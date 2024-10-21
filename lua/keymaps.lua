@@ -1,0 +1,1 @@
+vim.cmd('source ~/.config/nvim/lua/keymaps.vim')        -- 复用旧的分屏设置
