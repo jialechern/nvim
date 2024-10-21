@@ -55,6 +55,20 @@ nnoremap <A-Down> :wincmd J<CR>			" 将当前分屏移至最
 " end 标签页设置
 
 
+" begin 插件设置
+" 自动配置插件
+if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
+	silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs 
+		\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	autocmd VimEnter * PlugInstall --sync | source ~/.config/nvim/init.vim
+endif
+
+
+call plug#begin('~/.local/share/nvim/plugged')
+
+call plug#end()
+" end 插件设置
+
 
 
 
