@@ -1,6 +1,20 @@
 
 " begin 一般设置
+" lua require('init')				" 使用 lua 配置文件
 syntax on					" 开启语法高亮
+
+" set mouse=a					" 允许使用鼠标
+set encoding=utf-8				" 使用 utf-8 编码
+set tabstop=8					" 设置 tab 的缩进大小
+set list					" 显示空白字符
+set backspace=indent,eol,start			" 设置退格键自动换行
+
+set foldmethod=indent				" 可折叠代码
+" set laststatus=2
+
+set autochdir					" 设置 vim/neovim 的指令命令路径
+au BufReadPost * if line("'\'") > 1 && line("'\'") <= line("$") | exe "normal! g'\"" | endif
+						" 记住上一次文件关闭时的光标所在位置
 
 set number					" 显示行号
 set relativenumber				" 显示从当前行数的前后行数
@@ -27,9 +41,18 @@ nnoremap <C-Left> :vertical resize-5<CR>	" 纵向分屏分界线左移
 nnoremap <C-Right> :vertical resize+5<CR>	" 纵向分屏分界线右移
 nnoremap <C-Up> :resize+5<CR>			" 横向分屏分界线上移
 nnoremap <C-Down> :resize-5<CR>			" 横向分屏分界线下移
+nnoremap sv <C-w>t<C-w>H			" 横向分屏改为纵向分屏
+nnoremap sh <C-w>t<C-w>K			" 纵向分屏改为横向分屏
+nnoremap <A-Left> :wincmd H<CR>			" 将当前分屏移至最左
+nnoremap <A-Right> :wincmd L<CR>		" 将当前分屏移至最右
+nnoremap <A-Up> :wincmd K<CR>			" 将当前分屏移至最上
+nnoremap <A-Down> :wincmd J<CR>			" 将当前分屏移至最
 " end 分屏设置
 
 
+" begin 标签页设置
+
+" end 标签页设置
 
 
 
