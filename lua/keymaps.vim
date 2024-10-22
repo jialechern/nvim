@@ -18,3 +18,5 @@ nnoremap <A-Right> :wincmd L<CR>		" 将当前分屏移至最右
 nnoremap <A-Up> :wincmd K<CR>			" 将当前分屏移至最上
 nnoremap <A-Down> :wincmd J<CR>			" 将当前分屏移至最
 " end 分屏设置
+
+

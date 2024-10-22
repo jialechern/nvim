@@ -57,3 +57,5 @@ vim.api.nvim_set_hl(0, 'CursorLine', { bg = 'NONE' })
 -- 设置状态行透明（如果使用状态栏插件）
 vim.api.nvim_set_hl(0, 'StatusLine', { bg = 'NONE' })
 
+-- 设置打印机模式
+vim.opt.scrolloff=10
