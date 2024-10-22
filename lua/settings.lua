@@ -1,3 +1,9 @@
+-- 配置语法高亮
+vim.cmd('syntax on')
+vim.cmd('filetype plugin indent on')
+vim.cmd('filetype on')                  -- 文档类型自动检测
+
+
 -- Hint: use `:h <option>` to figure out the meaning if needed
 vim.opt.clipboard = 'unnamedplus'                       -- use system clipboard
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
@@ -27,3 +33,27 @@ vim.opt.smartcase = true                                -- but make it case sens
 
 -- MarkDown
 vim.g.mkdp_auto_start = 1
+
+-- 配置代码高亮
+require('nvim-treesitter.configs').setup ({
+    ensure_installed = { "bash", "python", "javascript", "lua", "html", "css", "c" }, -- 你所需要的语言
+    highlight = {
+      enable = true,  -- 启用高亮
+    },
+  })
+if vim.fn.has("termguicolors") == 1 then            -- 启用终端色彩
+  vim.opt.termguicolors = true
+end
+   
+-- 启用代码提示
+vim.g.ycm_global_ycm_extra_conf = '~/.config/nvim/.ycm_extra_conf.py'
+vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
+
+
+-- 设置背景透明
+vim.api.nvim_set_hl(0, 'Normal', { bg = 'NONE', ctermbg = 'NONE' })
+-- 设置光标行透明
+vim.api.nvim_set_hl(0, 'CursorLine', { bg = 'NONE' })
+-- 设置状态行透明（如果使用状态栏插件）
+vim.api.nvim_set_hl(0, 'StatusLine', { bg = 'NONE' })
+
