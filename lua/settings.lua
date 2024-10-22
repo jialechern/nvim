@@ -23,3 +23,7 @@ vim.opt.incsearch = true                                -- search as characters 
 vim.opt.hlsearch = false                                -- do not highlight matches
 vim.opt.ignorecase = true                               -- ignore case in searches by default
 vim.opt.smartcase = true                                -- but make it case sensitive if an uppercase is entered
+
+
+-- MarkDown
+vim.g.mkdp_auto_start = 1
