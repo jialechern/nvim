@@ -22,16 +22,42 @@ inoremap <LEADER>H \mathcal{H}
 " end   一些花体大写字母
 
 " begin 一些数学专用符号
+inoremap <LEADER>d \mathrm{d}
+inoremap <LEADER>p \partial
+inoremap <LEADER>ker \mathrm{ker}
+inoremap <LEADER>im \mathrm{im}
 inoremap <LEADER>id \mathrm{id}
 inoremap <LEADER>hom \mathrm{hom}
 inoremap <LEADER>frac \dfrac{}{}<Esc>2hi
 inoremap <LEADER>sum \sum_{}<Esc>i
 inoremap <LEADER>lim \lim_{}<Esc>i
+inoremap <LEADER>Lra \Longrightarrow
+inoremap <LEADER>lra \longrightarrow
+inoremap <LEADER>Lla \Longleftarrow
+inoremap <LEADER>lla \longleftarrow
+inoremap <LEADER>Iff \Longleftrightarrow
+inoremap <LEADER>iff \longleftrightarrow
 " end   一些数学专用符号
+
+" begin 希腊字母
+inoremap <LEADER>a \alpha
+inoremap <LEADER>b \beta
+inoremap <LEADER>g \gamma
+inoremap <LEADER>G \Gamma
+inoremap <LEADER>vphi \varphi
+inoremap <LEADER>ve \varepsilon
+inoremap <LEADER>e \epsilon
+inoremap <LEADER>del \delta
+inoremap <LEADER>Del \Delta
+inoremap <LEADER>lam \lambda
+inoremap <LEADER>Lam \Lambda
+" end   希腊字母
 
 " begin 自定义环境
 inoremap <LEADER>lineq \left\{\begin{array}{c}<CR>\end{array}\right.<Esc>O
 inoremap <LEADER>vector \left(\begin{array}{c}\end{array}\right)<Esc>17hi
+inoremap <LEADER>matrix \left(\begin{array}{}<CR>\end{array}\right)<Esc>k$i
+inoremap <LEADER>aligned \begin{aligned}<CR>\end{aligned}<Esc>O
 " end   自定义环境
 
 
