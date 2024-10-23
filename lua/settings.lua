@@ -32,7 +32,7 @@ vim.opt.smartcase = true                                -- but make it case sens
 
 
 -- MarkDown
-vim.g.mkdp_auto_start = 1
+-- vim.g.mkdp_auto_start = 1
 
 -- 配置代码高亮
 require('nvim-treesitter.configs').setup ({

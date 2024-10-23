@@ -1,5 +1,8 @@
 -- vim.g.mapleader = " "                                   -- 设置空格键为 LEADER 键
-vim.cmd('source $NVIMCONFIGP/lua/keymaps/basekeymaps.vim')        -- 复用旧的分屏设置
+vim.api.nvim_set_keymap('i', '<leader>;', '<Esc>/<++><CR>:nohlsearch<CR>c4l', { noremap = true, silent = true })
+        -- 设置写入模式的传送锚点
+
+vim.cmd('source $NVIMCONFIGP/lua/keymaps/keymaps-base.vim')        -- 复用旧的分屏设置
 vim.api.nvim_set_keymap('n', '<leader>sc', ':set spell!<CR>', { noremap = true, silent = true})
                                                         -- 设置拼写检查
 vim.api.nvim_set_keymap('n', 'H', '^', {noremap = true, silent = true})                                                                  -- 设置跳转到行首键
@@ -15,13 +18,20 @@ vim.api.nvim_set_keymap('n', '$', 'L', {noremap = true, silent = true})
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "markdown", 
     callback = function()
-        vim.cmd('source $NVIMCONFIGP/lua/keymaps/mathkeymaps.vim')
+        vim.cmd('source $NVIMCONFIGP/lua/keymaps/keymaps-math.vim')
+    end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "markdown", 
+    callback = function()
+        vim.cmd('source $NVIMCONFIGP/lua/keymaps/keymaps-markdown.vim')
     end,
 })
 
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "tex", 
     callback = function()
-        vim.cmd('source $NVIMCONFIGP/lua/keymaps/mathkeymaps.vim')
+        vim.cmd('source $NVIMCONFIGP/lua/keymaps/keymaps-math.vim')
     end,
 })

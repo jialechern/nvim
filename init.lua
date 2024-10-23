@@ -12,6 +12,20 @@ if not vim.loop.fs_stat(lazypath) then
   })
 end
 vim.opt.rtp:prepend(lazypath)
+-- begin    配置自动运行或是编译文件
+function Run()
+    local extension = vim.fn.expand('%:e')
+    if extension == 'py' then
+        vim.cmd('!python3 %')
+    elseif extension == 'md' then
+        vim.cmd('MarkdownPreview')
+    else
+        print('No command for this file type.')
+    end
+end
+
+vim.api.nvim_set_keymap('n', '<A-r>', ':lua Run()<CR>', { noremap = true, silent = true })
+-- end      配置自动运行或是编译文件
 
 -- 照例require一下，如果同时使用vim-plug插件，记得把这个放在vim-plug后面
 require("lazy").setup('plugins')
