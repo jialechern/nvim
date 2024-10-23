@@ -12,5 +12,10 @@ inoremap `r <Esc>mcI> <Esc>`c2la
 inoremap `link <CR>[]<CR>(<++>)<Esc>kF[a
 inoremap `@ <> <++><Esc>2F<a
 inoremap `img ![](<++>)<Esc>F[a
+inoremap `ll ----------------<CR>
+inoremap `1 # 
+inoremap `2 ## 
+inoremap `3 ### 
+inoremap `4 #### 
 " end   文本控制
 
