@@ -9,5 +9,19 @@ vim.api.nvim_set_keymap('n', '^', 'H', {noremap = true, silent = true})
                                                         -- 设置跳转到首行键
 vim.api.nvim_set_keymap('n', '$', 'L', {noremap = true, silent = true})
                                                         -- 设置跳转到末行键
-vim.cmd('source ~/.config/nvim/lua/mathkeymaps.vim')
+-- vim.cmd('source $NVIMCONFIGP/lua/mathkeymaps.vim')
                                                         -- 引入数学公式的快捷键
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "markdown", 
+    callback = function()
+        vim.cmd('source $NVIMCONFIGP/lua/mathkeymaps.vim')
+    end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "tex", 
+    callback = function()
+        vim.cmd('source $NVIMCONFIGP/lua/mathkeymaps.vim')
+    end,
+})
