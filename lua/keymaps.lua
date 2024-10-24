@@ -1,5 +1,6 @@
 -- vim.g.mapleader = " "                                   -- 设置空格键为 LEADER 键
 vim.api.nvim_set_keymap('i', '<leader>;', '<Esc>/<++><CR>:nohlsearch<CR>c4l', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '`;', '<Esc>/<++><CR>:nohlsearch<CR>c4l', { noremap = true, silent = true })
         -- 设置写入模式的传送锚点
 
 vim.cmd('source $NVIMCONFIGP/lua/keymaps/keymaps-base.vim')        -- 复用旧的分屏设置
