@@ -10,7 +10,7 @@ inoremap <LEADER>M $$<CR>$$<CR><++><Esc>kO
 
 
 " begin 一些常用的 left right 包裹的命令
-inoremap <LEADER><LEADER> \\
+" inoremap <LEADER><LEADER> \\
 inoremap <LEADER>inner \left\langle\right\rangle<++><Esc>2F\i
                     " 尖括号符号(内积)
 inoremap <LEADER>tuple \left(\right)<++><Esc>F\i
