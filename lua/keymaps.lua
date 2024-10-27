@@ -59,6 +59,9 @@ vim.api.nvim_set_keymap('n', '<C-_>', ':lua ToggleComment()<CR>', { noremap = tr
 vim.api.nvim_set_keymap('i', '<C-_>', '<Esc>:lua ToggleComment()<CR>a', { noremap = true, silent = true })
 
 -- end      设置注释
+-- begin    设置成对符号的自动配对
+vim.cmd('source $NVIMCONFIGP/lua/keymaps/keymaps-symbols.vim')
+-- end      设置成对符号的自动配对
 
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "markdown", 
