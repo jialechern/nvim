@@ -1,3 +1,6 @@
+-- 设置字体
+vim.opt.guifont = "JetBrainsMono Nerd Font:h16"
+
 -- 配置语法高亮
 vim.cmd('syntax on')
 vim.cmd('filetype plugin indent on')
@@ -33,6 +36,8 @@ vim.opt.smartcase = true                                -- but make it case sens
 
 -- MarkDown
 -- vim.g.mkdp_auto_start = 1
+
+vim.g.mkdp_browser = 'firefox'
 
 -- 配置代码高亮
 require('nvim-treesitter.configs').setup ({

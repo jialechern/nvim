@@ -20,6 +20,7 @@ inoremap <LEADER>list \left[\right]<++><Esc>F\i
 " end   一些常用的 left right 包裹的命令
 
 " begin 一些双线体大写字母
+inoremap <LEADER>bb \mathbb{}<++><Esc>F}i
 inoremap <LEADER>N \mathbb{N}
 inoremap <LEADER>Q \mathbb{Q}
 inoremap <LEADER>R \mathbb{R}
@@ -27,6 +28,7 @@ inoremap <LEADER>C \mathbb{C}
 " end   一些双线体大写字母
 
 " begin 一些花体大写字母
+inoremap <LEADER>cal \mathcal{}<++><Esc>F}i
 inoremap <LEADER>T \mathcal{T}
 inoremap <LEADER>L \mathcal{L}
 inoremap <LEADER>P \mathcal{P}
@@ -36,6 +38,7 @@ inoremap <LEADER>H \mathcal{H}
 " end   一些花体大写字母
 
 " begin 一些数学专用符号
+inoremap <LEADER>rm \mathrm{}<++><Esc>F}i
 inoremap <LEADER>d \mathrm{d}
 inoremap <LEADER>p \partial
 inoremap <LEADER>ker \mathrm{ker}
