@@ -21,9 +21,9 @@ nnoremap <A-Down> :wincmd J<CR>			" 将当前分屏移至最
 
 " begin 转译字符
 inoremap <LEADER>` `
-inoremap `<LEADER> \
+inoremap `<LEADER> <Space>
 inoremap `` ``
-inoremap <LEADER><LEADER> \\
+inoremap <LEADER><LEADER> <Space><Space>
 " end   转译字符
 
 
