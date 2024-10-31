@@ -1,4 +1,4 @@
-vim.g.mapleader = "."                                   -- 设置空格键为 LEADER 键
+vim.g.mapleader = ">"                                   -- 设置空格键为 LEADER 键
 vim.api.nvim_set_keymap('i', '<leader>;', '<Esc>/<++><CR>:nohlsearch<CR>c4l', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('i', '`;', '<Esc>/<++><CR>:nohlsearch<CR>c4l', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('i', '<C-n>', '<Esc>/<++><CR>:nohlsearch<CR>c4l', { noremap = true, silent = true })
