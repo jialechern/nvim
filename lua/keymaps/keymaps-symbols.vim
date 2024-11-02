@@ -1,15 +1,9 @@
 
-inoremap ( ()<++><Esc>F)i
-inoremap <LEADER>( (
-inoremap < <><++><Esc>4hi
-inoremap <LEADER>< <
-inoremap [ []<++><Esc>F]i
-inoremap <LEADER>[ [
-inoremap { {}<++><Esc>F}i
-inoremap <LEADER>{ {
-inoremap " ""<++><Esc>F"i
-inoremap <LEADER>" "
-inoremap ' ''<++><Esc>F'i
-inoremap <LEADER>' '
+inoremap <LEADER>( ()<++><Esc>F)i
+inoremap <LEADER>< <><++><Esc>4hi
+inoremap <LEADER>[ []<++><Esc>F]i
+inoremap <LEADER>{ {}<++><Esc>F}i
+inoremap <LEADER>" ""<++><Esc>F"i
+inoremap <LEADER>' ''<++><Esc>F'i
 
 
