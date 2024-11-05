@@ -15,6 +15,9 @@ vim.api.nvim_set_keymap('n', '^', 'H', {noremap = true, silent = true})
                                                         -- 设置跳转到首行键
 vim.api.nvim_set_keymap('n', '$', 'L', {noremap = true, silent = true})
                                                         -- 设置跳转到末行键
+vim.api.nvim_set_keymap('n', 'J', '5j', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', 'K', '5k', {noremap = true, silent = true})
+                                                        -- 设置快速上下移动
 -- vim.cmd('source $NVIMCONFIGP/lua/mathkeymaps.vim')
                                                         -- 引入数学公式的快捷键
 -- begin    设置注释
