@@ -1,5 +1,5 @@
 return {
     {
-        'ycm-core/YouCompleteMe',       -- 依赖于 pynvim npm nodejs go gcc cmake 等等 
+        'ycm-core/YouCompleteMe',       -- 依赖于 python-pynvim npm nodejs go gcc cmake jdk&jvm 等等 
     }
 }
