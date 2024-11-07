@@ -28,6 +28,7 @@ vim.api.nvim_set_keymap('n', '<A-r>', ':lua Run()<CR>', { noremap = true, silent
 -- end      配置自动运行或是编译文件
 
 -- 照例require一下，如果同时使用vim-plug插件，记得把这个放在vim-plug后面
+vim.g.mapleader = ">"   -- 需要在加载插件之前引入 leader 键
 require("lazy").setup('plugins')
 
 
