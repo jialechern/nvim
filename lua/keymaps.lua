@@ -4,6 +4,8 @@ vim.api.nvim_set_keymap('i', '<leader>:', '<Esc>/<++><CR>:nohlsearch<CR>c4l', { 
 vim.api.nvim_set_keymap('i', '`;', '<Esc>/<++><CR>:nohlsearch<CR>c4l', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('i', '<C-n>', '<Esc>/<++><CR>:nohlsearch<CR>c4l', { noremap = true, silent = true })
         -- 设置写入模式的传送锚点
+vim.api.nvim_set_keymap('i', '<A-c>', '<Esc>mc:s/<++>//g<CR>`ca', { noremap = true, silent = true })
+        -- 设置清除当前行的传送锚点
 
 vim.cmd('source $NVIMCONFIGP/lua/keymaps/keymaps-base.vim')        -- 复用旧的分屏设置
 vim.api.nvim_set_keymap('n', '<leader>sc', ':set spell!<CR>', { noremap = true, silent = true})
