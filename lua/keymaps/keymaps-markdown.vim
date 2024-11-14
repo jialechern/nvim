@@ -19,3 +19,5 @@ inoremap `3 ###
 inoremap `4 #### 
 " end   文本控制
 
+inoremap `C ```<Esc>o<++><CR>```<Esc>2kA
+
