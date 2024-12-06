@@ -9,7 +9,7 @@ inoremap `S ****** <++><Esc>3F*i
 inoremap `n <CR><br><CR> 
 inoremap `p <p><CR></p><CR><++><Esc>kO
 inoremap `r <Esc>mcI> <Esc>`c2la
-inoremap `link <CR>[]<CR>(<++>)<Esc>kF[a
+inoremap `link <CR>[](<++>)<Esc>kF[a
 inoremap `@ <> <++><Esc>2F<a
 inoremap `img ![](<++>)<Esc>F[a
 inoremap `ll ----------------<CR>
