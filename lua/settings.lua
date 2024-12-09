@@ -21,9 +21,8 @@ vim.opt.expandtab = true                                -- tabs are spaces, main
 -- UI config
 vim.opt.number = true                                   -- show absolute number
 vim.opt.relativenumber = true                           -- add numbers to each line on the left side
--- vim.opt.cursorline = true                               -- highlight cursor line underneath the cursor horizontally
-vim.o.cursorline = true                               -- highlight cursor line underneath the cursor horizontally
-vim.o.cursorcolumn = true                               -- highlight cursor column underneath the cursor horizontally
+vim.opt.cursorline = true                               -- highlight cursor line underneath the cursor horizontally
+vim.opt.cursorcolumn = true                               -- highlight cursor column underneath the cursor horizontally
 vim.opt.splitbelow = true                               -- open new vertical split bottom
 vim.opt.splitright = true                               -- open new horizontal splits right
 -- vim.opt.termguicolors = true                         -- enabl 24-bit RGB color in the TUI
