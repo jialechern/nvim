@@ -34,6 +34,10 @@ vim.opt.hlsearch = false                                -- do not highlight matc
 vim.opt.ignorecase = true                               -- ignore case in searches by default
 vim.opt.smartcase = true                                -- but make it case sensitive if an uppercase is entered
 
+-- begin 设置光标跳转逻辑
+vim.opt.jumpoptions = "stack"
+-- end 设置光标跳转逻辑
+
 
 -- MarkDown
 -- vim.g.mkdp_auto_start = 1
