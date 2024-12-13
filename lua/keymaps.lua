@@ -11,14 +11,18 @@ vim.cmd('source $NVIMCONFIGP/lua/keymaps/keymaps-base.vim')        -- 复用旧�
 vim.api.nvim_set_keymap('n', '<leader>sc', ':set spell!<CR>', { noremap = true, silent = true})
                                                         -- 设置拼写检查
 vim.api.nvim_set_keymap('n', 'H', '^', {noremap = true, silent = true})                                                                  -- 设置跳转到行首键
+vim.api.nvim_set_keymap('v', 'H', '^', {noremap = true, silent = true})                                                                  -- 设置跳转到行首键
 vim.api.nvim_set_keymap('n', 'L', '$', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('v', 'L', '$', {noremap = true, silent = true})
                                                         -- 设置跳转到行尾键
 vim.api.nvim_set_keymap('n', '^', 'H', {noremap = true, silent = true})
                                                         -- 设置跳转到首行键
 vim.api.nvim_set_keymap('n', '$', 'L', {noremap = true, silent = true})
                                                         -- 设置跳转到末行键
 vim.api.nvim_set_keymap('n', 'J', '5j', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('v', 'J', '5j', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', 'K', '5k', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('v', 'K', '5k', {noremap = true, silent = true})
                                                         -- 设置快速上下移动
 -- vim.cmd('source $NVIMCONFIGP/lua/mathkeymaps.vim')
                                                         -- 引入数学公式的快捷键
