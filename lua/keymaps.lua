@@ -109,3 +109,9 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "c", 
+    callback = function()
+        vim.cmd('source $NVIMCONFIGP/lua/keymaps/keymaps-c.vim')
+    end,
+})
