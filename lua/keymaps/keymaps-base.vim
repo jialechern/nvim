@@ -1,6 +1,6 @@
 " begin 分屏设置
-nnoremap sr :set nosplitright<CR>:vsplit<CR>	" 左分屏
-nnoremap sl :set splitright<CR>:vsplit<CR>	" 右分屏
+nnoremap sl :set nosplitright<CR>:vsplit<CR>	" 左分屏
+nnoremap sr :set splitright<CR>:vsplit<CR>	" 右分屏
 nnoremap su :set nosplitbelow<CR>:split<CR>	" 上分屏
 nnoremap sd :set splitbelow<CR>:split<CR>	" 下分屏
 nnoremap <C-h> <C-w>h				" 分屏时光标左移
