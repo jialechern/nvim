@@ -13,10 +13,10 @@ nnoremap <C-Up> :resize+5<CR>			" 横向分屏分界线上移
 nnoremap <C-Down> :resize-5<CR>			" 横向分屏分界线下移
 nnoremap sV <C-w>t<C-w>H			" 横向分屏改为纵向分屏
 nnoremap sH <C-w>t<C-w>K			" 纵向分屏改为横向分屏
-nnoremap <A-Left> :wincmd H<CR>			" 将当前分屏移至最左
-nnoremap <A-Right> :wincmd L<CR>		" 将当前分屏移至最右
-nnoremap <A-Up> :wincmd K<CR>			" 将当前分屏移至最上
-nnoremap <A-Down> :wincmd J<CR>			" 将当前分屏移至最
+nnoremap <C-H> :wincmd H<CR>			" 将当前分屏移至最左
+nnoremap <C-L> :wincmd L<CR>		" 将当前分屏移至最右
+nnoremap <C-K> :wincmd K<CR>			" 将当前分屏移至最上
+nnoremap <C-J> :wincmd J<CR>			" 将当前分屏移至最
 " end 分屏设置
 
 " begin 转译字符
