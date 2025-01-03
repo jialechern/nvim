@@ -1,7 +1,7 @@
 " begin 控制命令
 inoremap <LEADER>left \left\right<++><Esc>F\i
-inoremap <LEADER>D _{} <++><Esc>F}i
-inoremap <LEADER>U ^{} <++><Esc>F}i
+inoremap <LEADER>D _{}<++><Esc>F}i
+inoremap <LEADER>U ^{}<++><Esc>F}i
 " end   控制命令
 
 " begin 公式块
@@ -48,8 +48,8 @@ inoremap <LEADER>id \mathrm{id}
 inoremap <LEADER>hom \mathrm{hom}
 inoremap <LEADER>frac \frac{}{<++>} <++><Esc>2F}i
 inoremap <LEADER>dfrac \dfrac{}{<++>} <++><Esc>2F}i
-inoremap <LEADER>sum \sum_{} <++><Esc>F}i
-inoremap <LEADER>lim \lim_{} <++><Esc>F}i
+inoremap <LEADER>sum \sum_{}<++><Esc>F}i
+inoremap <LEADER>lim \lim_{}<++><Esc>F}i
 inoremap <LEADER>Lra \Longrightarrow
 inoremap <LEADER>lra \longrightarrow
 inoremap <LEADER>Lla \Longleftarrow
