@@ -95,6 +95,7 @@ vim.api.nvim_create_autocmd("FileType", {
     pattern = "tex", 
     callback = function()
         vim.cmd('source $NVIMCONFIGP/lua/keymaps/keymaps-math.vim')
+        vim.cmd('source $NVIMCONFIGP/lua/keymaps/keymaps-elegant_note.vim')
     end,
 })
 
