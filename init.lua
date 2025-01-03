@@ -12,6 +12,7 @@ if not vim.loop.fs_stat(lazypath) then
   })
 end
 vim.opt.rtp:prepend(lazypath)
+
 -- begin    配置自动运行或是编译文件
 function Run()
     local extension = vim.fn.expand('%:e')
@@ -19,6 +20,8 @@ function Run()
         vim.cmd('!python3 %')
     elseif extension == 'md' then
         vim.cmd('MarkdownPreview')
+    elseif extension == 'tex' then
+        vim.cmd('make')
     else
         print('No command for this file type.')
     end
