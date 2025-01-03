@@ -17,6 +17,7 @@ inoremap <LEADER>inner \left\langle\right\rangle<++><Esc>2F\i
 inoremap <LEADER>tuple \left(\right)<++><Esc>F\i
                     " 圆括号
 inoremap <LEADER>list \left[\right]<++><Esc>F\i
+inoremap <LEADER>set \left\{\right\}<++><Esc>2F\i
 " end   一些常用的 left right 包裹的命令
 
 " begin 一些双线体大写字母
