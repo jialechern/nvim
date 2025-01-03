@@ -55,6 +55,13 @@ inoremap <LEADER>Lla \Longleftarrow
 inoremap <LEADER>lla \longleftarrow
 inoremap <LEADER>Iff \Longleftrightarrow
 inoremap <LEADER>iff \longleftrightarrow
+" 上下箭头
+inoremap <LEADER>ora \overrightarrow{}<++><Esc>F}i
+inoremap <LEADER>ura \underrightarrow{}<++><Esc>F}i
+inoremap <LEADER>ola \overleftarrow{}<++><Esc>F}i
+inoremap <LEADER>ula \underleftarrow{}<++><Esc>F}i
+inoremap <LEADER>olra \overleftrightarrow{}<++><Esc>F}i
+inoremap <LEADER>ulra \underleftrightarrow{}<++><Esc>F}i
 " end   一些数学专用符号
 
 " begin 希腊字母
