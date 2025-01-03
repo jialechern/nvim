@@ -17,11 +17,13 @@ vim.opt.rtp:prepend(lazypath)
 function Run()
     local extension = vim.fn.expand('%:e')
     if extension == 'py' then
-        vim.cmd('!python3 %')
+        vim.cmd('silent write')
+        vim.cmd('silent !python3 %')
     elseif extension == 'md' then
-        vim.cmd('MarkdownPreview')
+        vim.cmd('silent MarkdownPreview')
     elseif extension == 'tex' then
-        vim.cmd('make')
+        vim.cmd('silent write')
+        vim.cmd('silent !make -f $MakeFiles_Path/latex/latex.mk')
     else
         print('No command for this file type.')
     end
