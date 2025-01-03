@@ -46,7 +46,8 @@ inoremap <LEADER>ker \mathrm{ker}
 inoremap <LEADER>im \mathrm{im}
 inoremap <LEADER>id \mathrm{id}
 inoremap <LEADER>hom \mathrm{hom}
-inoremap <LEADER>frac \dfrac{}{<++>} <++><Esc>2F}i
+inoremap <LEADER>frac \frac{}{<++>} <++><Esc>2F}i
+inoremap <LEADER>dfrac \dfrac{}{<++>} <++><Esc>2F}i
 inoremap <LEADER>sum \sum_{} <++><Esc>F}i
 inoremap <LEADER>lim \lim_{} <++><Esc>F}i
 inoremap <LEADER>Lra \Longrightarrow
