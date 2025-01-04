@@ -14,7 +14,12 @@ inoremap <LEADER>p print()<Esc>F)i
 
 " begin 单元测试
 execute 'inoremap <LEADER>main' . ' ' .
-            \   'if __name__ == "__main__":' . '<CR>'
+            \   'def main():'                   . '<CR>' .
+            \   '<++><CR><CR>'                  .
+            \   '<C-u>'                         .
+            \   'if __name__ == "__main__":'    . '<CR>' .
+            \   'main()'                        . '<CR>' .
+            \   '<Esc>5k$hi'
 " end 单元测试
 
 

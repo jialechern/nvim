@@ -5,8 +5,14 @@ inoremap <LEADER>U ^{}<++><Esc>F}i
 " end   控制命令
 
 " begin 公式块
+" 行内块
 inoremap <LEADER>math $$ <++><Esc>F$i
-inoremap <LEADER>M $$<CR>$$<CR><++><Esc>kO
+" 行间块
+" inoremap <LEADER>M $$<CR>$$<CR><++><Esc>kO
+execute 'inoremap <LEADER>M'                . ' <CR>' .
+            \   '$$'                        . '<CR>' .
+            \   '$$'                        . '<CR>' .
+            \   '<Esc>kO'
 " end   公式块
 
 
@@ -88,7 +94,6 @@ execute 'inoremap <LEADER>lineq'            . ' '
             \   '<++>'                      .
             \   '<Esc>kO'
 " 向量
-" inoremap <LEADER>vector \left(\begin{array}{c}\end{array}\right)<++><Esc>2F\i
 execute 'inoremap <LEADER>vector'           . ' '
             \   '\left('                    .
             \       '\begin{array}{c}'      .
@@ -96,9 +101,19 @@ execute 'inoremap <LEADER>vector'           . ' '
             \   '\right)<++>'               .
             \   '<Esc>2F\i'
 " 矩阵
-inoremap <LEADER>matrix \left(\begin{array}{}<CR><++><CR>\end{array}\right)<Esc>2k$i
+execute 'inoremap <LEADER>matrix'           . ' ' .
+            \   '\left('                    .
+            \       '\begin{array}{}'       . '<CR>' .
+            \           '<++>'              . '<CR>' .
+            \       '\end{array}'           .
+            \   '\right)'                   .
+            \   '<Esc>2k$i'
 " 等式排版
-inoremap <LEADER>aligned \begin{aligned}<CR>\end{aligned}<CR><++><Esc>kO
+" inoremap <LEADER>aligned \begin{aligned}<CR>\end{aligned}<CR><++><Esc>kO
+execute 'inoremap <LEADER>aligned'          . ' ' .
+            \   '\begin{aligned}'           . '<CR>' .
+            \   '\end{aligned}'             . '<CR>' .
+            \   '<++><Esc>kO'
 " end   自定义环境
 
 
