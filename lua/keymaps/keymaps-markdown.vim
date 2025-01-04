@@ -19,5 +19,11 @@ inoremap `3 ###
 inoremap `4 #### 
 " end   文本控制
 
-inoremap `C ```<Esc>o<++><CR>```<Esc>2kA
+" begin 代码块
+execute 'inoremap `C' . ' ' .
+            \   '```' .     '<CR>' .
+            \   '<++>' .    '<CR>' .
+            \   '```' .     '<CR>' .
+            \   '<Esc>3kA'
+" end 代码块
 

@@ -79,9 +79,25 @@ inoremap <LEADER>Lam \Lambda
 " end   希腊字母
 
 " begin 自定义环境
-inoremap <LEADER>lineq \left\{\begin{array}{c}<CR>\end{array}\right.<CR><++><Esc>kO
-inoremap <LEADER>vector \left(\begin{array}{c}\end{array}\right)<++><Esc>2F\i
+" 线性方程组
+execute 'inoremap <LEADER>lineq'            . ' '
+            \   '\left\{'                   .
+            \       '\begin{array}{c}'      . '<CR>' .
+            \       '\end{array}'           .
+            \   '\right.'                   . '<CR>' .
+            \   '<++>'                      .
+            \   '<Esc>kO'
+" 向量
+" inoremap <LEADER>vector \left(\begin{array}{c}\end{array}\right)<++><Esc>2F\i
+execute 'inoremap <LEADER>vector'           . ' '
+            \   '\left('                    .
+            \       '\begin{array}{c}'      .
+            \       '\end{array}'           .
+            \   '\right)<++>'               .
+            \   '<Esc>2F\i'
+" 矩阵
 inoremap <LEADER>matrix \left(\begin{array}{}<CR><++><CR>\end{array}\right)<Esc>2k$i
+" 等式排版
 inoremap <LEADER>aligned \begin{aligned}<CR>\end{aligned}<CR><++><Esc>kO
 " end   自定义环境
 
