@@ -42,6 +42,8 @@ function ToggleComment()
           comment_prefix = '// '
   elseif extension == 'lua' then
       comment_prefix = '-- '
+  elseif extension == 'tex' then
+      comment_prefix = '% '
   end
   local comment_prefix_len = #comment_prefix
 

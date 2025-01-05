@@ -69,6 +69,8 @@ inoremap <LEADER>ola \overleftarrow{}<++><Esc>F}i
 inoremap <LEADER>ula \underleftarrow{}<++><Esc>F}i
 inoremap <LEADER>olra \overleftrightarrow{}<++><Esc>F}i
 inoremap <LEADER>ulra \underleftrightarrow{}<++><Esc>F}i
+" 平行
+inoremap <LEADER>pl \parallel
 " end   一些数学专用符号
 
 " begin 希腊字母
