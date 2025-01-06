@@ -20,10 +20,10 @@ inoremap `4 ####
 " end   文本控制
 
 " begin 代码块
-execute 'inoremap `C' . ' ' .
-            \   '```' .     '<CR>' .
-            \   '<++>' .    '<CR>' .
-            \   '```' .     '<CR>' .
+execute 'inoremap `C'                   . ' ' .
+            \   '```'                   . '<CR>' .
+            \   '   <++>'               . '<CR><C-u>' .
+            \   '```'                   . '<CR>' .
             \   '<Esc>3kA'
 " end 代码块
 

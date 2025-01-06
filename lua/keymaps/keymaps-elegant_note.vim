@@ -89,11 +89,11 @@ execute 'inoremap <LEADER>case'         . ' ' .
 " begin 图片环境
 execute 'inoremap <LEADER>img'          . ' ' .
             \   '\begin{figure}[]'      . '<CR>' .
-            \   '\centering<CR>'        .
-            \   '\includegraphics[width=\textwidth]{<++>}' . 
+            \       '\centering<CR>'    .
+            \       '\includegraphics[width=\textwidth]{<++>}' . 
             \                           '<CR>' .
-            \   '\caption{<++>}'        . '<CR>' .
-            \   '\label{fig:<++>}'      . '<CR>' .
+            \       '\caption{<++>}'    . '<CR>' .
+            \       '\label{fig:<++>}'  . '<CR>' .
             \   '\end{figure}'          . '<CR><++>' .
             \   '<Esc>6k$i'
 " end 图片环境
