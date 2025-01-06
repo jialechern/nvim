@@ -25,14 +25,16 @@ execute 'inoremap <LEADER>neq'      . ' ' .
 " begin 枚举环境
 " enumerate 环境
 execute 'inoremap <LEADER>enum'     . ' ' .
-            \   '\begin{enumerate}' . '<CR>' .
+            \   '\begin{enumerate}' . '<CR><C-u>' .
+            \   '   \item '         . '<CR><C-u>' .
             \   '\end{enumerate}'   . '<CR>' .
-            \   '<++><Esc>kO\item' . ' '
+            \   '<++><Esc>2k$a'     . ' '
 
 " itemize 环境
 execute 'inoremap <LEADER>itemize'  . ' ' .
-            \   '\begin{itemize}'   . '<CR>' .
+            \   '\begin{itemize}'   . '<CR><C-u>' .
+            \   '   \item '         . '<CR><C-u>' .
             \   '\end{itemize}'     . '<CR>' .
-            \   '<++><Esc>kO\item' . ' '
+            \   '<++><Esc>2k$a'     . ' '
 " end   枚举环境
 

@@ -48,4 +48,6 @@ execute 'inoremap <LEADER>eif'                      . ' ' .
             \   '<Esc>5k$a'
 " end if-else 语句
 
+" begin loop 循环
+" end loop 循环
 

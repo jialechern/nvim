@@ -1,32 +1,40 @@
--- vim.g.mapleader = ">"                                   -- 设置空格键为 LEADER 键
+-- keymaps.lua
+
+-- end 设置写入模式的传送锚点
+-- 跳转方式
 vim.api.nvim_set_keymap('i', '<leader>;', '<Esc>/<++><CR>:nohlsearch<CR>c4l', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('i', '<leader>:', '<Esc>/<++><CR>:nohlsearch<CR>c4l', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('i', '`;', '<Esc>/<++><CR>:nohlsearch<CR>c4l', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('i', '<C-n>', '<Esc>/<++><CR>:nohlsearch<CR>c4l', { noremap = true, silent = true })
-        -- 设置写入模式的传送锚点
+-- 设置清除当前行的传送锚点
+vim.api.nvim_set_keymap('i', '<C-c>', '<Esc>mc:s/<++>//g<CR>`ca', { noremap = true, silent = true })
+-- end 设置写入模式的传送锚点
+
+-- begin 设置快速推出快捷键
 vim.api.nvim_set_keymap('n', '<C-D>', ':q!<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-S>', ':wq<CR>', { noremap = true, silent = true })
-        -- 设置快捷退出
-vim.api.nvim_set_keymap('i', '<C-c>', '<Esc>mc:s/<++>//g<CR>`ca', { noremap = true, silent = true })
-        -- 设置清除当前行的传送锚点
+-- end 设置快速推出快捷键
 
-vim.cmd('source $NVIMCONFIGP/lua/keymaps/keymaps-base.vim')        -- 复用旧的分屏设置
+-- 复用旧的分屏设置
+vim.cmd('source $NVIMCONFIGP/lua/keymaps/keymaps-base.vim')        
+-- 设置拼写检查
 vim.api.nvim_set_keymap('n', '<leader>sc', ':set spell!<CR>', { noremap = true, silent = true})
-                                                        -- 设置拼写检查
-vim.api.nvim_set_keymap('n', 'H', '^', {noremap = true, silent = true})                                                                  -- 设置跳转到行首键
-vim.api.nvim_set_keymap('v', 'H', '^', {noremap = true, silent = true})                                                                  -- 设置跳转到行首键
+
+-- begin 设置 noremal 模式快速跳转
+vim.api.nvim_set_keymap('n', 'H', '^', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('v', 'H', '^', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '^', 'H', {noremap = true, silent = true})
+-- 设置跳转到行尾键
 vim.api.nvim_set_keymap('n', 'L', '$', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('v', 'L', '$', {noremap = true, silent = true})
-                                                        -- 设置跳转到行尾键
-vim.api.nvim_set_keymap('n', '^', 'H', {noremap = true, silent = true})
-                                                        -- 设置跳转到首行键
 vim.api.nvim_set_keymap('n', '$', 'L', {noremap = true, silent = true})
-                                                        -- 设置跳转到末行键
+-- 设置快速上下移动
 vim.api.nvim_set_keymap('n', 'J', '5j', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('v', 'J', '5j', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', 'K', '5k', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('v', 'K', '5k', {noremap = true, silent = true})
-                                                        -- 设置快速上下移动
+-- end 设置 noremal 模式快速跳转
+
 -- vim.cmd('source $NVIMCONFIGP/lua/mathkeymaps.vim')
                                                         -- 引入数学公式的快捷键
 -- begin    设置注释
@@ -73,8 +81,8 @@ end
 
 vim.api.nvim_set_keymap('n', '<C-_>', ':lua ToggleComment()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('i', '<C-_>', '<Esc>:lua ToggleComment()<CR>a', { noremap = true, silent = true })
-
 -- end      设置注释
+
 -- begin    设置成对符号的自动配对
 vim.cmd('source $NVIMCONFIGP/lua/keymaps/keymaps-symbols.vim')
 -- end      设置成对符号的自动配对

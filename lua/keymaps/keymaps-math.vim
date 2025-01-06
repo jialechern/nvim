@@ -32,6 +32,7 @@ inoremap <LEADER>N \mathbb{N}
 inoremap <LEADER>Q \mathbb{Q}
 inoremap <LEADER>R \mathbb{R}
 inoremap <LEADER>C \mathbb{C}
+inoremap <LEADER>E \mathbb{E}
 " end   一些双线体大写字母
 
 " begin 一些花体大写字母
@@ -52,6 +53,7 @@ inoremap <LEADER>ker \mathrm{ker}
 inoremap <LEADER>im \mathrm{im}
 inoremap <LEADER>id \mathrm{id}
 inoremap <LEADER>hom \mathrm{hom}
+inoremap <LEADER>dim \mathrm{dim}
 inoremap <LEADER>frac \frac{}{<++>} <++><Esc>2F}i
 inoremap <LEADER>dfrac \dfrac{}{<++>} <++><Esc>2F}i
 inoremap <LEADER>sum \sum_{}<++><Esc>F}i

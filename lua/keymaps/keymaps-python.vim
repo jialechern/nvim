@@ -80,3 +80,10 @@ execute 'inoremap <LEADER>eelif'                . ' ' .
             \   '<Esc>6k$hi'
 " end if-elif-else 分支
 
+" begin loop 循环
+execute 'inoremap <LEADER>loop'                 . ' ' .
+            \   'while True:'                   . '<CR>'
+            \   '<Esc>O'
+" end loop 循环
+
+

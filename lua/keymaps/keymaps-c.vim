@@ -91,6 +91,12 @@ execute 'inoremap <LEADER>switch'                   . ' ' .
             \   '<Esc>7k$2hi'
 " end switch 分支
 
+" begin loop 循环
+execute 'inoremap <LEADER>loop'                     . ' ' .
+            \   'while (1) {'                       . '<CR>' .
+            \   '}'                                 .
+            \   '<Esc>O'
+" end loop 循环
 
 
 

@@ -81,4 +81,17 @@ vim.api.nvim_exec([[
 ]], false)
 -- end 配置折叠功能
 
+-- begin 设置根据文件扩展名配置文件类型
+vim.filetype.add({
+  extension = {
+    tex = 'tex',
+    py  = 'python', 
+    rs  = 'rust', 
+    mk  = 'makefile', 
+    c   = 'c', 
+    cpp = 'cpp', 
+    h   = 'c', 
+  },
+})
+-- end 设置根据文件扩展名配置文件类型
 

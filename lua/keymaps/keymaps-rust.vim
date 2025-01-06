@@ -84,3 +84,12 @@ execute 'inoremap <LEADER>match'                    . ' ' .
             \   '<Esc>2k$hi'
 " end match 模式匹配
 
+" begin loop 循环
+execute 'inoremap <LEADER>loop'                     . ' ' .
+            \   'loop {'                            . '<CR>' .
+            \   '}'                                 .
+            \   '<Esc>O'
+" end loop 循环
+
+
+

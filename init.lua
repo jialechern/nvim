@@ -1,5 +1,5 @@
 -- 要使用配置, 需要实现将全局环境 NVIMCONFIGP 的值设置为 nvim/vin 配置文件的路径
--- 指定插件位置，不存在则clone到本地
+-- begin 指定插件位置，不存在则clone到本地
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -12,6 +12,7 @@ if not vim.loop.fs_stat(lazypath) then
   })
 end
 vim.opt.rtp:prepend(lazypath)
+-- end 指定插件位置，不存在则clone到本地
 
 -- begin    配置自动运行或是编译文件
 function Run()
