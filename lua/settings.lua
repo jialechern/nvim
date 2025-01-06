@@ -69,3 +69,16 @@ vim.api.nvim_set_hl(0, 'StatusLine', { bg = 'NONE' })
 
 -- 设置打印机模式
 vim.opt.scrolloff=10
+
+-- begin 配置折叠功能
+-- 设置自动保存折叠信息
+vim.api.nvim_exec([[
+  augroup remember_folds
+    autocmd!
+    autocmd BufWinLeave * silent! mkview
+    autocmd BufWinEnter * silent! loadview
+  augroup END
+]], false)
+-- end 配置折叠功能
+
+
