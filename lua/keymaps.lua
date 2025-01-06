@@ -122,3 +122,14 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.cmd('source $NVIMCONFIGP/lua/keymaps/keymaps-c.vim')
     end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { 
+        "bash",
+        "zsh",
+    }, 
+    callback = function()
+        vim.cmd('source $NVIMCONFIGP/lua/keymaps/keymaps-shell_base.vim')
+    end,
+})
+

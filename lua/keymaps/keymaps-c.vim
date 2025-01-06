@@ -45,17 +45,35 @@ execute 'inoremap <LEADER>if'                       . ' ' .
             \   '<Esc>F)i'
 " end if 分支
 
-" begin if-else 分支
+" begin if-else_if 分支
 execute 'inoremap <LEADER>elif'                     . ' ' .
             \   'if () '                            . '<CR>' .
             \   '{'                                 . '<CR>' .
             \       '<++>'                          . '<CR>' .
-            \   '} else if (<++>) '                 . '<CR>' .
+            \   '}'                                 . '<CR>' .
+            \   'else if (<++>) '                   . '<CR>' .
             \   '{'                                 . '<CR>' .
             \       '<++>'                          . '<CR>' .
             \   '}'                                 . 
-            \   '<Esc>6k$hi'
-" end if-else 分支
+            \   '<Esc>7k$hi'
+" end if-else_if 分支
+
+" begin if-else_if-else 分支
+execute 'inoremap <LEADER>eelif'                    . ' ' .
+            \   'if () '                            . '<CR>' .
+            \   '{'                                 . '<CR>' .
+            \       '<++>'                          . '<CR>' .
+            \   '}'                                 . '<CR>' .
+            \   'else if (<++>) '                   . '<CR>' .
+            \   '{'                                 . '<CR>' .
+            \       '<++>'                          . '<CR>' .
+            \   '}'                                 . '<CR>' . 
+            \   'else'                              . '<CR>' . 
+            \   '{'                                 . '<CR>' .
+            \       '<++>'                          . '<CR>' .
+            \   '}'                                 .
+            \   '<Esc>11k$hi'
+" end if-else_if-else 分支
 
 " begin switch 分支
 execute 'inoremap <LEADER>switch'                   . ' ' .

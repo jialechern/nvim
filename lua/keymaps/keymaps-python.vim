@@ -47,16 +47,36 @@ execute 'inoremap <LEADER>match'                . ' ' .
 " begin if 分支
 execute 'inoremap <LEADER>if'                   . ' ' .
             \   'if  :'                         . '<CR>' .
-            \       '<++>'                      . ' ' .
-            \   '<Esc>k$hi'
+            \       '<++>'                      . '<CR>' .
+            \   '<Esc>2k$hi'
 " end if 分支
 
-" begin if-else 分支
+" begin if-elif 分支
 execute 'inoremap <LEADER>elif'                 . ' ' .
             \   'if  :'                         . '<CR>' .
             \       '<++>'                      . '<CR>' .
             \   'elif <++> :'                   . '<CR>' .
             \       '<++>'                      . '<CR>' .
             \   '<Esc>4k$hi'
+" end if-elif 分支
+
+" begin if-else 分支
+execute 'inoremap <LEADER>eif'                  . ' ' .
+            \   'if  :'                         . '<CR>' .
+            \       '<++>'                      . '<CR>' .
+            \   'else:'                         . '<CR>' .
+            \       '<++>'                      . '<CR>' .
+            \   '<Esc>4k$hi'
 " end if-else 分支
+
+" begin if-elif-else 分支
+execute 'inoremap <LEADER>eelif'                . ' ' .
+            \   'if  :'                         . '<CR>' .
+            \       '<++>'                      . '<CR>' .
+            \   'elif <++> :'                   . '<CR>' .
+            \       '<++>'                      . '<CR>' .
+            \   'else:'                         . '<CR>' .
+            \       '<++>'                      . '<CR>' .
+            \   '<Esc>6k$hi'
+" end if-elif-else 分支
 
