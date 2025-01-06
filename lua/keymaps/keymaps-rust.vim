@@ -44,15 +44,37 @@ execute 'inoremap <LEADER>if'                       . ' ' .
             \   '<Esc>2k$hi'
 " end if 分支
 
-" begin if-else 分支
+" begin elif 分支
 execute 'inoremap <LEADER>elif'                     . ' ' .
             \   'if  {'                             . '<CR>' .
             \       '<++>'                          . '<CR>' .
-            \   '} else if  {'                      . '<CR>' .
+            \   '} else if <++> {'                  . '<CR>' .
+            \       '<++>'                          . '<CR>' .
+            \   '}'                                 . 
+            \   '<Esc>4k$hi'
+" end elif 分支
+
+" begin if-else 分支
+execute 'inoremap <LEADER>eif'                      . ' ' .
+            \   'if  {'                             . '<CR>' .
+            \       '<++>'                          . '<CR>' .
+            \   '} else  {'                         . '<CR>' .
             \       '<++>'                          . '<CR>' .
             \   '}'                                 . 
             \   '<Esc>4k$hi'
 " end if-else 分支
+
+" begin elif-else 分支
+execute 'inoremap <LEADER>eelif'                    . ' ' .
+            \   'if  {'                             . '<CR>' .
+            \       '<++>'                          . '<CR>' .
+            \   '} else if <++> {'                  . '<CR>' .
+            \       '<++>'                          . '<CR>' .
+            \   '} else {'                          . '<CR>' .
+            \       '<++>'                          . '<CR>' .
+            \   '}'                                 .
+            \   '<Esc>6k$hi'
+" end elif-else 分支
 
 " begin match 模式匹配
 execute 'inoremap <LEADER>match'                    . ' ' .
