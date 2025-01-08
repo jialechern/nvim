@@ -89,6 +89,17 @@ vim.api.nvim_set_keymap('i', '<C-_>', '<Esc>:lua ToggleComment()<CR>a', { norema
 vim.cmd('source $NVIMCONFIGP/lua/keymaps/keymaps-symbols.vim')
 -- end      设置成对符号的自动配对
 
+-- begin 设置代码折叠快捷键
+vim.api.nvim_set_keymap('n', '<C-A-c>', 'zc', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-A-o>', 'zo', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-A-d>', 'zd', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-A-f>', 'zf', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<C-A-c>', 'zc', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<C-A-o>', 'zo', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<C-A-d>', 'zd', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<C-A-f>', 'zf', { noremap = true, silent = true })
+-- end 设置代码折叠快捷键
+
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "markdown", 
     callback = function()

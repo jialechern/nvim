@@ -87,7 +87,7 @@ vim.filetype.add({
     tex = 'tex',
     py  = 'python', 
     rs  = 'rust', 
-    mk  = 'makefile', 
+    mk  = 'make', 
     c   = 'c', 
     cpp = 'cpp', 
     h   = 'c', 
