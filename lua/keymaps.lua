@@ -40,17 +40,19 @@ vim.api.nvim_set_keymap('v', 'K', '5k', {noremap = true, silent = true})
 -- begin    设置注释
 -- 定义一个函数来添加或去除注释
 function ToggleComment()
-  local extension = vim.fn.expand('%:e')
-  if extension == 'py' then
+  local filetype = vim.bo.filetype
+  if filetype == 'python' or
+     filetype == 'make'
+      then
       comment_prefix = '# '
-  elseif extension == 'c' or 
-      extension == 'cpp' or
-      extension == 'rs'
+  elseif filetype == 'c' or 
+      filetype == 'cpp' or
+      filetype == 'rust'
       then
           comment_prefix = '// '
-  elseif extension == 'lua' then
+  elseif filetype == 'lua' then
       comment_prefix = '-- '
-  elseif extension == 'tex' then
+  elseif filetype == 'tex' then
       comment_prefix = '% '
   end
   local comment_prefix_len = #comment_prefix
