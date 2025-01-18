@@ -1,3 +1,4 @@
+"" python.vim
 
 " begin 设置魔法方法的快捷键
 inoremap <LEADER>_ ____<++><Esc>F_hi

@@ -1,3 +1,5 @@
+"" base.vim
+
 " begin 分屏设置
 " 左分屏
 nnoremap sh :set nosplitright<CR>:vsplit<CR>	

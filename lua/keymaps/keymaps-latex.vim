@@ -1,3 +1,5 @@
+"" latex.vim
+
 " begin 一般的 begin-end 环境
 " inoremap <LEADER>be \begin{}<CR>\end{<++>}<CR><++><Esc>2k$i
 execute 'inoremap <LEADER>be'   . ' ' .

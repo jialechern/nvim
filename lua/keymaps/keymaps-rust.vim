@@ -1,3 +1,4 @@
+"" rust.vim
 
 " begin 匿名函数
 execute 'inoremap <LEADER><Bar>' . ' ' .

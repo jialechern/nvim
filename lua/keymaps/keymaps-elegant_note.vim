@@ -1,3 +1,4 @@
+"" elegant_note.vim
 
 " begin 定义环境
 execute 'inoremap <LEADER>def'          . ' ' .

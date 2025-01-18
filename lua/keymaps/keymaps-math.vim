@@ -1,3 +1,5 @@
+"" math.vim
+
 " begin 控制命令
 inoremap <LEADER>left \left\right<++><Esc>F\i
 inoremap <LEADER>D _{}<++><Esc>F}i

@@ -1,3 +1,4 @@
+"" shell_base.vim
 
 inoremap <LEADER>initb #!/bin/bash
 inoremap <LEADER>initz #!/bin/zsh
