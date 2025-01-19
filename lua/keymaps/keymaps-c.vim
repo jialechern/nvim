@@ -1,9 +1,63 @@
 "" c.vim
 
 " 导入头文件
-inoremap <LEADER>i #include
+inoremap <LEADER>include #include <><Esc>F<a
+" 导入标准输入输出
+inoremap <LEADER>istdio #include <stdio.h>
 " 打印
 inoremap <LEADER>p printf();<Esc>F)i
+
+" begin 宏替换
+inoremap <LEADER>def #define 
+inoremap <LEADER>undef #undef
+" 宏条件
+" macro-if
+execute 'inoremap <LEADER>mif'                      . ' ' .
+            \   '#if '                              . '<CR>' .
+            \   '   <++>'                           . '<CR>' .
+            \   '#endif'                            . '<CR>' .
+            \   '<Esc>3k$a'
+
+" macro-if-else
+execute 'inoremap <LEADER>meif'                     . ' ' .
+            \   '#if '                              . '<CR>' .
+            \   '   <++>'                           . '<CR>' .
+            \   '#else '                            . '<CR><BS>' .
+            \   '   <++>'                           . '<CR>' .
+            \   '#endif'                            . '<CR>' .
+            \   '<Esc>5k$a'
+
+
+" macro-if-elif
+execute 'inoremap <LEADER>melif'                    . ' ' .
+            \   '#if '                              . '<CR>' .
+            \   '   <++>'                           . '<CR>' .
+            \   '#elif <++>'                        . '<CR><BS>' .
+            \   '   <++>'                           . '<CR>' .
+            \   '#endif'                            . '<CR>' .
+            \   '<Esc>5k$a'
+
+" macro-if-elif
+execute 'inoremap <LEADER>meelif'                   . ' ' .
+            \   '#if '                              . '<CR>' .
+            \   '   <++>'                           . '<CR>' .
+            \   '#elif <++>'                        . '<CR><BS>' .
+            \   '   <++>'                           . '<CR>' .
+            \   '#else '                            . '<CR><BS>' .
+            \   '   <++>'                           . '<CR>' .
+            \   '#endif'                            . '<CR>' .
+            \   '<Esc>7k$a'
+
+" if-defnine
+execute 'inoremap <LEADER>ifndef'                   . ' ' .
+            \   '#ifndef '                          . '<CR>' .
+            \   '#define <++>'                      . '<CR>' .
+            \   '   <++>'                           . '<CR>' .
+            \   '#endif'                            . '<CR>' .
+            \   '<Esc>4k$a'
+" ifdefine
+inoremap <LEADER>ifdef  #ifdef
+" end 宏替换
 
 
 " begin main 函数
