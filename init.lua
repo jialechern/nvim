@@ -35,6 +35,8 @@ vim.api.nvim_set_keymap('n', '<A-r>', ':lua Run()<CR>', { noremap = true, silent
 
 -- 照例require一下，如果同时使用vim-plug插件，记得把这个放在vim-plug后面
 vim.g.mapleader = ">"   -- 需要在加载插件之前引入 leader 键
+vim.api.nvim_set_keymap('i', '<C-_>', '<Esc>', { noremap = true, silent = true })   -- 设置进入一般模式的快捷键
+vim.api.nvim_set_keymap('x', '<C-_>', '<Esc>', { noremap = true, silent = true })   -- 设置进入一般模式的快捷键
 vim.opt.shortmess:append("I")   -- 禁用默认的启动界面
 require("lazy").setup('plugins')
 
