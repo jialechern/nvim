@@ -5,7 +5,7 @@
 vim.api.nvim_set_keymap('i', '<leader>;', '<Esc>/<++><CR>:nohlsearch<CR>c4l', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('i', '<leader>:', '<Esc>/<++><CR>:nohlsearch<CR>c4l', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('i', '`;', '<Esc>/<++><CR>:nohlsearch<CR>c4l', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '<C-A-l>', '<Esc>/<++><CR>:nohlsearch<CR>c4l', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<C-l>', '<Esc>/<++><CR>:nohlsearch<CR>c4l', { noremap = true, silent = true })
 -- 设置清除当前行的传送锚点
 vim.api.nvim_set_keymap('i', '<C-c>', '<Esc>mc:s/<++>//g<CR>`ca', { noremap = true, silent = true })
 -- end 设置写入模式的传送锚点
