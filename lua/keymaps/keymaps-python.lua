@@ -40,6 +40,13 @@ vim.api.nvim_set_keymap('i', '<LEADER>while',
 , { noremap = true, silent = true})
 -- end while 循环
 
+-- begin loop 循环
+vim.api.nvim_set_keymap('i', '<LEADER>loop', 
+    'while True :'                                          .. '<CR><BS>' ..
+    '# end while'                                           .. '<Esc>O'
+, { noremap = true, silent = true})
+-- end loop 循环
+
 -- begin match 分支
 vim.api.nvim_set_keymap('i', '<LEADER>match', 
     'match  :'                                              .. '<CR>' ..
@@ -48,4 +55,45 @@ vim.api.nvim_set_keymap('i', '<LEADER>match',
     '# end match'                                           .. '<Esc>3k$hi'
 , { noremap = true, silent = true})
 -- end match 分支
+
+-- begin if 分支
+vim.api.nvim_set_keymap('i', '<LEADER>if', 
+    'if  :'                                                 .. '<CR>' ..
+            _G.Next                                         .. '<CR><BS>' ..
+    '# end if'                                              .. '<Esc>3k$hi'
+, { noremap = true, silent = true})
+-- end if 分支
+
+-- begin if-else 分支
+vim.api.nvim_set_keymap('i', '<LEADER>eif', 
+    'if  :'                                                 .. '<CR>' ..
+            _G.Next                                         .. '<CR><BS>' ..
+    'else:'                                                 .. '<CR>' ..
+            _G.Next                                         .. '<CR><BS>' ..
+    '# end if'                                              .. '<Esc>4k$hi'
+, { noremap = true, silent = true})
+-- end if-else 分支
+
+-- begin elif 分支
+vim.api.nvim_set_keymap('i', '<LEADER>elif', 
+    'if  :'                                                 .. '<CR>' ..
+            _G.Next                                         .. '<CR><BS>' ..
+    'elif ' .. _G.Next .. ' :'                              .. '<CR>' ..
+            _G.Next                                         .. '<CR><BS>' ..
+    '# end if'                                              .. '<Esc>5k$hi'
+, { noremap = true, silent = true})
+-- end elif 分支
+
+-- begin elif-else 分支
+vim.api.nvim_set_keymap('i', '<LEADER>eelif', 
+    'if  :'                                                 .. '<CR>' ..
+            _G.Next                                         .. '<CR><BS>' ..
+    'elif ' .. _G.Next .. ' :'                              .. '<CR>' ..
+            _G.Next                                         .. '<CR><BS>' ..
+    'else:'                                                 .. '<CR>' ..
+            _G.Next                                         .. '<CR><BS>' ..
+    '# end if'                                              .. '<Esc>6k$hi'
+, { noremap = true, silent = true})
+-- end elif-else 分支
+
 
