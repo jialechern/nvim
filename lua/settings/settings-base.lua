@@ -3,6 +3,9 @@
 -- 设置字体
 vim.opt.guifont = "JetBrainsMono Nerd Font:h16"
 
+-- 禁用默认的启动界面
+vim.opt.shortmess:append("I")   
+
 -- 配置语法高亮
 vim.cmd('syntax on')
 vim.cmd('filetype plugin indent on')
