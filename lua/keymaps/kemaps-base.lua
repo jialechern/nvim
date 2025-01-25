@@ -70,7 +70,7 @@ vim.api.nvim_set_keymap('x', 'K', '5k', {noremap = true, silent = true})
 -- end 设置 noremal 模式快速跳转
 
 -- 设置拼写检查
-vim.api.nvim_set_keymap('n', '<leader>sc', ':set spell!<CR>', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<LEADER>sc', ':set spell!<CR>', { noremap = true, silent = true})
 
 -- begin 设置转译字符
 -- 转译 CoLeader

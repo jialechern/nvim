@@ -21,7 +21,8 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "rust", 
     callback = function()
-        vim.cmd('source $NVIMCONFIGP/lua/keymaps/keymaps-rust.vim')
+        vim.cmd('source $NVIMCONFIGP/lua/keymaps/keymaps-rust.lua')
+--         vim.cmd('source $NVIMCONFIGP/lua/keymaps/keymaps-rust.vim')
     end,
 })
 
