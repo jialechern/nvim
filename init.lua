@@ -1,4 +1,5 @@
 -- 要使用配置, 需要实现将全局环境 NVIMCONFIGP 的值设置为 nvim/vin 配置文件的路径
+
 -- begin 指定插件位置，不存在则clone到本地
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -14,36 +15,31 @@ end
 vim.opt.rtp:prepend(lazypath)
 -- end 指定插件位置，不存在则clone到本地
 
--- begin    配置自动运行或是编译文件
-function Run()
-    local extension = vim.fn.expand('%:e')
-    if extension == 'py' then
-        vim.cmd('silent write')
-        vim.cmd('silent !python3 %')
-    elseif extension == 'md' then
-        vim.cmd('silent MarkdownPreview')
-    elseif extension == 'tex' then
-        vim.cmd('silent write')
-        vim.cmd('silent !make -f $MakeFiles_Path/latex/latex.mk')
-    else
-        print('No command for this file type.')
-    end
-end
+-- 自动编译运行
+vim.cmd('source $NVIMCONFIGP/init/auto-compile.lua')
 
-vim.api.nvim_set_keymap('n', '<A-r>', ':lua Run()<CR>', { noremap = true, silent = true })
--- end      配置自动运行或是编译文件
+-- 需要在加载插件之前引入 leader 键
+vim.g.mapleader = ">"   
+-- 副转译字符
+_G.CoLeader = "`"
 
+-- 设置进入一般模式的快捷键
+vim.api.nvim_set_keymap('i', '<C-_>', '<Esc>', { noremap = true, silent = true })   
+vim.api.nvim_set_keymap('x', '<C-_>', '<Esc>', { noremap = true, silent = true })   
+
+-- 设置跳转锚点的符号
+_G.NextSymbol = "<++>"
+-- 跳转锚点
+_G.Next = _G.NextSymbol
+
+-- require('plugins')		-- 插件配置
 -- 照例require一下，如果同时使用vim-plug插件，记得把这个放在vim-plug后面
-vim.g.mapleader = ">"   -- 需要在加载插件之前引入 leader 键
-vim.api.nvim_set_keymap('i', '<C-_>', '<Esc>', { noremap = true, silent = true })   -- 设置进入一般模式的快捷键
-vim.api.nvim_set_keymap('x', '<C-_>', '<Esc>', { noremap = true, silent = true })   -- 设置进入一般模式的快捷键
-vim.opt.shortmess:append("I")   -- 禁用默认的启动界面
 require("lazy").setup('plugins')
 
+-- 一般设置
+require('settings')		
 
--- vim.cmd('source $NVIMCONFIGP/init.vim')			-- 使用传统 vim 配置文件
--- require('plugins')		-- 插件配置
-require('settings')		-- 一般设置
-require('keymaps')		-- 键盘映射
+-- 键盘映射
+require('keymaps')		
 
 
