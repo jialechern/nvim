@@ -24,7 +24,7 @@ _G.GetComment = GetComment
 
 -- 定义一个函数来添加或去除行注释
 function ToggleComment()
-  local comment_prefix = GetComment()
+  local comment_prefix = _G.GetComment()
   local comment_prefix_len = #comment_prefix
 
   -- 获取当前行号和列号
@@ -54,15 +54,15 @@ end
 -- 注册为全局函数
 _G.ToggleComment = ToggleComment
 
-vim.api.nvim_set_keymap('n', '<C-A-_>', ':lua ToggleComment()<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '<C-A-_>', '<Esc>:lua ToggleComment()<CR>a', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-A-_>', ':lua _G.ToggleComment()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<C-A-_>', '<Esc>:lua _G.ToggleComment()<CR>a', { noremap = true, silent = true })
 
 -- 定义一个函数用于增加/去除可视模式下的块注释
 function BlockToggleComment()
     -- 获取当前选中的行范围
   local start_line = vim.fn.line("'<")
   local end_line = vim.fn.line("'>")
-  local insert_string = GetComment()  -- 你想要插入或删除的字符串
+  local insert_string = _G.GetComment()  -- 你想要插入或删除的字符串
   local insert_string_len = #insert_string
 
     -- 保存可视模式状态
@@ -88,4 +88,4 @@ end
 -- 注册为全局函数
 _G.BlockToggleComment = BlockToggleComment
 -- 设置可视模式下的块注释
-vim.api.nvim_set_keymap('x', '<C-A-_>', ":lua BlockToggleComment()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('x', '<C-A-_>', ":lua _G.BlockToggleComment()<CR>", { noremap = true, silent = true })
