@@ -35,3 +35,26 @@ vim.api.nvim_set_keymap('i', '<LEADER>itemize',
 , { noremap = true, silent = true})
 -- end 枚举环境
 
+-- begin latex 初始化
+vim.api.nvim_set_keymap('i', '<LEADER>init', 
+    '\\documentclass{} % article / book / report'                       .. '<CR><CR>' ..
+
+    '\\title{' .. _G.Next .. '}'                                        .. '<CR>' ..
+    '\\author{' .. _G.Next .. '}'                                       .. '<CR>' ..
+    '\\institute{' .. _G.Next .. '}'                                    .. '<CR>' ..
+    '\\version{' .. _G.Next .. '}'                                      .. '<CR><CR>' ..
+
+    '\\date{\\zhtoday}'                                                 .. '<CR><CR>' ..
+
+    '\\usepackage{array}'                                               .. '<CR>' ..
+    '\\usepackage{amssymb}'                                             .. '<CR>' ..
+    '\\usepackage{float}'                                               .. '<CR>' ..
+    '\\usepackage{mathrsfs}'                                            .. '<CR>' ..
+    '\\usepackage{' .. _G.Next .. '}'                                   .. '<CR><CR>' ..
+
+    '\\begin{document}'                                                 .. '<CR>' ..
+    '\\maketitle'                                                       .. '<CR>' ..
+    '\\end{document}'                                                   .. '<Esc>17k$F}i'
+, { noremap = true, silent = true})
+-- end latex 初始化
+
