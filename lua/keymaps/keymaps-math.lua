@@ -7,7 +7,8 @@ vim.api.nvim_set_keymap('i', '<LEADER>D', '_{}' .. _G.Next .. '<Esc>F}i', { nore
 -- 上标
 vim.api.nvim_set_keymap('i', '<LEADER>U', '^{}' .. _G.Next .. '<Esc>F}i', { noremap = true, silent = true})
 -- 行内公式块
-vim.api.nvim_set_keymap('i', '<LEADER>math', '$$' .. _G.Next .. '<Esc>F$i', { noremap = true, silent = true})
+-- vim.api.nvim_set_keymap('i', '<LEADER>math', '$$' .. _G.Next .. '<Esc>F$i', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('i', '<LEADER>$', '$$' .. _G.Next .. '<Esc>F$i', { noremap = true, silent = true})
 
 -- begin 行间公式块
 vim.api.nvim_set_keymap('i', '<LEADER>M', 
