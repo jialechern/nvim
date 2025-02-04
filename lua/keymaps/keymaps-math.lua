@@ -26,6 +26,8 @@ vim.api.nvim_set_keymap('i', '<LEADER>tuple', '\\left(\\right)' .. _G.Next .. '<
 vim.api.nvim_set_keymap('i', '<LEADER>list', '\\left[\\right]' .. _G.Next .. '<Esc>F\\i', { noremap = true, silent = true})
 -- 大括号
 vim.api.nvim_set_keymap('i', '<LEADER>set', '\\left\\{\\right\\}' .. _G.Next .. '<Esc>2F\\i', { noremap = true, silent = true})
+-- 绝对值
+vim.api.nvim_set_keymap('i', '<LEADER>abs', '\\left|\\right|' .. _G.Next .. '<Esc>F\\i', { noremap = true, silent = true})
 -- end 常见的 \left \right 包裹的符号
 
 -- begin 一些双线体大写字母
