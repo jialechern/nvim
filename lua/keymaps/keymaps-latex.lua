@@ -58,3 +58,10 @@ vim.api.nvim_set_keymap('i', '<LEADER>init',
 , { noremap = true, silent = true})
 -- end latex 初始化
 
+-- begin 居中环境
+vim.api.nvim_set_keymap('i', '<LEADER>center', 
+    '\\begin{center}'                                         .. '<CR>' ..
+    '\\end{center}'                                           .. '<Esc>O'
+, { noremap = true, silent = true})
+-- end 居中环境
+
