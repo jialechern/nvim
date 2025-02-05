@@ -9,6 +9,8 @@ vim.filetype.add({
     c   = 'c', 
     cpp = 'cpp', 
     h   = 'c', 
+    js = 'javascript', 
+    ts = 'typescript', 
   },
 })
 
