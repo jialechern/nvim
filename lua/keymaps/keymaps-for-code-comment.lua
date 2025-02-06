@@ -8,7 +8,9 @@ function GetComment()
       comment_prefix = '# '
   elseif filetype == 'c' or 
       filetype == 'cpp' or
-      filetype == 'rust'
+      filetype == 'rust' or
+      filetype == 'javascript' or
+      filetype == 'typescript'
       then
           comment_prefix = '// '
   elseif filetype == 'lua' then

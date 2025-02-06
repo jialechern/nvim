@@ -90,6 +90,13 @@ vim.api.nvim_set_keymap('i', '<LEADER>while',
 , { noremap = true , silent = true })
 -- end while 循环
 
+-- begin do-while 循环
+vim.api.nvim_set_keymap('i', '<LEADER>dowhile', 
+        'do {'                                      .. '<CR>' ..
+        '} while ();'                               .. '<Esc>F(a'
+, { noremap = true , silent = true })
+-- end do-while 循环
+
 -- begin if 分支
 vim.api.nvim_set_keymap('i', '<LEADER>if', 
         'if () ' .. _G.Next                         .. '<Esc>F)i'
@@ -141,10 +148,10 @@ vim.api.nvim_set_keymap('i', '<LEADER>switch',
 , { noremap = true , silent = true })
 -- end switch 分支
 
--- begin loop 分支
+-- begin loop 循环
 vim.api.nvim_set_keymap('i', '<LEADER>loop', 
     'while (1) {'                                   .. '<CR>' ..
     '}'                                             .. '<Esc>O'
 , { noremap = true , silent = true })
--- end loop 分支
+-- end loop 循环
 
