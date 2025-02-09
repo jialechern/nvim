@@ -3,16 +3,11 @@
 -- 设置魔法方法快捷键
 vim.api.nvim_set_keymap('i', '<LEADER>_', '____' .. _G.Next .. '<Esc>2F_i', { noremap = true, silent = true})
 
+-- base init
+vim.api.nvim_set_keymap('i', '<LEADER>init', '#!/usr/bin/env python<CR>', { noremap = true, silent = true})
+
 -- 打印
 vim.api.nvim_set_keymap('i', '<LEADER>p', 'print()<Esc>F(a', { noremap = true, silent = true})
-
--- begin 对象初始化
-vim.api.nvim_set_keymap('i', '<LEADER>init', 
-    'def __init__(self, ):'                             .. '<CR>' ..
-            '<++>'                                      .. '<CR>' ..
-                                                        '<Esc>2k$hi'
-, { noremap = true, silent = true})
--- end 对象初始化
 
 -- begin 单元测试
 vim.api.nvim_set_keymap('i', '<LEADER>main', 

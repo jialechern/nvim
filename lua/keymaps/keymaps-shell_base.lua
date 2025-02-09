@@ -1,10 +1,12 @@
 -- - kemaps-shell_base.lua
 
 -- begin init shell
+-- base init
+vim.api.nvim_set_keymap('i', '<LEADER>init', '#!/usr/bin/env ', { noremap = true, silent = true})
 -- bash
-vim.api.nvim_set_keymap('i', '<LEADER>initb', '#!/bin/bash ', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('i', '<LEADER>initb', '#!/bin/bash<CR>', { noremap = true, silent = true})
 -- zsh
-vim.api.nvim_set_keymap('i', '<LEADER>initz', '#!/bin/zsh ', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('i', '<LEADER>initz', '#!/bin/zsh<CR>', { noremap = true, silent = true})
 -- end init shell
 
 -- begin if 语句

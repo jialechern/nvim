@@ -3,8 +3,18 @@
 -- 设置严格模式
 vim.api.nvim_set_keymap('i', '<LEADER>us', '"use strict";', { noremap = true, silent = true})
 
--- 字符串差值
+-- base init
+vim.api.nvim_set_keymap('i', '<LEADER>init', '#!/usr/bin/env node<CR>', { noremap = true, silent = true})
+
+-- 字符串插值
 vim.api.nvim_set_keymap('i', '<LEADER>$', '${  }' .. '<Esc>F{la', { noremap = true, silent = true})
+
+-- begin 代码块
+vim.api.nvim_set_keymap('i', '<LEADER>b', 
+        '{'                                         .. '<CR>' ..
+        '}'                                         .. '<Esc>O'
+, { noremap = true , silent = true })
+-- end 代码块
 
 -- begin if 分支
 vim.api.nvim_set_keymap('i', '<LEADER>if', 
