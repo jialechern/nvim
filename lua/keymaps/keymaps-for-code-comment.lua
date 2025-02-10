@@ -3,7 +3,10 @@
 function GetComment()
   local filetype = vim.bo.filetype
   if filetype == 'python' or
-     filetype == 'make'
+     filetype == 'make' or
+     filetype == 'bash' or
+     filetype == 'zsh' or
+     filetype == 'sh'
       then
       comment_prefix = '# '
   elseif filetype == 'c' or 
