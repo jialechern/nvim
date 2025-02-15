@@ -73,3 +73,11 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.cmd('source $NVIMCONFIGP/lua/keymaps/keymaps-javascript.lua')
     end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "sshconfig", 
+    callback = function()
+        vim.cmd('source $NVIMCONFIGP/lua/keymaps/keymaps-sshconfig.lua')
+    end,
+})
+

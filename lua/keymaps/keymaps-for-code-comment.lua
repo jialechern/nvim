@@ -6,7 +6,8 @@ function GetComment()
      filetype == 'make' or
      filetype == 'bash' or
      filetype == 'zsh' or
-     filetype == 'sh'
+     filetype == 'sh' or
+     filetype == 'sshconfig'
       then
       comment_prefix = '# '
   elseif filetype == 'c' or 
