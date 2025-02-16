@@ -1,5 +1,26 @@
 -- - keymaps-rust.lua
 
+-- begin main
+vim.api.nvim_set_keymap('i', '<LEADER>main', 
+'fn main () {'                          .. '<CR>' ..
+'}'                                     .. '<Esc>O'
+,{ noremap = true, silent = true})
+-- end main
+
+-- begin init test
+vim.api.nvim_set_keymap('i', '<LEADER>initt', 
+'#[cfg(test)]'                          .. '<CR>' ..
+'mod tests {'                           .. '<CR>' ..
+    'use super::*;'                     .. '<CR><CR>' ..
+
+    '#[test]'                           .. '<CR>' ..
+    'fn  () {'                          .. '<CR>' ..
+        _G.Next                         .. '<CR>' ..
+    '}'                                 .. '<CR>' ..
+'}'                                     .. '<Esc>3k$Fnla'
+,{ noremap = true, silent = true})
+-- end init test
+
 -- 匿名函数
 vim.api.nvim_set_keymap('i', '<LEADER><Bar>', '<Bar><Bar>' .. _G.Next .. '<Esc>F<Bar>i',{ noremap = true, silent = true})
 -- 打印

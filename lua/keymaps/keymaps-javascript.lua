@@ -92,7 +92,7 @@ vim.api.nvim_set_keymap('i', '<LEADER>loop',
 -- begin function
 vim.api.nvim_set_keymap('i', '<LEADER>func', 
         'function  {'                               .. '<CR>' ..
-                '<++>'                              .. '<CR>' ..
+                _G.Next                             .. '<CR>' ..
         '}'                                         .. '<Esc>2k$hi'
 , { noremap = true , silent = true })
 -- end function
