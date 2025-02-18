@@ -12,10 +12,10 @@ vim.api.nvim_set_keymap('i', '<LEADER>p', 'print()<Esc>F(a', { noremap = true, s
 -- begin 单元测试
 vim.api.nvim_set_keymap('i', '<LEADER>main', 
     'def main():'                                           .. '<CR>' ..
-            _G.Next                                         .. '<CR><CR><C-u>' ..
+        ''                                                  .. '<CR><C-u>' ..
 
     'if __name__ == "__main__":'                            .. '<CR>' ..
-            'main()'                                        .. '<Esc>5k$hi'
+            'main()'                                        .. '<Esc>2kO'
 , { noremap = true, silent = true})
 -- end 单元测试
 
