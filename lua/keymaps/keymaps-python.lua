@@ -11,7 +11,7 @@ vim.api.nvim_set_keymap('i', '<LEADER>p', 'print()<Esc>F(a', { noremap = true, s
 
 -- begin 单元测试
 -- 测试初始化(导入依赖库)
-vim.api.nvim_set_keymap('i', '<LEADER>testinit', 
+vim.api.nvim_set_keymap('i', '<LEADER>tinit', 
 'from unittest import TestCase, skip, expectedFailure, main'
 , { noremap = true, silent = true})
 -- 测试类
