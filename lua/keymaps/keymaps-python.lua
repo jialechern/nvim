@@ -11,7 +11,7 @@ vim.api.nvim_set_keymap('i', '<LEADER>p', 'print()<Esc>F(a', { noremap = true, s
 
 -- begin 单元测试
 -- 测试初始化(导入依赖库)
-vim.api.nvim_set_keymap('i', '<LEADER>inittest', 
+vim.api.nvim_set_keymap('i', '<LEADER>testinit', 
 'from unittest import TestCase, skip, expectedFailure, main'
 , { noremap = true, silent = true})
 -- 测试类
@@ -26,7 +26,7 @@ vim.api.nvim_set_keymap('i', '<LEADER>test',
 '   def test_example(self):'                                    .. '<CR><C-u>' ..
 "       self.assertTrue(sum(range(101)) == 5050, '计算错误!')"  .. '<CR><CR><C-u>' ..
 
-'   def tearDown(self)'                                         .. '<CR><C-u>' ..
+'   def tearDown(self):'                                        .. '<CR><C-u>' ..
 '       # 测试结束, 清理资源'                                   .. '<CR><C-u>' ..
 '       pass'                                                   .. '<CR><CR><C-u>' ..
 
