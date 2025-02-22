@@ -1,5 +1,18 @@
 -- - keymaps-latex.lua
 
+-- begin 一些标准的排版方式
+-- 章节
+vim.api.nvim_set_keymap('i', '<LEADER>chapter', '\\chapter {}' .. '<Esc>F{a', { noremap = true, silent = true})
+-- 节
+vim.api.nvim_set_keymap('i', '<LEADER>section', '\\section {}' .. '<Esc>F{a', { noremap = true, silent = true})
+-- 小节
+vim.api.nvim_set_keymap('i', '<LEADER>ssection', '\\subsection {}' .. '<Esc>F{a', { noremap = true, silent = true})
+-- 小小节
+vim.api.nvim_set_keymap('i', '<LEADER>sssection', '\\subsubsection {}' .. '<Esc>F{a', { noremap = true, silent = true})
+-- 小小小节
+vim.api.nvim_set_keymap('i', '<LEADER>ssssection', '\\subsubsubsection {}' .. '<Esc>F{a', { noremap = true, silent = true})
+-- end 一些标准的排版方式
+
 -- begin 一般的 begin-end 环境
 vim.api.nvim_set_keymap('i', '<LEADER>be', 
     '\\begin{}'                                                 .. '<CR>' ..

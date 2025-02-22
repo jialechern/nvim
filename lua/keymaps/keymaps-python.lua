@@ -10,6 +10,32 @@ vim.api.nvim_set_keymap('i', '<LEADER>init', '#!/usr/bin/env python<CR>', { nore
 vim.api.nvim_set_keymap('i', '<LEADER>p', 'print()<Esc>F(a', { noremap = true, silent = true})
 
 -- begin 单元测试
+-- 测试初始化(导入依赖库)
+vim.api.nvim_set_keymap('i', '<LEADER>inittest', 
+'from unittest import TestCase, skip, expectedFailure, main'
+, { noremap = true, silent = true})
+-- 测试类
+vim.api.nvim_set_keymap('i', '<LEADER>test', 
+                                                                '<C-u>' ..
+'class Test(TestCase):'                                         .. '<CR><C-u>' ..
+'   def setUp(self):'                                           .. '<CR><C-u>' ..
+'       # 测试初始化'                                           .. '<CR><C-u>' ..
+'       pass'                                                   .. '<CR><CR><C-u>' ..
+
+"   @skip('暂时跳过测试')"                                      .. '<CR><C-u>' ..
+'   def test_example(self):'                                    .. '<CR><C-u>' ..
+"       self.assertTrue(sum(range(101)) == 5050, '计算错误!')"  .. '<CR><CR><C-u>' ..
+
+'   def tearDown(self)'                                         .. '<CR><C-u>' ..
+'       # 测试结束, 清理资源'                                   .. '<CR><C-u>' ..
+'       pass'                                                   .. '<CR><CR><C-u>' ..
+
+"if __name__ == '__main__':"                                    .. '<CR><C-u>' ..
+'   main()'                                                     .. '<Esc>14k$2FT3la'
+, { noremap = true, silent = true})
+-- end 单元测试
+
+-- begin main 函数
 vim.api.nvim_set_keymap('i', '<LEADER>main', 
     'def main():'                                           .. '<CR>' ..
         ''                                                  .. '<CR><C-u>' ..
@@ -17,7 +43,7 @@ vim.api.nvim_set_keymap('i', '<LEADER>main',
     'if __name__ == "__main__":'                            .. '<CR>' ..
             'main()'                                        .. '<Esc>2kO'
 , { noremap = true, silent = true})
--- end 单元测试
+-- end main 函数
 
 -- begin for 循环
 vim.api.nvim_set_keymap('i', '<LEADER>for', 
