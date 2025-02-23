@@ -2,7 +2,7 @@
 
 -- 导入基本快捷键设置
 -- vim.cmd('source $NVIMCONFIGP/lua/keymaps/keymaps-base.vim')        
-vim.cmd('source $NVIMCONFIGP/lua/keymaps/kemaps-base.lua')        
+vim.cmd('source $NVIMCONFIGP/lua/keymaps/keymaps-base.lua')        
 
 -- 设置注释
 vim.cmd('source $NVIMCONFIGP/lua/keymaps/keymaps-for-code-comment.lua')
@@ -15,5 +15,5 @@ vim.cmd('source $NVIMCONFIGP/lua/keymaps/keymaps-symbols.lua')
 vim.cmd('source $NVIMCONFIGP/lua/keymaps/keymaps-for-code-fold.lua')
 
 -- 设置自动根据文件名导入对应的键盘映射
-vim.cmd('source $NVIMCONFIGP/lua/keymaps/kemaps-auto-load-by-filetype.lua')
+vim.cmd('source $NVIMCONFIGP/lua/keymaps/keymaps-auto-load-by-filetype.lua')
 
