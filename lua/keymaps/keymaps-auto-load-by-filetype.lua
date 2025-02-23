@@ -81,3 +81,10 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "fish", 
+    callback = function()
+        vim.cmd('source $NVIMCONFIGP/lua/keymaps/keymaps-fish.lua')
+    end,
+})
+
