@@ -72,8 +72,10 @@ vim.api.nvim_set_keymap('i', '<LEADER>loop',
 vim.api.nvim_set_keymap('i', '<LEADER>match', 
     'match  :'                                              .. '<CR>' ..
         'case ' .. _G.Next .. ' :'                          .. '<CR>' ..
+                _G.Next                                     .. '<CR><BS>' ..
+        'case _ :'                                          .. '<CR>' ..
                 _G.Next                                     .. '<CR><BS><BS>' ..
-    '# end match'                                           .. '<Esc>3k$hi'
+    '# end match'                                           .. '<Esc>5k$hi'
 , { noremap = true, silent = true})
 -- end match 分支
 
