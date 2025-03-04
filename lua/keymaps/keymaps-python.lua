@@ -119,4 +119,88 @@ vim.api.nvim_set_keymap('i', '<LEADER>eelif',
 , { noremap = true, silent = true})
 -- end elif-else 分支
 
+-- begin 命令行参数处理
+vim.api.nvim_set_keymap('i', '<LEADER>argparse', 
+'def get_args():'                                                           
+                                                            .. '<CR><C-u>' ..
+'    # 需要预先导入标准库 argparse' .. _G.Next
+                                                            .. '<CR><C-u>' ..
+'    parser = argparse.ArgumentParser(description="' .. _G.Next .. '")'     
+                                                            .. '<CR><C-u>' ..
+'    # 位置参数'                                                            
+                                                            .. '<CR><C-u>' ..
+'    # parser.add_argument("位置参数", help="参数描述", type="参数类型",nargs: int="接受个数" ,default="默认值", choices: list[arg_type]="枚举参数")'
+                                                            .. '<CR><C-u>' ..
+'    parser.add_argument("' .. _G.Next .. '", ' .. 
+                            'help="' .. _G.Next .. '", ' .. 
+                            'type="' .. _G.Next .. '", ' .. 
+                            'default="' .. _G.Next .. '")'  .. '<CR><C-u>' ..
+'    # 一般参数'                                            .. '<CR><C-u>' ..
+'    # parser.add_argument("-缩写", "--全称", help="参数表述",nargs: int="接受个数" ,type="参数类型", default="默认值", choices: list[arg_type]="枚举参数")'
+                                                            .. '<CR><C-u>' ..
+'    parser.add_argument("' .. _G.Next ..'", ' ..
+                            '"' .. _G.Next .. '", ' .. 
+                            'help="' .. _G.Next .. '", ' .. 
+                            'type="' .. _G.Next .. '", ' .. 
+                            'default="' .. _G.Next .. '")'  .. '<CR><C-u>' ..
+'    # 开关参数'                                            .. '<CR><C-u>' ..
+'    # parser.add_argument("-缩写", "--全称", help="参数表述", action="store_true | store_false")'
+                                                            .. '<CR><C-u>' ..
+'    parser.add_argument("' .. _G.Next .. '", ' .. 
+                            '"' .. _G.Next .. '", ' .. 
+                            'help="' .. _G.Next .. '", ' .. 
+                            'action="' .. _G.Next .. '")'   .. '<CR><CR><C-u>' .. 
+
+'    return parser.parse_args()'                            .. '<Esc>13k$F(a'
+, { noremap = true, silent = true})
+-- end 命令行参数处理
+
+-- begin 调用其它程序
+-- subprocess.run
+vim.api.nvim_set_keymap('i', '<LEADER>run', 
+'# 需要导入标准库 subprocess'                                   .. '<CR>' ..
+'result = subprocess.run('                                      .. '<CR>' ..
+            '# [Command, args: list[str]]'
+                                                                .. '<CR>' ..
+            '[, ' .. _G.Next .. '],'
+                                                                .. '<CR>' ..
+            '# 是否捕获 stdout 和 stderr'
+                                                                .. '<CR>' ..
+            'capture_output=' .. _G.Next
+                                                                .. '<CR>' ..
+            '# 是否返回字符串'
+                                                                .. '<CR>' ..
+            'text=' .. _G.Next
+                                                                .. '<CR>' ..
+            '# 返回码非零时是否抛出异常'
+                                                                .. '<CR>' ..
+            'check=' .. _G.Next
+                                                                .. '<CR>' ..
+            '# 超时控制(秒)'
+                                                                .. '<CR>' ..
+            'timeout=' .. _G.Next                               .. '<CR>' ..
+            ')'                                                 .. '<Esc>9k^f,i'
+, { noremap = true, silent = true})
+-- subprocess.Popen
+vim.api.nvim_set_keymap('i', '<LEADER>popen', 
+'# 需要导入标准库 subprocess'                                   .. '<CR>' ..
+'with subprocess.Popen('                                        .. '<CR>' ..
+            '# [Command, args: list[str]]'                      .. '<CR>' ..
+            '[, ' .. _G.Next .. '],'                            .. '<CR>' ..
+            '# 合并 stdout 和 stderr'                           .. '<CR>' ..
+            'stdout=subprocess.PIPE,'                           .. '<CR>' ..
+            'stderr=subprocess.STDOUT,'                         .. '<CR>' ..
+            '# 是否返回字符串'                                  .. '<CR>' ..
+            'text=' .. _G.Next                                  .. '<CR>' ..
+            '# 行缓冲, 推荐为 1'                                .. '<CR>' ..
+            'bufsize=' .. _G.Next                               .. '<CR>' ..
+            ') as proc:'                                        .. '<CR>' ..
+                'for line in proc.stdout:'                      .. '<CR>' ..
+                    'print(f"实时输出: {line.strip()}")'        .. '<CR><CR><BS>' ..
+
+                '# 等待结束并获取返回码'                        .. '<CR>' ..
+                'returncode = proc.wait()'                      .. '<CR>' ..
+                _G.Next                                         .. '<Esc>14k^f,i'
+, { noremap = true, silent = true})
+-- end 调用其它程序
 
