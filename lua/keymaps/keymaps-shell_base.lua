@@ -78,11 +78,11 @@ vim.api.nvim_set_keymap('i', '<LEADER>while',
 
 -- begin case 分支
 vim.api.nvim_set_keymap('i', '<LEADER>case', 
-    'case  in'                                      .. '<CR><C-u>' ..
-    _G.Next .. ')'                                  .. '<CR><BS>' ..
-        '   ' .. _G.Next                            .. '<CR><C-u>' ..
-    '*)'                                            .. '<CR>' ..
-        '   ' .. _G.Next                            .. '<CR>' ..
+    'case  in'                                      .. '<CR><BS>' ..
+    _G.Next .. ')'                                  .. '<CR>' ..
+            _G.Next                                 .. '<CR><BS>' ..
+    '*)'                                            .. '<CR>\t' ..
+            _G.Next                                 .. '<CR>' ..
     'esac'                                          .. '<Esc>5k$Fihi'
 , { noremap = true, silent = true})
 -- end case 分支
