@@ -12,6 +12,7 @@ vim.filetype.add({
     js = 'javascript', 
     ts = 'typescript', 
     fish = 'fish',
+    toml = 'toml', 
   },
 })
 
