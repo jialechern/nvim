@@ -37,7 +37,7 @@ vim.api.nvim_set_keymap('i', '<LEADER>test',
 
 -- begin main 函数
 vim.api.nvim_set_keymap('i', '<LEADER>main', 
-    'def main():'                                           .. '<CR>' ..
+    'def main() -> None:'                                   .. '<CR>' ..
         ''                                                  .. '<CR><C-u>' ..
 
     'if __name__ == "__main__":'                            .. '<CR>' ..
@@ -121,20 +121,17 @@ vim.api.nvim_set_keymap('i', '<LEADER>eelif',
 
 -- begin 命令行参数处理
 vim.api.nvim_set_keymap('i', '<LEADER>argparse', 
-'def get_args():'                                                           
-                                                            .. '<CR><C-u>\t' ..
-    '# 需要预先导入标准库 argparse' .. _G.Next
+'def get_args() -> argparse.Namespace:'                                                           
                                                             .. '<CR><C-u>\t' ..
     'parser = argparse.ArgumentParser(description="' .. _G.Next .. '")'     
                                                             .. '<CR><C-u>\t' ..
-    '# 位置参数'                                                            
+    '# 位置参数, 位置参数不支持默认值.'                                                            
                                                             .. '<CR><C-u>\t' ..
-    '# parser.add_argument("位置参数", help="参数描述", type="参数类型",nargs: int="接受个数" ,default="默认值", choices: list[arg_type]="枚举参数")'
+    '# parser.add_argument("位置参数", help="参数描述", type="参数类型",nargs: int="接受个数" , choices: list[arg_type]="枚举参数")'
                                                             .. '<CR><C-u>\t' ..
     'parser.add_argument("' .. _G.Next .. '", ' .. 
                             'help="' .. _G.Next .. '", ' .. 
-                            'type="' .. _G.Next .. '", ' .. 
-                            'default="' .. _G.Next .. '")'  .. '<CR><C-u>\t' ..
+                            'type="' .. _G.Next .. '")'     .. '<CR><C-u>\t' ..
     '# 一般参数'                                            .. '<CR><C-u>\t' ..
     '# parser.add_argument("-缩写", "--全称", help="参数表述",nargs: int="接受个数" ,type="参数类型", default="默认值", choices: list[arg_type]="枚举参数")'
                                                             .. '<CR><C-u>\t' ..
@@ -151,7 +148,7 @@ vim.api.nvim_set_keymap('i', '<LEADER>argparse',
                             'help="' .. _G.Next .. '", ' .. 
                             'action="' .. _G.Next .. '")'   .. '<CR><CR><C-u>\t' .. 
 
-    'return parser.parse_args()'                            .. '<Esc>13k$F(a'
+    'return parser.parse_args()'                            .. '<Esc>12k$F(a'
 , { noremap = true, silent = true})
 -- end 命令行参数处理
 
