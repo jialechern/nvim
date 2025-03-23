@@ -40,8 +40,7 @@ vim.api.nvim_set_keymap('i', _G.CoLeader .. '4', '#### ', { noremap = true, sile
 vim.api.nvim_set_keymap('i', _G.CoLeader .. 'C', 
 '```'                                       .. '<CR>' .. 
     _G.Next                                 .. '<CR>' ..
-'```'                                       .. '<CR>' ..
-'<Esc>3kA'
+'```'                                       .. '<Esc>2kA'
 , { noremap = true, silent = true})
 -- end 代码块
 
