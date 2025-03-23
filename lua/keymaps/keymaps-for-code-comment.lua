@@ -19,7 +19,9 @@ function GetComment()
       filetype == 'typescript'
       then
           comment_prefix = '// '
-  elseif filetype == 'lua' then
+  elseif filetype == 'lua' or
+      filetype == 'haskell' 
+      then
       comment_prefix = '-- '
   elseif filetype == 'tex' then
       comment_prefix = '% '

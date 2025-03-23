@@ -13,6 +13,7 @@ vim.filetype.add({
     ts = 'typescript', 
     fish = 'fish',
     toml = 'toml', 
+    hs = 'haskell', 
   },
 })
 
