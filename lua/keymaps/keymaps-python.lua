@@ -9,6 +9,9 @@ vim.api.nvim_set_keymap('i', '<LEADER>init', '#!/usr/bin/env python<CR>', { nore
 -- 打印
 vim.api.nvim_set_keymap('i', '<LEADER>p', 'print()<Esc>F(a', { noremap = true, silent = true})
 
+-- 文档注释 / 长字符串
+vim.api.nvim_set_keymap('i', '<LEADER>S', '"""<CR>"""<Esc>O', { noremap = true, silent = true})
+
 -- begin 单元测试
 -- 测试初始化(导入依赖库)
 vim.api.nvim_set_keymap('i', '<LEADER>tinit', 
