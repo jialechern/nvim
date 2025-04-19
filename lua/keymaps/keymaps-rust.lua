@@ -2,8 +2,9 @@
 
 -- begin main
 vim.api.nvim_set_keymap('i', '<LEADER>main', 
-'fn main () {'                          .. '<CR>' ..
-'}'                                     .. '<Esc>O'
+'fn main () -> Result<(), Box<dyn std::error::Error>> {'            .. '<CR>' ..
+    'Ok(())'                                                        .. '<CR>' ..
+'}'                                                                 .. '<Esc>kO'
 ,{ noremap = true, silent = true})
 -- end main
 
@@ -84,9 +85,8 @@ vim.api.nvim_set_keymap('i', '<LEADER>match',
 
 -- begin loop 循环
 vim.api.nvim_set_keymap('i', '<LEADER>loop', 
-'loop  {'                               .. '<CR>' ..
-        _G.Next                         .. '<CR>' ..
-'}'                                     .. '<Esc>2k$hi'
+'loop {'                               .. '<CR>' ..
+'}'                                     .. '<Esc>O'
 ,{ noremap = true, silent = true})
 -- end loop 循环
 
