@@ -10,7 +10,7 @@ function Run()
         vim.cmd('silent MarkdownPreview')
     elseif extension == 'tex' then
         vim.cmd('silent write')
-        vim.cmd('silent !make -f $MakeFiles_Path/latex/latex.mk')
+        vim.cmd('silent !latexmk')
     else
         print('No command for this file type.')
     end
