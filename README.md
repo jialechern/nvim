@@ -10,6 +10,11 @@ python-pynvim npm nodejs go gcc cmake jdk&jvm
 ` 
 安装依赖完成后, 使用 `python install.py` 安装.
 ## 去除插件依赖
+### 使用无插件依赖的 `git` 分支
+
+分支 `no_plugins` 中的内容是无插件依赖的配置文件. 
+
+### 自行去除
 若使用时不希望依赖于插件需要注释以下代码: 
 
 - `CONFIG_ROOT/init.lua`
