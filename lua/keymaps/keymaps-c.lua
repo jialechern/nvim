@@ -7,6 +7,11 @@ vim.api.nvim_set_keymap('i', '<LEADER>include', '#include <>' .. '<Esc>F<a', { n
 vim.api.nvim_set_keymap('i', '<LEADER>istdio', '#include <stdio.h>', { noremap = true, silent = true})
 -- end 导入头文件
 
+-- begin 多行注释
+vim.api.nvim_set_keymap('i', '<LEADER>/', '/*  */' .. '<Esc>F*hi', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('i', '<LEADER>?', '/*  */' .. '<Esc>F*hi', { noremap = true, silent = true})
+-- end 多行注释
+
 -- 打印
 vim.api.nvim_set_keymap('i', '<LEADER>p', 'printf();' .. '<Esc>F)i', { noremap = true, silent = true})
 

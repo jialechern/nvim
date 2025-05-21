@@ -3,6 +3,11 @@
 -- 设置严格模式
 vim.api.nvim_set_keymap('i', '<LEADER>us', '"use strict";', { noremap = true, silent = true})
 
+-- begin 多行注释
+vim.api.nvim_set_keymap('i', '<LEADER>/', '/*  */' .. '<Esc>F*hi', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('i', '<LEADER>?', '/*  */' .. '<Esc>F*hi', { noremap = true, silent = true})
+-- end 多行注释
+
 -- 打印至终端
 vim.api.nvim_set_keymap('i', '<LEADER>p', 
 'console.log();'                                    .. '<Esc>F)i'

@@ -8,6 +8,11 @@ vim.api.nvim_set_keymap('i', '<LEADER>main',
 ,{ noremap = true, silent = true})
 -- end main
 
+-- begin 多行注释
+vim.api.nvim_set_keymap('i', '<LEADER>/', '/*  */' .. '<Esc>F*hi', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('i', '<LEADER>?', '/*  */' .. '<Esc>F*hi', { noremap = true, silent = true})
+-- end 多行注释
+
 -- begin init test
 vim.api.nvim_set_keymap('i', '<LEADER>initt', 
 '#[cfg(test)]'                          .. '<CR>' ..
