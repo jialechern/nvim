@@ -31,6 +31,8 @@ vim.api.nvim_set_keymap('x', '<C-_>', '<Esc>', { noremap = true, silent = true }
 _G.NextSymbol = "<++>"
 -- 跳转锚点
 _G.Next = _G.NextSymbol
+-- 键盘映射终止符
+_G.End = " "
 
 -- require('plugins')		-- 插件配置
 -- 照例require一下，如果同时使用vim-plug插件，记得把这个放在vim-plug后面
