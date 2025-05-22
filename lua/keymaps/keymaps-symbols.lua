@@ -11,7 +11,7 @@ vim.api.nvim_set_keymap('i', '<LEADER>{', '{}' .. _G.Next .. '<Esc>F}i', { norem
 vim.api.nvim_set_keymap('i', '<LEADER><LEADER>{', '{  }' .. _G.Next .. '<Esc>F}hi', { noremap = true, silent = true })
 -- 尖括号匹配
 vim.api.nvim_set_keymap('i', '<LEADER><', '<' .. _G.CoLeader .. '>' .. _G.Next .. '<Esc>F' .. _G.CoLeader .. 's', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '<LEADER><', '< ' .. _G.CoLeader .. ' >' .. _G.Next .. '<Esc>F' .. _G.CoLeader .. 's', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<LEADER><LEADER><', '< ' .. _G.CoLeader .. ' >' .. _G.Next .. '<Esc>F' .. _G.CoLeader .. 's', { noremap = true, silent = true })
 -- 单引号匹配
 vim.api.nvim_set_keymap('i', "<LEADER>'", "''" .. _G.Next .. "<Esc>F'i", { noremap = true, silent = true })
 vim.api.nvim_set_keymap('i', "<LEADER><LEADER>'", "'  '" .. _G.Next .. "<Esc>F'hi", { noremap = true, silent = true })
