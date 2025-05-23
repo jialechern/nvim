@@ -1,4 +1,4 @@
--- 要使用配置, 需要实现将全局环境 NVIMCONFIGP 的值设置为 nvim/vin 配置文件的路径
+-- - init.lua
 
 -- begin 指定插件位置，不存在则clone到本地
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -15,8 +15,21 @@ end
 vim.opt.rtp:prepend(lazypath)
 -- end 指定插件位置，不存在则clone到本地
 
+-- begin 定义一个能够自动加载 lua 配置文件的函数
+function LoadNvimConfigFile(file)
+    local chunk, err = loadfile(vim.fn.stdpath("config") .. file)
+    if not chunk then
+        error("加载失败: " .. err)
+    else
+        chunk()
+    end
+end
+
+_G.LoadNvimConfigFile = LoadNvimConfigFile
+-- end 定义一个能够自动加载 lua 配置文件的函数
+
 -- 自动编译运行
-vim.cmd('source $NVIMCONFIGP/init/auto-compile.lua')
+_G.LoadNvimConfigFile("/init/auto-compile.lua")
 
 -- 需要在加载插件之前引入 leader 键
 vim.g.mapleader = ">"   

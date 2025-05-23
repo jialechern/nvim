@@ -1,40 +1,12 @@
 -- - keymaps-for-code-comment.lua
--- 设置一个函数根据当前文件名获取注释符号
-function GetComment()
-  local filetype = vim.bo.filetype
-  if filetype == 'python' or
-     filetype == 'make' or
-     filetype == 'bash' or
-     filetype == 'zsh' or
-     filetype == 'sh' or
-     filetype == 'sshconfig' or
-     filetype == 'fish' or
-     filetype == 'toml'
-      then
-      comment_prefix = '# '
-  elseif filetype == 'c' or 
-      filetype == 'cpp' or
-      filetype == 'rust' or
-      filetype == 'javascript' or
-      filetype == 'typescript'
-      then
-          comment_prefix = '// '
-  elseif filetype == 'lua' or
-      filetype == 'haskell' 
-      then
-      comment_prefix = '-- '
-  elseif filetype == 'tex' then
-      comment_prefix = '% '
-  end
-  return comment_prefix
-  end
-
--- 注册为全局函数
-_G.GetComment = GetComment
 
 -- 定义一个函数来添加或去除行注释
-function ToggleComment()
-  local comment_prefix = _G.GetComment()
+function ToggleComment( get_comment )
+  local comment_prefix = get_comment()
+
+  -- 如果未设置有效的注释, 则直接返回
+  if not comment_prefix then return end
+
   local comment_prefix_len = #comment_prefix
 
   -- 获取当前行号和列号
@@ -64,15 +36,21 @@ end
 -- 注册为全局函数
 _G.ToggleComment = ToggleComment
 
-vim.api.nvim_set_keymap('n', '<C-A-_>', ':lua _G.ToggleComment()<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '<C-A-_>', '<Esc>:lua _G.ToggleComment()<CR>a', { noremap = true, silent = true })
+-- 设置一般注释
+vim.api.nvim_set_keymap('n', '<C-A-_>', ':lua _G.ToggleComment(_G.GetComment)<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<C-A-_>', '<Esc>:lua _G.ToggleComment(_G.GetComment)<CR>a', { noremap = true, silent = true })
+-- 设置文档注释
+vim.api.nvim_set_keymap('i', '<LEADER><LEADER>/', '<Esc>:lua _G.ToggleComment(_G.GetDocumentationComment)<CR>a', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<LEADER><LEADER>?', '<Esc>:lua _G.ToggleComment(_G.GetDocumentationComment)<CR>a', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<LEADER><LEADER>/', ':lua _G.ToggleComment(_G.GetDocumentationComment)<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<LEADER><LEADER>?', ':lua _G.ToggleComment(_G.GetDocumentationComment)<CR>', { noremap = true, silent = true })
 
 -- 定义一个函数用于增加/去除可视模式下的块注释
-function BlockToggleComment()
+function BlockToggleComment( get_comment )
     -- 获取当前选中的行范围
   local start_line = vim.fn.line("'<")
   local end_line = vim.fn.line("'>")
-  local insert_string = _G.GetComment()  -- 你想要插入或删除的字符串
+  local insert_string = get_comment()  -- 你想要插入或删除的字符串
   local insert_string_len = #insert_string
 
     -- 保存可视模式状态
@@ -98,4 +76,20 @@ end
 -- 注册为全局函数
 _G.BlockToggleComment = BlockToggleComment
 -- 设置可视模式下的块注释
-vim.api.nvim_set_keymap('x', '<C-A-_>', ":lua _G.BlockToggleComment()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('x', '<C-A-_>', ":lua _G.BlockToggleComment(_G.GetComment)<CR>", { noremap = true, silent = true })
+-- 设置可视模式下的块文档注释
+vim.api.nvim_set_keymap('x', _G.CoLeader .. '/', ":lua _G.BlockToggleComment(_G.GetDocumentationComment)<CR>", { noremap = true, silent = true })
+-- 根据不同的文件名设置不同的块文档注释键盘映射
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "*" },
+  callback = function()
+    local comment_prefix = _G.GetBlockDocumentationComment()
+    if comment_prefix then
+      vim.keymap.set("i", _G.CoLeader .. "/", comment_prefix, {
+        noremap = true,
+        silent = true
+      })
+    end
+  end
+})
+
