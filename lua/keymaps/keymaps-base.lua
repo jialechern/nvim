@@ -76,7 +76,7 @@ vim.api.nvim_set_keymap('n', '<LEADER>sc', ':set spell!<CR>', { noremap = true, 
 -- 转译 CoLeader
 vim.api.nvim_set_keymap('i', _G.CoLeader .. _G.End, _G.CoLeader, { noremap = true, silent = true })
 -- 转译 CoLeader CoLeader
-vim.api.nvim_set_keymap('i', _G.CoLeader .. _G.CoLeader, _G.CoLeader .. _G.CoLeader, { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', _G.CoLeader .. _G.CoLeader .. _G.End, _G.CoLeader .. _G.CoLeader, { noremap = true, silent = true })
 -- 转译 LEADER
 vim.api.nvim_set_keymap('i', '<LEADER>' .. _G.End, '<LEADER>', { noremap = true, silent = true })
 -- 转译 LEADER LEADER
