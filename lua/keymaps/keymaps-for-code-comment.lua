@@ -40,9 +40,8 @@ _G.ToggleComment = ToggleComment
 vim.api.nvim_set_keymap('n', '<C-A-_>', ':lua _G.ToggleComment(_G.GetComment)<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('i', '<C-A-_>', '<Esc>:lua _G.ToggleComment(_G.GetComment)<CR>a', { noremap = true, silent = true })
 -- 设置文档注释
-vim.api.nvim_set_keymap('i', '<LEADER><LEADER>/', '<Esc>:lua _G.ToggleComment(_G.GetDocumentationComment)<CR>a', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '<LEADER><LEADER>?', '<Esc>:lua _G.ToggleComment(_G.GetDocumentationComment)<CR>a', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<LEADER><LEADER>/', ':lua _G.ToggleComment(_G.GetDocumentationComment)<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', _G.CoLeader .. _G.CoLeader .. '/', '<Esc>:lua _G.ToggleComment(_G.GetDocumentationComment)<CR>a', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', _G.CoLeader .. _G.CoLeader .. '/', ':lua _G.ToggleComment(_G.GetDocumentationComment)<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<LEADER><LEADER>?', ':lua _G.ToggleComment(_G.GetDocumentationComment)<CR>', { noremap = true, silent = true })
 
 -- 定义一个函数用于增加/去除可视模式下的块注释
@@ -78,7 +77,7 @@ _G.BlockToggleComment = BlockToggleComment
 -- 设置可视模式下的块注释
 vim.api.nvim_set_keymap('x', '<C-A-_>', ":lua _G.BlockToggleComment(_G.GetComment)<CR>", { noremap = true, silent = true })
 -- 设置可视模式下的块文档注释
-vim.api.nvim_set_keymap('x', _G.CoLeader .. '/', ":lua _G.BlockToggleComment(_G.GetDocumentationComment)<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('x', _G.CoLeader .. _G.CoLeader .. '/', ":lua _G.BlockToggleComment(_G.GetDocumentationComment)<CR>", { noremap = true, silent = true })
 -- 根据不同的文件名设置不同的块文档注释键盘映射
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "*" },
