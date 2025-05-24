@@ -53,9 +53,9 @@ vim.api.nvim_set_keymap('i', '<LEADER>H', '\\mathcal{H}', { noremap = true, sile
 -- 罗马正体
 vim.api.nvim_set_keymap('i', '<LEADER>rm', '\\mathrm{}' .. _G.Next .. '<Esc>F}i', { noremap = true, silent = true})
 -- 正体 d 
-vim.api.nvim_set_keymap('i', '<LEADER>d', '\\mathrm{d}', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('i', '<LEADER>d' .. _G.End, '\\mathrm{d}', { noremap = true, silent = true})
 -- partial (德文 d )
-vim.api.nvim_set_keymap('i', '<LEADER>p', '\\partial', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('i', '<LEADER>p' .. _G.End, '\\partial', { noremap = true, silent = true})
 -- 核
 vim.api.nvim_set_keymap('i', '<LEADER>ker', '\\mathrm{ker}', { noremap = true, silent = true})
 -- 像
@@ -94,12 +94,12 @@ vim.api.nvim_set_keymap('i', '<LEADER>pl', '\\parallel', { noremap = true, silen
 -- end 一些数学专用符号
 
 -- begin 希腊字母
-vim.api.nvim_set_keymap('i', '<LEADER>a', '\\alpha', { noremap = true, silent = true})
-vim.api.nvim_set_keymap('i', '<LEADER>b', '\\beta', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('i', '<LEADER>a' .. _G.End, '\\alpha', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('i', '<LEADER>b' .. _G.End, '\\beta', { noremap = true, silent = true})
 vim.api.nvim_set_keymap('i', '<LEADER>g', '\\gamma', { noremap = true, silent = true})
 vim.api.nvim_set_keymap('i', '<LEADER>G', '\\Gamma', { noremap = true, silent = true})
 vim.api.nvim_set_keymap('i', '<LEADER>vphi', '\\varphi', { noremap = true, silent = true})
-vim.api.nvim_set_keymap('i', '<LEADER>ve', '\\varepsilon', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('i', '<LEADER>ve' .. _G.End, '\\varepsilon', { noremap = true, silent = true})
 vim.api.nvim_set_keymap('i', '<LEADER>e', '\\epsilon', { noremap = true, silent = true})
 vim.api.nvim_set_keymap('i', '<LEADER>del', '\\delta', { noremap = true, silent = true})
 vim.api.nvim_set_keymap('i', '<LEADER>lam', '\\lamdba', { noremap = true, silent = true})
