@@ -12,7 +12,7 @@ vim.api.nvim_set_keymap('i', '<LEADER>_', '____' .. _G.Next .. '<Esc>2F_i', { no
 vim.api.nvim_set_keymap('i', '<LEADER>init', '#!/usr/bin/env python<CR>', { noremap = true, silent = true})
 
 -- 打印
-vim.api.nvim_set_keymap('i', '<LEADER>p', 'print()<Esc>F(a', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('i', '<LEADER>p' .. _G.End, 'print()<Esc>F(a', { noremap = true, silent = true})
 
 -- 文档注释 / 长字符串
 vim.api.nvim_set_keymap('i', '<LEADER>S', '"""<CR>"""<Esc>O', { noremap = true, silent = true})
