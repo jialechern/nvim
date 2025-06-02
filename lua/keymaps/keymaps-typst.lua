@@ -28,3 +28,16 @@ vim.api.nvim_set_keymap('i', _G.CoLeader .. 'C',
 , { noremap = true, silent = true})
 -- end 代码块
 
+-- begin 脚本模式
+-- 脚本模式
+vim.api.nvim_set_keymap('i', '<LEADER>#', '#( ' .. _G.CoLeader .. ' )' .. '<Esc>F' .. _G.CoLeader .. 's', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('i', _G.CoLeader .. '#', '#[' .. _G.CoLeader .. ']' .. '<Esc>F' .. _G.CoLeader .. 's', { noremap = true, silent = true})
+-- end 脚本模式
+
+-- begin 数学模式
+-- 行内公式块
+vim.api.nvim_set_keymap('i', '<LEADER>$', '$$' .. _G.Next .. '<Esc>F$i', { noremap = true, silent = true})
+-- 行间公式块
+vim.api.nvim_set_keymap('i', '<LEADER>M', '$ '.. _G.CoLeader ..' $' .. _G.Next .. '<Esc>F' .. _G.CoLeader .. 's', { noremap = true, silent = true})
+-- end 数学模式
+
