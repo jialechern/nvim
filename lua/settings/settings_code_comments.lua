@@ -18,7 +18,8 @@ function GetComment()
         filetype == 'cpp' or
         filetype == 'rust' or
         filetype == 'javascript' or
-        filetype == 'typescript'
+        filetype == 'typescript' or
+        filetype == 'typst'
         then
             comment_prefix = '// '
     elseif filetype == 'lua' or

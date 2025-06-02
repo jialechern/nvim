@@ -14,6 +14,7 @@ vim.filetype.add({
     fish = 'fish',
     toml = 'toml', 
     hs = 'haskell', 
+    typ = 'typst', 
   },
 })
 

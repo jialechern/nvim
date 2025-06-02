@@ -13,6 +13,7 @@ require('nvim-treesitter.configs').setup ({
         "css",
         "c", 
         "haskell", 
+        "typst", 
     }, -- 你所需要的语言
     highlight = {
       enable = true,  -- 启用高亮

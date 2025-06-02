@@ -77,3 +77,10 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "typst", 
+    callback = function()
+        _G.LoadNvimConfigFile("/lua/keymaps/keymaps-typst.lua")
+    end,
+})
+
