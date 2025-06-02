@@ -1,10 +1,5 @@
 -- - keymaps-python.lua
 
--- begin 多行注释
-vim.api.nvim_set_keymap('i', '<LEADER>/', '"""  """' .. '<Esc>3hi', { noremap = true, silent = true})
-vim.api.nvim_set_keymap('i', '<LEADER>?', '"""  """' .. '<Esc>3hi', { noremap = true, silent = true})
--- end 多行注释
-
 -- 设置魔法方法快捷键
 vim.api.nvim_set_keymap('i', '<LEADER>_', '____' .. _G.Next .. '<Esc>2F_i', { noremap = true, silent = true})
 

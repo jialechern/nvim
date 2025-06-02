@@ -78,6 +78,25 @@ _G.BlockToggleComment = BlockToggleComment
 vim.api.nvim_set_keymap('x', '<C-A-_>', ":lua _G.BlockToggleComment(_G.GetComment)<CR>", { noremap = true, silent = true })
 -- 设置可视模式下的块文档注释
 vim.api.nvim_set_keymap('x', _G.CoLeader .. _G.CoLeader .. '/', ":lua _G.BlockToggleComment(_G.GetDocumentationComment)<CR>", { noremap = true, silent = true })
+-- 根据不同的文件名设置不同的块注释键盘映射
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "*" },
+  callback = function()
+    local comment_prefix = _G.GetBlockComment()
+    if comment_prefix then
+      vim.keymap.set("i", "<LEADER>/", comment_prefix, {
+        noremap = true,
+        silent = true
+      })
+
+      vim.keymap.set("i", "<LEADER>?", comment_prefix, {
+        noremap = true,
+        silent = true
+      })
+    end
+  end
+})
+
 -- 根据不同的文件名设置不同的块文档注释键盘映射
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "*" },
