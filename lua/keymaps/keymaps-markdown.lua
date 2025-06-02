@@ -37,11 +37,12 @@ vim.api.nvim_set_keymap('i', _G.CoLeader .. '4', '#### ', { noremap = true, sile
 -- end 文本控制
 
 -- begin 代码块
+-- 行内代码块
+vim.api.nvim_set_keymap('i', _G.CoLeader .. 'c', '``' .. _G.Next .. '<Esc>F`i', { noremap = true, silent = true})
+-- 多行代码块
 vim.api.nvim_set_keymap('i', _G.CoLeader .. 'C', 
 '```'                                       .. '<CR>' .. 
-    _G.Next                                 .. '<CR>' ..
-'```'                                       .. '<Esc>2kA'
+'```'                                       .. '<Esc>kA'
 , { noremap = true, silent = true})
 -- end 代码块
-
 
