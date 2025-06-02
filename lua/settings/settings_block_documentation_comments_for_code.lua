@@ -8,7 +8,8 @@ function GetBlockDocumentationComment()
         filetype == 'javascript' or
         filetype == 'typescript' or
         filetype == 'c' or
-        filetype == 'cpp' 
+        filetype == 'cpp' or
+        filetype == 'typst'
         then
             comment_prefix = '/**' .. '<CR>' .. '*/' .. '<Esc>O'
     elseif filetype == 'python' 
