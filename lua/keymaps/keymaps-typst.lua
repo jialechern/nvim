@@ -20,6 +20,13 @@ vim.api.nvim_set_keymap('i', _G.CoLeader .. '2', '== ', { noremap = true, silent
 vim.api.nvim_set_keymap('i', _G.CoLeader .. '3', '=== ', { noremap = true, silent = true})
 -- 四级标题
 vim.api.nvim_set_keymap('i', _G.CoLeader .. '4', '==== ', { noremap = true, silent = true})
+-- 表格
+vim.api.nvim_set_keymap('i', _G.CoLeader .. 'table', 
+'#table(columns: ' .. _G.CoLeader .. ', align: center, ' .. _G.Next .. ')' .. 
+                    '<Esc>F' .. _G.CoLeader .. 's'
+, { noremap = true, silent = true})
+-- 设置默认值
+vim.api.nvim_set_keymap('i', _G.CoLeader .. 'set', '#set ', { noremap = true, silent = true})
 -- end 文本控制
 
 -- begin 代码块
