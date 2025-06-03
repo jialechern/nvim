@@ -4,6 +4,8 @@ _G.LoadNvimConfigFile("/lua/settings/settings-base.lua")
 
 -- 配置代码提示和代码高亮
 _G.LoadNvimConfigFile("/lua/settings/settings-code-hint-by-color.lua")
+-- 配置 TypstPreview 插件
+_G.LoadNvimConfigFile("/lua/settings/settings-typst-preview.lua")
 
 -- 设置不同类型的代码的注释
 -- 一般注释

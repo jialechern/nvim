@@ -8,6 +8,8 @@ function Run()
         vim.cmd('silent !python3 %')
     elseif extension == 'md' then
         vim.cmd('silent MarkdownPreview')
+    elseif extension == 'typ' then
+        vim.cmd('silent TypstPreview')
     elseif extension == 'tex' then
         vim.cmd('silent write')
         vim.cmd('silent !latexmk')
