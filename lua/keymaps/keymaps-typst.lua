@@ -5,6 +5,10 @@
 vim.api.nvim_set_keymap('i', _G.CoLeader .. 'b', '**' .. _G.Next .. '<Esc>F*i', { noremap = true, silent = true})
 -- 强调字体
 vim.api.nvim_set_keymap('i', _G.CoLeader .. 's', '__' .. _G.Next .. '<Esc>F_i', { noremap = true, silent = true})
+-- 删除内容
+vim.api.nvim_set_keymap('i', _G.CoLeader .. 'd', 
+'#strike[' .. _G.CoLeader .. ']' .. '<Esc>F' .. _G.CoLeader .. 's'
+, { noremap = true, silent = true})
 -- end 字词修饰
 
 -- begin 文本控制
