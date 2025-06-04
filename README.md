@@ -1,28 +1,44 @@
 # VimConfig
 ## 使用说明
-需要注意等是，使用之前：
+需要注意的是，使用之前：
 
-- 需要设置环境变量 `NVIMCONFIGP` 为 neovim 的配置文件所在; 注: 模块化逻辑已重构, 已经不需要这个环境变量了;
+> 需要设置环境变量 `NVIMCONFIGP` 为 neovim 的配置文件所在; 注: 模块化逻辑已重构, 已经不需要这个环境变量了;
+
+### 插件说明
 - markdown-proview 需要执行 `install.sh` 安装才可以启用;
-- 在安装 YouCompleteMe 之前需要安装相应的依赖
-`
+- 在安装 YouCompleteMe 之前需要安装相应的依赖(现已迁移到 `Coc` 插件, 但依赖依然需要安装)
+```bash
 python-pynvim npm nodejs go gcc cmake jdk&jvm
-` 
+```
 安装依赖完成后, 使用 `python install.py` 安装.
-## `Lazy.nvim` 的配置
-进入 `nvim` 运行 `:checkhealth`
+
+### 插件依赖的配置
+
+- 通过一下方式可以自检插件的依赖是否满足
+
+进入 `nvim` 运行 `:checkhealth` 可以检查所有插件的依赖是否满足.
+也可以通过 `:checkhealth <plugin_name>` 来检查某个插件的依赖。
+
 - 当没有默认的 `lua5.1` 以及 `luarocks` 环境时需要手动安装
+
 lazy.nvim 通过内置的 hererocks（一个在 Neovim “用户目录” 下自动管理 LuaRocks 环境的工具）尝试去检查是否能安装那些声明了 rocks（LuaRocks）依赖的插件。
+
 ```bash
 sudo pacman -S lua51 luarocks
 ```
+
 - 没有默认的 `tree-sitter` 时可以手动安装
-nvim-treesitter 的 “:TSInstallFromGrammar” 功能，可以让你在没有预编译二进制解析器（parser.so）的情况下，直接下载 grammar（.js、.json）文件，然后用 tree-sitter cli 生成对应的 C 解析库。
+
+nvim-treesitter 的 “:TSInstallFromGrammar” 功能，可以让你在没有预编译二进制解析器（parser.so）的情况下，直接下载 grammar（.js、.json）文件，然后用 tree-sitter cli 生成对应的 C 解析库.
+
 ```bash
 sudo pacman -S tree-sitter-cli
 ```
+
 - 一些操作可能需要依赖系统提供的剪切板, 可以单独下载
-在 Neovim 中，如果你想使用 "+y、"+p 或者 "*y、"*p 这类访问系统剪贴板的命令，就必须要有一个外部程序来做桥接，否则这些寄存器都会失效，只在内部寄存器里工作。
+
+在 Neovim 中，如果你想使用 "+y、"+p 或者 "*y、"*p 这类访问系统剪贴板的命令，就必须要有一个外部程序来做桥接，否则这些寄存器都会失效，只在内部寄存器里工作.
+
 ```bash
 # Wayland
 sudo pacman -S wl-clipboard
@@ -48,6 +64,7 @@ pnpm install -g neovim
 ```
 
 - 如果你打算在 Neovim 里运行 Ruby 脚本（例如一些用 Ruby 写的插件），就需要在系统里有可用的 ruby 可执行文件和 RubyGems（gem）。
+
 ```bash
 sudo pacman -S ruby
 ```
@@ -61,6 +78,7 @@ sudo pacman -S perl
 ```
 
 ## 去除插件依赖
+
 ### 使用无插件依赖的 `git` 分支
 
 分支 `no_plugins` 中的内容是无插件依赖的配置文件. 

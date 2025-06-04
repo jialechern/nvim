@@ -1,8 +1,8 @@
 -- - github-copilot.lua
 
 return {
-  "github/copilot.vim",            -- 插件仓库地址
-  config = function()
+    "github/copilot.vim",            -- 插件仓库地址
+    config = function()
     -- 禁用 Copilot 默认把 <Tab> 映射为“接受建议”
     vim.g.copilot_no_tab_map = true
 
@@ -40,8 +40,7 @@ return {
         replace_keycodes = false
     })
 
-  end,  -- 注意这里的逗号
-
+    end,  -- 注意这里的逗号
 }
 
 
