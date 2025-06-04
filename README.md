@@ -101,10 +101,5 @@ require("lazy").setup('plugins')
         vim.cmd('silent !latexmk')
 ```
 
-- `CONFIG_ROOT/lua/settings.lua`
-
-```lua
--- 配置代码提示和代码高亮
-vim.cmd('source $NVIMCONFIGP/lua/settings/settings-code-hint-by-color.lua')
-```
+- `CONFIG_ROOT/lua/plugins/*`
 
