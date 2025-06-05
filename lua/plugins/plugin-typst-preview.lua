@@ -107,9 +107,7 @@ return {
     vim.api.nvim_create_autocmd('BufWritePost', {
         pattern = '*.typ',
         callback = function()
-            if require('typst-preview').is_running() then
-                vim.cmd.TypstPreviewReload()
-            end
+            pcall(vim.cmd, 'TypstPreviewReload')
         end
     })
     
