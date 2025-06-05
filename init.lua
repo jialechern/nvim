@@ -47,8 +47,7 @@ _G.Next = _G.NextSymbol
 -- 键盘映射终止符
 _G.End = " "
 
--- require('plugins')		-- 插件配置
--- 照例require一下，如果同时使用vim-plug插件，记得把这个放在vim-plug后面
+-- 设置插件管理器: 使用 Lazy.nvim 下载 CONFIG_ROOT/lua/plugins/ 下定义的插件
 require("lazy").setup('plugins')
 
 -- 一般设置
