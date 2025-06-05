@@ -43,8 +43,8 @@ return {
       
         -- 补全控制
         map('i', '<C-Space>', 'coc#refresh()', { expr = true })
-        -- map('i', '<Tab>', [[coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"]], { expr = true })
-        map('i', '<S-Tab>', [[coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"]], { expr = true })
+        map('i', '<C-j>', [[coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"]], { expr = true })
+        map('i', '<C-k>', [[coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"]], { expr = true })
         map('i', '<CR>', [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], { expr = true })
       
         -- 导航与诊断
