@@ -2,7 +2,7 @@
 
 -- begin main
 vim.api.nvim_set_keymap('i', '<LEADER>main', 
-'fn main () -> Result<(), Box<dyn std::error::Error>> {'            .. '<CR>' ..
+'fn main () -> Result<(), Box<dyn std::error::Error>> {'            .. '<CR><Esc>0i\t' ..
     'Ok(())'                                                        .. '<CR>' ..
 '}'                                                                 .. '<Esc>kO'
 ,{ noremap = true, silent = true})
