@@ -62,7 +62,7 @@ return {
         map('n', ']d', '<Plug>(coc-diagnostic-next)')
       
         -- 文档查看
-        map('n', 'K', function()
+        map('n', '<LEADER>?', function()
             local cw = vim.fn.expand('<cword>')
             if vim.fn.index({'vim', 'help'}, vim.bo.filetype) >= 0 then
                 vim.api.nvim_command('h ' .. cw)
