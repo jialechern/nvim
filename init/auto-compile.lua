@@ -2,15 +2,15 @@
 
 -- 定义自动编译运行的 Run 函数
 function Run()
-    local extension = vim.fn.expand('%:e')
-    if extension == 'py' then
+    local filetype = vim.bo.filetype
+    if filetype == 'python' then
         vim.cmd('silent write')
         vim.cmd('silent !python3 %')
-    elseif extension == 'md' then
+    elseif filetype == 'markdown' then
         vim.cmd('silent MarkdownPreview')
-    elseif extension == 'typ' then
+    elseif filetype == 'typst' then
         vim.cmd('silent TypstPreview')
-    elseif extension == 'tex' then
+    elseif filetype == 'tex' then
         vim.cmd('silent write')
         vim.cmd('silent !latexmk')
     else
