@@ -1,4 +1,4 @@
--- - settings_block_documentation_comments_for_code.lua
+-- - settings-block-documentation-comments-for-code.lua
 
 -- 设置一个函数根据当前文件名获取块文档注释符号
 function GetBlockDocumentationComment()

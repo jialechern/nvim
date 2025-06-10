@@ -1,12 +1,5 @@
 -- - keymaps-fish.lua
 
--- begin 代码块
-vim.api.nvim_set_keymap('i', '<LEADER>b', 
-        'begin'                                         .. '<CR>' ..
-        'end'                                           .. '<Esc>O'
-, { noremap = true , silent = true })
--- end 代码块
-
 -- begin if 语句
 -- if
 vim.api.nvim_set_keymap('i', '<LEADER>if', 

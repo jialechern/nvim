@@ -55,7 +55,7 @@ vim.api.nvim_set_keymap('i', '<LEADER>M', '$ '.. _G.CoLeader ..' $' .. _G.Next .
 -- begin 常用符号
 -- 希腊字母
 vim.api.nvim_set_keymap('i', '<LEADER>a' .. _G.End, 'alpha', { noremap = true, silent = true})
-vim.api.nvim_set_keymap('i', '<LEADER>b' .. _G.End, 'beta', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('i', '<LEADER>be', 'beta', { noremap = true, silent = true})
 vim.api.nvim_set_keymap('i', '<LEADER>g' .. _G.End, 'gamma', { noremap = true, silent = true})
 vim.api.nvim_set_keymap('i', '<LEADER>G' .. _G.End, 'Gamma', { noremap = true, silent = true})
 vim.api.nvim_set_keymap('i', '<LEADER>p' .. _G.End, 'phi.alt', { noremap = true, silent = true})

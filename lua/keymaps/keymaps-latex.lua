@@ -13,13 +13,6 @@ vim.api.nvim_set_keymap('i', '<LEADER>sssection', '\\subsubsection {}' .. '<Esc>
 vim.api.nvim_set_keymap('i', '<LEADER>ssssection', '\\subsubsubsection {}' .. '<Esc>F{a', { noremap = true, silent = true})
 -- end 一些标准的排版方式
 
--- begin 一般的 begin-end 环境
-vim.api.nvim_set_keymap('i', '<LEADER>be', 
-    '\\begin{}'                                                 .. '<CR>' ..
-    '\\end{' .. _G.Next .. '}'                                  .. '<Esc>k$i'
-, { noremap = true, silent = true})
--- end 一般的 begin-end 环境
-
 -- begin 等式环境
 -- 带标号
 vim.api.nvim_set_keymap('i', '<LEADER>eq', 

@@ -26,8 +26,6 @@ vim.api.nvim_set_keymap('i', '<LEADER>initt',
 vim.api.nvim_set_keymap('i', '<LEADER><Bar>', '<Bar><Bar>' .. _G.Next .. '<Esc>F<Bar>i',{ noremap = true, silent = true})
 -- 打印
 vim.api.nvim_set_keymap('i', '<LEADER>p', 'println!();' .. '<Esc>F)i',{ noremap = true, silent = true})
--- 代码块
-vim.api.nvim_set_keymap('i', '<LEADER>b', '{<CR>}<Esc>O',{ noremap = true, silent = true})
 
 -- begin for 循环
 vim.api.nvim_set_keymap('i', '<LEADER>for', 

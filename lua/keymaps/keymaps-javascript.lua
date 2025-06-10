@@ -14,13 +14,6 @@ vim.api.nvim_set_keymap('i', '<LEADER>init', '#!/usr/bin/env node<CR>', { norema
 -- 字符串插值
 vim.api.nvim_set_keymap('i', '<LEADER>$', '${  }' .. '<Esc>F{la', { noremap = true, silent = true})
 
--- begin 代码块
-vim.api.nvim_set_keymap('i', '<LEADER>b', 
-        '{'                                         .. '<CR>' ..
-        '}'                                         .. '<Esc>O'
-, { noremap = true , silent = true })
--- end 代码块
-
 -- begin if 分支
 vim.api.nvim_set_keymap('i', '<LEADER>if', 
         'if () ' .. _G.Next                         .. '<Esc>F)i'

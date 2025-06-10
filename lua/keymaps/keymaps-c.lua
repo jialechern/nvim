@@ -67,13 +67,6 @@ vim.api.nvim_set_keymap('i', '<LEADER>main',
 , { noremap = true , silent = true })
 -- end main 函数
 
--- begin 代码块
-vim.api.nvim_set_keymap('i', '<LEADER>b',
-        '{'                                         .. '<CR>' ..
-        '}'                                         .. '<Esc>O'
-, { noremap = true , silent = true })
--- end 代码块
-
 -- begin for 循环
 vim.api.nvim_set_keymap('i', '<LEADER>for',
         'for () {'                                  .. '<CR>' ..

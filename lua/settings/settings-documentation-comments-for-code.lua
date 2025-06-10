@@ -1,4 +1,4 @@
--- - settings_documentation_comments_for_code.lua
+-- - settings-documentation-comments-for-code.lua
 
 -- 设置一个函数根据当前文件名获取文档注释符号
 function GetDocumentationComment()

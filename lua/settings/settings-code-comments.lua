@@ -1,4 +1,4 @@
--- - settings_code_comments.lua
+-- - settings-code-comments.lua
 
 -- 设置一个函数根据当前文件名获取注释符号
 function GetComment()

@@ -3,6 +3,9 @@
 -- 导入基本快捷键设置
 _G.LoadNvimConfigFile("/lua/keymaps/keymaps-base.lua")
 
+-- 设置代码块
+_G.LoadNvimConfigFile("/lua/keymaps/keymaps-for-code-block.lua")
+
 -- 设置注释
 _G.LoadNvimConfigFile("/lua/keymaps/keymaps-for-code-comment.lua")
 
