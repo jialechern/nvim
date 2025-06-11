@@ -36,7 +36,7 @@ return {
       
             -- 自定义打开预览链接的命令格式，%s 会被替换为URL
             -- 示例: open_cmd = 'firefox %s -P typst-preview --class typst-preview'
-            open_cmd = 'firefox %s -P typst-preview --class typst-preview',
+            -- open_cmd = 'firefox %s -P typst-preview --class typst-preview',
       
             -- 预览服务器的端口号，0 表示随机端口
             port = 0,
