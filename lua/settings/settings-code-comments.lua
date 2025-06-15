@@ -11,10 +11,11 @@ function GetComment()
         filetype == 'sh' or
         filetype == 'sshconfig' or
         filetype == 'fish' or
-        filetype == 'toml'
+        filetype == 'toml' or
+        filetype == 'conf'
         then
             comment_prefix = '# '
-    elseif filetype == 'c' or 
+    elseif filetype == 'c' or
         filetype == 'cpp' or
         filetype == 'rust' or
         filetype == 'javascript' or
@@ -23,7 +24,7 @@ function GetComment()
         then
             comment_prefix = '// '
     elseif filetype == 'lua' or
-        filetype == 'haskell' 
+        filetype == 'haskell'
         then
             comment_prefix = '-- '
     elseif filetype == 'tex' 
