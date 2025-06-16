@@ -158,28 +158,34 @@ vim.api.nvim_set_keymap('i', '<LEADER>argparse',
 -- begin 调用其它程序
 -- subprocess.run
 vim.api.nvim_set_keymap('i', '<LEADER>run', 
-'# 需要导入标准库 subprocess'                                   .. '<CR>' ..
+'# 需要导入标准库 subprocess 以及 shlex'                        .. '<CR>' ..
 'result = subprocess.run('                                      .. '<CR>' ..
-            '# [Command, args: list[str]]'
-                                                                .. '<CR>' ..
-            '[, ' .. _G.Next .. '],'
-                                                                .. '<CR>' ..
+            '# shlex.split(str("cmd")) 会将字符串以 Shell 友好的方式分割成命令和参数'
+                                                                .. '<CR>\t' ..
+            'shlex.split(),'
+                                                                .. '<CR><BS>' ..
+            '# 可以使用 current_return.stdout.decode() 和 current_return.stderr.decode() 获取输出'
+                                                                .. '<CR><BS>' ..
+            '# input=str(...).encode() 设置程序的默认输入( 在程序启动后提供 )'
+                                                                .. '<CR>\t' ..
+            'input=' .. _G.Next .. ','
+                                                                .. '<CR><BS>' ..
             '# 是否捕获 stdout 和 stderr'
-                                                                .. '<CR>' ..
-            'capture_output=' .. _G.Next
-                                                                .. '<CR>' ..
+                                                                .. '<CR>\t' ..
+            'capture_output=' .. _G.Next .. ','
+                                                                .. '<CR><BS>' ..
             '# 是否返回字符串'
-                                                                .. '<CR>' ..
-            'text=' .. _G.Next
-                                                                .. '<CR>' ..
+                                                                .. '<CR>\t' ..
+            'text=' .. _G.Next .. ','
+                                                                .. '<CR><BS>' ..
             '# 返回码非零时是否抛出异常'
-                                                                .. '<CR>' ..
-            'check=' .. _G.Next
-                                                                .. '<CR>' ..
+                                                                .. '<CR>\t' ..
+            'check=' .. _G.Next .. ','
+                                                                .. '<CR><BS>' ..
             '# 超时控制(秒)'
-                                                                .. '<CR>' ..
-            'timeout=' .. _G.Next                               .. '<CR>' ..
-            ')'                                                 .. '<Esc>9k^f,i'
+                                                                .. '<CR>\t' ..
+            'timeout=' .. _G.Next .. ','                        .. '<CR>' ..
+            ')'                                                 .. '<Esc>11k^f)i'
 , { noremap = true, silent = true})
 -- subprocess.Popen
 vim.api.nvim_set_keymap('i', '<LEADER>popen', 
