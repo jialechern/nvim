@@ -40,7 +40,7 @@ return {
                 noremap = true
             }, opts or {}))
         end
-      
+
         -- 补全控制
         map('i', '<C-Space>', 'coc#refresh()', { expr = true })
         map('i', '<C-j>', [[coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"]], { expr = true })
@@ -72,6 +72,25 @@ return {
                 vim.api.nvim_command('!' .. vim.o.keywordprg .. ' ' .. cw)
             end
         end)
+
+        -- Coc 悬浮窗口滚动（<C-f>/<C-b>）
+        local modes = {'n', 'v', 'i', 's'}
+        for _, mode in ipairs(modes) do
+            -- 向下滚动
+            vim.keymap.set(mode, '<C-n>', function()
+                if vim.fn['coc#float#has_scroll']() == 1 then
+                    return vim.fn['coc#float#scroll'](1)
+                end
+                return vim.api.nvim_replace_termcodes('<C-f>', true, false, true)
+            end, {silent = true, expr = true})
+            -- 向上滚动
+            vim.keymap.set(mode, '<C-p>', function()
+                if vim.fn['coc#float#has_scroll']() == 1 then
+                    return vim.fn['coc#float#scroll'](0)
+                end
+                return vim.api.nvim_replace_termcodes('<C-b>', true, false, true)
+            end, {silent = true, expr = true})
+        end
       
         -- 自动命令
         vim.api.nvim_create_autocmd('FileType', {
