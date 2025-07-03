@@ -9,14 +9,14 @@ vim.api.nvim_set_keymap('i', '<LEADER>main',
 -- end main
 
 -- begin init test
-vim.api.nvim_set_keymap('i', '<LEADER>initt', 
+vim.api.nvim_set_keymap('i', '<LEADER>tinit',
 '#[cfg(test)]'                          .. '<CR>' ..
 'mod tests {'                           .. '<CR>' ..
     'use super::*;'                     .. '<CR><CR>' ..
 
     '#[test]'                           .. '<CR>' ..
-    'fn  () {'                          .. '<CR>' ..
-        _G.Next                         .. '<CR>' ..
+    'fn  () {'                          .. '<CR>\t\t' ..
+        _G.Next                         .. '<CR>\t' ..
     '}'                                 .. '<CR>' ..
 '}'                                     .. '<Esc>3k$Fnla'
 ,{ noremap = true, silent = true})
