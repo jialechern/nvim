@@ -1,7 +1,7 @@
 -- keymaps-auto-load-by-filetype.lua
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "markdown", 
+    pattern = "markdown",
     callback = function()
         _G.LoadNvimConfigFile("/lua/keymaps/keymaps-math.lua")
         _G.LoadNvimConfigFile("/lua/keymaps/keymaps-markdown.lua")
@@ -9,7 +9,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "tex", 
+    pattern = "tex",
     callback = function()
         _G.LoadNvimConfigFile("/lua/keymaps/keymaps-math.lua")
         _G.LoadNvimConfigFile("/lua/keymaps/keymaps-elegant_note.lua")
@@ -18,21 +18,21 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "rust", 
+    pattern = "rust",
     callback = function()
         _G.LoadNvimConfigFile("/lua/keymaps/keymaps-rust.lua")
     end,
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "python", 
+    pattern = "python",
     callback = function()
         _G.LoadNvimConfigFile("/lua/keymaps/keymaps-python.lua")
     end,
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "c", 
+    pattern = "c",
     callback = function()
         _G.LoadNvimConfigFile("/lua/keymaps/keymaps-c.lua")
     end,
@@ -42,14 +42,14 @@ vim.api.nvim_create_autocmd("FileType", {
     pattern = { 
         "bash",
         "zsh",
-    }, 
+    },
     callback = function()
         _G.LoadNvimConfigFile("/lua/keymaps/keymaps-shell_base.lua")
     end,
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "make", 
+    pattern = "make",
     callback = function()
         _G.LoadNvimConfigFile("/lua/keymaps/keymaps-shell_base.lua")
         _G.LoadNvimConfigFile("/lua/keymaps/keymaps-makefile.lua")
@@ -57,30 +57,37 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "javascript", 
+    pattern = "javascript",
     callback = function()
         _G.LoadNvimConfigFile("/lua/keymaps/keymaps-javascript.lua")
     end,
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "sshconfig", 
+    pattern = "sshconfig",
     callback = function()
         _G.LoadNvimConfigFile("/lua/keymaps/keymaps-sshconfig.lua")
     end,
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "fish", 
+    pattern = "fish",
     callback = function()
         _G.LoadNvimConfigFile("/lua/keymaps/keymaps-fish.lua")
     end,
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "typst", 
+    pattern = "typst",
     callback = function()
         _G.LoadNvimConfigFile("/lua/keymaps/keymaps-typst.lua")
+    end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "toml",
+    callback = function()
+        _G.LoadNvimConfigFile("/lua/keymaps/keymaps-toml.lua")
     end,
 })
 

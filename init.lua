@@ -32,13 +32,13 @@ _G.LoadNvimConfigFile = LoadNvimConfigFile
 _G.LoadNvimConfigFile("/init/auto-compile.lua")
 
 -- 需要在加载插件之前引入 leader 键
-vim.g.mapleader = ">"   
+vim.g.mapleader = ">"
 -- 副转译字符
 _G.CoLeader = "`"
 
 -- 设置进入一般模式的快捷键
-vim.api.nvim_set_keymap('i', '<C-_>', '<Esc>', { noremap = true, silent = true })   
-vim.api.nvim_set_keymap('x', '<C-_>', '<Esc>', { noremap = true, silent = true })   
+vim.api.nvim_set_keymap('i', '<C-_>', '<Esc>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('x', '<C-_>', '<Esc>', { noremap = true, silent = true })
 
 -- 设置跳转锚点的符号
 _G.NextSymbol = "<++>"
@@ -51,9 +51,8 @@ _G.End = " "
 require("lazy").setup('plugins')
 
 -- 一般设置
-require('settings')		
+require('settings')
 
 -- 键盘映射
-require('keymaps')		
-
+require('keymaps')
 
