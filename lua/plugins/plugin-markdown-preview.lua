@@ -9,7 +9,7 @@ return {
         elseif vim.fn.executable("npm") == 1 then
             build_cmd = "cd app && npm install"
         end
-      
+
         vim.notify("正在构建 markdown-preview.nvim...")
         local result = vim.fn.system(build_cmd)
         if vim.v.shell_error ~= 0 then
@@ -27,7 +27,7 @@ return {
         init = function()
         -- 设置文件类型检测
         vim.g.mkdp_filetypes = { "markdown" }
-      
+
         -- 自定义配置选项
         vim.g.mkdp_theme = 'light'                   -- 默认主题 (dark/light)
         vim.g.mkdp_browser = 'firefox'               -- 指定浏览器
@@ -44,7 +44,7 @@ return {
             hide_yaml_meta = true,                     -- 隐藏YAML元数据
             toc_levels = '1..3',                       -- TOC级别
         }
-      
+
         -- 自动关闭预览当离开Markdown缓冲区
         vim.api.nvim_create_autocmd('BufWinLeave', {
             pattern = '*.md',
@@ -64,20 +64,20 @@ return {
             if vim.fn.exists('g:loaded_nvim_treesitter') == 1 then
                 vim.cmd('TSEnable highlight')
             end
-            
+
             -- 可选：设置wrap和换行符显示
             vim.opt_local.wrap = true
             vim.opt_local.linebreak = true
             vim.opt_local.conceallevel = 2
             end
         })
-      
+
         -- 增强功能：复制预览页面URL
         vim.api.nvim_create_user_command('MkdpCopyUrl', function()
             local port = vim.g.mkdp_port or '8080'
             local filepath = vim.fn.expand('%:p')
             local url = 'http://localhost:' .. port .. '/?p=' .. vim.fn.fnameescape(filepath)
-            
+
             -- 复制到系统剪贴板
             vim.fn.setreg('+', url)
             vim.notify('预览URL已复制: ' .. url, vim.log.levels.INFO)

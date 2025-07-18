@@ -10,12 +10,12 @@ return {
                 enable = true,
                 additional_vim_regex_highlighting = false, -- 禁用传统正则高亮
             },
-  
+
             -- 启用自动缩进（实验性功能）
             indent = {
                 enable = true,
             },
-  
+
             -- 启用增量选择
             incremental_selection = {
                 enable = true,
@@ -26,14 +26,14 @@ return {
                 node_decremental = "grm",  -- 增量减少选择
                 },
             },
-  
+
             -- 确保安装的语言解析器
             ensure_installed = {
-                "bash", "c", "cpp", "css", "go", "html", "java", 
-                "javascript", "json", "lua", "python", "rust", 
+                "bash", "c", "cpp", "css", "go", "html", "java",
+                "javascript", "json", "lua", "python", "rust",
                 "typescript", "vim", "vimdoc", "yaml"
             },
-  
+
             -- 自动安装缺失的解析器
             auto_install = true,
             })

@@ -9,15 +9,14 @@ return {
     -- 禁用 Copilot 的预览窗口（如果你不喜欢浮窗干扰）
     vim.g.copilot_enable_preview = false
 
-    -- 插入模式：Ctrl+e 接受建议
-    vim.api.nvim_set_keymap("i", "<C-e>", 'copilot#Accept("<CR>")', {
-        expr = true,
-        silent = true,
-        script = true,
-        replace_keycodes = false
-    })
+    -- 引入自定义映射函数
+    local map = require('utils.map').map
+    local map_by_modes = require('utils.map').map_by_modes
 
-    vim.api.nvim_set_keymap("n", "<C-e>", 'copilot#Accept("<CR>")', {
+    -- 插入模式：Ctrl+e 接受建议
+    map_by_modes({ 'i', 'n' }, '<C-e>', function ()
+        return vim.fn["copilot#Accept"]('<CR>')
+    end, {
         expr = true,
         silent = true,
         script = true,
@@ -25,15 +24,19 @@ return {
     })
 
     -- 插入模式：Ctrl+n 跳到下一条建议
-    vim.api.nvim_set_keymap("i", "<C-n>", 'copilot#Next()', {
+    map('i', '<C-n>', function ()
+        return vim.fn["copilot#Next"]()
+    end, {
         expr = true,
         silent = true,
         script = true,
         replace_keycodes = false
     })
-    
+
     -- 插入模式：Ctrl+p 跳到上一条建议
-    vim.api.nvim_set_keymap("i", "<C-p>", 'copilot#Previous()', {
+    map('i', '<C-p>', function ()
+        return vim.fn["copilot#Previous"]()
+    end, {
         expr = true,
         silent = true,
         script = true,

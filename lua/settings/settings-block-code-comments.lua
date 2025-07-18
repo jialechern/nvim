@@ -12,7 +12,7 @@ function GetBlockComment()
         filetype == 'typst'
         then
             comment_prefix = '/*' .. '  ' .. '*/' .. '<Esc>F*hi'
-    elseif filetype == 'python' 
+    elseif filetype == 'python'
         then
             comment_prefix = '"""' .. ' ' .. _G.CoLeader .. ' ' .. '"""' .. '<Esc>F'.. _G.CoLeader .. 's'
     else

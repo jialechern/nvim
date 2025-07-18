@@ -17,7 +17,7 @@ vim.opt.rtp:prepend(lazypath)
 
 -- 引入自定义配置工具集
 -- local map_by_modes = require('utils.map').map_by_modes
-local map_by_modes = require('utils.map').map_by_mods
+local map_by_modes = require('utils.map').map_by_modes
 local loadcfg = require('utils.loadcfg').loadcfg
 
 -- 一个简单的与先前 LoadNvimConfigFile 函数的兼容措施, 不久后将会被移除
@@ -30,6 +30,8 @@ loadcfg("/init/auto-cmd-by-file-type.lua")
 vim.g.mapleader = ">"
 -- 副转译字符
 _G.CoLeader = "`"
+-- 快速移动所跨越的行数
+_G.FastMoveLines = 5
 
 -- 设置进入一般模式的快捷键
 map_by_modes({ 'i', 'v', 'x' }, '<C-_>', function ()

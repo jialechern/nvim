@@ -14,7 +14,7 @@ local function map(mode, lhs, rhs, opts)
 	vim.keymap.set(mode, lhs, rhs, options)
 end
 
-local function map_by_mods(modes, lhs, rhs, opts)
+local function map_by_modes(modes, lhs, rhs, opts)
 	local options = { noremap = true, silent = true, desc = "unknown" }
 
     -- 合并配置
@@ -28,7 +28,7 @@ local function map_by_mods(modes, lhs, rhs, opts)
 end
 
 module.map = map
-module.map_by_mods = map_by_mods
+module.map_by_modes = map_by_modes
 
 return module
 

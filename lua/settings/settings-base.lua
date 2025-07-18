@@ -4,12 +4,12 @@
 vim.opt.guifont = "JetBrainsMono Nerd Font:h16"
 
 -- 禁用默认的启动界面
-vim.opt.shortmess:append("I")   
+vim.opt.shortmess:append("I")
 
 -- 配置语法高亮
 vim.cmd('syntax on')
 vim.cmd('filetype plugin indent on')
-vim.cmd('filetype on')                  -- 文档类型自动检测
+vim.cmd('filetype on')                                  -- 文档类型自动检测
 
 
 -- Hint: use `:h <option>` to figure out the meaning if needed
