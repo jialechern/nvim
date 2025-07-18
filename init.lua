@@ -28,6 +28,9 @@ end
 _G.LoadNvimConfigFile = LoadNvimConfigFile
 -- end 定义一个能够自动加载 lua 配置文件的函数
 
+-- 引入自定义的配置工具集
+_G.LoadNvimConfigFile("/lua/utils/map.lua")
+
 -- 自动编译运行
 _G.LoadNvimConfigFile("/init/auto-compile.lua")
 
