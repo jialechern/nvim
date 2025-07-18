@@ -15,24 +15,16 @@ end
 vim.opt.rtp:prepend(lazypath)
 -- end 指定插件位置，不存在则clone到本地
 
--- begin 定义一个能够自动加载 lua 配置文件的函数
-function LoadNvimConfigFile(file)
-    local chunk, err = loadfile(vim.fn.stdpath("config") .. file)
-    if not chunk then
-        error("加载失败: " .. err)
-    else
-        chunk()
-    end
-end
+-- 引入自定义配置工具集
+-- local map_by_modes = require('utils.map').map_by_modes
+local map_by_modes = require('utils.map').map_by_mods
+local loadcfg = require('utils.loadcfg').loadcfg
 
-_G.LoadNvimConfigFile = LoadNvimConfigFile
--- end 定义一个能够自动加载 lua 配置文件的函数
-
--- 引入自定义的配置工具集
-_G.LoadNvimConfigFile("/lua/utils/map.lua")
+-- 一个简单的与先前 LoadNvimConfigFile 函数的兼容措施, 不久后将会被移除
+_G.LoadNvimConfigFile = loadcfg
 
 -- 自动编译运行
-_G.LoadNvimConfigFile("/init/auto-compile.lua")
+loadcfg("/init/auto-cmd-by-file-type.lua")
 
 -- 需要在加载插件之前引入 leader 键
 vim.g.mapleader = ">"
@@ -40,8 +32,9 @@ vim.g.mapleader = ">"
 _G.CoLeader = "`"
 
 -- 设置进入一般模式的快捷键
-vim.api.nvim_set_keymap('i', '<C-_>', '<Esc>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('x', '<C-_>', '<Esc>', { noremap = true, silent = true })
+map_by_modes({ 'i', 'v', 'x' }, '<C-_>', function ()
+    vim.cmd('stopinsert')
+end, { desc = "一个更加常用的进入 normal 模式的快捷键" })
 
 -- 设置跳转锚点的符号
 _G.NextSymbol = "<++>"

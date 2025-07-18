@@ -1,5 +1,8 @@
 -- - auto-compile.lua
 
+-- 载入需要的工具
+local map = require('utils.map').map
+
 -- 定义自动编译运行的 Run 函数
 function Run()
     local filetype = vim.bo.filetype
@@ -22,6 +25,6 @@ end
 _G.Run = Run
 -- 定义自动编译运行的键盘映射
 -- vim.api.nvim_set_keymap('n', '<A-r>', ':lua _G.Run()<CR>', { noremap = true, silent = true })
-_G.utils.map('n', '<A-r>', function ()
-    vim.cmd( 'lua _G.Run()<CR>' )
+map('n', '<A-r>', function ()
+    vim.cmd( 'lua _G.Run()' )
 end, { desc = "根据当前文件类型自动执行默认命令( 编译/预览/... )." })
