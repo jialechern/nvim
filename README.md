@@ -79,47 +79,10 @@ sudo pacman -S perl
 
 ## 去除插件依赖
 
-### 使用无插件依赖的 `git` 分支
-
-分支 `no_plugins` 中的内容是无插件依赖的配置文件. 
-
-### 自行去除
-若使用时不希望依赖于插件需要注释以下代码: 
-
-- `CONFIG_ROOT/init.lua`
-
-```lua
--- begin 指定插件位置，不存在则clone到本地
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
-end
-vim.opt.rtp:prepend(lazypath)
--- end 指定插件位置，不存在则clone到本地
-
-
-
-require("lazy").setup('plugins')
+如果当前环境无法满足 加载/更新/使用 插件的功能可以考虑使用一下的方式去除插件依赖:
+```bash
+nvim --noplugin <file>
 ```
-
-- `CONFIG_ROOT/init/auto-compile.lua`
-
-```lua
-    elseif extension == 'md' then
-        vim.cmd('silent MarkdownPreview')
-    elseif extension == 'tex' then
-        vim.cmd('silent write')
-        vim.cmd('silent !latexmk')
-```
-
-- `CONFIG_ROOT/lua/plugins/*`
 
 ## 一些编写配置的原则
 
