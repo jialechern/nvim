@@ -5,6 +5,9 @@ local loadcfg = require('utils.loadcfg').loadcfg
 -- 基础配置
 loadcfg("/lua/settings/settings-base.lua")
 
+-- 设置根据不同的文件类型带有的默认 编译/运行/预览... 命令
+loadcfg("/lua/settings/settings-auto-cmd-by-file-type.lua")
+
 -- 设置不同语言的代码块
 loadcfg("/lua/settings/settings-code-blocks.lua")
 

@@ -5,6 +5,11 @@
 local map = require('utils.map').map
 local map_by_modes = require('utils.map').map_by_modes
 
+-- 设置进入一般模式的快捷键
+map_by_modes({ 'i', 'v', 'x' }, '<C-_>', function ()
+    vim.cmd('stopinsert')
+end, { desc = "一个更加常用的进入 normal 模式的快捷键" })
+
 -- begin 设置写入模式的传送锚点
 -- 跳转函数
 local function jump_to_next()
@@ -119,8 +124,15 @@ map('n', '^', 'H', { desc = "设置 ^ 为跳转至首行" })
 map_by_modes({ 'n', 'x' }, 'L', '$', { desc = "设置 L 为跳转到当前行最后一个字符" })
 map('n', '$', 'L', { desc = "设置 $ 为跳转至末行" })
 -- 设置快速上下移动
-map_by_modes({ 'n', 'x' }, 'J', _G.FastMoveLines .. 'j', { desc = "设置 J 为快速向下移动, 移动行数可在 init.lua 中设置" })
-map_by_modes({ 'n', 'x' }, 'K', _G.FastMoveLines .. 'k', { desc = "设置 K 为快速向上移动, 移动行数可在 init.lua 中设置" })
+-- 载入快速移动的配置
+local FastMoveLines = require('settings.settings-variables').FastMoveLines
+map_by_modes({ 'n', 'x' }, 'J', function()
+    return FastMoveLines .. 'j'
+end, { desc = "设置 J 为快速向下移动, 移动行数可在 init.lua 中设置", expr = true })
+
+map_by_modes({ 'n', 'x' }, 'K', function ()
+    return FastMoveLines .. 'k'
+end, { desc = "设置 K 为快速向上移动, 移动行数可在 init.lua 中设置", expr = true })
 -- end 设置 noremal 模式快速跳转
 
 map('n', '<LEADER>sc', function ()
