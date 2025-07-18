@@ -1,9 +1,8 @@
--- - auto-compile.lua
+-- - settings-auto-cmd-by-file-type.lua
 
--- 载入需要的工具
-local map = require('utils.map').map
+local module = {}
 
--- 定义自动编译运行的 Run 函数
+-- 定义根据文件类型自动 编译/运行/预览... 的 Run 函数
 function Run()
     local filetype = vim.bo.filetype
     if filetype == 'python' then
@@ -21,8 +20,7 @@ function Run()
     end
 end
 
--- 定义自动编译运行的键盘映射
-map('n', '<A-r>', function ()
-    vim.cmd( 'lua Run()' )
-end, { desc = "根据当前文件类型自动执行默认命令( 编译/预览/... )." })
+module.Run = Run
+
+return module
 
