@@ -12,7 +12,7 @@ end, { desc = "一个更加常用的进入 normal 模式的快捷键" })
 
 -- 定义根据文件类型自动 编译/运行/预览... 的键盘映射
 map('n', '<A-r>', function ()
-    local Run = require('settings.settings-auto-cmd-by-file-type').Run
+    local Run = require('utils.auto-cmd-by-filetype').Run
     Run()
 end, { desc = "根据当前文件类型自动执行默认命令( 编译/预览/... )." })
 

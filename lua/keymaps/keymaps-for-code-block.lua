@@ -4,8 +4,8 @@
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "*" },
     callback = function()
-        local map = require("utils.map").map
-        local GetCodeBlock = require("settings.settings-code-blocks").GetCodeBlock
+        local map = require('utils.map').map
+        local GetCodeBlock = require('utils.code-blocks').GetCodeBlock
         local code_block = GetCodeBlock()
         if code_block then
             map('i', '<LEADER>b' .. _G.End, code_block, {

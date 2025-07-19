@@ -40,21 +40,23 @@ end
 
 -- 设置一般注释
 map_by_modes({ 'n', 'i' }, '<C-A-_>', function ()
-    local GetComment = require('settings.settings-code-comments').GetComment
+    local GetComment = require('utils.code-comments').GetComment
     ToggleComment(GetComment())
 end, { desc = "设置用于注释代码的快捷键." })
 -- 设置文档注释
 map_by_modes({ 'n', 'i' }, _G.CoLeader .. _G.CoLeader .. '/', function ()
-    local GetDocumentationComment = require('settings.settings-documentation-comments-for-code').GetDocumentationComment
+    local GetDocumentationComment = require('utils.documentation-comments').GetDocumentationComment
     ToggleComment(GetDocumentationComment())
 end, { desc = "设置用于文档注释的快捷键." })
 
 -- 定义一个函数用于增加/去除可视模式下的块注释
 local function BlockToggleComment( get_comment )
-		-- 获取当前选中的行范围
-	local start_line = vim.fn.line("'<")
-	local end_line = vim.fn.line("'>")
 	local insert_string = get_comment()	-- 你想要插入或删除的字符串
+    if not insert_string then return end
+
+	-- 获取当前选中的行范围
+	local start_line = vim.fn.getpos("'<")[2]
+	local end_line = vim.fn.getpos("'>")[2]
 	local insert_string_len = #insert_string
 
 	-- 保存可视模式状态
@@ -79,13 +81,13 @@ end
 
 -- 设置可视模式下的块注释
 map('x', '<C-A-_>', function ()
-    local GetComment = require('settings.settings-code-comments').GetComment
+    local GetComment = require('utils.code-comments').GetComment
     BlockToggleComment(GetComment())
 end, { desc = "设置可视模式下的块注释快捷键." })
 
 -- 设置可视模式下的块文档注释
 map('x', _G.CoLeader .. _G.CoLeader .. '/', function ()
-    local GetDocumentationComment = require('settings.settings-documentation-comments-for-code').GetDocumentationComment
+    local GetDocumentationComment = require('utils.documentation-comments').GetDocumentationComment
     BlockToggleComment(GetDocumentationComment())
 end, { desc = "设置可视模式下的块文档注释快捷键." })
 
@@ -93,7 +95,7 @@ end, { desc = "设置可视模式下的块文档注释快捷键." })
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "*" },
 	callback = function()
-        local GetBlockComment = require('settings.settings-block-code-comments').GetBlockComment
+        local GetBlockComment = require('utils.block-code-comments').GetBlockComment
 		local comment_prefix = GetBlockComment()
 
 		if comment_prefix then
@@ -114,7 +116,7 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "*" },
 	callback = function()
-        local GetBlockDocumentationComment = require('settings.settings-block-documentation-comments-for-code').GetBlockDocumentationComment
+        local GetBlockDocumentationComment = require('utils.block-documentation-comments').GetBlockDocumentationComment
         local comment_prefix = GetBlockDocumentationComment()
 
 		if comment_prefix then
