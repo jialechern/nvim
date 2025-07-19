@@ -1,11 +1,11 @@
--- - settings-documentation-comments-for-code.lua
+-- documentation-comments-for-code.lua
+-- 根据文件类型获取文档注释前缀
 
 local module = {}
 
--- 设置一个函数根据当前文件名获取文档注释符号
 function GetDocumentationComment()
     local filetype = vim.bo.filetype
-    local comment_prefix = require('settings.settings-documentation-comments').documentation_comments[filetype]
+    local comment_prefix = require('settings.documentation-comments').documentation_comments[filetype]
     return comment_prefix
 end
 

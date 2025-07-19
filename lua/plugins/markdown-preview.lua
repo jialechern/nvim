@@ -1,4 +1,4 @@
--- - markdown-preview.lua
+-- markdown-preview.lua
 return {
     "iamcco/markdown-preview.nvim",
     build = function()

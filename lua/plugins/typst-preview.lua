@@ -1,4 +1,4 @@
--- - typst-preview.lua
+-- typst-preview.lua
 return {
     'chomosuke/typst-preview.nvim',
     lazy = false, -- 非延迟加载，插件始终可用

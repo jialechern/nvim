@@ -1,4 +1,4 @@
--- - block-code-comments.lua
+-- block-code-comments.lua
 -- 这是一个用于返回代码块注释的工具函数
 
 local module = {}
@@ -6,7 +6,7 @@ local module = {}
 -- 设置一个函数根据当前文件名获取块注释符号
 function GetBlockComment()
     local filetype = vim.bo.filetype
-    local comment_prefix = require('settings.settings-block-code-comments').block_comments[filetype]
+    local comment_prefix = require('settings.block-code-comments').block_comments[filetype]
     return comment_prefix
   end
 

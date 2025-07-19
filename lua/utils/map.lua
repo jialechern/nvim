@@ -1,5 +1,5 @@
--- - map.lua
--- Description: 给出一个 vim.keymap.set 的一个基本抽象
+-- map.lua
+-- 给出一个 vim.keymap.set 的一个基本抽象
 
 local module = {}
 

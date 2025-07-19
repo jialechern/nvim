@@ -1,4 +1,4 @@
--- - keymaps-for-code-comment.lua
+-- code-comment.lua
 -- 这是一份用于代码注释的的配置文件
 
 -- 载入自定义工具函数

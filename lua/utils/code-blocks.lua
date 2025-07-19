@@ -1,11 +1,11 @@
--- - code-block.lua
+-- code-block.lua
+-- 根据文件类型获取代码块注释符号
 
 local module = {}
 
--- 设置一个函数根据当前文件名获取块文档注释符号
 function GetCodeBlock()
     local filetype = vim.bo.filetype
-    local code_block = require('settings.settings-code-blocks').code_blocks[filetype]
+    local code_block = require('settings.code-blocks').code_blocks[filetype]
     return code_block
 end
 

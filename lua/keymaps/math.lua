@@ -1,4 +1,4 @@
--- - keymaps-math.lua
+-- math.lua
 
 -- 左右符号匹配
 vim.api.nvim_set_keymap('i', '<LEADER>left', '\\left\\right' .. _G.Next .. '<Esc>F\\i', { noremap = true, silent = true})

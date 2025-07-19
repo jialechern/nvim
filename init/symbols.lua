@@ -1,4 +1,4 @@
--- - symbols.lua
+-- symbols.lua
 -- 用于存放一些初始化时必要的符号
 
 -- leader 键

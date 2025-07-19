@@ -1,13 +1,4 @@
--- - kemaps-shell_base.lua
-
--- begin init shell
--- base init
-vim.api.nvim_set_keymap('i', '<LEADER>init', '#!/usr/bin/env ', { noremap = true, silent = true})
--- bash
-vim.api.nvim_set_keymap('i', '<LEADER>initb', '#!/bin/bash<CR>', { noremap = true, silent = true})
--- zsh
-vim.api.nvim_set_keymap('i', '<LEADER>initz', '#!/bin/zsh<CR>', { noremap = true, silent = true})
--- end init shell
+-- shell-base.lua
 
 -- begin if 语句
 -- if
@@ -86,12 +77,4 @@ vim.api.nvim_set_keymap('i', '<LEADER>case',
     'esac'                                          .. '<Esc>5k$Fihi'
 , { noremap = true, silent = true})
 -- end case 分支
-
--- begin 函数
-vim.api.nvim_set_keymap('i', '<LEADER>func', 
-    'function () {'                                 .. '<CR>' ..
-        _G.Next                                     .. '<CR>' ..
-    '}'                                             .. '<Esc>2k^f(i'
-, { noremap = true, silent = true})
--- end 函数
 

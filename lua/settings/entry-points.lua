@@ -1,6 +1,17 @@
--- - keymaps-sshconfig.lua
--- 基本模板
-vim.api.nvim_set_keymap('i', '<LEADER>init',
+-- entry-points.lua
+-- 这是一个配置根据不同程序类型生成不同的入口点的文件
+
+local module = {}
+
+local entry_points = {}
+
+for _, key in ipairs({ 'sh', 'zsh', 'bash', 'fish' }) do
+    entry_points[key] = function () return
+        '#!/usr/bin/env ' .. key
+    end
+end
+
+entry_points['sshconfig'] = function () return
     '# 远程服务器地址别名'                               .. '<CR><Esc>0C' ..
     'Host '                                              .. '<CR><Esc>0C\t' ..
         '# 远程服务器地址'                               .. '<CR><Esc>0C\t' ..
@@ -18,4 +29,9 @@ vim.api.nvim_set_keymap('i', '<LEADER>init',
         'ForwardAgent yes'                               .. '<CR><Esc>0C\t' ..
         '# 开启 SSH 连接压缩，提高低带宽网络的性能'      .. '<CR><Esc>0C\t' ..
         'Compression yes'                                .. '<Esc>14kA'
-, { noremap = true, silent = true})
+end
+
+module.entry_points = entry_points
+
+return module
+

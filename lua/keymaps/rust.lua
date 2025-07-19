@@ -1,12 +1,19 @@
--- - keymaps-rust.lua
+-- rust.lua
 
--- begin main
-vim.api.nvim_set_keymap('i', '<LEADER>main', 
+
+---------------------------- 基本映射 ----------------------------
+
+require('settings.entry-points').entry_points['rust'] = function () return
 'fn main () -> Result<(), Box<dyn std::error::Error>> {'            .. '<CR><Esc>0i\t' ..
     'Ok(())'                                                        .. '<CR>' ..
 '}'                                                                 .. '<Esc>kO'
-,{ noremap = true, silent = true})
--- end main
+end
+
+require('settings.functions').functions['rust'] = function () return
+'fn ' .. _G.CoLeader .. '( ' .. _G.Next .. ' )' .. _G.Next .. '{'   ..
+    _G.Next                                                         ..
+'}'                                                                 .. '<Esc>F' .. _G.CoLeader .. 's'
+end
 
 -- begin init test
 vim.api.nvim_set_keymap('i', '<LEADER>tinit',

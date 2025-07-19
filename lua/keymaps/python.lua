@@ -1,10 +1,28 @@
--- - keymaps-python.lua
+-- python.lua
+
+---------------------------- 函数定义 ----------------------------
+
+require('settings.functions').functions['python'] = function () return
+'def ' .. _G.CoLeader .. '( ' .. _G.Next ..' ) ' .. _G.Next .. ':'
+                                                            .. '<CR>' ..
+    _G.Next                                                 .. '<Esc>k0f' .. _G.CoLeader .. 's'
+end
+
+---------------------------- 基本定义 ----------------------------
+
+require('settings.entry-points').entry_points['python'] = function () return
+'def main() -> None:'                                   .. '<CR>' ..
+    ''                                                  .. '<CR><BS>' ..
+
+'if __name__ == "__main__":'                            .. '<CR>' ..
+    'main()'                                            .. '<Esc>2kO'
+end
 
 -- 设置魔法方法快捷键
 vim.api.nvim_set_keymap('i', '<LEADER>_', '____' .. _G.Next .. '<Esc>2F_i', { noremap = true, silent = true})
 
--- base init
-vim.api.nvim_set_keymap('i', '<LEADER>init', '#!/usr/bin/env python<CR>', { noremap = true, silent = true})
+-- script 初始化
+vim.api.nvim_set_keymap('i', '<LEADER>script', '#!/usr/bin/env python<CR>', { noremap = true, silent = true})
 
 -- 打印
 vim.api.nvim_set_keymap('i', '<LEADER>p' .. _G.End, 'print()<Esc>F(a', { noremap = true, silent = true})
@@ -37,16 +55,6 @@ vim.api.nvim_set_keymap('i', '<LEADER>test',
     'main()'                                                     .. '<Esc>14k$2FT3la'
 , { noremap = true, silent = true})
 -- end 单元测试
-
--- begin main 函数
-vim.api.nvim_set_keymap('i', '<LEADER>main', 
-    'def main() -> None:'                                   .. '<CR>' ..
-        ''                                                  .. '<CR><C-u>' ..
-
-    'if __name__ == "__main__":'                            .. '<CR>' ..
-            'main()'                                        .. '<Esc>2kO'
-, { noremap = true, silent = true})
--- end main 函数
 
 -- begin for 循环
 vim.api.nvim_set_keymap('i', '<LEADER>for', 

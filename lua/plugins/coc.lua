@@ -1,4 +1,4 @@
--- - Coc.lua
+-- Coc.lua
 return {
     'neoclide/coc.nvim',
     branch = 'release',

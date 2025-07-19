@@ -1,4 +1,4 @@
--- - keymaps-makefile.lua
+-- makefile.lua
 
 -- begin ifeq 语句
 vim.api.nvim_set_keymap('i', '<LEADER>ifeq', 

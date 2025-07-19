@@ -1,5 +1,5 @@
--- - loadcfg.lua
--- Description: 给出一个快速加载文件的函数
+-- loadcfg.lua
+-- 给出一个快速加载文件的函数
 
 local module = {}
 

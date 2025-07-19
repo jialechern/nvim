@@ -1,11 +1,11 @@
--- - code-comments.lua
+-- code-comments.lua
+-- 根据文件类型获取注释前缀
 
 local module = {}
 
--- 设置一个函数根据当前文件名获取注释符号
 function GetComment()
     local filetype = vim.bo.filetype
-    local comment_prefix = require('settings.settings-code-comments').comment_prefixs[filetype]
+    local comment_prefix = require('settings.code-comments').comment_prefixs[filetype]
     return comment_prefix
 end
 

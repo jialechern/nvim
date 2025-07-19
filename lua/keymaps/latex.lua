@@ -1,4 +1,4 @@
--- - keymaps-latex.lua
+-- latex.lua
 
 -- begin 一些标准的排版方式
 -- 章节

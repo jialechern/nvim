@@ -1,4 +1,4 @@
--- - keymaps-typst.lua
+-- typst.lua
 
 -- begin 字词修饰
 -- 加粗字体

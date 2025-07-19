@@ -1,4 +1,4 @@
--- - github-copilot.lua
+-- github-copilot.lua
 
 return {
     "github/copilot.vim",            -- 插件仓库地址

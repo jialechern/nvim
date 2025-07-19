@@ -1,4 +1,4 @@
--- - nvim-treesitter.lua
+-- nvim-treesitter.lua
 return {
     {
         'nvim-treesitter/nvim-treesitter',
