@@ -113,6 +113,36 @@ sudo pacman -S perl
     - 当映射的片段较为复杂时应当善用 lua 的字符串拼接功能
     - 当映射的代码片段需要跳至当前行的游标之前时, 可以考虑采用 `_G.CoLeader` 作为跳转锚点
     - 当代码片段预期的缩进与 neovim 的缩进不一致时可以善用 norm 模式下的 `0` 和 `<number>|` 命令, 结合制表符 `\t` 来自定义缩进
+    - 如果映射需要依赖于新定义的 符号/变量, 应当将这些 符号/变量 存放在 settings/variables.lua 中, 在使用 `local symbol = require('settings.variables').symbol` 的方式来引入
+
+3. 键盘映射机制的一些说明
+    
+    - utils/map.lua 定义了两个官方 api 的浅层抽象, 应当尽可能的使用这两个函数
+        - `map`: 用于定义单个模式下的映射
+        - `map_by_modes`: 用于多个模式下的键盘映射
+    - 对于编程语言的通用概念, 可以通过下面的方式统一注册, 由 lua 脚本统一加载并定义为按键映射, 下面再对这种方式支持的按键映射类型进行说明
+        - 流程控制类型的映射
+            - 分支型语句: 'if', 'if-else', 'if-else_if', 'if-else_if-else', 'switch'/'case'/'match'
+                以上类型应当注册在 `settings/branchs.lua` 下.
+            - 循环型语句: 'for', 'while', 'do-while', 'loop'
+                以上类型应当注册在 `settings/loops.lua` 下.
+        - 程序入口
+            为每个编程语言定义一个入口函数, 该函数应当注册在 `settings/entry-point.lua` 下.
+        - 函数
+            为每个编程语言定义一种函数定义方式, 该函数应当注册在 `settings/functions.lua` 下.
+        ```lua
+        local <keymaps> = {}
+
+        keymaps['key'] = function () return
+            -- map
+        end
+
+        require('settings.<keymaps>').<keymaps>[<lang>] = <keymaps>
+        -- 其中 <keymaps> 为要定义的按键映射类型
+        -- <lang> 为编程语言的名称, 如 'python', 'javascript', 'typescript' 等
+        ```
+
+    **p.s.** 上面注册的所有按键映射的 key 都可以统一调节, 调节的变量统一存放在 settings/variables.lua 中.
 
 ## 未来希望增加的
 
