@@ -1,74 +1,63 @@
 -- makefile.lua
 
--- begin ifeq 语句
-vim.api.nvim_set_keymap('i', '<LEADER>ifeq', 
-    'ifeq (, ' .. _G.Next .. ')'                    .. '<CR>' ..
-            _G.Next                                 .. '<CR>' ..
-    'endif'                                         .. '<Esc>2k$F,i'
-, { noremap = true, silent = true})
--- end ifeq 语句
+-- 引入自定义工具函数
+local map = require('utils.map').map
 
--- begin ifneq 语句
-vim.api.nvim_set_keymap('i', '<LEADER>ifneq', 
-    'ifneq (, ' .. _G.Next .. ')'                   .. '<CR>' ..
-            _G.Next                                 .. '<CR>' ..
-    'endif'                                         .. '<Esc>2k$F,i'
-, { noremap = true, silent = true})
--- end ifneq 语句
+---------------------------------- 分支语句 ----------------------------------
 
--- begin ifeq-else 语句
-vim.api.nvim_set_keymap('i', '<LEADER>eifeq', 
-    'ifeq (, ' .. _G.Next .. ')'                    .. '<CR>' ..
-            _G.Next                                 .. '<CR>' ..
-    'else'                                          .. '<CR>' ..
-            _G.Next                                 .. '<CR>' ..
-    'endif'                                         .. '<Esc>4k$F,i'
-, { noremap = true, silent = true})
--- end ifeq-else 语句
+map('i', '<LEADER>ifeq', function () return
+'ifeq (' .. _G.CoLeader .. ', ' .. _G.Next .. ')'   .. '<CR>' ..
+        _G.Next                                     .. '<CR>' ..
+'endif'                                             .. '<Esc>2k0f' .. _G.CoLeader .. 's'
+end, { expr = true, desc = "特殊分支语句, 用于判断是否相等" })
 
--- begin ifneq-else 语句
-vim.api.nvim_set_keymap('i', '<LEADER>eifneq', 
-    'ifneq (, ' .. _G.Next .. ')'                   .. '<CR>' ..
-            _G.Next                                 .. '<CR>' ..
-    'else'                                          .. '<CR>' ..
-            _G.Next                                 .. '<CR>' ..
-    'endif'                                         .. '<Esc>4k$F,i'
-, { noremap = true, silent = true})
--- end ifneq-else 语句
+map('i', '<LEADER>ifneq', function () return
+'ifneq (' .. _G.CoLeader .. ', ' .. _G.Next .. ')'  .. '<CR>' ..
+        _G.Next                                     .. '<CR>' ..
+'endif'                                             .. '<Esc>2k0f' .. _G.CoLeader .. 's'
+end, { expr = true, desc = "特殊分支语句, 用于判断是否不相等" })
 
--- begin ifdef 语句
-vim.api.nvim_set_keymap('i', '<LEADER>ifdef', 
-    'ifdef '                                        .. '<CR>' ..
-            _G.Next                                 .. '<CR>' ..
-    'endif'                                         .. '<Esc>2kA'
-, { noremap = true, silent = true})
--- end ifdef 语句
+map('i', '<LEADER>eifeq', function () return
+'ifeq (' .. _G.CoLeader .. ', ' .. _G.Next .. ')'   .. '<CR>' ..
+        _G.Next                                     .. '<CR>' ..
+'else'                                              .. '<CR>' ..
+        _G.Next                                     .. '<CR>' ..
+'endif'                                             .. '<Esc>4k0f' .. _G.CoLeader .. 's'
+end, { expr = true, desc = "特殊分支语句, 用于判断是否不相等" })
 
--- begin ifdef-else 语句
-vim.api.nvim_set_keymap('i', '<LEADER>eifdef', 
-    'ifdef '                                        .. '<CR>' ..
-            _G.Next                                 .. '<CR>' ..
-    'else'                                          .. '<CR>' ..
-            _G.Next                                 .. '<CR>' ..
-    'endif'                                         .. '<Esc>4kA'
-, { noremap = true, silent = true})
--- end ifdef-else 语句
+map('i', '<LEADER>eifneq', function () return
+'ifneq (' .. _G.CoLeader .. ', ' .. _G.Next .. ')'  .. '<CR>' ..
+        _G.Next                                     .. '<CR>' ..
+'else'                                              .. '<CR>' ..
+        _G.Next                                     .. '<CR>' ..
+'endif'                                             .. '<Esc>4k0f' .. _G.CoLeader .. 's'
+end, { expr = true, desc = "特殊分支语句, 用于判断是否不相等" })
 
--- begin ifndef 语句
-vim.api.nvim_set_keymap('i', '<LEADER>ifndef', 
-    'ifndef '                                       .. '<CR>' ..
-            _G.Next                                 .. '<CR>' ..
-    'endif'                                         .. '<Esc>2kA'
-, { noremap = true, silent = true})
--- end ifndef 语句
+map('i', '<LEADER>ifdef', function () return
+'ifdef '                                        .. '<CR>' ..
+        _G.Next                                 .. '<CR>' ..
+'endif'                                         .. '<Esc>2kA'
+end, { expr = true, desc = "特殊分支语句, 用于判断某个变量是否定义" })
 
--- begin ifndef-else 语句
-vim.api.nvim_set_keymap('i', '<LEADER>eifndef', 
-    'ifndef '                                       .. '<CR>' ..
-            _G.Next                                 .. '<CR>' ..
-    'else'                                          .. '<CR>' ..
-            _G.Next                                 .. '<CR>' ..
-    'endif'                                         .. '<Esc>4kA'
-, { noremap = true, silent = true})
--- end ifndef-else 语句
+map('i', '<LEADER>eifdef', function () return
+'ifdef '                                        .. '<CR>' ..
+        _G.Next                                 .. '<CR>' ..
+'else'                                          .. '<CR>' ..
+        _G.Next                                 .. '<CR>' ..
+'endif'                                         .. '<Esc>4kA'
+end, { expr = true, desc = "特殊分支语句, 用于判断某个变量是否定义" })
+
+map('i', '<LEADER>ifndef', function () return
+'ifndef '                                       .. '<CR>' ..
+        _G.Next                                 .. '<CR>' ..
+'endif'                                         .. '<Esc>2kA'
+end, { expr = true, desc = "特殊分支语句, 用于判断某个变量是否未定义" })
+
+map('i', '<LEADER>eifndef', function () return
+'ifndef '                                       .. '<CR>' ..
+        _G.Next                                 .. '<CR>' ..
+'else'                                          .. '<CR>' ..
+        _G.Next                                 .. '<CR>' ..
+'endif'                                         .. '<Esc>4kA'
+end, { expr = true, desc = "特殊分支语句, 用于判断某个变量是否未定义" })
 

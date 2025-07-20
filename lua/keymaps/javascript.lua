@@ -74,33 +74,30 @@ require('settings.branchs').branchs['javascript'] = branchs
 
 ---------------------------------- 循环语句 ----------------------------------
 
--- begin while 循环
-vim.api.nvim_set_keymap('i', '<LEADER>while', 
-        'while () {'                                .. '<CR>' ..
-                _G.Next                             .. '<CR>' ..
-        '}'                                         .. '<Esc>2k$2hi'
-, { noremap = true , silent = true })
--- end while 循环
+local loops = {}
 
--- begin do-while 循环
-vim.api.nvim_set_keymap('i', '<LEADER>dowhile', 
-        'do {'                                      .. '<CR>' ..
-        '} while ();'                               .. '<Esc>F(a'
-, { noremap = true , silent = true })
--- end do-while 循环
+loops['while'] = function () return
+'while (' .. _G.CoLeader .. ') {'           ..
+        _G.Next                             ..
+'}'                                         .. '<Esc>F' .. _G.CoLeader .. 's'
+end
 
--- begin loop 循环
-vim.api.nvim_set_keymap('i', '<LEADER>loop', 
-    'while (true) {'                                .. '<CR>' ..
-    '}'                                             .. '<Esc>O'
-, { noremap = true , silent = true })
--- end loop 循环
+loops['do-while'] = function () return
+'do {'                                      .. '<CR>' ..
+'} while (' .. _G.CoLeader .. ');'          .. '<Esc>F' .. _G.CoLeader .. 's'
+end
 
--- begin for 循环
-vim.api.nvim_set_keymap('i', '<LEADER>for', 
-        'for () {'                                  .. '<CR>' ..
-                _G.Next                             .. '<CR>' ..
-        '}'                                         .. '<Esc>2k$2hi'
-, { noremap = true , silent = true })
--- end for 循环
+loops['loop'] = function () return
+'while (true) {'                                ..
+    _G.CoLeader                                 ..
+'}'                                             .. '<Esc>F' .. _G.CoLeader .. 's'
+end
+
+loops['for'] = function () return
+'for (' .. _G.CoLeader .. ') {'             ..
+        _G.Next                             ..
+'}'                                         .. '<Esc>F' .. _G.CoLeader .. 's'
+end
+
+require('settings.loops').loops['javascript'] = loops
 

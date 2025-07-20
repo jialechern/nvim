@@ -13,7 +13,7 @@ local branchs = {}
 branchs['if'] = function () return
 'if test '                                          .. '<CR>' ..
     _G.Next                                         .. '<CR>' ..
-'end'                                               .. '<Esc>2k$a'
+'end'                                               .. '<Esc>2kA'
 end
 
 branchs['if-else'] = function () return
@@ -21,7 +21,7 @@ branchs['if-else'] = function () return
     _G.Next                                         .. '<CR>' ..
 'else'                                              .. '<CR>' ..
     _G.Next                                         .. '<CR>' ..
-'end'                                               .. '<Esc>4k$a'
+'end'                                               .. '<Esc>4kA'
 end
 
 branchs['if-else_if'] = function () return
@@ -29,7 +29,7 @@ branchs['if-else_if'] = function () return
     _G.Next                                         .. '<CR>' ..
 'else if test ' .. _G.Next                          .. '<CR>' ..
     _G.Next                                         .. '<CR>' ..
-'end'                                               .. '<Esc>4k$a'
+'end'                                               .. '<Esc>4kA'
 end
 
 branchs['if-else_if-else'] = function () return
@@ -39,16 +39,16 @@ branchs['if-else_if-else'] = function () return
     _G.Next                                         .. '<CR>' ..
 'else'                                              .. '<CR>' ..
     _G.Next                                         .. '<CR>' ..
-'end'                                               .. '<Esc>6k$a'
+'end'                                               .. '<Esc>6kA'
 end
 
 branchs['switch'] = function () return
-'switch ""'                                         .. '<CR>' ..
+'switch "' .. _G.CoLeader .. '"'                    .. '<CR>' ..
     'case "' .. _G.Next .. '"'                      .. '<CR>' ..
             _G.Next                                 .. '<CR>' ..
     'case "*"'                                      .. '<CR>' ..
             _G.Next                                 .. '<CR>' ..
-'end'                                               .. '<Esc>5k$i'
+'end'                                               .. '<Esc>5k0f' .. _G.CoLeader .. 's'
 end
 
 require('settings.branchs').branchs['fish'] = branchs
@@ -58,15 +58,15 @@ require('settings.branchs').branchs['fish'] = branchs
 local loops = {}
 
 loops['for'] = function () return
-'for  in ' .. _G.Next                               .. '<CR>' ..
+'for ' .. _G.CoLeader .. ' in ' .. _G.Next          .. '<CR>' ..
     _G.Next                                         .. '<CR>' ..
-'end'                                               .. '<Esc>2k^fihi'
+'end'                                               .. '<Esc>2k0f' .. _G.CoLeader .. 's'
 end
 
 loops['while'] = function () return
 'while test '                                       .. '<CR>' ..
     _G.Next                                         .. '<CR>' ..
-'end'                                               .. '<Esc>2k$a'
+'end'                                               .. '<Esc>2kA'
 end
 
 require('settings.loops').loops['fish'] = loops
