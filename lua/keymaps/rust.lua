@@ -1,5 +1,7 @@
 -- rust.lua
 
+-- 导入自定义工具函数
+local map = require('utils.map').map
 
 ---------------------------- 基本映射 ----------------------------
 
@@ -15,83 +17,90 @@ require('settings.functions').functions['rust'] = function () return
 '}'                                                                 .. '<Esc>F' .. _G.CoLeader .. 's'
 end
 
--- begin init test
-vim.api.nvim_set_keymap('i', '<LEADER>tinit',
+map('i', '<LEADER>tinit', function () return
 '#[cfg(test)]'                          .. '<CR>' ..
 'mod tests {'                           .. '<CR>' ..
     'use super::*;'                     .. '<CR><CR>' ..
 
     '#[test]'                           .. '<CR>' ..
-    'fn  () {'                          .. '<CR>\t\t' ..
+    'fn ' .. _G.CoLeader .. ' () {'     .. '<CR>\t\t' ..
         _G.Next                         .. '<CR>\t' ..
     '}'                                 .. '<CR>' ..
-'}'                                     .. '<Esc>3k$Fnla'
-,{ noremap = true, silent = true})
--- end init test
+'}'                                     .. '<Esc>3k0f' .. _G.CoLeader .. 's'
+end, { expr = true, desc = "初始化测试模块" })
 
--- 匿名函数
-vim.api.nvim_set_keymap('i', '<LEADER><Bar>', '<Bar><Bar>' .. _G.Next .. '<Esc>F<Bar>i',{ noremap = true, silent = true})
--- 打印
-vim.api.nvim_set_keymap('i', '<LEADER>p', 'println!();' .. '<Esc>F)i',{ noremap = true, silent = true})
+map('i', '<LEADER><Bar>', function () return
+'<Bar>' .. _G.CoLeader .. '<Bar>' .. _G.Next    .. '<Esc>F' .. _G.CoLeader .. 's'
+end, { expr = true, desc = "匿名函数" })
 
--- begin for 循环
-vim.api.nvim_set_keymap('i', '<LEADER>for', 
-'for  {'                                 .. '<CR>' ..
+map('i', '<LEADER>p', function () return
+'println!(' .. _G.CoLeader .. ');' .. _G.Next   .. '<Esc>F' .. _G.CoLeader .. 's'
+end, { expr = true, desc = "打印" })
+
+----------------------------- 循环语句 ----------------------------
+
+local loops = {}
+
+loops['for'] = function () return
+'for ' .. _G.CoLeader .. ' {'           .. '<CR>' ..
         _G.Next                         .. '<CR>' ..
-'}'                                     .. '<Esc>2k$hi'
-,{ noremap = true, silent = true})
--- end for 循环
+'}'                                     .. '<Esc>2k0f' .. _G.CoLeader .. 's'
+end
 
--- begin while 循环
-vim.api.nvim_set_keymap('i', '<LEADER>while', 
-'while  {'                              .. '<CR>' ..
+loops['while'] = function () return
+'while ' .. _G.CoLeader .. ' {'         .. '<CR>' ..
         _G.Next                         .. '<CR>' ..
-'}'                                     .. '<Esc>2k$hi'
-,{ noremap = true, silent = true})
--- end while 循环
+'}'                                     .. '<Esc>2k0f' .. _G.CoLeader .. 's'
+end
 
--- begin if 分支
-vim.api.nvim_set_keymap('i', '<LEADER>if', 
-'if  {'                                 .. '<CR>' ..
+loops['loop'] = function () return
+'loop {'                                .. '<CR>' ..
+'}'                                     .. '<Esc>O'
+end
+
+require('settings.loops').loops['rust'] = loops
+
+----------------------------- 分支语句 ----------------------------
+
+local branchs = {}
+
+branchs['if'] = function () return
+'if ' .. _G.CoLeader .. ' {'            .. '<CR>' ..
         _G.Next                         .. '<CR>' ..
-'}'                                     .. '<Esc>2k$hi'
-,{ noremap = true, silent = true})
--- end if 分支
+'}'                                     .. '<Esc>2k0f' .. _G.CoLeader .. 's'
+end
 
--- begin elif 分支
-vim.api.nvim_set_keymap('i', '<LEADER>elif', 
-'if  {'                                 .. '<CR>' ..
+branchs['if-else'] = function () return
+'if ' .. _G.CoLeader .. ' {'            .. '<CR>' ..
+        _G.Next                         .. '<CR>' ..
+'} else {'                              .. '<CR>' ..
+        _G.Next                         .. '<CR>' ..
+'}'                                     .. '<Esc>4k0f' .. _G.CoLeader .. 's'
+end
+
+branchs['if-else_if'] = function () return
+'if ' .. _G.CoLeader .. ' {'            .. '<CR>' ..
         _G.Next                         .. '<CR>' ..
 '} else if ' .. _G.Next .. ' {'         .. '<CR>' ..
         _G.Next                         .. '<CR>' ..
-'}'                                     .. '<Esc>4k$hi'
-,{ noremap = true, silent = true})
--- end elif 分支
+'}'                                     .. '<Esc>4k0f' .. _G.CoLeader .. 's'
+end
 
--- begin elif-else 分支
-vim.api.nvim_set_keymap('i', '<LEADER>eelif', 
-'if  {'                                 .. '<CR>' ..
+branchs['if-else_if-else'] = function () return
+'if ' .. _G.CoLeader .. ' {'            .. '<CR>' ..
         _G.Next                         .. '<CR>' ..
 '} else if ' .. _G.Next .. ' {'         .. '<CR>' ..
         _G.Next                         .. '<CR>' ..
 '} else {'                              .. '<CR>' ..
         _G.Next                         .. '<CR>' ..
-'}'                                     .. '<Esc>6k$hi'
-,{ noremap = true, silent = true})
--- end elif-else 分支
+'}'                                     .. '<Esc>6k0f' .. _G.CoLeader .. 's'
+end
 
--- begin match 模式匹配
-vim.api.nvim_set_keymap('i', '<LEADER>match', 
-'match  {'                              .. '<CR>' ..
+branchs['match'] = function () return
+'match ' .. _G.CoLeader .. ' {'         .. '<CR>' ..
         _G.Next                         .. '<CR>' ..
-'}'                                     .. '<Esc>2k$hi'
-,{ noremap = true, silent = true})
--- end match 模式匹配
+'}'                                     .. '<Esc>2k0f' .. _G.CoLeader .. 's'
+end
 
--- begin loop 循环
-vim.api.nvim_set_keymap('i', '<LEADER>loop', 
-'loop {'                               .. '<CR>' ..
-'}'                                     .. '<Esc>O'
-,{ noremap = true, silent = true})
--- end loop 循环
+require('settings.branchs').branchs['rust'] = branchs
 

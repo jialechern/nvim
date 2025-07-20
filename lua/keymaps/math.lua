@@ -21,7 +21,7 @@ map('i', '<LEADER>$', function () return
 '$' .. _G.CoLeader .. '$' .. _G.Next            .. '<Esc>F' .. _G.CoLeader .. 's'
 end, { expr = true, desc = "行内公式块" })
 
-map('i', '<LEADER>$', function () return
+map('i', '<LEADER>M', function () return
 '$$'                                                        .. '<CR>' ..
 '$$'                                                        .. '<Esc>O'
 end, { expr = true, desc = "行间公式块" })
@@ -90,7 +90,7 @@ map('i', '<LEADER>T', function () return
 '\\mathcal{T}'
 end, { expr = true, desc = "花体字母 T" })
 
-map('i', '<LEADER>L', function () return
+map('i', '<LEADER>L' .. _G.End, function () return
 '\\mathcal{L}'
 end, { expr = true, desc = "花体字母 L" })
 
@@ -127,7 +127,7 @@ map('i', '<LEADER>ker', function () return
 '\\mathrm{ker}'
 end, { expr = true, desc = "核" })
 
-map('i', '<LEADER>im', function () return
+map('i', '<LEADER>im' .. _G.End, function () return
 '\\mathrm{im}'
 end, { expr = true, desc = "像" })
 
@@ -148,7 +148,7 @@ map('i', '<LEADER>frac', function () return
                                                 .. '<Esc>F' .. _G.CoLeader .. 's'
 end, { expr = true, desc = "相对尺寸分式" })
 
-map('i', '<LEADER>frac', function () return
+map('i', '<LEADER>dfrac', function () return
 '\\dfrac{' .. _G.CoLeader .. '}{' .. _G.Next .. '}' .. _G.Next
                                                 .. '<Esc>F' .. _G.CoLeader .. 's'
 end, { expr = true, desc = "绝对尺寸分式" })
@@ -235,7 +235,7 @@ map('i', '<LEADER>g', function () return
 '\\gamma'
 end, { expr = true })
 
-map('i', '<LEADER>g', function () return
+map('i', '<LEADER>G', function () return
 '\\Gamma'
 end, { expr = true })
 
@@ -247,11 +247,11 @@ map('i', '<LEADER>phi', function () return
 '\\phi'
 end, { expr = true })
 
-map('i', '<LEADER>ve', function () return
+map('i', '<LEADER>ve' .. _G.End, function () return
 '\\varepsilon'
 end, { expr = true })
 
-map('i', '<LEADER>e', function () return
+map('i', '<LEADER>e' .. _G.End, function () return
 '\\epsilon'
 end, { expr = true })
 
