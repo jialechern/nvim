@@ -163,29 +163,53 @@ map('i', '<LEADER>lim', function () return
                                                 .. '<Esc>F' .. _G.CoLeader .. 's'
 end, { expr = true, desc = "极限" })
 
-map('i', '<LEADER>lra', function () return
-'\\longrightarrow'
-end, { expr = true, desc = "必要条件" })
-
-map('i', '<LEADER>Lra', function () return
+map('i', '<LEADER>Lra' .. _G.End, function () return
 '\\Longrightarrow'
-end, { expr = true, desc = "必要条件" })
+end, { expr = true, desc = "必要条件1" })
 
-map('i', '<LEADER>lla', function () return
-'\\longleftarrow'
-end, { expr = true, desc = "充分条件" })
+map('i', '<LEADER>Ra' .. _G.End, function () return
+'\\Rightarrow'
+end, { expr = true, desc = "必要条件2" })
 
-map('i', '<LEADER>Lla', function () return
+map('i', '<LEADER>lra' .. _G.End, function () return
+'\\longrightarrow'
+end, { expr = true, desc = "必要条件3" })
+
+map('i', '<LEADER>ra' .. _G.End, function () return
+'\\rightarrow'
+end, { expr = true, desc = "必要条件4" })
+
+map('i', '<LEADER>Lla' .. _G.End, function () return
 '\\Longleftarrow'
-end, { expr = true, desc = "充分条件" })
+end, { expr = true, desc = "充分条件1" })
 
-map('i', '<LEADER>iff', function () return
-'\\longleftrightarrow'
-end, { expr = true, desc = "充要条件" })
+map('i', '<LEADER>La' .. _G.End, function () return
+'\\Leftarrow'
+end, { expr = true, desc = "充分条件2" })
 
-map('i', '<LEADER>Iff', function () return
+map('i', '<LEADER>lla' .. _G.End, function () return
+'\\longleftarrow'
+end, { expr = true, desc = "充分条件3" })
+
+map('i', '<LEADER>la' .. _G.End, function () return
+'\\leftarrow'
+end, { expr = true, desc = "充分条件4" })
+
+map('i', '<LEADER>Iff' .. _G.End, function () return
 '\\Longleftrightarrow'
-end, { expr = true, desc = "充要条件" })
+end, { expr = true, desc = "充要条件1" })
+
+map('i', '<LEADER>sIff' .. _G.End, function () return
+'\\Leftrightarrow'
+end, { expr = true, desc = "充要条件2" })
+
+map('i', '<LEADER>iff' .. _G.End, function () return
+'\\longleftrightarrow'
+end, { expr = true, desc = "充要条件3" })
+
+map('i', '<LEADER>siff' .. _G.End, function () return
+'\\leftrightarrow'
+end, { expr = true, desc = "充要条件4" })
 
 map('i', '<LEADER>ora', function () return
 '\\overrightarrow{' .. _G.CoLeader .. '}' .. _G.Next
@@ -247,11 +271,11 @@ map('i', '<LEADER>phi', function () return
 '\\phi'
 end, { expr = true })
 
-map('i', '<LEADER>ve' .. _G.End, function () return
+map('i', '<LEADER>vep' .. _G.End, function () return
 '\\varepsilon'
 end, { expr = true })
 
-map('i', '<LEADER>e' .. _G.End, function () return
+map('i', '<LEADER>ep' .. _G.End, function () return
 '\\epsilon'
 end, { expr = true })
 
@@ -269,7 +293,7 @@ end, { expr = true })
 
 ----------------------------------- 标准环境 ---------------------------------
 
-map('i', '<LEADER>lineq', function () return
+map('i', '<LEADER>cases', function () return
 '\\left\\{'                                                 ..
     '\\begin{array}{c}'                                     .. '<CR>' ..
     '\\end{array}'                                          ..
@@ -277,7 +301,7 @@ map('i', '<LEADER>lineq', function () return
 _G.Next                                                     .. '<Esc>kO'
 end, { expr = true, desc = "线性方程组" })
 
-map('i', '<LEADER>vector', function () return
+map('i', '<LEADER>vec', function () return
 '\\left('                                       ..
     '\\begin{array}{c}'                         ..
         _G.CoLeader                             ..
@@ -285,7 +309,7 @@ map('i', '<LEADER>vector', function () return
 '\\right)' .. _G.Next                           .. '<Esc>F' .. _G.CoLeader .. 's'
 end, { expr = true, desc = "向量" })
 
-map('i', '<LEADER>matrix', function () return
+map('i', '<LEADER>mat', function () return
 '\\left('                                       ..
     '\\begin{array}{' .. _G.CoLeader .. '}'     .. '<CR>' ..
         _G.Next                                 .. '<CR>' ..
