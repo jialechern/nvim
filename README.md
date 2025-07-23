@@ -77,6 +77,42 @@ sudo pacman -S ruby
 sudo pacman -S perl
 ```
 
+## 一些基本符号的设置
+
+- `vim.g.mapleader`: neovim/vim 自带的可自定义的领头键
+- `_G.CoLeader`: 本配置文件中副带的一个可自定义领头键
+- `_G.Next`: 游标跳转符号
+- `_G.End`: 键盘映射的结束符号, 当载入的映射过多可能导致冲突时应当使用这个符号来结束映射
+
+以上所有符号均可通过 `config` 脚本进行自定义(推荐), 也可以在 `lua/settings/init-symbols` 下进行自定义.
+
+详细操作可以使用下面的命令获取:
+
+```bash
+# 在 Unix-like 系统中
+./config --help
+
+# 在 Windows 系统中
+python .\config --help
+```
+
+下面是一个符号配置的示例, 也是默认推荐的配置:
+
+```bash
+# 在 Unix-like 系统中
+./config --leader '>' \
+    --coleader '`' \
+    --next '<++>' \
+    --end ' '
+
+# 在 Windows 系统中
+python .\config --set-symbols `
+    --leader '>' `
+    --coleader '`' `
+    --next '<++>' `
+    --end ' '
+```
+
 ## 去除插件依赖
 
 1. 使用配置文件根目录下的 `config` 脚本去除(推荐):
@@ -101,7 +137,7 @@ sudo pacman -S perl
 
 2. 使用配置文件自带的配置变量去除
 
-    只要将 lua/settings/settings-variables.lua 中的变量 `LoadPlugins` 设置为 `false` 即可去除所有插件的加载.
+    只要将 lua/settings/variables.lua 中的变量 `LoadPlugins` 设置为 `false` 即可去除所有插件的加载.
 
 3. 通过 neovim 的自带参数和 shell 的别名功能去除
 
@@ -125,8 +161,7 @@ sudo pacman -S perl
     - `vim.g.mapleader`: neovim/vim 自带的可自定义的领头键盘
     - `_G.CoLeader`: 本配置文件中副带的一个可自定义领头键( 前两者可互相转义 )
     - `_G.End`: 键盘映射的结束符号, 当载入的映射过多可能导致冲突时应当使用这个符号来结束映射
-    - `_G.NextSymbol`: 游标跳转符号
-    - `_G.Next`: 基于 `_G.NextSymbol` 重新包装的游标跳转符号, 所有的跳转操作应当使用这个符号
+    - `_G.Next`: 游标跳转符号, 所有的跳转操作应当使用这个符号
 
 2. 定义键盘映射时应当语义清晰且结构清晰
 

@@ -20,31 +20,92 @@ def get_logger() -> logging.Logger:
     logger.addHandler(console_handler)
     return logger
 
-def set_working_directory(args: argparse.Namespace, logger: logging.Logger) -> None:
-    args.cfg_path = args.cfg_path.expanduser().resolve()
 
-    if (not args.cfg_path.exists()) or (not args.cfg_path.is_dir()):
-            raise FileNotFoundError(f"ERROR: 配置文件路径 {args.cfg_path} 不存在或不是一个目录")
+def set_working_directory(cwd: Path, logger: logging.Logger) -> None:
+    cwd = cwd.expanduser().resolve()
+
+    if (not cwd.exists()) or (not cwd.is_dir()):
+            raise FileNotFoundError(f"ERROR: 配置文件路径 {cwd} 不存在或不是一个目录")
 
     check_path: dict[Path, str] = {
-        args.cfg_path/"init.lua": "缺少 init.lua 文件, 请检查路径是否正确",
-        args.cfg_path/"lua": "缺少 lua 目录, 请检查路径是否正确",
-        args.cfg_path/"lua"/"settings": "缺少 settings 目录, 请检查路径是否正确",
+        cwd/"init.lua": "缺少 init.lua 文件, 请检查路径是否正确",
+        cwd/"lua": "缺少 lua 目录, 请检查路径是否正确",
+        cwd/"lua"/"settings": "缺少 settings 目录, 请检查路径是否正确",
     }
 
     for path, error_msg in check_path.items():
         if not path.exists():
             raise FileNotFoundError(f"ERROR: {error_msg}")
 
-    os.chdir(args.cfg_path)
-    logger.info(f"配置文件路径: {args.cfg_path}")
+    os.chdir(cwd)
+    logger.info(f"配置文件路径: {cwd}")
 
 
-def store_plugins_config(args: argparse.Namespace, logger: logging.Logger) -> None:
-    with open(args.cfg_path/"lua"/"settings"/"load_plugins.lua", "w", encoding="utf-8") as file:
-        file.write(f"return {{\n\tLoadPlugins = {str(not args.no_plugins).lower()}\n}}\n")
-        msg = '将加载 neovim 插件' if not args.no_plugins else '取消加载  neovim 插件'
-        logger.info(f"配置已重置 -- {msg}")
+def get_config_files(cwd: Path) -> dict[str, Path]:
+    init_symbols_path = cwd / 'lua' / 'settings' / 'init-symbols'
+
+    return {
+        'no_plugins': cwd/'lua'/'settings'/'load_plugins.lua',
+        'leader': init_symbols_path/'leader.lua',
+        'coleader': init_symbols_path/'coleader.lua',
+        'next': init_symbols_path/'next.lua',
+        'end': init_symbols_path/'end.lua',
+    }
+
+
+def write_config_to_file(file_path: Path, content: str) -> None:
+    with open(file_path, "w", encoding="utf-8") as file:
+        file.write(content)
+
+
+def sync_config(args: argparse.Namespace, logger: logging.Logger) -> None:
+    for key, val in vars(args).items():
+        if key == 'cfg_path' or val is None:
+            continue
+
+        cfg_path = get_config_files(args.cfg_path).get(key)
+
+        if not cfg_path:
+            logger.critical(f"不支持的配置项: {key}")
+            exit(1)
+        elif not cfg_path.exists():
+            logger.critical(f"配置文件 {cfg_path} 不存在, 请检查路径是否正确")
+            exit(1)
+
+        match key :
+            case 'no_plugins':
+                content = f'return {{\n\tLoadPlugins = {str(not args.no_plugins).lower()}\n}}\n'
+                write_config_to_file(cfg_path, content)
+                msg = '将加载 neovim 插件' if not args.no_plugins else '取消加载  neovim 插件'
+                logger.info(f"配置已重置 -- {msg}")
+
+            case 'leader':
+                content = f"vim.g.mapleader = '{val}'"
+                write_config_to_file(cfg_path, content)
+                msg = f"leader 键已设置为 '{val}'"
+                logger.info(f"配置已重置 -- {msg}")
+
+            case 'coleader':
+                content = f"_G.CoLeader = '{val}'"
+                write_config_to_file(cfg_path, content)
+                msg = f"coleader 符号已设置为 '{val}'"
+                logger.info(f"配置已重置 -- {msg}")
+
+            case 'next':
+                content = f"_G.Next = '{val}'"
+                write_config_to_file(cfg_path, content)
+                msg = f"next 符号已设置为 '{val}'"
+                logger.info(f"配置已重置 -- {msg}")
+
+            case 'end':
+                content = f"_G.End = '{val}'"
+                write_config_to_file(cfg_path, content)
+                msg = f"end 符号已设置为 '{val}'"
+                logger.info(f"配置已重置 -- {msg}")
+
+            case _ :
+                logger.critical(f"不支持的配置项: {key}")
+                exit(1)
 
 
 def get_args() -> argparse.Namespace:
@@ -58,6 +119,10 @@ def get_args() -> argparse.Namespace:
 
     parser = argparse.ArgumentParser(description="配置 neovim 配置文件的基本参数")
     parser.add_argument( "-c", "--cfg-path", help="设置配置文件路径", type=Path, default=cfg_path )
+    parser.add_argument( "--leader", help="设置 leader 键", type=str, default=None )
+    parser.add_argument( "--coleader", help="设置 coleader 符号", type=str, default=None )
+    parser.add_argument( "--next", help="设置 next 符号", type=str, default=None )
+    parser.add_argument( "--end", help="设置 end 符号", type=str, default=None )
     parser.add_argument( "--no-plugins", help="是否加载参数", action="store_true" )
     return parser.parse_args()
 
@@ -65,8 +130,9 @@ def get_args() -> argparse.Namespace:
 def main() -> None:
     args = get_args()
     logger = get_logger()
-    set_working_directory(args, logger)
-    store_plugins_config(args, logger)
+
+    set_working_directory(args.cfg_path, logger)
+    sync_config(args, logger)
 
 if __name__ == "__main__":
     main()
