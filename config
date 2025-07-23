@@ -1,9 +1,26 @@
 #!/usr/bin/env python
+
 import os
+import logging
 from pathlib import Path
 import argparse
 
-def set_working_directory(args: argparse.Namespace) -> None:
+def get_logger() -> logging.Logger:
+    logger = logging.getLogger("nvim-config")
+    logger.setLevel(logging.INFO)
+
+    formatter = logging.Formatter(
+        '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    )
+
+    console_handler = logging.StreamHandler()
+    console_handler.setLevel(logging.INFO)
+    console_handler.setFormatter(formatter)
+
+    logger.addHandler(console_handler)
+    return logger
+
+def set_working_directory(args: argparse.Namespace, logger: logging.Logger) -> None:
     args.cfg_path = args.cfg_path.expanduser().resolve()
 
     if (not args.cfg_path.exists()) or (not args.cfg_path.is_dir()):
@@ -20,27 +37,36 @@ def set_working_directory(args: argparse.Namespace) -> None:
             raise FileNotFoundError(f"ERROR: {error_msg}")
 
     os.chdir(args.cfg_path)
-    print(f"INFO: 配置文件路径: {args.cfg_path}")
+    logger.info(f"配置文件路径: {args.cfg_path}")
 
 
-def store_plugins_config(args: argparse.Namespace) -> None:
+def store_plugins_config(args: argparse.Namespace, logger: logging.Logger) -> None:
     with open(args.cfg_path/"lua"/"settings"/"load_plugins.lua", "w", encoding="utf-8") as file:
         file.write(f"return {{\n\tLoadPlugins = {str(not args.no_plugins).lower()}\n}}\n")
         msg = '将加载 neovim 插件' if not args.no_plugins else '取消加载  neovim 插件'
-        print(f"INFO: 配置已重置 -- {msg}")
+        logger.info(f"配置已重置 -- {msg}")
 
 
 def get_args() -> argparse.Namespace:
+    match os.name :
+        case "posix" :
+            cfg_path = Path.home() / ".config" / "nvim"
+        case "nt" :
+            cfg_path = Path.home() / "AppData" / "Local" / "nvim"
+        case _ :
+            raise NotImplementedError("当前操作系统不支持, 仅支持 Linux、macOS 和 Windows")
+
     parser = argparse.ArgumentParser(description="配置 neovim 配置文件的基本参数")
-    parser.add_argument( "-c", "--cfg-path", help="设置配置文件路径", type=Path, default="~/.config/nvim" )
+    parser.add_argument( "-c", "--cfg-path", help="设置配置文件路径", type=Path, default=cfg_path )
     parser.add_argument( "--no-plugins", help="是否加载参数", action="store_true" )
     return parser.parse_args()
 
 
 def main() -> None:
     args = get_args()
-    set_working_directory(args)
-    store_plugins_config(args)
+    logger = get_logger()
+    set_working_directory(args, logger)
+    store_plugins_config(args, logger)
 
 if __name__ == "__main__":
     main()

@@ -82,13 +82,21 @@ sudo pacman -S perl
 1. 使用配置文件根目录下的 `config` 脚本去除(推荐):
     
     ```bash
+    # 在 Unix-like 系统中
     ./config --no-plugins
+
+    # 在 Windows 系统中
+    python .\config --no-plugins
     ```
 
     如果配置文件路径不正确, 可以使用 `-c` 或者 `--cfg-path` 参数指定配置文件的路径:
 
     ```bash
+    # 在 Unix-like 系统中
     ./config --no-plugins -c <neovim-config-path>
+
+    # 在 Windows 系统中
+    python .\config --no-plugins --cfg-path <neovim-config-path>
     ```
 
 2. 使用配置文件自带的配置变量去除
