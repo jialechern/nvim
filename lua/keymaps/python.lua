@@ -223,3 +223,36 @@ map('i', '<LEADER>popen', function () return
                                                 .. '<Esc>14k0f' .. _G.CoLeader .. 's'
 end, { expr = true, desc = "subprocess.Popen 调用其它程序"})
 
+-- 日志模块
+map('i', '<LEADER>log', function () return
+'import logging'                                    .. '<CR>' ..
+'def get_logger('                                   .. '<CR><Esc>0C\t' ..
+    'name: str = __name__,'                         .. '<CR><Esc>0C\t' ..
+    'level: int = logging.INFO,'                    .. '<CR><Esc>0C\t' ..
+    "fmt: str = '%(asctime)s - %(name)s - %(levelname)s - %(message)s',"
+                                                    .. '<CR><Esc>0C\t' ..
+    "into: str='console',"                          .. '<CR><Esc>0C\t' ..
+    ') -> logging.Logger:'                          .. '<CR><CR><Esc>0C\t' ..
+
+    'logger = logging.getLogger(name)'              .. '<CR><Esc>0C\t' ..
+    'logger.setLevel(level)'                        .. '<CR><CR><Esc>0C\t' ..
+
+    'formatter = logging.Formatter(fmt)'            .. '<CR><Esc>0C\t' ..
+    'handler: logging.Handler'                      .. '<CR><CR><Esc>0C\t' ..
+
+    'match into:'                                   .. '<CR><Esc>0C\t\t' ..
+        "case 'console':"                           .. '<CR><Esc>0C\t\t\t' ..
+            'handler = logging.StreamHandler()'     .. '<CR><Esc>0C\t\t' ..
+        "case 'file':"                              .. '<CR><Esc>0C\t\t\t' ..
+            "handler = logging.FileHandler(f'{name}.log', mode='a')"
+                                                    .. '<CR><Esc>0C\t\t' ..
+        'case _:'                                   .. '<CR><Esc>0C\t\t\t' ..
+            "raise ValueError(f'不支持将日志写入到 {into}')"
+                                                    .. '<CR><CR><Esc>0C\t' ..
+    'handler.setLevel(level)'                       .. '<CR><Esc>0C\t' ..
+    'handler.setFormatter(formatter)'               .. '<CR><CR><Esc>0C\t' ..
+
+    'logger.addHandler(handler)'                    .. '<CR><Esc>0C\t' ..
+    'return logger'
+end, { expr = true, desc = "日志模块"})
+
