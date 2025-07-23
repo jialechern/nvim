@@ -1,0 +1,47 @@
+#!/usr/bin/env python
+import os
+from pathlib import Path
+import argparse
+
+def set_working_directory(args: argparse.Namespace) -> None:
+    args.cfg_path = args.cfg_path.expanduser().resolve()
+
+    if (not args.cfg_path.exists()) or (not args.cfg_path.is_dir()):
+            raise FileNotFoundError(f"ERROR: 配置文件路径 {args.cfg_path} 不存在或不是一个目录")
+
+    check_path: dict[Path, str] = {
+        args.cfg_path/"init.lua": "缺少 init.lua 文件, 请检查路径是否正确",
+        args.cfg_path/"lua": "缺少 lua 目录, 请检查路径是否正确",
+        args.cfg_path/"lua"/"settings": "缺少 settings 目录, 请检查路径是否正确",
+    }
+
+    for path, error_msg in check_path.items():
+        if not path.exists():
+            raise FileNotFoundError(f"ERROR: {error_msg}")
+
+    os.chdir(args.cfg_path)
+    print(f"INFO: 配置文件路径: {args.cfg_path}")
+
+
+def store_plugins_config(args: argparse.Namespace) -> None:
+    with open(args.cfg_path/"lua"/"settings"/"load_plugins.lua", "w", encoding="utf-8") as file:
+        file.write(f"return {{\n\tLoadPlugins = {str(not args.no_plugins).lower()}\n}}\n")
+        msg = '将加载 neovim 插件' if not args.no_plugins else '取消加载  neovim 插件'
+        print(f"INFO: 配置已重置 -- {msg}")
+
+
+def get_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="配置 neovim 配置文件的基本参数")
+    parser.add_argument( "-c", "--cfg-path", help="设置配置文件路径", type=Path, default="~/.config/nvim" )
+    parser.add_argument( "--no-plugins", help="是否加载参数", action="store_true" )
+    return parser.parse_args()
+
+
+def main() -> None:
+    args = get_args()
+    set_working_directory(args)
+    store_plugins_config(args)
+
+if __name__ == "__main__":
+    main()
+

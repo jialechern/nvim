@@ -79,11 +79,23 @@ sudo pacman -S perl
 
 ## 去除插件依赖
 
-1. 使用配置文件自带的配置变量去除
+1. 使用配置文件根目录下的 `config` 脚本去除(推荐):
+    
+    ```bash
+    ./config --no-plugins
+    ```
+
+    如果配置文件路径不正确, 可以使用 `-c` 或者 `--cfg-path` 参数指定配置文件的路径:
+
+    ```bash
+    ./config --no-plugins -c <neovim-config-path>
+    ```
+
+2. 使用配置文件自带的配置变量去除
 
     只要将 lua/settings/settings-variables.lua 中的变量 `LoadPlugins` 设置为 `false` 即可去除所有插件的加载.
 
-2. 通过 neovim 的自带参数和 shell 的别名功能去除
+3. 通过 neovim 的自带参数和 shell 的别名功能去除
 
     如果当前环境无法满足 加载/更新/使用 插件的功能可以考虑使用一下的方式去除插件依赖:
     ```bash

@@ -1,7 +1,14 @@
 -- init.lua
 
 -- 导入是否加载插件的配置
-local LoadPlugins = require('settings.variables').LoadPlugins
+-- 如果没有加载插件的配置，则默认加载插件
+local LoadPlugins
+local ok, m = pcall(require, 'settings.load_plugins')
+if ok then
+    LoadPlugins = m.LoadPlugins
+else
+    LoadPlugins = true
+end
 
 -- begin 指定插件位置，不存在则clone到本地
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
