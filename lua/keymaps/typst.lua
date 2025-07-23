@@ -57,7 +57,7 @@ end, { expr = true, desc = "行间代码块" })
 
 -- 脚本模式
 map('i', '<LEADER>#', function () return
-'#( ' .. _G.CoLeader .. ' )'                .. '<Esc>F' .. _G.CoLeader .. 's'
+'#(' .. _G.CoLeader .. ')'                .. '<Esc>F' .. _G.CoLeader .. 's'
 end, { expr = true, desc = "脚本模式" })
 
 map('i', _G.CoLeader .. '#', function () return
@@ -79,7 +79,7 @@ map('i', '<LEADER>a' .. _G.End, function () return
 'alpha'
 end, { expr = true })
 
-map('i', '<LEADER>b' .. _G.End, function () return
+map('i', '<LEADER>be' .. _G.End, function () return
 'beta'
 end, { expr = true })
 
@@ -401,4 +401,50 @@ end, { expr = true, desc = "矩阵" })
 map('i', '<LEADER>cases' .. _G.End, function () return
 'cases(' .. _G.CoLeader .. ')' .. _G.Next .. '<Esc>F' .. _G.CoLeader .. 's'
 end, { expr = true, desc = "分段函数/线性方程组" })
+
+------------------------------- 函数 --------------------------------
+
+require('settings.functions').functions['typst'] = function () return
+'let ' .. _G.CoLeader .. '(' .. _G.Next .. ') = ' .. _G.Next .. '<Esc>F' .. _G.CoLeader .. 's'
+end
+
+------------------------------- 分支语句 --------------------------------
+
+local branchs = {}
+
+branchs['if'] = function () return
+    'if ' .. _G.CoLeader .. ' {' .. _G.Next .. '}'          .. '<Esc>F' .. _G.CoLeader .. 's'
+end
+
+branchs['if-else'] = function () return
+    'if ' .. _G.CoLeader .. ' {' .. _G.Next .. '} else {' .. _G.Next .. '}'
+                                                            .. '<Esc>F' .. _G.CoLeader .. 's'
+end
+
+branchs['if-else_if'] = function () return
+    'if ' .. _G.CoLeader .. ' {' .. _G.Next .. '} else if {' .. _G.Next .. '}'
+                                                            .. '<Esc>F' .. _G.CoLeader .. 's'
+end
+
+branchs['if-else_if-else'] = function () return
+    'if ' .. _G.CoLeader .. ' {' .. _G.Next .. '} else if {' .. _G.Next .. '} else {' .. _G.Next .. '}'
+                                                            .. '<Esc>F' .. _G.CoLeader .. 's'
+end
+
+require('settings.branchs').branchs['typst'] = branchs
+
+------------------------------- 循环语句 --------------------------------
+
+local loops = {}
+
+loops['while'] = function () return
+    'while ' .. _G.CoLeader .. ' {' .. _G.Next .. '}'           .. '<Esc>F' .. _G.CoLeader .. 's'
+end
+
+loops['for'] = function () return
+    'for ' .. _G.CoLeader .. ' in ' .. _G.Next .. ' {' .. _G.Next .. '}'
+                                                            .. '<Esc>F' .. _G.CoLeader .. 's'
+end
+
+require('settings.loops').loops['typst'] = loops
 

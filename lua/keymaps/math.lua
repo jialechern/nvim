@@ -227,7 +227,7 @@ map('i', '<LEADER>a' .. _G.End, function () return
 '\\alpha'
 end, { expr = true })
 
-map('i', '<LEADER>b' .. _G.End, function () return
+map('i', '<LEADER>be' .. _G.End, function () return
 '\\beta'
 end, { expr = true })
 
