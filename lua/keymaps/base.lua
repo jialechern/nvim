@@ -177,3 +177,7 @@ map('n', _G.CoLeader .. 'l', function ()
     vim.cmd('blast')
 end, { desc = "切换到缓冲区列表中的末个文件" })
 
+map('n', _G.CoLeader .. '\'', function ()
+    vim.cmd('e #')
+end, { desc = "在当前编辑的文件与上个编辑的文件间跳转" })
+
