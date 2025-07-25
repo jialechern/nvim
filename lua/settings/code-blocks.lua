@@ -37,6 +37,10 @@ code_blocks['typst'] = function () return
     '#{' .. _G.CoLeader .. '}'                                  .. '<Esc>F' .. _G.CoLeader .. 's'
 end
 
+code_blocks['lua'] = function () return
+    'do<CR>end' .. '<Esc>O'
+end
+
 module.code_blocks = code_blocks
 
 return module
