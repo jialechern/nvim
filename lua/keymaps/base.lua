@@ -159,3 +159,21 @@ map('n', '<LEADER>sc', function ()
     vim.cmd('set spell!')
 end, { desc = "切换拼写检查" })
 
+---------------------------------- 缓冲区设置 -------------------------------
+
+map('n', _G.CoLeader .. 'p', function ()
+    vim.cmd('bprevious')
+end, { desc = "切换到缓冲区列表中的上一个文件" })
+
+map('n', _G.CoLeader .. 'n', function ()
+    vim.cmd('bnext')
+end, { desc = "切换到缓冲区列表中的下一个文件" })
+
+map('n', _G.CoLeader .. 'f', function ()
+    vim.cmd('bfirst')
+end, { desc = "切换到缓冲区列表中的首个文件" })
+
+map('n', _G.CoLeader .. 'l', function ()
+    vim.cmd('blast')
+end, { desc = "切换到缓冲区列表中的末个文件" })
+
