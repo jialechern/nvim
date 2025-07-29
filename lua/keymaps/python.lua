@@ -259,7 +259,8 @@ end, { expr = true, desc = "日志模块"})
 ------------------------------ 自动解释运行 ------------------------------
 
 require('settings.autocmd-by-filetype').cmds['python'] = function ()
+    vim.cmd('set makeprg=python3\\ %')
     vim.cmd('silent write')
-    vim.cmd('silent !python3 %')
+    vim.cmd('make')
 end
 

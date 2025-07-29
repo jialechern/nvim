@@ -83,7 +83,8 @@ end, { expr = true, desc = "itemize 环境" })
 ------------------------------------- 自动编译 -------------------------------------
 
 require('settings.autocmd-by-filetype').cmds['tex'] = function ()
+    vim.bo.makeprg = 'latexmk'
     vim.cmd('silent write')
-    vim.cmd('silent !latexmk')
+    vim.cmd('make')
 end
 

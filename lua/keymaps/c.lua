@@ -158,3 +158,10 @@ require('settings.branchs').branchs['c'] = branchs
 
 --------------------------------- 其他配置 --------------------------------
 
+-- 自动编译
+require('settings.autocmd-by-filetype').cmds['c'] = function ()
+    vim.bo.makeprg = 'gcc %:p:r.c -o %:p:r && %:p:r'
+    vim.cmd('silent write')
+    vim.cmd('make')
+end
+

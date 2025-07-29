@@ -90,3 +90,13 @@ for _, key in ipairs(langs) do
     require('settings.loops').loops[key] = loops
 end
 
+------------------------------------- 自动运行 ----------------------------------
+
+for _, lang in ipairs(langs) do
+    require('settings.autocmd-by-filetype').cmds[lang] = function ()
+        vim.bo.makeprg = lang .. ' ' .. '%:p'
+        vim.cmd('silent write')
+        vim.cmd('make')
+    end
+end
+

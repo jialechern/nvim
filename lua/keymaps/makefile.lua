@@ -61,3 +61,11 @@ map('i', '<LEADER>eifndef', function () return
 'endif'                                         .. '<Esc>4kA'
 end, { expr = true, desc = "特殊分支语句, 用于判断某个变量是否未定义" })
 
+------------------------------- 自动运行 --------------------------------
+
+require('settings.autocmd-by-filetype').cmds['make'] = function ()
+    vim.bo.makeprg = 'make -f %:p'
+    vim.cmd('silent write')
+    vim.cmd('make')
+end
+
