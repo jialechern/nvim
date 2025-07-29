@@ -448,3 +448,9 @@ end
 
 require('settings.loops').loops['typst'] = loops
 
+------------------------------- 自动预览 --------------------------------
+
+require('settings.autocmd-by-filetype').cmds['typst'] = function ()
+    vim.cmd('silent TypstPreview')
+end
+

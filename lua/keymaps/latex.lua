@@ -80,3 +80,10 @@ map('i', '<LEADER>itemize', function () return
     '\\end{itemize}'                                            .. '<Esc>kA'
 end, { expr = true, desc = "itemize 环境" })
 
+------------------------------------- 自动编译 -------------------------------------
+
+require('settings.autocmd-by-filetype').cmds['tex'] = function ()
+    vim.cmd('silent write')
+    vim.cmd('silent !latexmk')
+end
+

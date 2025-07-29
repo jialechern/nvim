@@ -16,5 +16,5 @@ require('keymaps.symbols')
 require('keymaps.code-fold')
 
 -- 设置自动根据文件名导入对应的键盘映射
-require('keymaps.auto-load-by-filetype')
+require('keymaps.autoload-by-filetype')
 

@@ -78,3 +78,9 @@ map('i', _G.CoLeader .. 'C', function () return
 '```'                                       .. '<Esc>kA'
 end, { expr = true, desc = "行间代码块" })
 
+------------------------------------ 自动预览 ------------------------------------
+
+require('settings.autocmd-by-filetype').cmds['markdown'] = function ()
+    vim.cmd('silent MarkdownPreview')
+end
+

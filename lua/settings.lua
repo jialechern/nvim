@@ -4,5 +4,5 @@
 require('settings.base')
 
 -- 设置根据文件扩展名配置文件类型
-require('settings.auto-filetype-by-fileext')
+require('settings.autofiletype-by-fileext')
 

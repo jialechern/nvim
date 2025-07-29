@@ -256,3 +256,10 @@ map('i', '<LEADER>log', function () return
     'return logger'
 end, { expr = true, desc = "日志模块"})
 
+------------------------------ 自动解释运行 ------------------------------
+
+require('settings.autocmd-by-filetype').cmds['python'] = function ()
+    vim.cmd('silent write')
+    vim.cmd('silent !python3 %')
+end
+
