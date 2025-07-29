@@ -46,8 +46,9 @@ vim.api.nvim_create_autocmd('FileType', {
 
 vim.api.nvim_create_autocmd('FileType', {
     pattern = {
-        'bash',
+        'sh',
         'zsh',
+        'bash',
     },
     callback = function()
         require('keymaps.shell-base')
@@ -104,7 +105,7 @@ vim.api.nvim_create_autocmd('FileType', {
     pattern = { '*' },
     callback = function()
         local entry_point = require('utils.entry-point').GetEntryPoint()
-        local entry_key = require('settings.variables').entry_point
+        local entry_key = require('settings.variables.entry-points').entry_point
         if entry_point then
             map('i', '<LEADER>' .. entry_key, entry_point, { expr = true, desc = "程序入口点", })
         end
@@ -116,7 +117,7 @@ vim.api.nvim_create_autocmd('FileType', {
     pattern = { '*' },
     callback = function()
         local func = require('utils.functions').GetFunction()
-        local func_key = require('settings.variables').func_key
+        local func_key = require('settings.variables.functions').func_key
         if func then
             map('i', '<LEADER>' .. func_key, func, { expr = true, desc = "根据不同的程序类型加载相应的程序函数片段", })
         end
@@ -127,7 +128,7 @@ vim.api.nvim_create_autocmd('FileType', {
 vim.api.nvim_create_autocmd('FileType', {
     pattern = { '*' },
     callback = function()
-        local branchs = require('settings.variables').branch_keys
+        local branchs = require('settings.variables.branchs').branch_keys
         local GetBrach = require('utils.branchs').GetBrach
         for type, key in pairs(branchs) do
             local branch = GetBrach(type)
@@ -143,7 +144,7 @@ vim.api.nvim_create_autocmd('FileType', {
 vim.api.nvim_create_autocmd('FileType', {
     pattern = { '*' },
     callback = function()
-        local loops = require('settings.variables').loop_keys
+        local loops = require('settings.variables.loops').loop_keys
         local GetLoop = require('utils.loops').GetLoop
         for type, key in pairs(loops) do
             local loop = GetLoop(type)

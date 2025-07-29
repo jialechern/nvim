@@ -31,13 +31,13 @@ map('n', '$', 'L', { desc = "设置 $ 为跳转至末行" })
 
 -- 设置快速上下移动
 -- 载入快速移动的配置
-local FastMoveLines = require('settings.variables').FastMoveLines
+local fast_move_by_lines = require('settings.variables.fast-move').fast_move_by_lines
 map_by_modes({ 'n', 'x' }, 'J', function()
-    return FastMoveLines .. 'j'
+    return fast_move_by_lines .. 'j'
 end, { desc = "设置 J 为快速向下移动, 移动行数可在 init.lua 中设置", expr = true })
 
 map_by_modes({ 'n', 'x' }, 'K', function ()
-    return FastMoveLines .. 'k'
+    return fast_move_by_lines .. 'k'
 end, { desc = "设置 K 为快速向上移动, 移动行数可在 init.lua 中设置", expr = true })
 
 -- 设置快速退出快捷键

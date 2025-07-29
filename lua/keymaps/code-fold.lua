@@ -3,7 +3,7 @@
 
 -- 引入自定义工具函数
 local map_by_modes = require('utils.map').map_by_modes
-local fold_key = require('settings.variables').fold_key
+local fold_key = require('settings.variables.fold-codes').fold_key
 
 -- close fold
 map_by_modes({ 'n', 'x' }, '<' .. fold_key ..'-c>', 'zc', {  desc = "关闭当前光标所在的代码折叠" })
