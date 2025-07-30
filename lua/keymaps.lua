@@ -15,6 +15,9 @@ require('keymaps.symbols')
 -- 设置代码折叠快捷键
 require('keymaps.code-fold')
 
+-- 设置标签页操作快捷键
+require('keymaps.tabs')
+
 -- 设置自动根据文件名导入对应的键盘映射
 require('keymaps.autoload-by-filetype')
 
