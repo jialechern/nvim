@@ -15,6 +15,9 @@ require('keymaps.symbols')
 -- 设置代码折叠快捷键
 require('keymaps.code-fold')
 
+-- 设置分屏相关的快捷键
+require('keymaps.windows')
+
 -- 缓冲区操作快捷键
 require('keymaps.buffers')
 

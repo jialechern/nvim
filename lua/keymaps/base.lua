@@ -55,6 +55,10 @@ map('n', '<A-r>', function ()
     Run()
 end, { desc = "根据当前文件类型自动执行默认命令( 编译/预览/... )." })
 
+map('n', '<LEADER>sc', function ()
+    vim.cmd('set spell!')
+end, { desc = "切换拼写检查" })
+
 ----------------------------------- 设置跳转 -----------------------------------
 -- 跳转函数
 local function jump_to_next() return
@@ -70,92 +74,4 @@ map('i', '<C-l>', jump_to_next, { expr = true, desc = "使得光标跳转到下�
 map('i', '<C-c>', function ()
     vim.cmd('normal! mc:s/' .. _G.Next .. '//g\r`ca')
 end, { desc = "清除当前行中所有的跳转锚点" })
-
----------------------------------- 分屏设置 ----------------------------------
-
--- 基本分屏功能
-map('n', 'sk', function ()
-    vim.cmd('set nosplitbelow')
-    vim.cmd('split')
-end, { desc = "向上分屏" })
-
-map('n', 'sj', function ()
-    vim.cmd('set splitbelow')
-    vim.cmd('split')
-end, { desc = "向下分屏" })
-
-map('n', 'sh', function ()
-    vim.cmd('set nosplitright')
-    vim.cmd('vsplit')
-end, { desc = "向左分屏" })
-
-map('n', 'sl', function ()
-    vim.cmd('set splitright')
-    vim.cmd('vsplit')
-end, { desc = "向右分屏" })
-
--- 分屏时光标移动
-map('n', '<C-h>', function ()
-    vim.cmd('wincmd h')
-end, { desc = "分屏时光标左移" })
-
-map('n', '<C-l>', function ()
-    vim.cmd('wincmd l')
-end, { desc = "分屏时光标右移" })
-
-map('n', '<C-k>', function ()
-    vim.cmd('wincmd k')
-end, { desc = "分屏时光标上移" })
-
-map('n', '<C-j>', function ()
-    vim.cmd('wincmd j')
-end, { desc = "分屏时光标下移" })
-
--- 分屏边界控制
-map('n', '<C-Left>', function ()
-    vim.cmd('vertical resize -5')
-end, { desc = "纵向分屏分界线左移" })
-
-map('n', '<C-Right>', function ()
-    vim.cmd('vertical resize +5')
-end, { desc = "纵向分屏分界线右移" })
-
-map('n', '<C-Up>', function ()
-    vim.cmd('resize +5')
-end, { desc = "横向分屏分界线上移" })
-
-map('n', '<C-Down>', function ()
-    vim.cmd('resize -5')
-end, { desc = "横向分屏分界线下移" })
-
--- 分屏状态控制
-map('n', 'sV', function ()
-    vim.cmd('wincmd t')
-    vim.cmd('wincmd H')
-end, { desc = "更改横向分屏为纵向" })
-
-map('n', 'sH', function ()
-    vim.cmd('wincmd t')
-    vim.cmd('wincmd K')
-end, { desc = "更改纵向分屏为横向" })
-
-map('n', '<C-A-Up>', function ()
-    vim.cmd('wincmd K')
-end, { desc = "将当前分屏移至最上" })
-
-map('n', '<C-A-Down>', function ()
-    vim.cmd('wincmd J')
-end, { desc = "将当前分屏移至最下" })
-
-map('n', '<C-A-Left>', function ()
-    vim.cmd('wincmd H')
-end, { desc = "将当前分屏移至最左" })
-
-map('n', '<C-A-Right>', function ()
-    vim.cmd('wincmd L')
-end, { desc = "将当前分屏移至最右" })
-
-map('n', '<LEADER>sc', function ()
-    vim.cmd('set spell!')
-end, { desc = "切换拼写检查" })
 
