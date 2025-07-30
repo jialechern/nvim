@@ -4,7 +4,7 @@
 local module = {}
 
 -- 引入引导标签也控制的按键
-local tab_leader = _G.CoLeader
+local tab_leader = '\\'
 
 module.tab_leader = tab_leader
 

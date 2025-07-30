@@ -30,7 +30,7 @@ end
 branchs['if-else_if'] = function () return
 'if ' .. _G.CoLeader .. ' then'                 .. '<CR>' ..
         _G.Next                                 .. '<CR>' ..
-'elseif ' .. _G.Next                            .. '<CR>' ..
+'elseif ' .. _G.Next .. ' then'                 .. '<CR>' ..
         _G.Next                                 .. '<CR>' ..
 'end'                                           .. '<Esc>4k0f' .. _G.CoLeader .. 's'
 end
@@ -38,7 +38,7 @@ end
 branchs['if-else_if-else'] = function () return
 'if ' .. _G.CoLeader .. ' then'                 .. '<CR>' ..
         _G.Next                                 .. '<CR>' ..
-'elseif ' .. _G.Next                            .. '<CR>' ..
+'elseif ' .. _G.Next .. ' then'                 .. '<CR>' ..
         _G.Next                                 .. '<CR>' ..
 'else'                                          .. '<CR>' ..
         _G.Next                                 .. '<CR>' ..
