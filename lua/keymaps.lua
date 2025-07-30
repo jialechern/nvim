@@ -15,6 +15,9 @@ require('keymaps.symbols')
 -- 设置代码折叠快捷键
 require('keymaps.code-fold')
 
+-- 缓冲区操作快捷键
+require('keymaps.buffers')
+
 -- 设置标签页操作快捷键
 require('keymaps.tabs')
 
