@@ -21,6 +21,12 @@ map_by_modes({ 'i', 'v', 'x' }, '<C-_>', function ()
     vim.cmd('stopinsert')
 end, { desc = "一个更加常用的进入 normal 模式的快捷键" })
 
+-- 将按实际行跳转与按文本行跳转对调
+map('n', 'j', 'gj', { desc = "将 j 映射为按屏幕行跳转" })
+map('n', 'k', 'gk', { desc = "将 k 映射为按屏幕行跳转" })
+map('n', 'gj', 'j', { desc = "将 gj 映射为按实际行跳转" })
+map('n', 'gk', 'k', { desc = "将 gk 映射为按实际行跳转" })
+
 -- 设置 noremal 模式快速跳转
 map_by_modes({ 'n', 'x' }, 'H', '^', { desc = "设置 H 为跳转到当前行第一个有效字符" })
 map('n', '^', 'H', { desc = "设置 ^ 为跳转至首行" })
@@ -74,4 +80,14 @@ map('i', '<C-l>', jump_to_next, { expr = true, desc = "使得光标跳转到下�
 map('i', '<C-c>', function ()
     vim.cmd('normal! mc:s/' .. _G.Next .. '//g\r`ca')
 end, { desc = "清除当前行中所有的跳转锚点" })
+
+------------------------------------ 其它映射 -----------------------------------
+
+map('c', _G.CoLeader .. '%%', function ()
+    local file_path = vim.fn.expand('%:h')
+    if file_path == '' then
+        return '%%'
+    end
+    return file_path .. '/'
+end, { expr = true, desc = "在命令行中插入当前文件的路径" })
 
