@@ -1,7 +1,24 @@
 -- lsp.lua
 -- 这里是 LSP 相关的配置
 
-vim.lsp.enable 'lua_ls'
+local module = {}
+
+-- 所需的 lsp 服务器列表
+local require_servers = {
+    'lua_ls',
+    'rust_analyzer',
+}
+
+module.require_servers = require_servers
+
+-- 自动下载和安装 lsp 服务器
+-- local install_server = require('utils.lsp').install_server
+-- for _, server in ipairs(require_servers) do
+--     install_server(server)
+-- end
+
+-- 加载 LSP 配置
+vim.lsp.enable(require_servers)
 
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
@@ -75,7 +92,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
         if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
             map('n', '<LEADER>th', function()
-                vim.lsp.inlay_hint.enable( not vim.lsp.inlay_hint.is_enabled() { buffnr = event.buf } )
+                vim.lsp.inlay_hint.enable( not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf } )
             end, { buffer = event.buf, desc = "开/关 参数提示", })
         end
 
@@ -105,7 +122,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
             group = vim.api.nvim_create_augroup('kickstart-lsp-detach', { clear = false }),
             callback = function(event2)
                 vim.lsp.buf.clear_references()
-                vim.api.nvim_clear_autocmds { 
+                vim.api.nvim_clear_autocmds {
                     group = 'kickstart-lsp-highlight',
                     buffer = event2.buf,
                 }
@@ -114,4 +131,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     end,
 })
+
+return module
 

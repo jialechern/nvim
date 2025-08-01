@@ -2,8 +2,6 @@
 
 local module = {}
 
-require('utils.lsp').install_server('lua-language-server')
-
 module.cmd = { 'lua-language-server' }
 module.filetypes = { 'lua' }
 module.root_markers = {
