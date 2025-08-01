@@ -3,6 +3,9 @@
 -- 导入基本快捷键设置
 require('keymaps.base')
 
+-- 配置 lsp
+require('keymaps.lsp')
+
 -- 设置代码块
 require('keymaps.code-block')
 
