@@ -85,7 +85,7 @@ end, { desc = "清除当前行中所有的跳转锚点" })
 
 map('c', _G.CoLeader .. '%%', function ()
     local file_path = vim.fn.expand('%:h')
-    local sep = package.config:sub(1,1)
+    local sep = require('utils.path').path_prefix
     if file_path == '' then
         return '%%'
     end

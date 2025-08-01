@@ -11,7 +11,8 @@ else
 end
 
 -- 指定插件位置，不存在则clone到本地
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+local sep = require('utils.path').path_prefix
+local lazypath = vim.fn.stdpath('data') .. sep .. 'lazy' .. sep .. 'lazy.nvim'
 if LoadPlugins and vim.loop.fs_stat(lazypath) then
   vim.fn.system({
     "git",
