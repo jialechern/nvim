@@ -85,9 +85,10 @@ end, { desc = "清除当前行中所有的跳转锚点" })
 
 map('c', _G.CoLeader .. '%%', function ()
     local file_path = vim.fn.expand('%:h')
+    local sep = package.config:sub(1,1)
     if file_path == '' then
         return '%%'
     end
-    return file_path .. '/'
+    return file_path .. sep
 end, { expr = true, desc = "在命令行中插入当前文件的路径" })
 
