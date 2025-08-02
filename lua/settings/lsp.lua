@@ -19,18 +19,24 @@ local require_lsps = {
     -- <lang> = { '<lang_lsp_config>', '<lsp_server>' }
     lua = { 'lua_ls', 'lua-language-server' },
     rust = { 'rust_analyzer', 'rust-analyzer' },
+    python = { 'pyright', 'pyright' },
 }
 
 module.require_lsps = require_lsps
 
 -- 自动检查下载 LSP 服务器
-local lsp = require_lsps[vim.bo.filetype]
-if lsp then
-    local server = lsp[2]
-    if not is_installd(server) then
-        vim.cmd('MasonInstall ' .. server)
-    end
-end
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { '*' },
+    callback = function()
+        local lsp = require_lsps[vim.bo.filetype]
+        if lsp then
+            local server = lsp[2]
+            if not is_installd(server) then
+                require('utils.lsp').install_server(server)
+            end
+        end
+    end,
+})
 
 -- 加载 LSP 配置
 vim.lsp.enable(get_configs(require_lsps))
