@@ -33,9 +33,6 @@ if LoadPlugins then
     require("lazy").setup('plugins')
 end
 
--- 启用 lsp
-require('settings.lsp')
-
 -- 一般设置
 require('settings')
 

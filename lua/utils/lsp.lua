@@ -2,7 +2,7 @@
 -- 存放 LSP 相关工具
 
 -- 引入相关模块
-local registry = require("mason-registry")
+local registry = require('mason-registry')
 
 local module = {}
 

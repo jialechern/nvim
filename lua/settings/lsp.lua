@@ -3,22 +3,37 @@
 
 local module = {}
 
+-- 自定义工具函数
+local is_installd = require('utils.lsp').is_installed
+
+local function get_configs(t)
+    local arr = {}
+    for _, v in pairs(t) do
+        arr[#arr + 1] = v[1]
+    end
+    return arr
+end
+
 -- 所需的 lsp 服务器列表
-local require_servers = {
-    'lua_ls',
-    'rust_analyzer',
+local require_lsps = {
+    -- <lang> = { '<lang_lsp_config>', '<lsp_server>' }
+    lua = { 'lua_ls', 'lua-language-server' },
+    rust = { 'rust_analyzer', 'rust-analyzer' },
 }
 
-module.require_servers = require_servers
+module.require_lsps = require_lsps
 
--- 自动下载和安装 lsp 服务器
--- local install_server = require('utils.lsp').install_server
--- for _, server in ipairs(require_servers) do
---     install_server(server)
--- end
+-- 自动检查下载 LSP 服务器
+local lsp = require_lsps[vim.bo.filetype]
+if lsp then
+    local server = lsp[2]
+    if not is_installd(server) then
+        require('utils.lsp').install_server(lsp_server)
+    end
+end
 
 -- 加载 LSP 配置
-vim.lsp.enable(require_servers)
+vim.lsp.enable(get_configs(require_lsps))
 
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
