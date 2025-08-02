@@ -9,6 +9,12 @@ return {
     dependencies = { 'xzbdmw/colorful-menu.nvim', opts = {}, },
     opts = {
 
+        -- 禁用指定文件类型的补全
+        enabled = function() return not vim.tbl_contains({
+            -- 'lua',
+            -- 'markdown',
+        }, vim.bo.filetype) end,
+
         -- 代码提示时自动显示文档
         completion = {
 
@@ -35,12 +41,33 @@ return {
                     },
                 },
             },
+
+            keyword = {
+                -- 使用以整个单词为单位的补全
+                range = 'full',
+            },
+
+            -- 关闭与选择与自动插入
+            list = { selection = { preselect = false, auto_insert = false }, },
         },
 
         -- 重定义默认快捷键
         keymap = {
+            preset = 'none',
+            -- 开启/关闭补全菜单
+            ['<C-o>'] = { 'show', 'show_documentation', 'hide_documentation' },
+
             ['<C-p>'] = { 'scroll_documentation_up', 'fallback' },
             ['<C-n>'] = { 'scroll_documentation_down', 'fallback' },
+
+            -- ['<C-e>'] = { 'hide' },
+            ['<CR>'] = { 'accept', 'fallback' },
+
+            ['<C-k>'] = { 'select_prev', 'fallback' },
+            ['<C-j>'] = { 'select_next', 'fallback' },
+
+            ['<C-d>'] = { 'snippet_forward', 'fallback' },
+            ['<C-u>'] = { 'snippet_backward', 'fallback' },
         },
 
         -- 自动给出函数签名提示
