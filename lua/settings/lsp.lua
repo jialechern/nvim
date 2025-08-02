@@ -28,7 +28,7 @@ local lsp = require_lsps[vim.bo.filetype]
 if lsp then
     local server = lsp[2]
     if not is_installd(server) then
-        require('utils.lsp').install_server(lsp_server)
+        vim.cmd('MasonInstall ' .. server)
     end
 end
 
