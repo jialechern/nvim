@@ -3,7 +3,7 @@
 
 local module = {}
 
-local buffer_leader = ';'
+local buffer_leader = '\\'
 module.buffer_leader = buffer_leader
 
 local function get_key(v)

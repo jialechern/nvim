@@ -78,7 +78,22 @@ return {
         -- neovim 命令行模式自动补全
         cmdline = {
             completion = {
-                menu = { auto_show = true },
+
+                -- 默认启用补全
+                menu = { auto_show = false },
+
+                -- 幽灵文本提示
+                ghost_text = { enabled = true },
+            },
+
+            -- 继承默认快捷键
+            keymap = {
+                preset = 'inherit',
+
+                -- 禁用 Tab 键的默认行为
+                ['<Tab>'] = false,
+
+                ['<CR>'] = { 'accept_and_enter', 'fallback' },
             },
         },
 
