@@ -49,6 +49,7 @@ for _, filetype in ipairs({
     'rust',
     'typst',
     'python',
+    'sshconfig',
     'javascript',
 }) do
     autocmd_by_pattern(
