@@ -10,29 +10,29 @@ module.tab_leader = tab_leader
 
 local function get_key(v)
     if v == 'edit' then
-        return tab_leader .. 'e'
+        return tab_leader .. 'E'
     elseif v == 'list' then
-        return tab_leader .. 's'
+        return tab_leader .. 'S'
     elseif v == 'new' then
-        return tab_leader .. 'c'
+        return tab_leader .. 'C'
     elseif v == 'close' then
-        return tab_leader .. 'x'
+        return tab_leader .. 'X'
     elseif v == 'only' then
-        return tab_leader .. 'o'
+        return tab_leader .. 'O'
     elseif v == 'T' then
-        return tab_leader .. 't'
+        return tab_leader .. 'T'
     elseif v == 'next' then
-        return tab_leader .. 'n'
+        return tab_leader .. 'N'
     elseif v == 'previous' then
-        return tab_leader .. 'p'
+        return tab_leader .. 'P'
     elseif v == 'goto' then
-        return tab_leader .. 'g'
+        return tab_leader .. 'G'
     elseif v == 'move' then
-        return tab_leader .. 'm'
+        return tab_leader .. 'M'
     elseif v == 'first' then
-        return tab_leader .. 'f'
+        return tab_leader .. 'F'
     elseif v == 'last' then
-        return tab_leader .. 'l'
+        return tab_leader .. 'L'
     else
         return nil
     end

@@ -1,5 +1,5 @@
--- base.lua
--- 基础按键映射
+--- base.lua
+--- 基础按键映射
 
 -- 引入自定义工具函数
 local map = require('utils.map').map
@@ -7,7 +7,7 @@ local map_by_modes = require('utils.map').map_by_modes
 
 ------------------------------ 设置基本按键映射 ----------------------------
 
--- 设置领导键转译
+--- 设置领导键转译
 -- 转译 CoLeader
 map('i', _G.CoLeader .. _G.End, _G.CoLeader, { desc = "将副领导键转义为自身" })
 map('i', _G.CoLeader .. _G.CoLeader .. _G.End, _G.CoLeader .. _G.CoLeader, { desc = "将副领导键转义为自身" })
@@ -35,7 +35,7 @@ map('n', '^', 'H', { desc = "设置 ^ 为跳转至首行" })
 map_by_modes({ 'n', 'x' }, 'L', '$', { desc = "设置 L 为跳转到当前行最后一个字符" })
 map('n', '$', 'L', { desc = "设置 $ 为跳转至末行" })
 
--- 设置快速上下移动
+--- 设置快速上下移动
 -- 载入快速移动的配置
 local fast_move_by_lines = require('settings.variables.fast-move').fast_move_by_lines
 map_by_modes({ 'n', 'x' }, 'J', function()

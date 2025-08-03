@@ -43,6 +43,7 @@ autocmd_by_pattern(
 
 for _, filetype in ipairs({
     'c',
+    'lua',
     'toml',
     'fish',
     'rust',

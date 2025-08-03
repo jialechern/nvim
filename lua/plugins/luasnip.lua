@@ -65,7 +65,7 @@ return {
             end
         end, { silent = true, desc = "LuaSnip Jump Back" })
 
-        -- 选择节点内的选项(choiceNode)时用 <C-E> 切换
+        -- 选择节点内的选项(choiceNode)时用 <C-\> 切换
         map('i', '<C-\\>', function()
             if luasnip.choice_active() then
                 luasnip.change_choice(1)

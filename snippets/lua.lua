@@ -23,7 +23,7 @@ module[#module+1] = s(entry_point, {
 local func_key = require('settings.variables.functions').func_key
 module[#module+1] = s(func_key, {
     t('function '), i(1, 'name'), t('('), i(2), t({ ')', '' }),
-    i(0),
+    t('\t'), i(0),
     t({ '', 'end' }),
     })
 
@@ -66,7 +66,7 @@ module[#module+1] = s(branch_keys['if-else_if-else'], {
 local loop_keys = require('settings.variables.loops').loop_keys
 
 module[#module+1] = s(loop_keys['for'], {
-    t('for '), i(1, 'i'), t(' in '), i(2, 'iterable'), t({ ' do', '' }),
+    t('for '), i(1, 'elem'), t(' in '), i(2, 'iterable'), t({ ' do', '' }),
     t('\t'), i(0),
     t({ '', 'end' }),
     })
@@ -89,5 +89,6 @@ module[#module+1] = s(loop_keys['do-while'], {
     t({ '', 'until '}), i(1, 'condition'), t({''}),
     })
 
+-- 模块返回
 return module
 
