@@ -1,5 +1,5 @@
--- lua.lua
--- lua 的 snipets
+--- lua.lua
+--- lua 的 snipets
 
 -- 基本引入
 local luasnip = require('luasnip')
@@ -13,13 +13,13 @@ local i = luasnip.insert_node
 -- 模块定义
 local module = {}
 
--- 程序入口点
+--- 程序入口点
 local entry_point = require('settings.variables.entry-points').entry_point
 module[#module+1] = s(entry_point, {
     t('#!/usr/bin/env lua'),
     })
 
--- 函数模板
+--- 函数模板
 local func_key = require('settings.variables.functions').func_key
 module[#module+1] = s(func_key, {
     t('function '), i(1, 'name'), t('('), i(2), t({ ')', '' }),
@@ -27,7 +27,7 @@ module[#module+1] = s(func_key, {
     t({ '', 'end' }),
     })
 
--- 分支型语句
+--- 分支型语句
 local branch_keys = require('settings.variables.branchs').branch_keys
 
 module[#module+1] = s(branch_keys['if'], {
@@ -62,7 +62,7 @@ module[#module+1] = s(branch_keys['if-else_if-else'], {
     t({ '', 'end' }),
     })
 
--- 循环型语句
+--- 循环型语句
 local loop_keys = require('settings.variables.loops').loop_keys
 
 module[#module+1] = s(loop_keys['for'], {
