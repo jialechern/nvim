@@ -74,8 +74,6 @@ end
 -- 跳转快捷键
 map('i', '<LEADER>;', jump_to_next, { expr = true, desc = "使得光标跳转到下一个锚点" })
 map('i', '<LEADER>:', jump_to_next, { expr = true, desc = "使得光标跳转到下一个锚点" })
-map('i', _G.CoLeader .. ':', jump_to_next, { expr = true, desc = "使得光标跳转到下一个锚点" })
-map('i', '<C-l>', jump_to_next, { expr = true, desc = "使得光标跳转到下一个锚点" })
 
 map('i', '<C-c>', function ()
     vim.cmd('normal! mc:s/' .. _G.Next .. '//g\r`ca')

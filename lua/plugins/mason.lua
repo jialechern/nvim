@@ -1,6 +1,6 @@
 -- mason.lua
 return {
-    "williamboman/mason.nvim",
+    'williamboman/mason.nvim',
     event = { 'BufReadPost', 'BufNewFile', 'VimEnter' },
     opts = {},
 }

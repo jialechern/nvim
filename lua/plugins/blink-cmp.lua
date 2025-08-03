@@ -6,7 +6,11 @@ return {
     version = '1.*',
     -- build = 'cargo build --release',
     -- 增加命令补全菜单栏的语法高亮插件
-    dependencies = { 'xzbdmw/colorful-menu.nvim', opts = {}, },
+    dependencies = {
+        'xzbdmw/colorful-menu.nvim',
+        dependencies = { 'L3MON4D3/LuaSnip', version = 'v2.*' },
+        opts = {},
+    },
     opts = {
 
         -- 禁用指定文件类型的补全
@@ -97,8 +101,14 @@ return {
             },
         },
 
+        -- 配置 luasnip 为默认代码片段补全引擎
+        snippets = { preset = 'luasnip' },
+
         -- 提高自定义 snippet 的权重
         sources = {
+            -- 默认补全源
+            default = { 'lsp', 'path', 'snippets', 'buffer' },
+            -- 配置 snippets 的权重
             providers = {
                 snippets = { score_offset = 1000, },
             },

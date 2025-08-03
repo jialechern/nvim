@@ -1,6 +1,6 @@
 -- markdown-preview.lua
 return {
-    "iamcco/markdown-preview.nvim",
+    'iamcco/markdown-preview.nvim',
     build = function()
         -- 跨平台构建命令，带错误处理
         local build_cmd = [[cd app && npm install || yarn install]]
