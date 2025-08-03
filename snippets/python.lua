@@ -13,7 +13,7 @@ local c = luasnip.choice_node
 --- 模块定义
 local module = {}
 
--- 基本代码片段
+--- 基本代码片段
 -- module[#module+1] = s({
 --     trig      = '(_+)',
 --     regTrig   = true,
