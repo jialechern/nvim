@@ -107,7 +107,7 @@ return {
         -- 提高自定义 snippet 的权重
         sources = {
             -- 默认补全源
-            default = { 'lsp', 'path', 'snippets', 'buffer' },
+            default = { 'lsp', 'snippets', 'path', 'buffer' },
             -- 配置 snippets 的权重
             providers = {
                 snippets = { score_offset = 1000, },

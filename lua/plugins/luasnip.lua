@@ -28,11 +28,20 @@ return {
         })
 
         -- 加载 VSCode 社区 snippets
-        require('luasnip.loaders.from_vscode').lazy_load()
+        -- require('luasnip.loaders.from_vscode').lazy_load()
 
         -- 加载 LuaSnip 自定义 snippets
-        require("luasnip.loaders.from_lua").lazy_load({
-            paths = { vim.fn.stdpath("config") .. "/snippets" },
+        -- require("luasnip.loaders.from_lua").lazy_load({
+            -- paths = { vim.fn.stdpath("config") .. "/snippets" },
+        -- })
+
+        vim.api.nvim_create_autocmd("FileType", {
+            pattern = {'*'},
+            callback = function ()
+                require("luasnip.loaders.from_lua").lazy_load({
+                    paths = { vim.fn.stdpath("config") .. "/snippets" },
+                })
+            end,
         })
 
         -- 你也可以指定路径

@@ -31,6 +31,9 @@ require('settings.init-symbols')
 -- 设置插件管理器: 使用 Lazy.nvim 下载 CONFIG_ROOT/lua/plugins/ 下定义的插件
 if LoadPlugins then
     require('lazy').setup('plugins')
+
+    -- 加载 lsp server 管理器配置
+    require('settings.mason')
 end
 
 -- 一般设置
