@@ -15,6 +15,14 @@ autocmd_by_pattern(
     end
 )
 
+autocmd_by_pattern(
+    'tex',
+    function ()
+        require('keymaps.math')
+        require('keymaps.latex')
+    end
+)
+
 autocmd_by_pattern({
         'sh',
         'zsh',
@@ -36,7 +44,6 @@ autocmd_by_pattern(
 for _, filetype in ipairs({
     'c',
     'lua',
-    'tex',
     'toml',
     'fish',
     'rust',

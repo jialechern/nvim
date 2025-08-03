@@ -13,6 +13,14 @@ local require_lsps = {
     lua = { 'lua_ls', 'lua-language-server' },
     rust = { 'rust_analyzer', 'rust-analyzer' },
     python = { 'pyright', 'pyright' },
+    typst = { 'typst_lsp', 'typst-lsp' },
+    tex = { 'texlab', 'texlab' },
+    c = { 'clangd', 'clangd' },
+    cpp = { 'clangd', 'clangd' },
+    typescript = { 'ts_ls', 'typescript-language-server' },
+    javascript = { 'ts_ls', 'typescript-language-server' },
+    markdown = { 'marksman', 'marksman' },
+    toml = { 'taplo', 'taplo' },
 }
 
 -- 获取指定的 LSP 服务器包
