@@ -66,7 +66,7 @@ return {
             ['<C-n>'] = { 'scroll_documentation_down', 'fallback' },
 
             -- 关闭补全菜单
-            ['<C-x>'] = { 'hide', 'fallback' },
+            ['<C-x>'] = { 'hide', },
 
             -- 接受补全
             ['<CR>'] = { 'accept', 'fallback' },

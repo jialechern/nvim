@@ -40,18 +40,18 @@ return {
         -- require('luasnip.loaders.from_vscode').lazy_load()
 
         -- 加载 LuaSnip 自定义 snippets
-        -- require("luasnip.loaders.from_lua").lazy_load({
-            -- paths = { vim.fn.stdpath("config") .. "/snippets" },
-        -- })
-
-        vim.api.nvim_create_autocmd("FileType", {
-            pattern = {'*'},
-            callback = function ()
-                require("luasnip.loaders.from_lua").lazy_load({
-                    paths = { vim.fn.stdpath("config") .. "/snippets" },
-                })
-            end,
+        require('luasnip.loaders.from_lua').load({
+            paths = { vim.fn.stdpath('config') .. '/snippets' },
         })
+
+        -- vim.api.nvim_create_autocmd("FileType", {
+            -- pattern = {'*'},
+            -- callback = function ()
+                -- require("luasnip.loaders.from_lua").lazy_load({
+                    -- paths = { vim.fn.stdpath("config") .. "/snippets" },
+                -- })
+            -- end,
+        -- })
 
         -- 你也可以指定路径
         -- require("luasnip.loaders.from_vscode").lazy_load({
@@ -81,7 +81,7 @@ return {
             end
         end, { silent = true, desc = "LuaSnip Change Choice" })
 
-      -- 可选: 清理历史, 以免内存占用过大
-        vim.cmd([[autocmd InsertLeave * silent! lua require("luasnip").cleanup()]])
+        -- 可选: 清理历史, 以免内存占用过大
+        -- vim.cmd([[autocmd InsertLeave * silent! lua require("luasnip").cleanup()]])
     end,
 }
