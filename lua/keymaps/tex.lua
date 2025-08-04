@@ -1,14 +1,14 @@
---- lua.lua
---- 用于配置 lua 语言的快捷键映射
+--- tex.lua
+--- 用于配置 tex 语言的快捷键映射
 
 -- 导入自定义的工具函数以及需要的符号
 local map = require('utils.map').map
 local autocmd_key = require('settings.variables.auto-run').autocmd_key
 
--- 自动解释运行
+--- 自动编译
 map('n', autocmd_key, function ()
-    vim.cmd('set makeprg=lua\\ %')
+    vim.bo.makeprg = 'latexmk'
     vim.cmd('silent write')
     vim.cmd('make')
-end, { desc = '运行 lua 语言文件' })
+end, { desc = '编译 tex 语言文件' })
 

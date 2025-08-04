@@ -55,12 +55,7 @@ map('n', '<C-S>', function ()
     vim.cmd('wq')
 end, { desc = "保存退出" })
 
--- 定义根据文件类型自动 编译/运行/预览... 的键盘映射
-map('n', '<A-r>', function ()
-    local Run = require('utils.autocmd-by-filetype').Run
-    Run()
-end, { desc = "根据当前文件类型自动执行默认命令( 编译/预览/... )." })
-
+-- 拼写检查
 map('n', '<LEADER>sc', function ()
     vim.cmd('set spell!')
 end, { desc = "切换拼写检查" })
