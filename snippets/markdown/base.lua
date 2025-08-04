@@ -1,0 +1,201 @@
+--- markdown
+--- markdown 的 base snipets
+
+-- 基本引入
+local luasnip = require('luasnip')
+
+-- 自定义 snippet(Lua 方式)
+local s = luasnip.snippet
+local t = luasnip.text_node
+local i = luasnip.insert_node
+local c = luasnip.choice_node
+-- local d  = luasnip.dynamic_node
+-- local sn = luasnip.snippet_node
+
+-- 模块定义
+local module = {}
+
+--- 字体控制
+-- 加粗
+module[#module+1] = s({
+    trig = 'bold',
+    wordTrig  = true,
+    regTrig   = false,
+    -- snippetType = 'autosnippet',
+}, {
+        t('*'), i(0, 'bold-text'), t('*'),
+})
+
+-- 删除线
+module[#module+1] = s({
+    trig = 'strike',
+    wordTrig  = true,
+    regTrig   = false,
+    -- snippetType = 'autosnippet',
+}, {
+        t('~~'), i(0, 'strike-text'), t('~~'),
+})
+
+-- 斜体
+module[#module+1] = s({
+    trig = 'italic',
+    wordTrig  = true,
+    regTrig   = false,
+    -- snippetType = 'autosnippet',
+}, {
+        t('__'), i(0, 'italic-text'), t('__'),
+})
+
+-- 加粗斜体
+module[#module+1] = s({
+    trig = 'bold-italic',
+    wordTrig  = true,
+    regTrig   = false,
+    -- snippetType = 'autosnippet',
+}, {
+        t('***'), i(0, 'bold-italic-text'), t('***'),
+})
+
+--- 文本控制
+
+-- 加粗斜体
+module[#module+1] = s({
+    trig = 'new-line',
+    wordTrig  = true,
+    regTrig   = false,
+    -- snippetType = 'autosnippet',
+}, {
+        t({'', ''}), t('<br>'), t({'', ''}),
+})
+
+-- 段落
+module[#module+1] = s({
+    trig = 'new-paragraph',
+    wordTrig  = true,
+    regTrig   = false,
+    -- snippetType = 'autosnippet',
+}, {
+        t('<p>'), i(0, 'paragraph-text'), t('</p>'),
+})
+
+-- 引用
+module[#module+1] = s({
+    trig = 'reference',
+    wordTrig  = true,
+    regTrig   = false,
+    -- snippetType = 'autosnippet',
+}, {
+        t('> '), i(0, 'ref-text')
+})
+
+-- 链接1
+module[#module+1] = s({
+    trig = 'link',
+    wordTrig  = true,
+    regTrig   = false,
+    -- snippetType = 'autosnippet',
+}, {
+        t('['), i(1, 'link-text'), t(']('), i(2, 'link-url'), t(')'),
+        i(0),
+})
+
+-- 链接1
+module[#module+1] = s({
+    trig = '@',
+    wordTrig  = true,
+    regTrig   = false,
+    -- snippetType = 'autosnippet',
+}, {
+        t('<'), i(1, 'link-text'), t('>'),
+        i(0),
+})
+
+-- 图片
+module[#module+1] = s({
+    trig = 'img',
+    wordTrig  = true,
+    regTrig   = false,
+    -- snippetType = 'autosnippet',
+}, {
+        t('!['), i(1, 'image-text'), t(']('), i(2, 'image-url'), t(')'),
+        i(0),
+})
+
+-- 页面分隔线
+module[#module+1] = s({
+    trig = 'page-split-line',
+    wordTrig  = true,
+    regTrig   = false,
+    -- snippetType = 'autosnippet',
+}, {
+        t({'---', ''}),
+        i(0),
+})
+
+--- 标题
+-- 一级标题
+module[#module+1] = s({
+    trig = 'head1',
+    wordTrig  = true,
+    regTrig   = false,
+    -- snippetType = 'autosnippet',
+}, {
+        t('# '),
+})
+
+-- 二级标题
+module[#module+1] = s({
+    trig = 'head2',
+    wordTrig  = true,
+    regTrig   = false,
+    -- snippetType = 'autosnippet',
+}, {
+        t('## '),
+})
+
+-- 三级标题
+module[#module+1] = s({
+    trig = 'head3',
+    wordTrig  = true,
+    regTrig   = false,
+    -- snippetType = 'autosnippet',
+}, {
+        t('### '),
+})
+
+-- 三级标题
+module[#module+1] = s({
+    trig = 'head4',
+    wordTrig  = true,
+    regTrig   = false,
+    -- snippetType = 'autosnippet',
+}, {
+        t('#### '),
+})
+
+--- 代码块
+-- 行内代码块
+module[#module+1] = s({
+    trig = 'code',
+    wordTrig  = true,
+    regTrig   = false,
+    -- snippetType = 'autosnippet',
+}, {
+        t('`'), i(0, 'inline-code'), t('`'),
+})
+
+-- 行间代码块
+module[#module+1] = s({
+    trig = 'code-block',
+    wordTrig  = true,
+    regTrig   = false,
+    -- snippetType = 'autosnippet',
+}, {
+        t('```'), i(1, 'language'), t({'', ''}),
+        i(0, 'code-block-text'), t({'', '```'}),
+})
+
+
+-- 模块返回
+return module
+
