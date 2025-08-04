@@ -18,6 +18,8 @@ local module = {}
 --- 日志处理
 module[#module+1] = s({
     trig = 'log',
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
     t({'import logging', '', ''}),

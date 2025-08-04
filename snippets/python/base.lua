@@ -18,6 +18,8 @@ local module = {}
 --- 魔法变量
 module[#module+1] = s({
     trig = '__',
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
 }, {
     t('__'), i(1, 'magic'), t('__'), i(0),
@@ -26,6 +28,8 @@ module[#module+1] = s({
 --- 脚本初始化
 module[#module+1] = s({
     trig = 'script',
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
     t('#!/usr/bin/env python3'),
@@ -34,6 +38,8 @@ module[#module+1] = s({
 --- 打印
 module[#module+1] = s({
     trig = 'print',
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
     t('print('), i(1, 'message'), t(')'), i(0),
@@ -42,6 +48,8 @@ module[#module+1] = s({
 --- 长字符串
 module[#module+1] = s({
     trig = 'str',
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
     t('\'\'\''), i(1, 'message'), t('\'\'\''), i(0),
@@ -49,6 +57,8 @@ module[#module+1] = s({
 
 module[#module+1] = s({
     trig = 'string',
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
     t('\"\"\"'), i(1, 'message'), t('\"\"\"'), i(0),

@@ -18,6 +18,8 @@ local module = {}
 --- 解析命令行输入
 module[#module+1] = s({
     trig = 'argparse',
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
     t({'import argparse', '', '', ''}),
@@ -50,6 +52,8 @@ module[#module+1] = s({
 --- 调用外部命令
 module[#module+1] = s({
     trig = 'run',
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
     t({'import subprocess',

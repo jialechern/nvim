@@ -23,6 +23,8 @@ module[#module+1] = s(branch_keys['if'], {
 
 module[#module+1] = s({
     trig = branch_keys['if-else'],
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
     t('if ('), i(1, 'condition'), t(') {'),
@@ -34,6 +36,8 @@ module[#module+1] = s({
 
 module[#module+1] = s({
     trig = branch_keys['if-else_if'],
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
     t('if ('), i(1, 'condition1'), t(') {'),
@@ -45,6 +49,8 @@ module[#module+1] = s({
 
 module[#module+1] = s({
     trig = branch_keys['if-else_if-else'],
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
     t('if ('), i(1, 'condition1'), t(') {'),
@@ -58,6 +64,8 @@ module[#module+1] = s({
 
 module[#module+1] = s({
     trig = branch_keys['switch'],
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
     t('switch ('), i(1, 'expr'), t({') {', ''}),

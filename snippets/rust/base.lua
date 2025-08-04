@@ -19,6 +19,8 @@ local module = {}
 --- 匿名函数
 module[#module+1] = s({
     trig = '|',
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
     t('|'), i(1, 'args'), t('|'), i(0),
@@ -27,6 +29,8 @@ module[#module+1] = s({
 --- 打印函数
 module[#module+1] = s({
     trig = 'println',
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
     t('println!('), i(0, 'fmt'), t(');'),
@@ -35,6 +39,8 @@ module[#module+1] = s({
 -- 打印函数
 module[#module+1] = s({
     trig = 'println',
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
     t('println!('), i(0, 'fmt'), t(');'),

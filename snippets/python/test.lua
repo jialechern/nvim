@@ -18,6 +18,8 @@ local module = {}
 --- 单元测试测试类
 module[#module+1] = s({
     trig = 'test',
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
     t({'# 单元测试初始化',

@@ -19,6 +19,8 @@ local func_key = require('settings.variables.functions').func_key
 
 module[#module+1] = s({
     trig = func_key,
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
     i(1, 'ret-type'), t(' '), i(2, 'func-name'), t('('), i(3, 'args'), t({') {', ''}),

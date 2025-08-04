@@ -17,6 +17,8 @@ local module = {}
 --- 测试模块
 module[#module+1] = s({
     trig = 'test',
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
     t({'#[cfg(test)]', ''}),

@@ -18,6 +18,8 @@ local module = {}
 local entry_point = require('settings.variables.entry-points').entry_point
 module[#module+1] = s({
     trig = entry_point,
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
     t('#!/usr/bin/env lua'),

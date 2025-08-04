@@ -18,6 +18,8 @@ local module = {}
 --- 严格模式
 module[#module+1] = s({
     trig = 'use-strict',
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
 }, {
     t('\'use strict\';'),
@@ -26,6 +28,8 @@ module[#module+1] = s({
 --- 打印至终端
 module[#module+1] = s({
     trig = 'print',
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
 }, {
         t('console.log('), i(0, 'message'), t(');'),
@@ -34,6 +38,8 @@ module[#module+1] = s({
 --- 模板字符串
 module[#module+1] = s({
     trig = 'fmt-string',
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
 }, {
     t('${'), i(1, 'content'), t('}'), i(0),

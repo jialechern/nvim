@@ -17,6 +17,8 @@ local module = {}
 
 -- module[#module+1] = s({
 --     trig = 'module-math',
+--     wordTrig  = true,
+--     regTrig   = false,
 --     -- snippetType = 'autosnippet',
 -- }, {
 -- })

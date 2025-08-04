@@ -19,6 +19,8 @@ local loop_keys = require('settings.variables.loops').loop_keys
 
 module[#module+1] = s({
     trig = loop_keys['for'],
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
     t('for (int '), i(1, 'loop-var'), t('; '), i(2, 'loop-flag'), t('; '), i(3, 'loop-expr'), t(') {'),
@@ -28,6 +30,8 @@ module[#module+1] = s({
 
 module[#module+1] = s({
     trig = loop_keys['loop'],
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
     t({'while (1) {', ''}),
@@ -37,6 +41,8 @@ module[#module+1] = s({
 
 module[#module+1] = s({
     trig = loop_keys['while'],
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
     t('while ('), i(1, 'condition'), t({') {', ''}),
@@ -46,6 +52,8 @@ module[#module+1] = s({
 
 module[#module+1] = s({
     trig = loop_keys['do-while'],
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
     t({'do {', ''}),

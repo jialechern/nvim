@@ -18,6 +18,8 @@ local module = {}
 --- Rust 工作空间初始化
 module[#module+1] = s({
     trig = 'rust-workspace-init',
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
 }, {
         t({'[workspace]', ''}),

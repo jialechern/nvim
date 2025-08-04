@@ -19,6 +19,8 @@ local module = {}
 -- 宏定义
 module[#module+1] = s({
     trig = 'define',
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
     t('#define '), i(0, 'macro-name')
@@ -27,6 +29,8 @@ module[#module+1] = s({
 -- 注销宏定义
 module[#module+1] = s({
     trig = 'undef',
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
     t('#undef '), i(0, 'macro-name')
@@ -35,6 +39,8 @@ module[#module+1] = s({
 -- 宏 if 判断
 module[#module+1] = s({
     trig = 'macro-if',
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
     t('# if '), i(1, 'condition'), t({'', ''}),
@@ -45,6 +51,8 @@ module[#module+1] = s({
 -- 宏 if-else 判断
 module[#module+1] = s({
     trig = 'macro-if-else',
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
     t('# if '), i(1, 'condition'), t({'', ''}),
@@ -57,6 +65,8 @@ module[#module+1] = s({
 -- 宏 if-else_if 判断
 module[#module+1] = s({
     trig = 'macro-if-else_if',
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
     t('# if '), i(1, 'condition'), t({'', ''}),
@@ -69,6 +79,8 @@ module[#module+1] = s({
 -- 宏 if-else_if-else 判断
 module[#module+1] = s({
     trig = 'macro-if-else_if-else',
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
     t('# if '), i(1, 'condition'), t({'', ''}),
@@ -83,6 +95,8 @@ module[#module+1] = s({
 -- 宏 ifndef 判断
 module[#module+1] = s({
     trig = 'ifndef',
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
     t('# ifndef '), i(1, 'macro-name'), t({'', ''}),
@@ -94,6 +108,8 @@ module[#module+1] = s({
 -- 宏 ifdef 判断
 module[#module+1] = s({
     trig = 'ifdef',
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
     t('# ifdef '), i(0, 'macro-name'),

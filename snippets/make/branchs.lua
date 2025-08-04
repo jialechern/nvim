@@ -19,6 +19,8 @@ local module = {}
 
 module[#module+1] = s({
     trig = 'ifeq',
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
         t('ifeq ('), i(1, 'var1'), t(', '), i(2, 'var2'), t({ ')', '' }),
@@ -28,6 +30,8 @@ module[#module+1] = s({
 
 module[#module+1] = s({
     trig = 'ifneq',
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
         t('ifneq ('), i(1, 'var1'), t(', '), i(2, 'var2'), t({ ')', '' }),
@@ -37,6 +41,8 @@ module[#module+1] = s({
 
 module[#module+1] = s({
     trig = 'ifeq-else',
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
         t('ifeq ('), i(1, 'var1'), t(', '), i(2, 'var2'), t({ ')', '' }),
@@ -48,6 +54,8 @@ module[#module+1] = s({
 
 module[#module+1] = s({
     trig = 'ifneq-else',
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
         t('ifneq ('), i(1, 'var1'), t(', '), i(2, 'var2'), t({ ')', '' }),
@@ -59,6 +67,8 @@ module[#module+1] = s({
 
 module[#module+1] = s({
     trig = 'ifdef',
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
         t('ifdef '), i(1, 'var'), t({ '', '' }),
@@ -68,6 +78,8 @@ module[#module+1] = s({
 
 module[#module+1] = s({
     trig = 'ifdef-else',
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
         t('ifdef '), i(1, 'var'), t({ '', '' }),
@@ -79,6 +91,8 @@ module[#module+1] = s({
 
 module[#module+1] = s({
     trig = 'ifndef',
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
         t('ifndef '), i(1, 'var'), t({ '', '' }),
@@ -88,6 +102,8 @@ module[#module+1] = s({
 
 module[#module+1] = s({
     trig = 'ifndef-else',
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
         t('ifndef '), i(1, 'var'), t({ '', '' }),

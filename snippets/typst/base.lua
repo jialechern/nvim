@@ -19,6 +19,8 @@ local module = {}
 -- 加粗
 module[#module+1] = s({
     trig = 'bold',
+    wordTrig  = true,
+    regTrig   = false,
     snippetType = 'autosnippet',
 }, {
         t('*'), i(0, 'bold text'), t('*'),
@@ -27,6 +29,8 @@ module[#module+1] = s({
 -- 强调
 module[#module+1] = s({
     trig = 'emph',
+    wordTrig  = true,
+    regTrig   = false,
     snippetType = 'autosnippet',
 }, {
         t('__'), i(0, 'emph text'), t('__'),
@@ -35,6 +39,8 @@ module[#module+1] = s({
 -- 删除线
 module[#module+1] = s({
     trig = 'strike',
+    wordTrig  = true,
+    regTrig   = false,
     snippetType = 'autosnippet',
 }, {
         t('#strike['), i(0, 'strike text'), t(']'),
@@ -44,6 +50,8 @@ module[#module+1] = s({
 -- 一级标题
 module[#module+1] = s({
     trig = 'head1',
+    wordTrig  = true,
+    regTrig   = false,
     snippetType = 'autosnippet',
 }, {
         t('= ')
@@ -52,6 +60,8 @@ module[#module+1] = s({
 -- 二级标题
 module[#module+1] = s({
     trig = 'head2',
+    wordTrig  = true,
+    regTrig   = false,
     snippetType = 'autosnippet',
 }, {
         t('== ')
@@ -60,6 +70,8 @@ module[#module+1] = s({
 -- 三级标题
 module[#module+1] = s({
     trig = 'head3',
+    wordTrig  = true,
+    regTrig   = false,
     snippetType = 'autosnippet',
 }, {
         t('=== ')
@@ -68,6 +80,8 @@ module[#module+1] = s({
 -- 四级标题
 module[#module+1] = s({
     trig = 'head4',
+    wordTrig  = true,
+    regTrig   = false,
     snippetType = 'autosnippet',
 }, {
         t('==== ')
@@ -76,6 +90,8 @@ module[#module+1] = s({
 --- 表格
 module[#module+1] = s({
     trig = 'table',
+    wordTrig  = true,
+    regTrig   = false,
     snippetType = 'autosnippet',
 }, {
         t('#table(columns: '), i(1, 'columns'), t(', align: '), c(2, {
@@ -93,6 +109,8 @@ module[#module+1] = s({
 --- 设置默认值
 module[#module+1] = s({
     trig = 'set',
+    wordTrig  = true,
+    regTrig   = false,
     snippetType = 'autosnippet',
 }, {
         t('#set ')
@@ -101,6 +119,8 @@ module[#module+1] = s({
 --- 行内代码块
 module[#module+1] = s({
     trig = 'code',
+    wordTrig  = true,
+    regTrig   = false,
     snippetType = 'autosnippet',
 }, {
         t('`'), i(0, 'code content'), t('`'),
@@ -109,6 +129,8 @@ module[#module+1] = s({
 --- 行间代码块
 module[#module+1] = s({
     trig = 'code-block',
+    wordTrig  = true,
+    regTrig   = false,
     snippetType = 'autosnippet',
 }, {
         t('```'), i(1, 'language'), t({ '', '' }),
@@ -119,6 +141,8 @@ module[#module+1] = s({
 --- 脚本模式
 module[#module+1] = s({
     trig = '#(',
+    wordTrig  = true,
+    regTrig   = false,
     snippetType = 'autosnippet',
 }, {
         t('#('), i(0, 'script content'), t(')'),
@@ -126,6 +150,8 @@ module[#module+1] = s({
 
 module[#module+1] = s({
     trig = '#[',
+    wordTrig  = true,
+    regTrig   = false,
     snippetType = 'autosnippet',
 }, {
         t('#['), i(0, 'script content'), t(']'),
@@ -135,6 +161,8 @@ module[#module+1] = s({
 -- 行内
 module[#module+1] = s({
     trig = 'math',
+    wordTrig  = true,
+    regTrig   = false,
     snippetType = 'autosnippet',
 }, {
         t('$'), i(0), t('$'),
@@ -142,6 +170,8 @@ module[#module+1] = s({
 -- 行间
 module[#module+1] = s({
     trig = 'Math',
+    wordTrig  = true,
+    regTrig   = false,
     snippetType = 'autosnippet',
 }, {
         t('$ '), i(0), t(' $'),

@@ -19,6 +19,8 @@ local branch_keys = require('settings.variables.branchs').branch_keys
 
 module[#module+1] = s({
     trig = branch_keys['if'],
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
     t('if '), i(1, 'condition'), t({ ' then', '' }),
@@ -28,6 +30,8 @@ module[#module+1] = s({
 
 module[#module+1] = s({
     trig = branch_keys['if-else'],
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
     t('if '), i(1, 'condition1'), t({ ' then', '' }),
@@ -39,6 +43,8 @@ module[#module+1] = s({
 
 module[#module+1] = s({
     trig = branch_keys['if-else_if'],
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
     t('if '), i(1, 'condition1'), t({ ' then', '' }),
@@ -50,6 +56,8 @@ module[#module+1] = s({
 
 module[#module+1] = s({
     trig = branch_keys['if-else_if-else'],
+    wordTrig  = true,
+    regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
     t('if '), i(1, 'condition1'), t({ ' then', '' }),
