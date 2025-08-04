@@ -195,6 +195,26 @@ module[#module+1] = s({
         i(0, 'code-block-text'), t({'', '```'}),
 })
 
+--- 数学环境
+-- 行内数学公式
+module[#module+1] = s({
+    trig = 'math',
+    wordTrig  = true,
+    regTrig   = false,
+    -- snippetType = 'autosnippet',
+}, {
+        t('$'), i(0, 'inline-math'), t('$'),
+})
+
+-- 行间数学公式
+module[#module+1] = s({
+    trig = 'Math',
+    wordTrig  = true,
+    regTrig   = false,
+    -- snippetType = 'autosnippet',
+}, {
+        t({'$$', ''}), i(0, 'block-math'), t({'', '$$'}),
+})
 
 -- 模块返回
 return module

@@ -23,6 +23,25 @@ module[#module+1] = s({
     regTrig   = false,
     -- snippetType = 'autosnippet',
     }, {
+        t('\\documentclass{'), c(1, { t('article'), t('book'), t('report') }), t({'}', '', ''}),
+
+        t('\\title{'), i(2, 'Title'), t({'}', ''}),
+        t('\\author{'), i(3, 'Author'), t({'}', ''}),
+        t('\\institute{'), i(4, 'Institute'), t({'}', ''}),
+        t('\\version{'), i(5, 'Version'), t({'}', '', ''}),
+
+        t({'\\date{\\zhtoday}', ''}),
+
+        t({'\\usepackage{array}', ''}),
+        t({'\\usepackage{amssymb}', ''}),
+        t({'\\usepackage{float}', ''}),
+        t({'\\usepackage{mathrsfs}', ''}),
+        t('\\usepackage{'), i(6, 'Package'), t({ '}', '', '' }),
+
+        t({'\\begin{document}', ''}),
+        t({'\\maketitle', ''}),
+        i(0),
+        t({'', '\\end{document}'}),
     })
 
 --- 模块返回

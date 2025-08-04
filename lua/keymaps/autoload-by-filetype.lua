@@ -10,7 +10,6 @@ local autocmd_by_pattern = require('utils.autocmd').autocmd_by_pattern
 autocmd_by_pattern(
     'markdown',
     function ()
-        require('keymaps.math')
         require('keymaps.markdown')
     end
 )
@@ -18,7 +17,6 @@ autocmd_by_pattern(
 autocmd_by_pattern(
     'tex',
     function ()
-        require('keymaps.math')
         require('keymaps.latex')
     end
 )
