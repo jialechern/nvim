@@ -25,7 +25,7 @@ module[#module+1] = s({
     }, {
     t({'def main() -> None:', ''}),
     t('\t'), i(0),
-    t({'', 'if __name__ == \'__main__\':', ''}),
+    t({'', '', 'if __name__ == \'__main__\':', ''}),
     t('\tmain()'),
     })
 
