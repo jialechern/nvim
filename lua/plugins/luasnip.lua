@@ -20,6 +20,13 @@ return {
         local luasnip = require('luasnip')
         local types   = require('luasnip.util.types')
 
+        -- 配置 LuaSnip 映射后回退
+        local auto_expand = require('luasnip').auto_expand
+        require('luasnip').auto_expand = function (...)
+            vim.o.undolevels = vim.o.undolevels
+            auto_expand(...)
+        end
+
         -- 可视化提示(可选)
         -- 在插入模式下, 给当前可跳转的 snippet 占位符加上下划线
         luasnip.config.set_config({
@@ -40,20 +47,11 @@ return {
         -- require('luasnip.loaders.from_vscode').lazy_load()
 
         -- 加载 LuaSnip 自定义 snippets
-        require('luasnip.loaders.from_lua').load({
+        require('luasnip.loaders.from_lua').lazy_load({
             paths = { vim.fn.stdpath('config') .. '/snippets' },
         })
 
-        -- vim.api.nvim_create_autocmd("FileType", {
-            -- pattern = {'*'},
-            -- callback = function ()
-                -- require("luasnip.loaders.from_lua").lazy_load({
-                    -- paths = { vim.fn.stdpath("config") .. "/snippets" },
-                -- })
-            -- end,
-        -- })
-
-        -- 你也可以指定路径
+        -- 也可以指定路径
         -- require("luasnip.loaders.from_vscode").lazy_load({
         --      paths = { "./my-snippets" },
         -- })
