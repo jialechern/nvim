@@ -5,8 +5,17 @@ return {
     -- 使用 v2 后的最新版本
     version = 'v2.*', -- Replace <CurrentMajor> by the latest released major (first number of latest release)
     -- install jsregexp (optional!).
-    build = 'make install_jsregexp',
+    -- build = 'make install_jsregexp',
+    build = (not jit.os:find('Windows'))
+        and "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build'; make install_jsregexp"
+      or nil,
     config = function()
+        -- 基本配置
+        require('luasnip').config.set_config({
+            enable_autosnippets = true,  -- 启用自动触发类型 snippet
+            store_selection_keys = '<C-s>', -- 选择节点时, 使用 <C-s> 存储选中内容
+        })
+
         -- 基本引入
         local luasnip = require('luasnip')
         local types   = require('luasnip.util.types')
