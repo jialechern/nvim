@@ -3,12 +3,6 @@
 -- 导入基本快捷键设置
 require('keymaps.base')
 
--- 设置代码块
-require('keymaps.code-block')
-
--- 设置注释
-require('keymaps.code-comment')
-
 -- 设置成对符号的自动配对
 require('keymaps.symbols')
 

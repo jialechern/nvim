@@ -80,7 +80,7 @@ def sync_config(args: argparse.Namespace, logger: logging.Logger) -> None:
                 logger.info(f"配置已重置 -- {msg}")
 
             case 'leader':
-                content = f"vim.g.mapleader = '{val}'"
+                content = f"_G.Leader = '{val}'\nvim.g.mapleader = _G.Leader"
                 write_config_to_file(cfg_path, content)
                 msg = f"leader 键已设置为 '{val}'"
                 logger.info(f"配置已重置 -- {msg}")
