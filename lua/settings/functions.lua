@@ -5,14 +5,6 @@ local module = {}
 
 local functions = {}
 
-for _, key in ipairs({ 'sh', 'zsh', 'bash' }) do
-    functions[key] = function () return
-        'function ( ' .. _G.CoLeader .. ' ) {'          ..
-            _G.Next                                     ..
-        '}'                                             .. '<Esc>F' .. _G.CoLeader .. 's'
-    end
-end
-
 module.functions = functions
 
 return module
