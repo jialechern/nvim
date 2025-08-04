@@ -16,7 +16,10 @@ local c = luasnip.choice_node
 local module = {}
 
 --- 日志处理
-module[#module+1] = s('log', {
+module[#module+1] = s({
+    trig = 'log',
+    -- snippetType = 'autosnippet',
+    }, {
     t({'import logging', '', ''}),
 
     t({'def get_logger(', ''}),

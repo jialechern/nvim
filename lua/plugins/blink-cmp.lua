@@ -58,20 +58,26 @@ return {
         -- 重定义默认快捷键
         keymap = {
             preset = 'none',
-            -- 开启/关闭补全菜单
+            -- 开启/关闭补全文档
             ['<C-o>'] = { 'show', 'show_documentation', 'hide_documentation' },
 
+            -- 上下滚动文档
             ['<C-p>'] = { 'scroll_documentation_up', 'fallback' },
             ['<C-n>'] = { 'scroll_documentation_down', 'fallback' },
 
-            -- ['<C-e>'] = { 'hide' },
+            -- 关闭补全菜单
+            ['<C-h>'] = { 'hide', 'fallback' },
+
+            -- 接受补全
             ['<CR>'] = { 'accept', 'fallback' },
 
+            -- 选择补全菜单项
             ['<C-k>'] = { 'select_prev', 'fallback' },
             ['<C-j>'] = { 'select_next', 'fallback' },
 
-            ['<C-d>'] = { 'snippet_forward', 'fallback' },
-            ['<C-u>'] = { 'snippet_backward', 'fallback' },
+            -- snippet 跳转键
+            ['<C-l>'] = { 'snippet_forward', 'fallback' },
+            ['<A-l>'] = { 'snippet_backward', 'fallback' },
         },
 
         -- 自动给出函数签名提示

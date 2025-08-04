@@ -18,13 +18,19 @@ local module = {}
 --- 分支型语句
 local branch_keys = require('settings.variables.branchs').branch_keys
 
-module[#module+1] = s(branch_keys['if'], {
+module[#module+1] = s({
+    trig = branch_keys['if'],
+    -- snippetType = 'autosnippet',
+    }, {
     t('if '), i(1, 'condition'), t({ ' :', '' }),
     t('\t'), i(0),
     t({ '', '# end if' }),
     })
 
-module[#module+1] = s(branch_keys['if-else'], {
+module[#module+1] = s({
+    trig = branch_keys['if-else'],
+    -- snippetType = 'autosnippet',
+    }, {
     t('if '), i(1, 'condition1'), t({ ' :', '' }),
     t('\t'), i(2),
     t({ '', 'else:', '' }),
@@ -32,7 +38,10 @@ module[#module+1] = s(branch_keys['if-else'], {
     t({ '', '# end if' }),
     })
 
-module[#module+1] = s(branch_keys['if-else_if'], {
+module[#module+1] = s({
+    trig = branch_keys['if-else_if'],
+    -- snippetType = 'autosnippet',
+    }, {
     t('if '), i(1, 'condition1'), t({ ' :', '' }),
     t('\t'), i(2),
     t({ '', 'elif '}), i(3, 'condition2'), t({ ' :', '' }),
@@ -40,7 +49,10 @@ module[#module+1] = s(branch_keys['if-else_if'], {
     t({ '', '# end if' }),
     })
 
-module[#module+1] = s(branch_keys['if-else_if-else'], {
+module[#module+1] = s({
+    trig = branch_keys['if-else_if-else'],
+    -- snippetType = 'autosnippet',
+    }, {
     t('if '), i(1, 'condition1'), t({ ' :', '' }),
     t('\t'), i(2),
     t({ '', 'elif '}), i(3, 'condition2'), t({ ' :', '' }),
@@ -50,7 +62,10 @@ module[#module+1] = s(branch_keys['if-else_if-else'], {
     t({ '', '# end if' }),
     })
 
-module[#module+1] = s(branch_keys['match'], {
+module[#module+1] = s({
+    trig = branch_keys['match'],
+    -- snippetType = 'autosnippet',
+    }, {
     t('match '), i(1, 'expr'), t({ ' :', '' }),
     t('\tcase '), i(2, 'pattern1'), t({ ' :', '' }),
     t('\t\t'), i(3),

@@ -16,7 +16,10 @@ local module = {}
 
 --- 程序入口点
 local entry_point = require('settings.variables.entry-points').entry_point
-module[#module+1] = s(entry_point, {
+module[#module+1] = s({
+    trig = entry_point,
+    -- snippetType = 'autosnippet',
+    }, {
     t({'fn main () -> Result<(), Box<dyn std::error::Error>> {', ''}),
     t('\t'), i(0),
     t({'', '\tOk(())'}),

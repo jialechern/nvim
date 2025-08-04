@@ -15,7 +15,10 @@ local c = luasnip.choice_node
 local module = {}
 
 --- 测试模块
-module[#module+1] = s('test', {
+module[#module+1] = s({
+    trig = 'test',
+    -- snippetType = 'autosnippet',
+    }, {
     t({'#[cfg(test)]', ''}),
     t({'mod tests {', ''}),
     t({'\tuse super::*;', '', ''}),

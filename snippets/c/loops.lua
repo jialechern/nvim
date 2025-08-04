@@ -17,25 +17,37 @@ local module = {}
 --- 循环型语句
 local loop_keys = require('settings.variables.loops').loop_keys
 
-module[#module+1] = s(loop_keys['for'], {
+module[#module+1] = s({
+    trig = loop_keys['for'],
+    -- snippetType = 'autosnippet',
+    }, {
     t('for (int '), i(1, 'loop-var'), t('; '), i(2, 'loop-flag'), t('; '), i(3, 'loop-expr'), t(') {'),
     t({'', '\t'}), i(0),
     t({'', '}'}),
     })
 
-module[#module+1] = s(loop_keys['loop'], {
+module[#module+1] = s({
+    trig = loop_keys['loop'],
+    -- snippetType = 'autosnippet',
+    }, {
     t({'while (1) {', ''}),
     t('\t'), i(0),
     t({'', '}'}),
     })
 
-module[#module+1] = s(loop_keys['while'], {
+module[#module+1] = s({
+    trig = loop_keys['while'],
+    -- snippetType = 'autosnippet',
+    }, {
     t('while ('), i(1, 'condition'), t({') {', ''}),
     t('\t'), i(0),
     t({'', '}'}),
     })
 
-module[#module+1] = s(loop_keys['do-while'], {
+module[#module+1] = s({
+    trig = loop_keys['do-while'],
+    -- snippetType = 'autosnippet',
+    }, {
     t({'do {', ''}),
     t('\t'), i(0),
     t({'', '} while ('}), i(1, 'condition'), t({');', ''}),

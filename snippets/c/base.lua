@@ -17,17 +17,26 @@ local module = {}
 --- 基本映射
 
 --- 导入头文件
-module[#module+1] = s('include', {
+module[#module+1] = s({
+    trig = 'include',
+    -- snippetType = 'autosnippet',
+    }, {
     t('# include <'), i(0, 'header'), t('>'),
     })
 
 --- 导入标准输入输出头文件
-module[#module+1] = s('stdio', {
+module[#module+1] = s({
+    trig = 'stdio',
+    -- snippetType = 'autosnippet',
+    }, {
     t('# include <stdio.h>'),
     })
 
 --- 打印函数
-module[#module+1] = s('printf', {
+module[#module+1] = s({
+    trig = 'printf',
+    -- snippetType = 'autosnippet',
+    }, {
     t('printf('), i(0, 'format'), t(');'),
     })
 

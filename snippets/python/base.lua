@@ -24,21 +24,33 @@ module[#module+1] = s({
 })
 
 --- 脚本初始化
-module[#module+1] = s('script', {
+module[#module+1] = s({
+    trig = 'script',
+    -- snippetType = 'autosnippet',
+    }, {
     t('#!/usr/bin/env python3'),
 })
 
 --- 打印
-module[#module+1] = s('print', {
+module[#module+1] = s({
+    trig = 'print',
+    -- snippetType = 'autosnippet',
+    }, {
     t('print('), i(1, 'message'), t(')'), i(0),
 })
 
 --- 长字符串
-module[#module+1] = s('str', {
+module[#module+1] = s({
+    trig = 'str',
+    -- snippetType = 'autosnippet',
+    }, {
     t('\'\'\''), i(1, 'message'), t('\'\'\''), i(0),
 })
 
-module[#module+1] = s('string', {
+module[#module+1] = s({
+    trig = 'string',
+    -- snippetType = 'autosnippet',
+    }, {
     t('\"\"\"'), i(1, 'message'), t('\"\"\"'), i(0),
 })
 

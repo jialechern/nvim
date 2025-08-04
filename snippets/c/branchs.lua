@@ -21,7 +21,10 @@ module[#module+1] = s(branch_keys['if'], {
     t('if ('), i(1, 'condition'), t(') '), i(0), t(';')
     })
 
-module[#module+1] = s(branch_keys['if-else'], {
+module[#module+1] = s({
+    trig = branch_keys['if-else'],
+    -- snippetType = 'autosnippet',
+    }, {
     t('if ('), i(1, 'condition'), t(') {'),
     t({'', '\t'}), i(2),
     t({'', '} else {', ''}),
@@ -29,7 +32,10 @@ module[#module+1] = s(branch_keys['if-else'], {
     t({'', '}'}),
     })
 
-module[#module+1] = s(branch_keys['if-else_if'], {
+module[#module+1] = s({
+    trig = branch_keys['if-else_if'],
+    -- snippetType = 'autosnippet',
+    }, {
     t('if ('), i(1, 'condition1'), t(') {'),
     t({'', '\t'}), i(2),
     t({'', '} else if ('}), i(3, 'condition2'), t({') {', ''}),
@@ -37,7 +43,10 @@ module[#module+1] = s(branch_keys['if-else_if'], {
     t({'', '}'}),
     })
 
-module[#module+1] = s(branch_keys['if-else_if-else'], {
+module[#module+1] = s({
+    trig = branch_keys['if-else_if-else'],
+    -- snippetType = 'autosnippet',
+    }, {
     t('if ('), i(1, 'condition1'), t(') {'),
     t({'', '\t'}), i(2),
     t({'', '} else if ('}), i(3, 'condition2'), t({') {', ''}),
@@ -47,7 +56,10 @@ module[#module+1] = s(branch_keys['if-else_if-else'], {
     t({'', '}'}),
     })
 
-module[#module+1] = s(branch_keys['switch'], {
+module[#module+1] = s({
+    trig = branch_keys['switch'],
+    -- snippetType = 'autosnippet',
+    }, {
     t('switch ('), i(1, 'expr'), t({') {', ''}),
     t('\tcase '), i(2, 'case-value'), t({':', ''}),
     t('\t\t'), i(3),

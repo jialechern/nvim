@@ -17,17 +17,26 @@ local module = {}
 --- 基本代码片段
 
 --- 匿名函数
-module[#module+1] = s('|', {
+module[#module+1] = s({
+    trig = '|',
+    -- snippetType = 'autosnippet',
+    }, {
     t('|'), i(1, 'args'), t('|'), i(0),
     })
 
 --- 打印函数
-module[#module+1] = s('println', {
+module[#module+1] = s({
+    trig = 'println',
+    -- snippetType = 'autosnippet',
+    }, {
     t('println!('), i(0, 'fmt'), t(');'),
     })
 
 -- 打印函数
-module[#module+1] = s('println', {
+module[#module+1] = s({
+    trig = 'println',
+    -- snippetType = 'autosnippet',
+    }, {
     t('println!('), i(0, 'fmt'), t(');'),
     })
 

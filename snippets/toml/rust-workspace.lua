@@ -1,5 +1,5 @@
---- python.lua
---- python 的 entry_point snipets
+--- toml
+--- rust-workspace.lua
 
 -- 基本引入
 local luasnip = require('luasnip')
@@ -12,21 +12,20 @@ local c = luasnip.choice_node
 -- local d  = luasnip.dynamic_node
 -- local sn = luasnip.snippet_node
 
---- 模块定义
+-- 模块定义
 local module = {}
 
---- 程序入口点
-local entry_point = require('settings.variables.entry-points').entry_point
+--- Rust 工作空间初始化
 module[#module+1] = s({
-    trig = entry_point,
+    trig = 'rust-workspace-init',
     -- snippetType = 'autosnippet',
-    }, {
-    t({'def main() -> None:', ''}),
-    t('\t'), i(0),
-    t({'', 'if __name__ == \'__main__\':', ''}),
-    t('\tmain()'),
-    })
+}, {
+        t({'[workspace]', ''}),
+        t({'\tmembers = [', ''}),
+        t('\t\t'), i(0, 'member'), t({',', ''}),
+        t('\t]'),
+})
 
---- 模块返回
+-- 模块返回
 return module
 

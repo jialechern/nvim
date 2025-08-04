@@ -16,7 +16,10 @@ local c = luasnip.choice_node
 local module = {}
 
 --- 单元测试测试类
-module[#module+1] = s('test', {
+module[#module+1] = s({
+    trig = 'test',
+    -- snippetType = 'autosnippet',
+    }, {
     t({'# 单元测试初始化',
         'from unittest import TestCase, skip, expectedFailure, main', ''}),
     t('class '), i(1, 'TestClassName'), t({'(TestCase):', ''}),

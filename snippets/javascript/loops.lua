@@ -1,5 +1,5 @@
---- rust.lua
---- rust 的 loops snipets
+--- javascript
+--- javascript 的 loops snipets
 
 -- 基本引入
 local luasnip = require('luasnip')
@@ -9,7 +9,8 @@ local s = luasnip.snippet
 local t = luasnip.text_node
 local i = luasnip.insert_node
 local c = luasnip.choice_node
--- local d  = ls.dynamic_node
+-- local d  = luasnip.dynamic_node
+-- local sn = luasnip.snippet_node
 
 --- 模块定义
 local module = {}
@@ -21,27 +22,36 @@ module[#module+1] = s({
     trig = loop_keys['for'],
     -- snippetType = 'autosnippet',
     }, {
-    t('for '), i(1, 'elem'), t(' in '), i(2, 'iterable'), t({ ' {', '' }),
-    t('\t'), i(0),
-    t({'', '}'}),
-    })
-
-module[#module+1] = s({
-    trig = loop_keys['while'],
-    -- snippetType = 'autosnippet',
-    }, {
-    t('while '), i(1, 'condition'), t({ ' {', '' }),
-    t('\t'), i(0),
-    t({'', '}'}),
+        t('for ('), i(1, 'loop-flag'), t({') {', ''}),
+        t('\t'), i(0),
+        t({ '', '}' }),
     })
 
 module[#module+1] = s({
     trig = loop_keys['loop'],
     -- snippetType = 'autosnippet',
     }, {
-    t({'loop {', ''}),
+    t({'while (true) {', ''}),
     t('\t'), i(0),
-    t({'', '}'}),
+    t({ '', '}' }),
+    })
+
+module[#module+1] = s({
+    trig = loop_keys['while'],
+    -- snippetType = 'autosnippet',
+    }, {
+    t('while ('), i(1, 'condition'), t({ ') {', '' }),
+    t('\t'), i(0),
+    t({ '', '}' }),
+    })
+
+module[#module+1] = s({
+    trig = loop_keys['do-while'],
+    -- snippetType = 'autosnippet',
+    }, {
+        t({'do {', ''}),
+        t('\t'), i(0),
+        t({ '', '} while ('}), i(1, 'condition'), t({ ');', '' }),
     })
 
 --- 模块返回

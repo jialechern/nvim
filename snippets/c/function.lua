@@ -17,7 +17,10 @@ local module = {}
 --- 函数模板
 local func_key = require('settings.variables.functions').func_key
 
-module[#module+1] = s(func_key, {
+module[#module+1] = s({
+    trig = func_key,
+    -- snippetType = 'autosnippet',
+    }, {
     i(1, 'ret-type'), t(' '), i(2, 'func-name'), t('('), i(3, 'args'), t({') {', ''}),
     t('\t'), i(0),
     t({'', '}'}),

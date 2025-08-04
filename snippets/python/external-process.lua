@@ -16,7 +16,10 @@ local c = luasnip.choice_node
 local module = {}
 
 --- 解析命令行输入
-module[#module+1] = s('argparse', {
+module[#module+1] = s({
+    trig = 'argparse',
+    -- snippetType = 'autosnippet',
+    }, {
     t({'import argparse', '', '', ''}),
 
     t('def get_args( '), i(1, '*args, **kwargs'), t({' ) -> argparse.Namespace:', '', ''}),
@@ -45,7 +48,10 @@ module[#module+1] = s('argparse', {
     })
 
 --- 调用外部命令
-module[#module+1] = s('run', {
+module[#module+1] = s({
+    trig = 'run',
+    -- snippetType = 'autosnippet',
+    }, {
     t({'import subprocess',
     'import shlex', '', ''}),
 
