@@ -22,26 +22,21 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'lambda-function',
+    desc = '匿名函数/闭包',
     }, {
     t('|'), i(1, 'args'), t('|'), i(0),
     })
 
 --- 打印函数
+local print_key = require('settings.variables.print').print_key
 module[#module+1] = s({
-    trig = 'println',
+    trig = print_key,
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
-    }, {
-    t('println!('), i(0, 'fmt'), t(');'),
-    })
-
--- 打印函数
-module[#module+1] = s({
-    trig = 'println',
-    wordTrig  = true,
-    regTrig   = false,
-    -- snippetType = 'autosnippet',
+    name = 'println',
+    desc = '打印函数',
     }, {
     t('println!('), i(0, 'fmt'), t(');'),
     })

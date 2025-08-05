@@ -21,6 +21,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'rust-workspace-init',
+    desc = 'Rust 工作空间初始化',
 }, {
         t({'[workspace]', ''}),
         t({'\tmembers = [', ''}),

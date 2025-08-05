@@ -22,6 +22,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'if',
+    desc = 'if 判断',
     }, {
     t('if '), i(1, 'condition'), t({ ' then', '' }),
     t('\t'), i(0),
@@ -33,6 +35,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'if-else',
+    desc = 'if-else 判断',
     }, {
     t('if '), i(1, 'condition1'), t({ ' then', '' }),
     t('\t'), i(2),
@@ -46,6 +50,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'if-elif',
+    desc = 'if-elif 判断',
     }, {
     t('if '), i(1, 'condition1'), t({ ' then', '' }),
     t('\t'), i(2),
@@ -59,6 +65,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'if-elif-else',
+    desc = 'if-elif-else 判断',
     }, {
     t('if '), i(1, 'condition1'), t({ ' then', '' }),
     t('\t'), i(2),

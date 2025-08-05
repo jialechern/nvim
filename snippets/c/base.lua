@@ -22,6 +22,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'include',
+    desc = '导入头文件',
     }, {
     t('# include <'), i(0, 'header'), t('>'),
     })
@@ -32,16 +34,21 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'include <stdio.h>',
+    desc = '导入标准输入输出头文件',
     }, {
     t('# include <stdio.h>'),
     })
 
 --- 打印函数
+local print_key = require('settings.variables.print').print_key
 module[#module+1] = s({
-    trig = 'printf',
+    trig = print_key,
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'printf',
+    desc = '打印函数',
     }, {
     t('printf('), i(0, 'format'), t(');'),
     })

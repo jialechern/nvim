@@ -22,6 +22,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'abs',
+    desc = '绝对值',
 }, {
     t('\\left|'), i(1), t('\\right|'), i(0),
 })
@@ -32,6 +34,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'ker',
+    desc = '核',
 }, {
         t('\\mathrm{ker}'),
 })
@@ -42,6 +46,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'im',
+    desc = '像',
 }, {
         t('\\mathrm{im}'),
 })
@@ -52,6 +58,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'id',
+    desc = '恒等映射',
 }, {
         t('\\mathrm{id}'),
 })
@@ -62,6 +70,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'hom',
+    desc = '同态',
 }, {
         t('\\mathrm{hom}'),
 })
@@ -72,6 +82,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'dim',
+    desc = '维数',
 }, {
         t('\\mathrm{dim}'),
 })
@@ -82,6 +94,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'frac',
+    desc = '相对尺度分式',
 }, {
         t('\\frac{'), i(1), t('}{'), i(2), t('}'), i(0),
 })
@@ -92,6 +106,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'dfrac',
+    desc = '绝对尺度分式',
 }, {
         t('\\dfrac{'), i(1), t('}{'), i(2), t('}'), i(0),
 })
@@ -102,6 +118,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'sum',
+    desc = '求和',
 }, {
         t('\\sum_{'), i(1), t('}'), i(0),
 })
@@ -112,16 +130,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
-}, {
-        t('\\lim_{'), i(1), t('}'), i(0),
-})
-
--- 极限
-module[#module+1] = s({
-    trig = 'lim',
-    wordTrig  = true,
-    regTrig   = false,
-    -- snippetType = 'autosnippet',
+    name = 'lim',
+    desc = '极限',
 }, {
         t('\\lim_{'), i(1), t('}'), i(0),
 })
@@ -132,6 +142,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'Longrightarrow',
+    desc = '必要条件1',
 }, {
     t('\\Longrightarrow'),
 })
@@ -142,6 +154,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'Rightarrow',
+    desc = '必要条件2',
 }, {
     t('\\Rightarrow'),
 })
@@ -152,6 +166,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'longrightarrow',
+    desc = '必要条件3',
 }, {
     t('\\longrightarrow'),
 })
@@ -162,6 +178,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'rightarrow',
+    desc = '必要条件4',
 }, {
     t('\\rightarrow'),
 })
@@ -172,6 +190,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'Longleftarrow',
+    desc = '充分条件1',
 }, {
     t('\\Longleftarrow'),
 })
@@ -182,6 +202,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'Leftarrow',
+    desc = '充分条件2',
 }, {
     t('\\Leftarrow'),
 })
@@ -192,6 +214,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'longleftarrow',
+    desc = '充分条件3',
 }, {
     t('\\longleftarrow'),
 })
@@ -202,6 +226,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'leftarrow',
+    desc = '充分条件4',
 }, {
     t('\\leftarrow'),
 })
@@ -212,6 +238,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'Longleftrightarrow',
+    desc = '充要条件1',
 }, {
     t('\\Longleftrightarrow'),
 })
@@ -222,6 +250,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'Leftrightarrow',
+    desc = '充要条件2',
 }, {
     t('\\Leftrightarrow'),
 })
@@ -232,6 +262,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'longleftrightarrow',
+    desc = '充要条件3',
 }, {
     t('\\longleftrightarrow'),
 })
@@ -242,6 +274,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'leftrightarrow',
+    desc = '充要条件4',
 }, {
     t('\\leftrightarrow'),
 })
@@ -252,6 +286,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'overrightarrow',
+    desc = '上方向右箭头',
 }, {
     t('\\overrightarrow{'), i(1), t('}'), i(0),
 })
@@ -262,6 +298,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'underrightarrow',
+    desc = '下方向右箭头',
 }, {
     t('\\underrightarrow{'), i(1), t('}'), i(0),
 })
@@ -272,6 +310,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'overleftarrow',
+    desc = '上方向左箭头',
 }, {
     t('\\overleftarrow{'), i(1), t('}'), i(0),
 })
@@ -282,6 +322,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'underleftarrow',
+    desc = '下方向左箭头',
 }, {
     t('\\underleftarrow{'), i(1), t('}'), i(0),
 })
@@ -292,6 +334,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'overleftrightarrow',
+    desc = '上方向双箭头',
 }, {
     t('\\overleftrightarrow{'), i(1), t('}'), i(0),
 })
@@ -302,6 +346,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'underleftrightarrow',
+    desc = '下方向双箭头',
 }, {
     t('\\underleftrightarrow{'), i(1), t('}'), i(0),
 })
@@ -312,6 +358,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'parallel',
+    desc = '平行',
 }, {
     t('\\parallel'),
 })
@@ -322,6 +370,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'alpha',
+    desc = '希腊字母 alpha',
 }, {
     t('\\alpha'),
 })
@@ -331,6 +381,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'beta',
+    desc = '希腊字母 beta',
 }, {
     t('\\beta'),
 })
@@ -340,6 +392,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'gamma',
+    desc = '希腊字母 gamma',
 }, {
     t('\\gamma'),
 })
@@ -349,6 +403,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'Gamma',
+    desc = '希腊字母 Gamma',
 }, {
     t('\\Gamma'),
 })
@@ -358,6 +414,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'var-phi',
+    desc = '希腊字母 phi (变量)',
 }, {
     t('\\varphi'),
 })
@@ -367,6 +425,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'phi',
+    desc = '希腊字母 phi',
 }, {
     t('\\phi'),
 })
@@ -376,6 +436,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'var-epsilon',
+    desc = '希腊字母 epsilon (变量)',
 }, {
     t('\\varepsilon'),
 })
@@ -385,6 +447,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'epsilon',
+    desc = '希腊字母 epsilon',
 }, {
     t('\\epsilon'),
 })
@@ -394,6 +458,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'delta',
+    desc = '希腊字母 delta',
 }, {
     t('\\delta'),
 })
@@ -403,6 +469,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'lambda',
+    desc = '希腊字母 lambda',
 }, {
     t('\\lambda'),
 })
@@ -412,6 +480,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'Lambda',
+    desc = '希腊字母 Lambda',
 }, {
     t('\\Lambda'),
 })
@@ -423,6 +493,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'cases',
+    desc = '分段函数/线性方程组',
 }, {
         t({'\\left\\{', ''}),
         t({'\t\\begin{array}{c}', ''}),
@@ -437,6 +509,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'vector',
+    desc = '向量',
 }, {
         t('\\left(\\begin{array}{c}'), i(0), t('\\end{array}\\right)'),
 })
@@ -447,6 +521,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'matrix',
+    desc = '矩阵',
 }, {
         t('\\left(\\begin{array}{'), i(1), t({'}', ''}),
         t('\t'), i(0),
@@ -459,6 +535,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'aligned',
+    desc = '等式排版',
 }, {
         t({'\\begin{aligned}', ''}),
         t('\t'), i(0),

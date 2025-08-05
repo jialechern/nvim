@@ -22,6 +22,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'for',
+    desc = 'for 循环',
     }, {
     t('for (int '), i(1, 'loop-var'), t('; '), i(2, 'loop-flag'), t('; '), i(3, 'loop-expr'), t(') {'),
     t({'', '\t'}), i(0),
@@ -33,6 +35,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'loop',
+    desc = 'loop 循环',
     }, {
     t({'while (1) {', ''}),
     t('\t'), i(0),
@@ -44,6 +48,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'while',
+    desc = 'while 循环',
     }, {
     t('while ('), i(1, 'condition'), t({') {', ''}),
     t('\t'), i(0),
@@ -55,6 +61,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'do-while',
+    desc = 'do-while 循环',
     }, {
     t({'do {', ''}),
     t('\t'), i(0),

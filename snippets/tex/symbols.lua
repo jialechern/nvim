@@ -22,6 +22,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'inner',
+    desc = '内积',
 }, {
     t('\\left\\langle'), i(1), t('\\right\\rangle'), i(0),
 })
@@ -32,6 +34,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'tuple',
+    desc = '元组',
 }, {
     t('\\left('), i(1), t('\\right)'), i(0),
 })
@@ -42,6 +46,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'list',
+    desc = '列表',
 }, {
     t('\\left['), i(1), t('\\right]'), i(0),
 })
@@ -52,6 +58,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'set',
+    desc = '集合',
 }, {
     t('\\left\\{'), i(1), t('\\right\\}'), i(0),
 })
@@ -63,6 +71,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'bb',
+    desc = '双线体',
 }, {
     t('\\mathbb{'), i(1), t('}'), i(0),
 })
@@ -73,6 +83,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'bb-N',
+    desc = '双线体 N',
 }, {
     t('\\mathbb{N}'),
 })
@@ -83,6 +95,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'bb-Q',
+    desc = '双线体 Q',
 }, {
     t('\\mathbb{Q}'),
 })
@@ -93,6 +107,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'bb-R',
+    desc = '双线体 R',
 }, {
     t('\\mathbb{R}'),
 })
@@ -103,6 +119,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'bb-C',
+    desc = '双线体 C',
 }, {
     t('\\mathbb{C}'),
 })
@@ -113,6 +131,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'bb-E',
+    desc = '双线体 E',
 }, {
     t('\\mathbb{E}'),
 })
@@ -124,6 +144,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'cal',
+    desc = '花体字母',
 }, {
     t('\\mathcal{'), i(1), t('}'), i(0),
 })
@@ -134,6 +156,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'cal-T',
+    desc = '花体字母 T',
 }, {
     t('\\mathcal{T}'),
 })
@@ -144,6 +168,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'cal-L',
+    desc = '花体字母 L',
 }, {
     t('\\mathcal{L}'),
 })
@@ -154,6 +180,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'cal-P',
+    desc = '花体字母 P',
 }, {
     t('\\mathcal{P}'),
 })
@@ -164,6 +192,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'cal-A',
+    desc = '花体字母 A',
 }, {
     t('\\mathcal{A}'),
 })
@@ -174,6 +204,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'cal-B',
+    desc = '花体字母 B',
 }, {
     t('\\mathcal{B}'),
 })
@@ -184,6 +216,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'cal-H',
+    desc = '花体字母 H',
 }, {
     t('\\mathcal{H}'),
 })
@@ -194,6 +228,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'rm',
+    desc = '罗马正体',
 }, {
     t('\\mathrm{'), i(1), t('}'), i(0),
 })
@@ -204,6 +240,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'rm-d',
+    desc = '罗马正体 d',
 }, {
     t('\\mathrm{d}'),
 })
@@ -214,6 +252,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'partial',
+    desc = '德文偏导数符号',
 }, {
     t('\\partial'),
 })

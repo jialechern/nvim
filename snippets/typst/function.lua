@@ -22,6 +22,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = '函数定义',
+    desc = '函数定义模板',
     }, {
         t('let '), i(1, 'func-name'), t('('), i(2, 'args'), t(') = '), i(0),
     })

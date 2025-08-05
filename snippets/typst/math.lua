@@ -23,6 +23,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'ge.eq',
+    desc = '大于等于',
 }, {
         t('gt.eq'),
 })
@@ -33,6 +35,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'lt.eq',
+    desc = '小于等于',
 }, {
         t('lt.eq'),
 })
@@ -43,6 +47,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'eq.not',
+    desc = '不等于',
 }, {
         t('eq.not'),
 })
@@ -53,6 +59,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'tilde',
+    desc = '等价',
 }, {
         t('tilde'),
 })
@@ -63,6 +71,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'tilde.eq',
+    desc = '全等于1',
 }, {
         t('tilde.eq'),
 })
@@ -73,6 +83,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'equiv',
+    desc = '全等于2',
 }, {
         t('equiv'),
 })
@@ -83,6 +95,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'in.rev',
+    desc = '属于(反向)',
 }, {
         t('in.rev'),
 })
@@ -93,6 +107,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'in.not',
+    desc = '不属于',
 }, {
         t('in.not'),
 })
@@ -103,6 +119,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'parallel',
+    desc = '平行',
 }, {
         t('parallel'),
 })
@@ -113,6 +131,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'divides',
+    desc = '整除',
 }, {
         t('divides'),
 })
@@ -125,6 +145,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'plus.minus',
+    desc = '正负',
 }, {
         t('plus.minus'),
 })
@@ -135,6 +157,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'minus.plus',
+    desc = '负正',
 }, {
         t('minus.plus'),
 })
@@ -145,6 +169,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'circ',
+    desc = '复合',
 }, {
         t('compose'),
 })
@@ -155,6 +181,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'xor',
+    desc = '异或/直和',
 }, {
         t('xor'),
 })
@@ -165,6 +193,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'times.circle',
+    desc = '圈乘',
 }, {
         t('times.circle'),
 })
@@ -175,6 +205,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'frac',
+    desc = '分式',
 }, {
         t('frac('), i(1), t(', '), i(2), t(')'), i(0),
 })
@@ -185,6 +217,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'binom',
+    desc = '组合数',
 }, {
         t('binom('), i(1), t(', '), i(2), t(')'), i(0),
 })
@@ -196,6 +230,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'integral',
+    desc = '积分1',
 }, {
         t('integral'),
 })
@@ -205,6 +241,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'integral.double',
+    desc = '积分2',
 }, {
         t('integral.double'),
 })
@@ -214,6 +252,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'integral.triple',
+    desc = '积分3',
 }, {
         t('integral.triple'),
 })
@@ -224,6 +264,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'integral.cont',
+    desc = '围道积分',
 }, {
         t('integral.cont'),
 })
@@ -235,6 +277,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'forall',
+    desc = '全称量词',
 }, {
         t('forall'),
 })
@@ -245,6 +289,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'exists',
+    desc = '存在量词',
 }, {
         t('exists'),
 })
@@ -255,6 +301,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'infinity',
+    desc = '无穷',
 }, {
         t('infinity'),
 })
@@ -265,6 +313,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'im',
+    desc = '像',
 }, {
         t('im'),
 })
@@ -275,6 +325,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'ker',
+    desc = '核',
 }, {
         t('ker'),
 })
@@ -285,6 +337,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'hom',
+    desc = '同态',
 }, {
         t('hom'),
 })
@@ -295,6 +349,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'abs',
+    desc = '绝对值',
 }, {
         t('abs('), i(1), t(')'), i(0),
 })
@@ -305,6 +361,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'sqrt',
+    desc = '根式',
 }, {
         t('sqrt('), i(1), t(')'), i(0),
 })
@@ -315,6 +373,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'norm',
+    desc = '范数',
 }, {
         t('norm('), i(1), t(')'), i(0),
 })
@@ -325,6 +385,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'inner',
+    desc = '内积',
 }, {
         t('lr(angle.l '), i(1), t(' angle.r)'), i(0),
 })
@@ -335,6 +397,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'mat',
+    desc = '矩阵',
 }, {
         t('mat('), i(1), t(')'), i(0),
 })
@@ -345,6 +409,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'cases',
+    desc = '分段函数/线性方程组',
 }, {
         t('cases('), i(1), t(')'), i(0),
 })

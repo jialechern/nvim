@@ -22,6 +22,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'entry-point',
+    desc = '程序入口点',
     }, {
     t({'def main() -> None:', ''}),
     t('\t'), i(0),

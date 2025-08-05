@@ -22,6 +22,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = '加粗',
+    desc = '加粗文本',
 }, {
         t('*'), i(0, 'bold-text'), t('*'),
 })
@@ -32,6 +34,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = '删除线',
+    desc = '删除线文本',
 }, {
         t('~~'), i(0, 'strike-text'), t('~~'),
 })
@@ -42,6 +46,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = '斜体',
+    desc = '斜体文本',
 }, {
         t('__'), i(0, 'italic-text'), t('__'),
 })
@@ -52,6 +58,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = '加粗斜体',
+    desc = '加粗斜体文本',
 }, {
         t('***'), i(0, 'bold-italic-text'), t('***'),
 })
@@ -64,6 +72,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = '新行',
+    desc = '新行',
 }, {
         t({'', ''}), t('<br>'), t({'', ''}),
 })
@@ -74,6 +84,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = '新段落',
+    desc = '新段落',
 }, {
         t('<p>'), i(0, 'paragraph-text'), t('</p>'),
 })
@@ -84,6 +96,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = '引用',
+    desc = '引用文本',
 }, {
         t('> '), i(0, 'ref-text')
 })
@@ -94,6 +108,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = '链接',
+    desc = '链接',
 }, {
         t('['), i(1, 'link-text'), t(']('), i(2, 'link-url'), t(')'),
         i(0),
@@ -105,6 +121,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = '链接',
+    desc = '链接',
 }, {
         t('<'), i(1, 'link-text'), t('>'),
         i(0),
@@ -116,6 +134,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = '图片',
+    desc = '图片',
 }, {
         t('!['), i(1, 'image-text'), t(']('), i(2, 'image-url'), t(')'),
         i(0),
@@ -127,6 +147,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = '页面分隔线',
+    desc = '页面分隔线',
 }, {
         t({'---', ''}),
         i(0),
@@ -139,6 +161,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = '一级标题',
+    desc = '一级标题',
 }, {
         t('# '),
 })
@@ -149,6 +173,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = '二级标题',
+    desc = '二级标题',
 }, {
         t('## '),
 })
@@ -159,6 +185,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = '三级标题',
+    desc = '三级标题',
 }, {
         t('### '),
 })
@@ -169,6 +197,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = '四级标题',
+    desc = '四级标题',
 }, {
         t('#### '),
 })
@@ -180,6 +210,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = '行内代码块',
+    desc = '行内代码块',
 }, {
         t('`'), i(0, 'inline-code'), t('`'),
 })
@@ -190,6 +222,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = '行间代码块',
+    desc = '行间代码块',
 }, {
         t('```'), i(1, 'language'), t({'', ''}),
         i(0, 'code-block-text'), t({'', '```'}),
@@ -202,6 +236,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = '行内数学公式',
+    desc = '行内数学公式',
 }, {
         t('$'), i(0, 'inline-math'), t('$'),
 })
@@ -212,6 +248,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = '行间数学公式',
+    desc = '行间数学公式',
 }, {
         t({'$$', ''}), i(0, 'block-math'), t({'', '$$'}),
 })

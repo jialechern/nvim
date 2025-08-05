@@ -21,7 +21,9 @@ module[#module+1] = s({
     trig = 'bold',
     wordTrig  = true,
     regTrig   = false,
-    snippetType = 'autosnippet',
+    -- snippetType = 'autosnippet',
+    name = 'bold',
+    desc = '加粗',
 }, {
         t('*'), i(0, 'bold text'), t('*'),
 })
@@ -31,7 +33,9 @@ module[#module+1] = s({
     trig = 'emph',
     wordTrig  = true,
     regTrig   = false,
-    snippetType = 'autosnippet',
+    -- snippetType = 'autosnippet',
+    name = 'emph',
+    desc = '强调',
 }, {
         t('__'), i(0, 'emph text'), t('__'),
 })
@@ -41,7 +45,9 @@ module[#module+1] = s({
     trig = 'strike',
     wordTrig  = true,
     regTrig   = false,
-    snippetType = 'autosnippet',
+    -- snippetType = 'autosnippet',
+    name = 'strike',
+    desc = '删除线',
 }, {
         t('#strike['), i(0, 'strike text'), t(']'),
 })
@@ -52,7 +58,9 @@ module[#module+1] = s({
     trig = 'head1',
     wordTrig  = true,
     regTrig   = false,
-    snippetType = 'autosnippet',
+    -- snippetType = 'autosnippet',
+    name = 'head1',
+    desc = '一级标题',
 }, {
         t('= ')
 })
@@ -62,7 +70,9 @@ module[#module+1] = s({
     trig = 'head2',
     wordTrig  = true,
     regTrig   = false,
-    snippetType = 'autosnippet',
+    -- snippetType = 'autosnippet',
+    name = 'head2',
+    desc = '二级标题',
 }, {
         t('== ')
 })
@@ -72,7 +82,9 @@ module[#module+1] = s({
     trig = 'head3',
     wordTrig  = true,
     regTrig   = false,
-    snippetType = 'autosnippet',
+    -- snippetType = 'autosnippet',
+    name = 'head3',
+    desc = '三级标题',
 }, {
         t('=== ')
 })
@@ -82,7 +94,9 @@ module[#module+1] = s({
     trig = 'head4',
     wordTrig  = true,
     regTrig   = false,
-    snippetType = 'autosnippet',
+    -- snippetType = 'autosnippet',
+    name = 'head4',
+    desc = '四级标题',
 }, {
         t('==== ')
 })
@@ -92,7 +106,9 @@ module[#module+1] = s({
     trig = 'table',
     wordTrig  = true,
     regTrig   = false,
-    snippetType = 'autosnippet',
+    -- snippetType = 'autosnippet',
+    name = 'table',
+    desc = '表格',
 }, {
         t('#table(columns: '), i(1, 'columns'), t(', align: '), c(2, {
             t('center'),
@@ -111,7 +127,9 @@ module[#module+1] = s({
     trig = 'set',
     wordTrig  = true,
     regTrig   = false,
-    snippetType = 'autosnippet',
+    -- snippetType = 'autosnippet',
+    name = 'set',
+    desc = '设置默认值',
 }, {
         t('#set ')
 })
@@ -121,7 +139,9 @@ module[#module+1] = s({
     trig = 'code',
     wordTrig  = true,
     regTrig   = false,
-    snippetType = 'autosnippet',
+    -- snippetType = 'autosnippet',
+    name = 'code',
+    desc = '行内代码块',
 }, {
         t('`'), i(0, 'code content'), t('`'),
 })
@@ -131,7 +151,9 @@ module[#module+1] = s({
     trig = 'code-block',
     wordTrig  = true,
     regTrig   = false,
-    snippetType = 'autosnippet',
+    -- snippetType = 'autosnippet',
+    name = 'code-block',
+    desc = '行间代码块',
 }, {
         t('```'), i(1, 'language'), t({ '', '' }),
         i(0, 'code content'),
@@ -143,7 +165,9 @@ module[#module+1] = s({
     trig = '#(',
     wordTrig  = true,
     regTrig   = false,
-    snippetType = 'autosnippet',
+    -- snippetType = 'autosnippet',
+    name = 'script1',
+    desc = '脚本模式1',
 }, {
         t('#('), i(0, 'script content'), t(')'),
 })
@@ -152,7 +176,9 @@ module[#module+1] = s({
     trig = '#[',
     wordTrig  = true,
     regTrig   = false,
-    snippetType = 'autosnippet',
+    -- snippetType = 'autosnippet',
+    name = 'script2',
+    desc = '脚本模式2',
 }, {
         t('#['), i(0, 'script content'), t(']'),
 })
@@ -163,7 +189,9 @@ module[#module+1] = s({
     trig = 'math',
     wordTrig  = true,
     regTrig   = false,
-    snippetType = 'autosnippet',
+    -- snippetType = 'autosnippet',
+    name = 'math',
+    desc = '行内数学模式',
 }, {
         t('$'), i(0), t('$'),
 })
@@ -172,7 +200,9 @@ module[#module+1] = s({
     trig = 'Math',
     wordTrig  = true,
     regTrig   = false,
-    snippetType = 'autosnippet',
+    -- snippetType = 'autosnippet',
+    name = 'Math',
+    desc = '行间数学模式',
 }, {
         t('$ '), i(0), t(' $'),
 })

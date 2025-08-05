@@ -16,11 +16,14 @@ local c = luasnip.choice_node
 local module = {}
 
 --- 单元测试测试类
+local test_key = require('settings.variables.test').test_key
 module[#module+1] = s({
-    trig = 'test',
+    trig = test_key,
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'test',
+    desc = '单元测试初始化',
     }, {
     t({'# 单元测试初始化',
         'from unittest import TestCase, skip, expectedFailure, main', ''}),

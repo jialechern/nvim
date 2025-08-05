@@ -23,6 +23,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'if',
+    desc = 'if 语句',
     }, {
     t('if test '), i(1, 'condition'), t({ '', '' }),
     t({'then', ''}),
@@ -35,6 +37,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'if-else',
+    desc = 'if-else 语句',
     }, {
     t('if test '), i(1, 'condition1'), t({ '', '' }),
     t({'then', ''}),
@@ -49,6 +53,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'if-elif',
+    desc = 'if-elif 语句',
     }, {
     t('if test '), i(1, 'condition1'), t({ '', '' }),
     t({'then', ''}),
@@ -64,6 +70,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'if-elif-else',
+    desc = 'if-elif-else 语句',
     }, {
     t('if test '), i(1, 'condition1'), t({ '', '' }),
     t({'then', ''}),
@@ -81,6 +89,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'case',
+    desc = 'case 语句',
     }, {
         t('case '), i(1, 'expr'), t({ ' in', '' }),
         t('\t'), i(2, 'pattern1'), t({ ')', '' }),

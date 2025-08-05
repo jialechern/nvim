@@ -16,11 +16,14 @@ local c = luasnip.choice_node
 local module = {}
 
 --- 日志处理
+local logger_key = require('settings.variables.logger').logger_key
 module[#module+1] = s({
-    trig = 'log',
+    trig = logger_key,
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'log',
+    desc = 'python 日志处理',
     }, {
     t({'import logging', '', ''}),
 

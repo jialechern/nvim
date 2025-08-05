@@ -22,6 +22,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'ifeq',
+    desc = 'ifeq 判断',
     }, {
         t('ifeq ('), i(1, 'var1'), t(', '), i(2, 'var2'), t({ ')', '' }),
         t('\t'), i(0),
@@ -33,6 +35,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'ifneq',
+    desc = 'ifneq 判断',
     }, {
         t('ifneq ('), i(1, 'var1'), t(', '), i(2, 'var2'), t({ ')', '' }),
         t('\t'), i(0),
@@ -44,6 +48,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'ifeq-else',
+    desc = 'ifeq-else 判断',
     }, {
         t('ifeq ('), i(1, 'var1'), t(', '), i(2, 'var2'), t({ ')', '' }),
         t('\t'), i(3),
@@ -57,6 +63,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'ifneq-else',
+    desc = 'ifneq-else 判断',
     }, {
         t('ifneq ('), i(1, 'var1'), t(', '), i(2, 'var2'), t({ ')', '' }),
         t('\t'), i(3),
@@ -70,6 +78,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'ifdef',
+    desc = 'ifdef 判断',
     }, {
         t('ifdef '), i(1, 'var'), t({ '', '' }),
         t('\t'), i(0),
@@ -81,6 +91,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'ifdef-else',
+    desc = 'ifdef-else 判断',
     }, {
         t('ifdef '), i(1, 'var'), t({ '', '' }),
         t('\t'), i(2),
@@ -94,6 +106,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'ifndef',
+    desc = 'ifndef 判断',
     }, {
         t('ifndef '), i(1, 'var'), t({ '', '' }),
         t('\t'), i(0),
@@ -105,6 +119,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'ifndef-else',
+    desc = 'ifndef-else 判断',
     }, {
         t('ifndef '), i(1, 'var'), t({ '', '' }),
         t('\t'), i(2),

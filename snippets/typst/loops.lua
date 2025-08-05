@@ -23,6 +23,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'for',
+    desc = 'for 循环',
     }, {
     t('for '), i(1, 'elem'), t(' in '), i(2, 'iterable'), t({ ' {', '' }),
     t('\t'), i(0),
@@ -34,6 +36,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'loop',
+    desc = 'loop 循环',
     }, {
     t({'while true {', ''}),
     t('\t'), i(0),
@@ -45,6 +49,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'while',
+    desc = 'while 循环',
     }, {
     t('while '), i(1, 'condition'), t({ ' {', '' }),
     t('\t'), i(0),

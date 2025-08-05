@@ -21,6 +21,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'definition',
+    desc = '定义环境',
 }, {
         t('\\begin{definition}['), i(1), t({']', ''}),
         t('\t'), i(0),
@@ -33,6 +35,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'theorem',
+    desc = '定理环境',
 }, {
         t('\\begin{theorem}['), i(1), t({']', ''}),
         t('\t'), i(0),
@@ -45,6 +49,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'proof',
+    desc = '证明环境',
 }, {
         t({'\\begin{proof}', ''}),
         t('\t'), i(0),
@@ -57,6 +63,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'lemma',
+    desc = '引理环境',
 }, {
         t('\\begin{lemma}['), i(1), t({']', ''}),
         t('\t'), i(0),
@@ -69,6 +77,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'proposition',
+    desc = '命题环境',
 }, {
         t('\\begin{proposition}['), i(1), t({']', ''}),
         t('\t'), i(0),
@@ -81,6 +91,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'corollary',
+    desc = '推论环境',
 }, {
         t('\\begin{corollary}['), i(1), t({']', ''}),
         t('\t'), i(0),
@@ -93,6 +105,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'conjecture',
+    desc = '猜想环境',
 }, {
         t('\\begin{conjecture}['), i(1), t({']', ''}),
         t('\t'), i(0),
@@ -105,6 +119,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'example',
+    desc = '例子环境',
 }, {
         t('\\begin{example}['), i(1), t({']', ''}),
         t('\t'), i(0),
@@ -117,6 +133,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'note',
+    desc = '备注环境',
 }, {
         t('\\begin{note}['), i(1), t({']', ''}),
         t('\t'), i(0),
@@ -129,18 +147,22 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'remark',
+    desc = '评论环境',
 }, {
         t('\\begin{remark}['), i(1), t({']', ''}),
         t('\t'), i(0),
         t({'', '\\end{remark}'}),
 })
 
---- 评论环境
+--- 情形环境
 module[#module+1] = s({
     trig = 'case',
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'case',
+    desc = '情形环境',
 }, {
         t('\\begin{case}['), i(1), t({']', ''}),
         t('\t'), i(0),
@@ -153,6 +175,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'image',
+    desc = '图片环境',
 }, {
         t('\\begin{figure} ['), c(1, { t('H'), t('h'), t('b'), t('t'), t('p'), }), t({']', ''}),
         t({'\t\\centering', ''}),

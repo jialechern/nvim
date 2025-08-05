@@ -20,7 +20,11 @@ module[#module+1] = s({
     trig = entry_point,
     wordTrig  = true,
     regTrig   = false,
+    name = 'entry-point',
+    desc = '程序入口点',
     -- snippetType = 'autosnippet',
+    name = 'entry-point',
+    desc = '程序入口点',
     }, {
     t('#!/usr/bin/env lua'),
     })

@@ -220,6 +220,12 @@ python .\config --set-symbols `
 
         - 函数
             为每个编程语言定义一种函数定义方式, 该函数应当注册在 `settings/variables/functions.lua` 下.
+        - 日志
+            为每个编程语言定义一种日志打印方式, 该函数应当注册在 `settings/variables/logger.lua` 下.
+        - 测试
+            为每个编程语言定义一种测试方式, 该函数应当注册在 `settings/variables/test.lua` 下.
+        - 打印
+            为每个编程语言定义一种打印方式, 该函数应当注册在 `settings/variables/print.lua` 下.
         - 每个文件类型的一个自动执行命令
             为每个文件类型定义一个自动执行命令, 该命令按键注册在 `settings/variables/auto-run.lua` 下
             ```lua

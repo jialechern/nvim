@@ -21,16 +21,21 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'use-strict',
+    desc = '启用严格模式',
 }, {
     t('\'use strict\';'),
 })
 
 --- 打印至终端
+local print_key = require('settings.variables.print').print_key
 module[#module+1] = s({
-    trig = 'print',
+    trig = print_key,
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'print',
+    desc = '打印至终端',
 }, {
         t('console.log('), i(0, 'message'), t(');'),
 })
@@ -41,6 +46,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'fmt-string',
+    desc = '模板字符串',
 }, {
     t('${'), i(1, 'content'), t('}'), i(0),
 })

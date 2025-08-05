@@ -21,6 +21,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'get-args',
+    desc = '解析命令行输入',
     }, {
     t({'import argparse', '', '', ''}),
 
@@ -55,6 +57,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'run',
+    desc = '调用外部命令',
     }, {
     t({'import subprocess',
     'import shlex', '', ''}),

@@ -21,7 +21,9 @@ module[#module+1] = s({
     trig = entry_point,
     wordTrig  = true,
     regTrig   = false,
-    snippetType = 'autosnippet',
+    -- snippetType = 'autosnippet',
+    name = 'entry-point',
+    desc = '程序入口点',
     }, {
         t({'# 远程服务器地址别名', ''}),
         t('Host '), i(1, 'host-alias'),

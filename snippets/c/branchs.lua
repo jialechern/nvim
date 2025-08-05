@@ -17,7 +17,14 @@ local module = {}
 --- 分支型语句
 local branch_keys = require('settings.variables.branchs').branch_keys
 
-module[#module+1] = s(branch_keys['if'], {
+module[#module+1] = s({
+    trig = branch_keys['if'],
+    wordTrig  = true,
+    regTrig   = false,
+    -- snippetType = 'autosnippet',
+    name = 'if',
+    desc = 'if 语句',
+    }, {
     t('if ('), i(1, 'condition'), t(') '), i(0), t(';')
     })
 
@@ -26,6 +33,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'if-else',
+    desc = 'if-else 语句',
     }, {
     t('if ('), i(1, 'condition'), t(') {'),
     t({'', '\t'}), i(2),
@@ -39,6 +48,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'if-elif',
+    desc = 'if-else if 语句',
     }, {
     t('if ('), i(1, 'condition1'), t(') {'),
     t({'', '\t'}), i(2),
@@ -52,6 +63,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'if-elif-else',
+    desc = 'if-elif-else 语句',
     }, {
     t('if ('), i(1, 'condition1'), t(') {'),
     t({'', '\t'}), i(2),
@@ -67,6 +80,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'switch',
+    desc = 'switch 语句',
     }, {
     t('switch ('), i(1, 'expr'), t({') {', ''}),
     t('\tcase '), i(2, 'case-value'), t({':', ''}),

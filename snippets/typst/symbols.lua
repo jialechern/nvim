@@ -21,6 +21,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'bb',
+    desc = '双线体字母',
 }, {
     t('bb('), i(1), t(')'), i(0),
 })
@@ -31,6 +33,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'cal',
+    desc = '花体字母',
 }, {
     t('cal('), i(1), t(')'), i(0),
 })
@@ -41,6 +45,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'alpha',
+    desc = '希腊字母 alpha',
 }, {
     t('alpha'),
 })
@@ -50,6 +56,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'beta',
+    desc = '希腊字母 beta',
 }, {
     t('beta'),
 })
@@ -59,6 +67,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'gamma',
+    desc = '希腊字母 gamma',
 }, {
     t('gamma'),
 })
@@ -68,6 +78,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'Gamma',
+    desc = '希腊字母 Gamma',
 }, {
     t('Gamma'),
 })
@@ -77,6 +89,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'phi',
+    desc = '希腊字母 phi',
 }, {
     t('phi.alt'),
 })
@@ -86,6 +100,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'var-phi',
+    desc = '希腊字母 phi (变量)',
 }, {
     t('phi'),
 })
@@ -95,6 +111,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'Phi',
+    desc = '希腊字母 Phi',
 }, {
     t('Phi'),
 })
@@ -104,6 +122,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'delta',
+    desc = '希腊字母 delta',
 }, {
     t('delta'),
 })
@@ -113,6 +133,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'Delta',
+    desc = '希腊字母 Delta',
 }, {
     t('Delta'),
 })
@@ -122,6 +144,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'epsilon',
+    desc = '希腊字母 epsilon',
 }, {
     t('epsilon.alt'),
 })
@@ -131,6 +155,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'var-epsilon',
+    desc = '希腊字母 epsilon (变量)',
 }, {
     t('epsilon'),
 })
@@ -140,6 +166,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'lambda',
+    desc = '希腊字母 lambda',
 }, {
     t('lambda'),
 })
@@ -149,6 +177,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'Lambda',
+    desc = '希腊字母 Lambda',
 }, {
     t('Lambda'),
 })
@@ -158,6 +188,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'omega',
+    desc = '希腊字母 omega',
 }, {
     t('omega'),
 })
@@ -167,6 +199,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'Omega',
+    desc = '希腊字母 Omega',
 }, {
     t('Omega'),
 })
@@ -176,6 +210,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'sigma',
+    desc = '希腊字母 sigma',
 }, {
     t('sigma'),
 })
@@ -185,6 +221,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'Sigma',
+    desc = '希腊字母 Sigma',
 }, {
     t('Sigma'),
 })
@@ -194,6 +232,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'tau',
+    desc = '希腊字母 tau',
 }, {
     t('tau'),
 })
@@ -203,6 +243,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'theta',
+    desc = '希腊字母 theta',
 }, {
     t('theta'),
 })
@@ -212,6 +254,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'Theta',
+    desc = '希腊字母 Theta',
 }, {
     t('Theta'),
 })
@@ -221,6 +265,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'var-theta',
+    desc = '希腊字母 theta (变量)',
 }, {
     t('theta.alt'),
 })
@@ -233,6 +279,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = '^',
+    desc = '上标',
 }, {
         t('^('), i(1), t(')'), i(0),
 })
@@ -242,6 +290,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = '_',
+    desc = '下标',
 }, {
         t('_('), i(1), t(')'), i(0),
 })
@@ -252,6 +302,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'overline',
+    desc = '上横线',
 }, {
         t('overline('), i(1), t(')'), i(0),
 })
@@ -262,6 +314,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'underline',
+    desc = '下横线',
 }, {
         t('underline('), i(1), t(')'), i(0),
 })
@@ -272,6 +326,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'overbrace',
+    desc = '上括号',
 }, {
         t('overbrace('), i(1), t(')'), i(0),
 })
@@ -282,6 +338,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'underbrace',
+    desc = '下括号',
 }, {
         t('underbrace('), i(1), t(')'), i(0),
 })
@@ -292,6 +350,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'hat',
+    desc = '上尖括号',
 }, {
         t('hat('), i(1), t(')'), i(0),
 })
@@ -302,6 +362,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'cohat',
+    desc = '上倒尖括号',
 }, {
         t('caron('), i(1), t(')'), i(0),
 })
@@ -312,6 +374,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'tilde',
+    desc = '上波浪号',
 }, {
         t('tilde('), i(1), t(')'), i(0),
 })
@@ -322,6 +386,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'arrow',
+    desc = '上标向右箭头',
 }, {
         t('arrow('), i(1), t(')'), i(0),
 })
@@ -334,6 +400,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'arrow.l.r.double.long',
+    desc = '充要条件1',
 }, {
         t('arrow.l.r.double.long'),
 })
@@ -344,6 +412,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'arrow.l.r.double',
+    desc = '充要条件2',
 }, {
         t('arrow.l.r.double'),
 })
@@ -354,6 +424,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'arrow.l.r.long',
+    desc = '充要条件3',
 }, {
         t('arrow.l.r.long'),
 })
@@ -364,6 +436,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'arrow.l.r',
+    desc = '充要条件4',
 }, {
         t('arrow.l.r'),
 })
@@ -374,6 +448,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'arrow.r.bar',
+    desc = '元素对应',
 }, {
         t('arrow.r.bar'),
 })
@@ -384,6 +460,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'arrow.l.long.bar',
+    desc = '元素对应(加长)',
 }, {
         t('arrow.r.long.bar'),
 })
@@ -394,6 +472,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'arrow.l.double.long',
+    desc = '必要条件1',
 }, {
         t('arrow.l.double.long'),
 })
@@ -404,6 +484,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'arrow.l.double',
+    desc = '必要条件2',
 }, {
         t('arrow.l.double'),
 })
@@ -414,6 +496,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'arrow.l.long',
+    desc = '必要条件3',
 }, {
         t('arrow.l.long'),
 })
@@ -424,6 +508,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'arrow.l',
+    desc = '必要条件4',
 }, {
         t('arrow.l'),
 })
@@ -434,6 +520,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'arrow.r.double.long',
+    desc = '充分条件1',
 }, {
         t('arrow.r.double.long'),
 })
@@ -444,6 +532,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'arrow.r.double',
+    desc = '充分条件2',
 }, {
         t('arrow.r.double'),
 })
@@ -454,6 +544,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'arrow.r.long',
+    desc = '充分条件3',
 }, {
         t('arrow.r.long'),
 })
@@ -464,6 +556,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'arrow.r',
+    desc = '充分条件4',
 }, {
         t('arrow.r'),
 })

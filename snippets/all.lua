@@ -20,6 +20,8 @@ local module = {}
 --     wordTrig  = true,
 --     regTrig   = false,
 --     snippetType = 'autosnippet',
+--     name = 'name',
+--     desc = 'desc',
 -- }, {
 -- })
 

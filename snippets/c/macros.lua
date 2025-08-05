@@ -22,6 +22,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = '# define',
+    desc = '宏定义',
     }, {
     t('#define '), i(0, 'macro-name')
     })
@@ -32,6 +34,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = '# undef',
+    desc = '注销宏定义',
     }, {
     t('#undef '), i(0, 'macro-name')
     })
@@ -42,6 +46,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'macro-if',
+    desc = '宏 if 判断',
     }, {
     t('# if '), i(1, 'condition'), t({'', ''}),
     t('\t'), i(0),
@@ -54,6 +60,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'macro-if-else',
+    desc = '宏 if-else 判断',
     }, {
     t('# if '), i(1, 'condition'), t({'', ''}),
     t('\t'), i(2),
@@ -68,6 +76,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'macro-if-elif',
+    desc = '宏 if-elif 判断',
     }, {
     t('# if '), i(1, 'condition'), t({'', ''}),
     t('\t'), i(2),
@@ -82,6 +92,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'macro-if-elif-else',
+    desc = '宏 if-elif-else 判断',
     }, {
     t('# if '), i(1, 'condition'), t({'', ''}),
     t('\t'), i(2),
@@ -98,6 +110,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = '# ifndef',
+    desc = '宏 ifndef 判断',
     }, {
     t('# ifndef '), i(1, 'macro-name'), t({'', ''}),
     t('# define '), i(2, 'macro-name'), t({'', ''}),
@@ -111,6 +125,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = '# ifdef',
+    desc = '宏 ifdef 判断',
     }, {
     t('# ifdef '), i(0, 'macro-name'),
     })

@@ -22,6 +22,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'math',
+    desc = '行内数学环境',
 }, {
         t('$'), i(0, 'inline-math'), t('$'),
 })
@@ -32,6 +34,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'Math',
+    desc = '行间数学环境',
 }, {
         t({'$$', ''}), i(0, 'block-math'), t({'', '$$'}),
 })
@@ -43,6 +47,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'left-right',
+    desc = '左右符号匹配',
 }, {
         t('\\left'), i(1), t('\\right)'), i(0),
 })
@@ -53,6 +59,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'sub',
+    desc = '下标',
 }, {
         t('_{'), i(1, 'sub'), t('}'), i(0),
 })
@@ -63,6 +71,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'sup',
+    desc = '上标',
 }, {
         t('^{'), i(1, 'sup'), t('}'), i(0),
 })
@@ -74,6 +84,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'chapter',
+    desc = '章',
 }, {
     t('\\chapter{'), i(1), t('}'), i(0),
 })
@@ -84,6 +96,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'section',
+    desc = '节',
 }, {
     t('\\section{'), i(1), t('}'), i(0),
 })
@@ -94,6 +108,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'subsection',
+    desc = '小节',
 }, {
     t('\\subsection{'), i(1), t('}'), i(0),
 })
@@ -104,6 +120,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'subsubsection',
+    desc = '小小节',
 }, {
     t('\\subsubsection{'), i(1), t('}'), i(0),
 })
@@ -114,6 +132,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'subsubsubsection',
+    desc = '小小小节',
 }, {
     t('\\subsubsubsection{'), i(1), t('}'), i(0),
 })
@@ -125,6 +145,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'center',
+    desc = '居中环境',
 }, {
         t({'\\begin{center}', ''}),
         t('\t'), i(0),
@@ -137,6 +159,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'equation',
+    desc = '有标号等式环境',
 }, {
         t({'\\begin{equation}', ''}),
         t('\t'), i(0),
@@ -149,6 +173,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'nolable-equation',
+    desc = '无标号等式环境',
 }, {
         t({'\\begin{equation*}', ''}),
         t('\t'), i(0),
@@ -161,6 +187,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'enumerate',
+    desc = '有序列表',
 }, {
         t({'\\begin{enumerate}', ''}),
         t('\t\\item '), i(0),
@@ -173,6 +201,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'itemize',
+    desc = '无序列表',
 }, {
         t({'\\begin{itemize}', ''}),
         t('\t\\item '), i(0),

@@ -22,6 +22,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = '一般注释',
+    desc = '一般注释',
     }, {
         t('-- ')
     })
@@ -33,6 +35,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = '文档注释',
+    desc = '文档注释',
     }, {
         t('--- '),
     })

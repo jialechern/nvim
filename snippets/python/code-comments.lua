@@ -22,6 +22,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = '一般注释',
+    desc = '一般注释',
     }, {
         t('# ')
     })
@@ -33,6 +35,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = '块注释',
+    desc = '块注释',
     }, {
         t('\'\'\' '), i(0), t(' \'\'\''),
     })
@@ -44,6 +48,8 @@ module[#module+1] = s({
     wordTrig  = true,
     regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = '块文档注释',
+    desc = '块文档注释',
     }, {
         t({'\"\"\"', ''}),
         t('\t'), i(0),
