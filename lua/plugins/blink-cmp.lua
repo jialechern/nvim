@@ -3,7 +3,8 @@
 return {
     'saghen/blink.cmp',
     -- 在读入或新建文件时加载
-    event = { 'BufReadPost', 'BufNewFile' },
+    -- event = { 'BufReadPost', 'BufNewFile' },
+    event = 'VimEnter',
     version = '1.*',
     -- build = 'cargo build --release',
     -- 增加命令补全菜单栏的语法高亮插件
