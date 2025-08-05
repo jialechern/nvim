@@ -55,10 +55,20 @@ map('n', '<C-S>', function ()
     vim.cmd('wq')
 end, { desc = "保存退出" })
 
--- 拼写检查
-map('n', '<LEADER>sc', function ()
-    vim.cmd('set spell!')
-end, { desc = "切换拼写检查" })
+-- 使用 <ESC> 取消搜索高亮
+map({ 'i', 'n', 's' }, '<esc>', function()
+  vim.cmd('noh')
+  return '<esc>'
+end, { expr = true, desc = '使用 <ESC> 键来取消搜索模式的高亮' })
+
+-- 添加撤消断点
+map('i', ',', ',<c-g>u')
+map('i', '.', '.<c-g>u')
+map('i', ';', ';<c-g>u')
+
+-- 自动缩进
+map({'v', 'x'}, '<', '<gv')
+map({'v', 'x'}, '>', '>gv')
 
 ----------------------------------- 设置跳转 -----------------------------------
 -- 跳转函数

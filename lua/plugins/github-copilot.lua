@@ -2,6 +2,8 @@
 
 return {
     'github/copilot.vim',            -- 插件仓库地址
+    -- 设置为 lazy 加载, 只有在文件类型完成加载后才加载
+    event = 'FileType',
     config = function()
     -- 禁用 Copilot 默认把 <Tab> 映射为“接受建议”
     vim.g.copilot_no_tab_map = true

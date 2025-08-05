@@ -2,6 +2,7 @@
 
 return {
     'saghen/blink.cmp',
+    -- 在读入或新建文件时加载
     event = { 'BufReadPost', 'BufNewFile' },
     version = '1.*',
     -- build = 'cargo build --release',

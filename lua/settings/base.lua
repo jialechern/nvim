@@ -1,10 +1,10 @@
 -- - settings-base.lua
 
 -- 设置字体
-vim.opt.guifont = "JetBrainsMono Nerd Font:h16"
+vim.opt.guifont = 'JetBrainsMono Nerd Font:h16'
 
 -- 禁用默认的启动界面
-vim.opt.shortmess:append("I")
+vim.opt.shortmess:append('I')
 
 -- 配置语法高亮
 vim.cmd('syntax on')
@@ -13,39 +13,36 @@ vim.cmd('filetype on')                                  -- 文档类型自动检
 
 
 -- Hint: use `:h <option>` to figure out the meaning if needed
-vim.opt.clipboard = 'unnamedplus'                       -- use system clipboard
+vim.opt.clipboard = 'unnamedplus'                       -- 使用系统剪贴板
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
-vim.opt.mouse = 'a'                                     -- allow the mouse to be used in Nvim
+vim.opt.mouse = 'a'                                     -- 启用鼠标支持
 
 -- Tab
-vim.opt.tabstop = 4                                     -- number of visual spaces per TAB
-vim.opt.softtabstop = 4                                 -- number of spacesin tab when editing
-vim.opt.shiftwidth = 4                                  -- insert 4 spaces on a tab
-vim.opt.expandtab = true                                -- tabs are spaces, mainly because of python
+vim.opt.tabstop = 4                                     -- tab 的宽度为 4 个空格
+vim.opt.softtabstop = 4                                 -- 当按下 Tab 键时，插入 4 个空格
+vim.opt.shiftwidth = 4                                  -- 自动缩进时使用 4 个空格
+vim.opt.expandtab = true                                -- 将 Tab 键转换为空格
 
 -- UI config
-vim.opt.number = true                                   -- show absolute number
-vim.opt.relativenumber = true                           -- add numbers to each line on the left side
-vim.opt.cursorline = true                               -- highlight cursor line underneath the cursor horizontally
-vim.opt.cursorcolumn = true                               -- highlight cursor column underneath the cursor horizontally
-vim.opt.splitbelow = true                               -- open new vertical split bottom
-vim.opt.splitright = true                               -- open new horizontal splits right
--- vim.opt.termguicolors = true                         -- enabl 24-bit RGB color in the TUI
-vim.opt.showmode = false                                -- we are experienced, wo don't need the "-- INSERT --" mode hint
+vim.opt.number = true                                   -- 开启行号
+vim.opt.relativenumber = true                           -- 开启相对行号
+vim.opt.cursorline = true                               -- 显示光标所在行
+vim.opt.cursorcolumn = true                             -- 高亮显示光标所在列
+vim.opt.splitbelow = true                               -- 打开新水平分割时，新的窗口在下方
+vim.opt.splitright = true                               -- 打开新垂直分割时，新的窗口在右侧
+-- vim.opt.termguicolors = true                         -- 使用 24 bit rgb 颜色
+vim.opt.showmode = false                                -- 是否显示模式（insert, normal 等）
 
 -- Searching
 vim.opt.incsearch = true                                -- search as characters are entered
-vim.opt.hlsearch = false                                -- do not highlight matches
-vim.opt.ignorecase = true                               -- ignore case in searches by default
-vim.opt.smartcase = true                                -- but make it case sensitive if an uppercase is entered
+vim.opt.hlsearch = true                                -- 取消高亮搜索匹配结果
+vim.opt.ignorecase = true                               -- 搜索时忽略大小写
+vim.opt.smartcase = true                                -- 如果搜索包含大写字母，则不忽略大小写
 
 -- begin 设置光标跳转逻辑
 vim.opt.jumpoptions = "stack"
 -- end 设置光标跳转逻辑
 
-
--- MarkDown
--- vim.g.mkdp_auto_start = 1
 
 vim.g.mkdp_browser = 'firefox'
 
@@ -59,7 +56,6 @@ vim.api.nvim_set_hl(0, 'StatusLine', { bg = 'NONE' })
 -- 设置打印机模式
 vim.opt.scrolloff=10
 
--- begin 配置折叠功能
 -- 设置自动保存折叠信息
 vim.api.nvim_exec([[
   augroup remember_folds
@@ -68,5 +64,14 @@ vim.api.nvim_exec([[
     autocmd BufWinEnter * silent! loadview
   augroup END
 ]], false)
--- end 配置折叠功能
+
+-- 设置自动保存
+-- vim.opt.autowrite = true
+
+-- 拼写检查
+vim.opt.spell = true
+-- 设置拼写检查语言
+vim.opt.spelllang = { 'en', 'cjk' }
+-- 支持骆驼拼写
+vim.opt.spelloptions = 'camel'
 

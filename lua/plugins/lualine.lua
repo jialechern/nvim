@@ -1,6 +1,8 @@
 -- lualine.lua
 return {
     'nvim-lualine/lualine.nvim',
+    -- 进入 neovim 时加载 lualine
+    event = 'VimEnter',
     config = function()
         require('lualine').setup({
             options = {

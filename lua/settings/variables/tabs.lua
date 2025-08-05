@@ -4,35 +4,35 @@
 local module = {}
 
 -- 引入引导标签也控制的按键
-local tab_leader = '|'
+local tab_leader = '<C-t>'
 
 module.tab_leader = tab_leader
 
 local function get_key(v)
     if v == 'edit' then
-        return tab_leader .. 'E'
+        return tab_leader .. 'e'
     elseif v == 'list' then
-        return tab_leader .. 'S'
+        return tab_leader .. 's'
     elseif v == 'new' then
-        return tab_leader .. 'C'
+        return tab_leader .. 'c'
     elseif v == 'close' then
-        return tab_leader .. 'X'
+        return tab_leader .. 'x'
     elseif v == 'only' then
-        return tab_leader .. 'O'
+        return tab_leader .. 'o'
     elseif v == 'T' then
-        return tab_leader .. 'T'
+        return tab_leader .. 't'
     elseif v == 'next' then
-        return tab_leader .. 'N'
+        return tab_leader .. 'n'
     elseif v == 'previous' then
-        return tab_leader .. 'P'
+        return tab_leader .. 'p'
     elseif v == 'goto' then
-        return tab_leader .. 'G'
+        return tab_leader .. 'g'
     elseif v == 'move' then
-        return tab_leader .. 'M'
+        return tab_leader .. 'm'
     elseif v == 'first' then
-        return tab_leader .. 'F'
+        return tab_leader .. 'f'
     elseif v == 'last' then
-        return tab_leader .. 'L'
+        return tab_leader .. 'l'
     else
         return nil
     end

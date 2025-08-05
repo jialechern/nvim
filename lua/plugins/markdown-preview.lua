@@ -1,6 +1,8 @@
 -- markdown-preview.lua
 return {
     'iamcco/markdown-preview.nvim',
+    -- 在确定文件类型后构建
+    event = 'FileType',
     build = function()
         -- 跨平台构建命令，带错误处理
         local build_cmd = [[cd app && npm install || yarn install]]

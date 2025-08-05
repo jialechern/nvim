@@ -2,6 +2,8 @@
 
 return {
     'L3MON4D3/LuaSnip',
+    -- 在读入或新建文件时加载
+    event = { 'BufReadPost', 'BufNewFile' },
     -- 使用 v2 后的最新版本
     version = 'v2.*', -- Replace <CurrentMajor> by the latest released major (first number of latest release)
     -- install jsregexp (optional!).

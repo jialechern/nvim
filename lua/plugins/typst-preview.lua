@@ -1,7 +1,8 @@
 -- typst-preview.lua
 return {
     'chomosuke/typst-preview.nvim',
-    lazy = false, -- 非延迟加载，插件始终可用
+    -- 在确定文件类型后构建
+    event = 'FileType',
     version = '1.*', -- 使用最新主要版本
     build = function() -- 添加自动依赖检查
         local dependencies = { 'tinymist', 'websocat' }
