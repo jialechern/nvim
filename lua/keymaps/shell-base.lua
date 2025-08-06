@@ -12,11 +12,14 @@ local langs = {
     'bash',
 }
 
---- 自动运行
+-- 设置解释器
+for _, lang in ipairs(langs) do
+    vim.bo.makeprg = lang .. ' ' .. '%:p'
+end
 
+--- 自动运行
 for _, lang in ipairs(langs) do
     map('n', autocmd_key, function ()
-        vim.bo.makeprg = lang .. ' ' .. '%:p'
         vim.cmd('silent write')
         vim.cmd('make')
     end, { desc = '运行 ' .. lang .. ' 语言文件' })

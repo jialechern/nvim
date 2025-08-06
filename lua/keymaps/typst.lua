@@ -5,6 +5,9 @@
 local map = require('utils.map').map
 local autocmd_key = require('settings.variables.auto-run').autocmd_key
 
+-- 设置编译器
+vim.bo.makeprg = 'typst'
+
 --- 自动预览
 map('n', autocmd_key, function ()
     vim.cmd('silent TypstPreview')

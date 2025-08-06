@@ -5,9 +5,11 @@
 local map = require('utils.map').map
 local autocmd_key = require('settings.variables.auto-run').autocmd_key
 
+-- 设置编译器
+vim.bo.makeprg = 'latexmk'
+
 --- 自动编译
 map('n', autocmd_key, function ()
-    vim.bo.makeprg = 'latexmk'
     vim.cmd('silent write')
     vim.cmd('make')
 end, { desc = '编译 tex 语言文件' })

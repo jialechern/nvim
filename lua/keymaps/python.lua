@@ -5,9 +5,11 @@
 local map = require('utils.map').map
 local autocmd_key = require('settings.variables.auto-run').autocmd_key
 
+-- 设置解释器
+vim.cmd('set makeprg=python3\\ %')
+
 --- 自动解释运行
 map('n', autocmd_key, function ()
-    vim.cmd('set makeprg=python3\\ %')
     vim.cmd('silent write')
     vim.cmd('make')
 end, { desc = '运行 python 语言文件' })

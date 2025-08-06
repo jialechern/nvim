@@ -28,7 +28,7 @@ module[#module+1] = s({
     }, {
     t('for '), i(1, 'elem'), t(' in '), i(2, 'iterable'), t({ ' :', '' }),
     t('\t'), i(0),
-    t({ '', '# end if' }),
+    t({ '', '# end for' }),
     })
 
 module[#module+1] = s({
