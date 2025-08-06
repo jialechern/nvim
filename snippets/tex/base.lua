@@ -28,12 +28,34 @@ module[#module+1] = s({
         t('$'), i(0, 'inline-math'), t('$'),
 })
 
+module[#module+1] = s({
+    trig = _G.Leader .. '$',
+    -- wordTrig  = true,
+    -- regTrig   = false,
+    snippetType = 'autosnippet',
+    name = 'math',
+    desc = '行内数学环境',
+}, {
+        t('$'), i(0, 'inline-math'), t('$'),
+})
+
 -- 行间数学公式
 module[#module+1] = s({
     trig = 'Math',
     -- wordTrig  = true,
     -- regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'Math',
+    desc = '行间数学环境',
+}, {
+        t({'$$', ''}), i(0, 'block-math'), t({'', '$$'}),
+})
+
+module[#module+1] = s({
+    trig = _G.CoLeader .. '$',
+    -- wordTrig  = true,
+    -- regTrig   = false,
+    snippetType = 'autosnippet',
     name = 'Math',
     desc = '行间数学环境',
 }, {
@@ -65,12 +87,34 @@ module[#module+1] = s({
         t('_{'), i(1, 'sub'), t('}'), i(0),
 })
 
+module[#module+1] = s({
+    trig = _G.Leader .. 'D',
+    -- wordTrig  = true,
+    -- regTrig   = false,
+    snippetType = 'autosnippet',
+    name = 'sub',
+    desc = '下标',
+}, {
+        t('_{'), i(1, 'sub'), t('}'), i(0),
+})
+
 -- 上标
 module[#module+1] = s({
     trig = 'sup',
     -- wordTrig  = true,
     -- regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'sup',
+    desc = '上标',
+}, {
+        t('^{'), i(1, 'sup'), t('}'), i(0),
+})
+
+module[#module+1] = s({
+    trig = _G.Leader .. 'U',
+    -- wordTrig  = true,
+    -- regTrig   = false,
+    snippetType = 'autosnippet',
     name = 'sup',
     desc = '上标',
 }, {
@@ -90,12 +134,34 @@ module[#module+1] = s({
     t('\\chapter{'), i(1), t('}'), i(0),
 })
 
+module[#module+1] = s({
+    trig = _G.CoLeader .. '0',
+    -- wordTrig  = true,
+    -- regTrig   = false,
+    snippetType = 'autosnippet',
+    name = 'chapter',
+    desc = '章',
+}, {
+    t('\\chapter{'), i(1), t('}'), i(0),
+})
+
 -- 节
 module[#module+1] = s({
     trig = 'section',
     -- wordTrig  = true,
     -- regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'section',
+    desc = '节',
+}, {
+    t('\\section{'), i(1), t('}'), i(0),
+})
+
+module[#module+1] = s({
+    trig = _G.CoLeader .. '1',
+    -- wordTrig  = true,
+    -- regTrig   = false,
+    snippetType = 'autosnippet',
     name = 'section',
     desc = '节',
 }, {
@@ -114,6 +180,17 @@ module[#module+1] = s({
     t('\\subsection{'), i(1), t('}'), i(0),
 })
 
+module[#module+1] = s({
+    trig = _G.CoLeader .. '2',
+    -- wordTrig  = true,
+    -- regTrig   = false,
+    snippetType = 'autosnippet',
+    name = 'subsection',
+    desc = '小节',
+}, {
+    t('\\subsection{'), i(1), t('}'), i(0),
+})
+
 -- 小小节
 module[#module+1] = s({
     trig = 'subsubsection',
@@ -126,12 +203,34 @@ module[#module+1] = s({
     t('\\subsubsection{'), i(1), t('}'), i(0),
 })
 
+module[#module+1] = s({
+    trig = _G.CoLeader .. '3',
+    -- wordTrig  = true,
+    -- regTrig   = false,
+    snippetType = 'autosnippet',
+    name = 'subsubsection',
+    desc = '小小节',
+}, {
+    t('\\subsubsection{'), i(1), t('}'), i(0),
+})
+
 -- 小小小节
 module[#module+1] = s({
     trig = 'subsubsubsection',
     -- wordTrig  = true,
     -- regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'subsubsubsection',
+    desc = '小小小节',
+}, {
+    t('\\subsubsubsection{'), i(1), t('}'), i(0),
+})
+
+module[#module+1] = s({
+    trig = _G.CoLeader .. '4',
+    -- wordTrig  = true,
+    -- regTrig   = false,
+    snippetType = 'autosnippet',
     name = 'subsubsubsection',
     desc = '小小小节',
 }, {

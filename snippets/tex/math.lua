@@ -28,6 +28,17 @@ module[#module+1] = s({
     t('\\left|'), i(1), t('\\right|'), i(0),
 })
 
+module[#module+1] = s({
+    trig = _G.Leader .. 'abs',
+    -- wordTrig  = true,
+    -- regTrig   = false,
+    snippetType = 'autosnippet',
+    name = 'abs',
+    desc = '绝对值',
+}, {
+    t('\\left|'), i(1), t('\\right|'), i(0),
+})
+
 -- 核
 module[#module+1] = s({
     trig = 'ker',
@@ -100,12 +111,34 @@ module[#module+1] = s({
         t('\\frac{'), i(1), t('}{'), i(2), t('}'), i(0),
 })
 
+module[#module+1] = s({
+    trig = _G.Leader .. 'frac',
+    -- wordTrig  = true,
+    -- regTrig   = false,
+    snippetType = 'autosnippet',
+    name = 'frac',
+    desc = '相对尺度分式',
+}, {
+        t('\\frac{'), i(1), t('}{'), i(2), t('}'), i(0),
+})
+
 -- 绝对尺度分式
 module[#module+1] = s({
     trig = 'dfrac',
     -- wordTrig  = true,
     -- regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'dfrac',
+    desc = '绝对尺度分式',
+}, {
+        t('\\dfrac{'), i(1), t('}{'), i(2), t('}'), i(0),
+})
+
+module[#module+1] = s({
+    trig = _G.Leader .. 'dfrac',
+    -- wordTrig  = true,
+    -- regTrig   = false,
+    snippetType = 'autosnippet',
     name = 'dfrac',
     desc = '绝对尺度分式',
 }, {
@@ -124,12 +157,34 @@ module[#module+1] = s({
         t('\\sum_{'), i(1), t('}'), i(0),
 })
 
+module[#module+1] = s({
+    trig = _G.Leader .. 'sum',
+    -- wordTrig  = true,
+    -- regTrig   = false,
+    snippetType = 'autosnippet',
+    name = 'sum',
+    desc = '求和',
+}, {
+        t('\\sum_{'), i(1), t('}'), i(0),
+})
+
 -- 极限
 module[#module+1] = s({
     trig = 'lim',
     -- wordTrig  = true,
     -- regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'lim',
+    desc = '极限',
+}, {
+        t('\\lim_{'), i(1), t('}'), i(0),
+})
+
+module[#module+1] = s({
+    trig = _G.Leader .. 'lim',
+    -- wordTrig  = true,
+    -- regTrig   = false,
+    snippetType = 'autosnippet',
     name = 'lim',
     desc = '极限',
 }, {
@@ -364,6 +419,18 @@ module[#module+1] = s({
     t('\\parallel'),
 })
 
+module[#module+1] = s({
+    trig = _G.Leader .. 'pl',
+    -- wordTrig  = true,
+    -- regTrig   = false,
+    snippetType = 'autosnippet',
+    name = 'parallel',
+    desc = '平行',
+}, {
+    t('\\parallel'),
+})
+
+
 --- 希腊字母
 module[#module+1] = s({
     trig = 'alpha',
@@ -515,12 +582,36 @@ module[#module+1] = s({
         t('\\left(\\begin{array}{c}'), i(0), t('\\end{array}\\right)'),
 })
 
+module[#module+1] = s({
+    trig = _G.Leader .. 'vec',
+    -- wordTrig  = true,
+    -- regTrig   = false,
+    snippetType = 'autosnippet',
+    name = 'vector',
+    desc = '向量',
+}, {
+        t('\\left(\\begin{array}{c}'), i(0), t('\\end{array}\\right)'),
+})
+
 -- 矩阵
 module[#module+1] = s({
     trig = 'mat',
     -- wordTrig  = true,
     -- regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'matrix',
+    desc = '矩阵',
+}, {
+        t('\\left(\\begin{array}{'), i(1), t({'}', ''}),
+        t('\t'), i(0),
+        t({'', '\\end{array}\\right)'}),
+})
+
+module[#module+1] = s({
+    trig = _G.Leader .. 'mat',
+    -- wordTrig  = true,
+    -- regTrig   = false,
+    snippetType = 'autosnippet',
     name = 'matrix',
     desc = '矩阵',
 }, {

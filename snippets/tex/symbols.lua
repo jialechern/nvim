@@ -28,12 +28,34 @@ module[#module+1] = s({
     t('\\left\\langle'), i(1), t('\\right\\rangle'), i(0),
 })
 
+module[#module+1] = s({
+    trig = _G.Leader .. 'inner',
+    -- wordTrig  = true,
+    -- regTrig   = false,
+    snippetType = 'autosnippet',
+    name = 'inner',
+    desc = '内积',
+}, {
+    t('\\left\\langle'), i(1), t('\\right\\rangle'), i(0),
+})
+
 -- 小括号
 module[#module+1] = s({
     trig = 'tuple',
     -- wordTrig  = true,
     -- regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'tuple',
+    desc = '元组',
+}, {
+    t('\\left('), i(1), t('\\right)'), i(0),
+})
+
+module[#module+1] = s({
+    trig = _G.Leader .. 'tuple',
+    -- wordTrig  = true,
+    -- regTrig   = false,
+    snippetType = 'autosnippet',
     name = 'tuple',
     desc = '元组',
 }, {
@@ -52,12 +74,34 @@ module[#module+1] = s({
     t('\\left['), i(1), t('\\right]'), i(0),
 })
 
+module[#module+1] = s({
+    trig = _G.Leader .. 'list',
+    -- wordTrig  = true,
+    -- regTrig   = false,
+    snippetType = 'autosnippet',
+    name = 'list',
+    desc = '列表',
+}, {
+    t('\\left['), i(1), t('\\right]'), i(0),
+})
+
 -- 大括号
 module[#module+1] = s({
     trig = 'set',
     -- wordTrig  = true,
     -- regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'set',
+    desc = '集合',
+}, {
+    t('\\left\\{'), i(1), t('\\right\\}'), i(0),
+})
+
+module[#module+1] = s({
+    trig = _G.Leader .. 'set',
+    -- wordTrig  = true,
+    -- regTrig   = false,
+    snippetType = 'autosnippet',
     name = 'set',
     desc = '集合',
 }, {
@@ -71,6 +115,17 @@ module[#module+1] = s({
     -- wordTrig  = true,
     -- regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'bb',
+    desc = '双线体',
+}, {
+    t('\\mathbb{'), i(1), t('}'), i(0),
+})
+
+module[#module+1] = s({
+    trig = _G.Leader .. 'bb',
+    -- wordTrig  = true,
+    -- regTrig   = false,
+    snippetType = 'autosnippet',
     name = 'bb',
     desc = '双线体',
 }, {
@@ -144,6 +199,17 @@ module[#module+1] = s({
     -- wordTrig  = true,
     -- regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'cal',
+    desc = '花体字母',
+}, {
+    t('\\mathcal{'), i(1), t('}'), i(0),
+})
+
+module[#module+1] = s({
+    trig = _G.Leader .. 'cal',
+    -- wordTrig  = true,
+    -- regTrig   = false,
+    snippetType = 'autosnippet',
     name = 'cal',
     desc = '花体字母',
 }, {
@@ -228,6 +294,17 @@ module[#module+1] = s({
     -- wordTrig  = true,
     -- regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'rm',
+    desc = '罗马正体',
+}, {
+    t('\\mathrm{'), i(1), t('}'), i(0),
+})
+
+module[#module+1] = s({
+    trig = _G.Leader .. 'rm',
+    -- wordTrig  = true,
+    -- regTrig   = false,
+    snippetType = 'autosnippet',
     name = 'rm',
     desc = '罗马正体',
 }, {
