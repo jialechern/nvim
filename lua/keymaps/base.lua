@@ -7,17 +7,8 @@ local map_by_modes = require('utils.map').map_by_modes
 
 ------------------------------ 设置基本按键映射 ----------------------------
 
---- 设置领导键转译
--- 转译 CoLeader
-map('i', _G.CoLeader .. _G.End, _G.CoLeader, { desc = "将副领导键转义为自身" })
-map('i', _G.CoLeader .. _G.CoLeader .. _G.End, _G.CoLeader .. _G.CoLeader, { desc = "将副领导键转义为自身" })
-
--- 转译 LEADER
-map('i', '<LEADER>' .. _G.End, '<LEADER>', { desc = "将领导键转义为自身" })
-map('i', '<LEADER><LEADER>' .. _G.End, '<LEADER><LEADER>', { desc = "将领导键转义为自身" })
-
 -- 设置进入一般模式的快捷键
-map_by_modes({ 'i', 'v', 'x' }, '<C-_>', function ()
+map_by_modes({ 'i', 'v', 'x', 's', 'o' }, '<C-_>', function ()
     vim.cmd('stopinsert')
 end, { desc = "一个更加常用的进入 normal 模式的快捷键" })
 
@@ -46,15 +37,6 @@ map_by_modes({ 'n', 'x' }, 'K', function ()
     return fast_move_by_lines .. 'k'
 end, { desc = "设置 K 为快速向上移动, 移动行数可在 init.lua 中设置", expr = true })
 
--- 设置快速退出快捷键
-map('n', '<C-D>', function ()
-    vim.cmd('q!')
-end, { desc = "强制退出" })
-
-map('n', '<C-S>', function ()
-    vim.cmd('wq')
-end, { desc = "保存退出" })
-
 -- 使用 <ESC> 取消搜索高亮
 map({ 'i', 'n', 's' }, '<esc>', function()
   vim.cmd('noh')
@@ -70,21 +52,7 @@ map('i', ';', ';<c-g>u')
 map({'v', 'x'}, '<', '<gv')
 map({'v', 'x'}, '>', '>gv')
 
------------------------------------ 设置跳转 -----------------------------------
--- 跳转函数
-local function jump_to_next() return
-    '<Esc>/' .. _G.Next .. '<CR>:nohlsearch<CR>c' .. _G.Next:len() .. 'l'
-end
-
--- 跳转快捷键
-map('i', '<LEADER>;', jump_to_next, { expr = true, desc = "使得光标跳转到下一个锚点" })
-map('i', '<LEADER>:', jump_to_next, { expr = true, desc = "使得光标跳转到下一个锚点" })
-
-map('i', '<C-c>', function ()
-    vim.cmd('normal! mc:s/' .. _G.Next .. '//g\r`ca')
-end, { desc = "清除当前行中所有的跳转锚点" })
-
------------------------------------- 其它映射 -----------------------------------
+--- 其它映射
 
 map('c', _G.CoLeader .. '%%', function ()
     local file_path = vim.fn.expand('%:h')

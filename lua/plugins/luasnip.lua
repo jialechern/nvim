@@ -84,8 +84,7 @@ return {
         -- 清除当前 snippet 还未使用的 insert_node
         map({ 'i', 'n', 'x', 's', 'v', 'o' }, '<C-c>', function()
             luasnip.unlink_current()
-            return '<C-c>'
-        end, { expr = true, desc = "清除当前 snippet 还未使用的 insert_node (break)" })
+        end, { desc = "清除当前 snippet 还未使用的 insert_node" })
 
         -- 可选: 清理历史, 以免内存占用过大
         -- vim.cmd([[autocmd InsertLeave * silent! lua require("luasnip").cleanup()]])

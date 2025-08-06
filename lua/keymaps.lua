@@ -4,7 +4,7 @@
 require('keymaps.base')
 
 -- 设置成对符号的自动配对
-require('keymaps.symbols')
+-- require('keymaps.symbols')
 
 -- 设置代码折叠快捷键
 require('keymaps.code-fold')
