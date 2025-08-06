@@ -11,6 +11,6 @@ vim.bo.makeprg = 'cargo'
 --- 自动编译运行
 map('n', autocmd_key, function ()
     vim.cmd('silent write')
-    vim.cmd('make')
+    vim.cmd('make run')
 end, { desc = '编译运行 rust 项目' })
 

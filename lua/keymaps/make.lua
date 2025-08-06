@@ -6,11 +6,11 @@ local map = require('utils.map').map
 local autocmd_key = require('settings.variables.auto-run').autocmd_key
 
 -- 设置解释器
-vim.bo.makeprg = 'make -f %:p'
+vim.bo.makeprg = 'make'
 
 --- 自动运行
 map('n', autocmd_key, function ()
     vim.cmd('silent write')
-    vim.cmd('make')
+    vim.cmd('make -f %:p')
 end, { desc = '运行 lua 语言文件' })
 

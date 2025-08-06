@@ -14,14 +14,14 @@ local langs = {
 
 -- 设置解释器
 for _, lang in ipairs(langs) do
-    vim.bo.makeprg = lang .. ' ' .. '%:p'
+    vim.bo.makeprg = lang
 end
 
 --- 自动运行
 for _, lang in ipairs(langs) do
     map('n', autocmd_key, function ()
         vim.cmd('silent write')
-        vim.cmd('make')
+        vim.cmd('make %:p')
     end, { desc = '运行 ' .. lang .. ' 语言文件' })
 end
 
