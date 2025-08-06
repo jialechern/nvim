@@ -27,12 +27,34 @@ module[#module+1] = s({
     t('bb('), i(1), t(')'), i(0),
 })
 
+module[#module+1] = s({
+    trig = _G.Leader .. 'bb',
+    -- wordTrig  = true,
+    -- regTrig   = false,
+    snippetType = 'autosnippet',
+    name = 'bb',
+    desc = '双线体字母',
+}, {
+    t('bb('), i(1), t(')'), i(0),
+})
+
 --- 花字母
 module[#module+1] = s({
     trig = 'cal',
     -- wordTrig  = true,
     -- regTrig   = false,
     -- snippetType = 'autosnippet',
+    name = 'cal',
+    desc = '花体字母',
+}, {
+    t('cal('), i(1), t(')'), i(0),
+})
+
+module[#module+1] = s({
+    trig = _G.Leader .. 'cal',
+    -- wordTrig  = true,
+    -- regTrig   = false,
+    snippetType = 'autosnippet',
     name = 'cal',
     desc = '花体字母',
 }, {
