@@ -8,7 +8,7 @@ local luasnip = require('luasnip')
 local s = luasnip.snippet
 local t = luasnip.text_node
 local i = luasnip.insert_node
-local c = luasnip.choice_node
+-- local c = luasnip.choice_node
 -- local d  = ls.dynamic_node
 
 --- 模块定义
@@ -20,8 +20,8 @@ local func_key = require('settings.variables.functions').func_key
 
 module[#module+1] = s({
     trig = func_key,
-    wordTrig  = true,
-    regTrig   = false,
+    -- wordTrig  = true,
+    -- regTrig   = false,
     -- snippetType = 'autosnippet',
     name = '函数定义',
     desc = '函数定义模板',

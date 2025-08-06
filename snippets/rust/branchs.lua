@@ -19,8 +19,8 @@ local branch_keys = require('settings.variables.branchs').branch_keys
 
 module[#module+1] = s({
     trig = branch_keys['if'],
-    wordTrig  = true,
-    regTrig   = false,
+    -- wordTrig  = true,
+    -- regTrig   = false,
     -- snippetType = 'autosnippet',
     name = 'if',
     desc = 'if 判断',
@@ -32,8 +32,8 @@ module[#module+1] = s({
 
 module[#module+1] = s({
     trig = branch_keys['if-else'],
-    wordTrig  = true,
-    regTrig   = false,
+    -- wordTrig  = true,
+    -- regTrig   = false,
     -- snippetType = 'autosnippet',
     name = 'if-else',
     desc = 'if-else 判断',
@@ -47,8 +47,8 @@ module[#module+1] = s({
 
 module[#module+1] = s({
     trig = branch_keys['if-else_if'],
-    wordTrig  = true,
-    regTrig   = false,
+    -- wordTrig  = true,
+    -- regTrig   = false,
     -- snippetType = 'autosnippet',
     name = 'if-elif',
     desc = 'if-elif 判断',
@@ -62,8 +62,8 @@ module[#module+1] = s({
 
 module[#module+1] = s({
     trig = branch_keys['if-else_if-else'],
-    wordTrig  = true,
-    regTrig   = false,
+    -- wordTrig  = true,
+    -- regTrig   = false,
     -- snippetType = 'autosnippet',
     name = 'if-elif-else',
     desc = 'if-elif-else 判断',
@@ -79,8 +79,8 @@ module[#module+1] = s({
 
 module[#module+1] = s({
     trig = branch_keys['match'],
-    wordTrig  = true,
-    regTrig   = false,
+    -- wordTrig  = true,
+    -- regTrig   = false,
     -- snippetType = 'autosnippet',
     name = 'match',
     desc = 'match 分支',

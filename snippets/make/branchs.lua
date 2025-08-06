@@ -8,7 +8,7 @@ local luasnip = require('luasnip')
 local s = luasnip.snippet
 local t = luasnip.text_node
 local i = luasnip.insert_node
-local c = luasnip.choice_node
+-- local c = luasnip.choice_node
 -- local d  = luasnip.dynamic_node
 -- local sn = luasnip.snippet_node
 
@@ -19,8 +19,8 @@ local module = {}
 
 module[#module+1] = s({
     trig = 'ifeq',
-    wordTrig  = true,
-    regTrig   = false,
+    -- wordTrig  = true,
+    -- regTrig   = false,
     -- snippetType = 'autosnippet',
     name = 'ifeq',
     desc = 'ifeq 判断',
@@ -32,8 +32,8 @@ module[#module+1] = s({
 
 module[#module+1] = s({
     trig = 'ifneq',
-    wordTrig  = true,
-    regTrig   = false,
+    -- wordTrig  = true,
+    -- regTrig   = false,
     -- snippetType = 'autosnippet',
     name = 'ifneq',
     desc = 'ifneq 判断',
@@ -45,8 +45,8 @@ module[#module+1] = s({
 
 module[#module+1] = s({
     trig = 'ifeq-else',
-    wordTrig  = true,
-    regTrig   = false,
+    -- wordTrig  = true,
+    -- regTrig   = false,
     -- snippetType = 'autosnippet',
     name = 'ifeq-else',
     desc = 'ifeq-else 判断',
@@ -60,8 +60,8 @@ module[#module+1] = s({
 
 module[#module+1] = s({
     trig = 'ifneq-else',
-    wordTrig  = true,
-    regTrig   = false,
+    -- wordTrig  = true,
+    -- regTrig   = false,
     -- snippetType = 'autosnippet',
     name = 'ifneq-else',
     desc = 'ifneq-else 判断',
@@ -75,8 +75,8 @@ module[#module+1] = s({
 
 module[#module+1] = s({
     trig = 'ifdef',
-    wordTrig  = true,
-    regTrig   = false,
+    -- wordTrig  = true,
+    -- regTrig   = false,
     -- snippetType = 'autosnippet',
     name = 'ifdef',
     desc = 'ifdef 判断',
@@ -88,8 +88,8 @@ module[#module+1] = s({
 
 module[#module+1] = s({
     trig = 'ifdef-else',
-    wordTrig  = true,
-    regTrig   = false,
+    -- wordTrig  = true,
+    -- regTrig   = false,
     -- snippetType = 'autosnippet',
     name = 'ifdef-else',
     desc = 'ifdef-else 判断',
@@ -103,8 +103,8 @@ module[#module+1] = s({
 
 module[#module+1] = s({
     trig = 'ifndef',
-    wordTrig  = true,
-    regTrig   = false,
+    -- wordTrig  = true,
+    -- regTrig   = false,
     -- snippetType = 'autosnippet',
     name = 'ifndef',
     desc = 'ifndef 判断',
@@ -116,8 +116,8 @@ module[#module+1] = s({
 
 module[#module+1] = s({
     trig = 'ifndef-else',
-    wordTrig  = true,
-    regTrig   = false,
+    -- wordTrig  = true,
+    -- regTrig   = false,
     -- snippetType = 'autosnippet',
     name = 'ifndef-else',
     desc = 'ifndef-else 判断',

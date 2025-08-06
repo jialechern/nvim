@@ -19,8 +19,8 @@ local entry_point = require('settings.variables.entry-points').entry_point
 
 module[#module+1] = s({
     trig = entry_point,
-    wordTrig  = true,
-    regTrig   = false,
+    -- wordTrig  = true,
+    -- regTrig   = false,
     -- snippetType = 'autosnippet',
     name = 'entry-point',
     desc = '程序入口点',

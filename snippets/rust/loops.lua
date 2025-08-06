@@ -8,7 +8,7 @@ local luasnip = require('luasnip')
 local s = luasnip.snippet
 local t = luasnip.text_node
 local i = luasnip.insert_node
-local c = luasnip.choice_node
+-- local c = luasnip.choice_node
 -- local d  = ls.dynamic_node
 
 --- 模块定义
@@ -19,8 +19,8 @@ local loop_keys = require('settings.variables.loops').loop_keys
 
 module[#module+1] = s({
     trig = loop_keys['for'],
-    wordTrig  = true,
-    regTrig   = false,
+    -- wordTrig  = true,
+    -- regTrig   = false,
     -- snippetType = 'autosnippet',
     name = 'for',
     desc = 'for 循环',
@@ -32,8 +32,8 @@ module[#module+1] = s({
 
 module[#module+1] = s({
     trig = loop_keys['while'],
-    wordTrig  = true,
-    regTrig   = false,
+    -- wordTrig  = true,
+    -- regTrig   = false,
     -- snippetType = 'autosnippet',
     name = 'while',
     desc = 'while 循环',
@@ -45,8 +45,8 @@ module[#module+1] = s({
 
 module[#module+1] = s({
     trig = loop_keys['loop'],
-    wordTrig  = true,
-    regTrig   = false,
+    -- wordTrig  = true,
+    -- regTrig   = false,
     -- snippetType = 'autosnippet',
     name = 'loop',
     desc = 'loop 循环',

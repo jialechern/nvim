@@ -8,7 +8,7 @@ local luasnip = require('luasnip')
 local s = luasnip.snippet
 local t = luasnip.text_node
 local i = luasnip.insert_node
-local c = luasnip.choice_node
+-- local c = luasnip.choice_node
 -- local d  = luasnip.dynamic_node
 -- local sn = luasnip.snippet_node
 
@@ -18,8 +18,8 @@ local module = {}
 --- Rust 工作空间初始化
 module[#module+1] = s({
     trig = 'rust-workspace-init',
-    wordTrig  = true,
-    regTrig   = false,
+    -- wordTrig  = true,
+    -- regTrig   = false,
     -- snippetType = 'autosnippet',
     name = 'rust-workspace-init',
     desc = 'Rust 工作空间初始化',

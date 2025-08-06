@@ -19,8 +19,8 @@ local module = {}
 -- 宏定义
 module[#module+1] = s({
     trig = 'define',
-    wordTrig  = true,
-    regTrig   = false,
+    -- wordTrig  = true,
+    -- regTrig   = false,
     -- snippetType = 'autosnippet',
     name = '# define',
     desc = '宏定义',
@@ -31,8 +31,8 @@ module[#module+1] = s({
 -- 注销宏定义
 module[#module+1] = s({
     trig = 'undef',
-    wordTrig  = true,
-    regTrig   = false,
+    -- wordTrig  = true,
+    -- regTrig   = false,
     -- snippetType = 'autosnippet',
     name = '# undef',
     desc = '注销宏定义',
@@ -43,8 +43,8 @@ module[#module+1] = s({
 -- 宏 if 判断
 module[#module+1] = s({
     trig = 'macro-if',
-    wordTrig  = true,
-    regTrig   = false,
+    -- wordTrig  = true,
+    -- regTrig   = false,
     -- snippetType = 'autosnippet',
     name = 'macro-if',
     desc = '宏 if 判断',
@@ -57,8 +57,8 @@ module[#module+1] = s({
 -- 宏 if-else 判断
 module[#module+1] = s({
     trig = 'macro-if-else',
-    wordTrig  = true,
-    regTrig   = false,
+    -- wordTrig  = true,
+    -- regTrig   = false,
     -- snippetType = 'autosnippet',
     name = 'macro-if-else',
     desc = '宏 if-else 判断',
@@ -73,8 +73,8 @@ module[#module+1] = s({
 -- 宏 if-else_if 判断
 module[#module+1] = s({
     trig = 'macro-if-else_if',
-    wordTrig  = true,
-    regTrig   = false,
+    -- wordTrig  = true,
+    -- regTrig   = false,
     -- snippetType = 'autosnippet',
     name = 'macro-if-elif',
     desc = '宏 if-elif 判断',
@@ -89,8 +89,8 @@ module[#module+1] = s({
 -- 宏 if-else_if-else 判断
 module[#module+1] = s({
     trig = 'macro-if-else_if-else',
-    wordTrig  = true,
-    regTrig   = false,
+    -- wordTrig  = true,
+    -- regTrig   = false,
     -- snippetType = 'autosnippet',
     name = 'macro-if-elif-else',
     desc = '宏 if-elif-else 判断',
@@ -107,8 +107,8 @@ module[#module+1] = s({
 -- 宏 ifndef 判断
 module[#module+1] = s({
     trig = 'ifndef',
-    wordTrig  = true,
-    regTrig   = false,
+    -- wordTrig  = true,
+    -- regTrig   = false,
     -- snippetType = 'autosnippet',
     name = '# ifndef',
     desc = '宏 ifndef 判断',
@@ -122,8 +122,8 @@ module[#module+1] = s({
 -- 宏 ifdef 判断
 module[#module+1] = s({
     trig = 'ifdef',
-    wordTrig  = true,
-    regTrig   = false,
+    -- wordTrig  = true,
+    -- regTrig   = false,
     -- snippetType = 'autosnippet',
     name = '# ifdef',
     desc = '宏 ifdef 判断',

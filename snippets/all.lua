@@ -8,32 +8,22 @@ local luasnip = require('luasnip')
 local s = luasnip.snippet
 local t = luasnip.text_node
 local i = luasnip.insert_node
-local c = luasnip.choice_node
+-- local c = luasnip.choice_node
 -- local d  = luasnip.dynamic_node
 -- local sn = luasnip.snippet_node
 
 -- 模块定义
 local module = {}
 
--- module[#module+1] = s({
---     trig = 'map_key',
---     wordTrig  = true,
---     regTrig   = false,
---     snippetType = 'autosnippet',
---     name = 'name',
---     desc = 'desc',
--- }, {
--- })
-
 --- 括号匹配
 for from, to in pairs({
-    ['%('] = ')',
-    ['%['] = ']',
+    ['('] = ')',
+    ['['] = ']',
 }) do
     module[#module+1] = s({
         trig = _G.Leader .. from,
-        wordTrig  = false,
-        regTrig   = false,
+        -- wordTrig  = false,
+        -- regTrig   = false,
         snippetType = 'autosnippet',
         name = string.sub(from, -1) .. '匹配',
         desc = string.sub(from, -1) .. '匹配',
@@ -50,8 +40,8 @@ for from, to in pairs({
 }) do
     module[#module+1] = s({
         trig = _G.Leader .. from,
-        wordTrig  = false,
-        regTrig   = false,
+        -- wordTrig  = false,
+        -- regTrig   = false,
         snippetType = 'autosnippet',
         name = from .. '匹配',
         desc = from .. '匹配',

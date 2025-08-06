@@ -7,8 +7,8 @@ local luasnip = require('luasnip')
 -- 自定义 snippet(Lua 方式)
 local s = luasnip.snippet
 local t = luasnip.text_node
-local i = luasnip.insert_node
-local c = luasnip.choice_node
+-- local i = luasnip.insert_node
+-- local c = luasnip.choice_node
 -- local d  = luasnip.dynamic_node
 -- local sn = luasnip.snippet_node
 
@@ -19,8 +19,8 @@ local module = {}
 local logger_key = require('settings.variables.logger').logger_key
 module[#module+1] = s({
     trig = logger_key,
-    wordTrig  = true,
-    regTrig   = false,
+    -- wordTrig  = true,
+    -- regTrig   = false,
     -- snippetType = 'autosnippet',
     name = 'log',
     desc = 'python 日志处理',

@@ -8,7 +8,7 @@ local luasnip = require('luasnip')
 local s = luasnip.snippet
 local t = luasnip.text_node
 local i = luasnip.insert_node
-local c = luasnip.choice_node
+-- local c = luasnip.choice_node
 -- local d  = ls.dynamic_node
 
 --- 模块定义
@@ -18,8 +18,8 @@ local module = {}
 local entry_point = require('settings.variables.entry-points').entry_point
 module[#module+1] = s({
     trig = entry_point,
-    wordTrig  = true,
-    regTrig   = false,
+    -- wordTrig  = true,
+    -- regTrig   = false,
     -- snippetType = 'autosnippet',
     name = 'entry-point',
     desc = '程序入口点',
