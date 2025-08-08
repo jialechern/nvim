@@ -9,6 +9,7 @@ local s = luasnip.snippet
 local t = luasnip.text_node
 local i = luasnip.insert_node
 local c = luasnip.choice_node
+local fmt = require('luasnip.extras.fmt').fmt
 -- local d  = luasnip.dynamic_node
 -- local sn = luasnip.snippet_node
 
@@ -24,27 +25,34 @@ module[#module+1] = s({
     -- snippetType = 'autosnippet',
     name = 'entry-point',
     desc = '程序入口点',
-    }, {
-        t('\\documentclass{'), c(1, { t('article'), t('book'), t('report') }), t({'}', '', ''}),
+    }, fmt([[
+    \documentclass{{{1}}}
 
-        t('\\title{'), i(2, 'Title'), t({'}', ''}),
-        t('\\author{'), i(3, 'Author'), t({'}', ''}),
-        t('\\institute{'), i(4, 'Institute'), t({'}', ''}),
-        t('\\version{'), i(5, 'Version'), t({'}', '', ''}),
+    \title{{{2}}}
+    \author{{{3}}}
+    \institute{{{4}}}
+    \version{{{5}}}
+    \date{{\zhtoday}}
 
-        t({'\\date{\\zhtoday}', ''}),
+    \usepackage{{array}}
+    \usepackage{{amssymb}}
+    \usepackage{{float}}
+    \usepackage{{mathrsfs}}
+    \usepackage{{{6}}}
 
-        t({'\\usepackage{array}', ''}),
-        t({'\\usepackage{amssymb}', ''}),
-        t({'\\usepackage{float}', ''}),
-        t({'\\usepackage{mathrsfs}', ''}),
-        t('\\usepackage{'), i(6, 'Package'), t({ '}', '', '' }),
-
-        t({'\\begin{document}', ''}),
-        t({'\\maketitle', ''}),
-        i(0),
-        t({'', '\\end{document}'}),
-    })
+    \begin{{document}}
+    \maketitle
+    {7}
+    \end{{document}}
+    ]], {
+        c(1, { t('article'), t('book'), t('report') }),
+        i(2, 'Title'),
+        i(3, 'Author'),
+        i(4, 'Institute'),
+        i(5, 'Version'),
+        i(6, 'Package'),
+        i(0, '% Content'),
+    }))
 
 --- 模块返回
 return module

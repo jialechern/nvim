@@ -8,6 +8,7 @@ local luasnip = require('luasnip')
 local s = luasnip.snippet
 local t = luasnip.text_node
 local i = luasnip.insert_node
+local fmt = require('luasnip.extras.fmt').fmt
 -- local c = luasnip.choice_node
 -- local d  = ls.dynamic_node
 
@@ -23,17 +24,20 @@ module[#module+1] = s({
     -- snippetType = 'autosnippet',
     name = 'test',
     desc = '测试模块初始化',
-    }, {
-    t({'#[cfg(test)]', ''}),
-    t({'mod tests {', ''}),
-    t({'\tuse super::*;', '', ''}),
+    }, fmt([[
+    #[cfg(test)]
+    mod tests {{
+        use super::*;
 
-    t({'\t#[test]', ''}),
-    t('\tfn '), i(1, 'test_func'), t({'() {', ''}),
-    t('\t\t'), i(0),
-    t({'', '\t}'}),
-    t({'', '}'}),
-    })
+        #[test]
+        fn {1}() {{
+            {2}
+        }}
+    }}
+    ]], {
+        i(1, 'test-func'),
+        i(0, '// test code'),
+    }))
 
 -- 模块返回
 return module

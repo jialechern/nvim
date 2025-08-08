@@ -8,12 +8,30 @@ local luasnip = require('luasnip')
 local s = luasnip.snippet
 local t = luasnip.text_node
 local i = luasnip.insert_node
+-- local f = luasnip.function_node
+
+local extras = require('luasnip.extras')
+local rep = extras.rep
 -- local c = luasnip.choice_node
 -- local d  = luasnip.dynamic_node
 -- local sn = luasnip.snippet_node
 
 -- 模块定义
 local module = {}
+
+--- 一般环境
+module[#module+1] = s({
+    trig = 'begin-end',
+    -- wordTrig = false,
+    -- regTrig = false,
+    -- snippetType = 'snippet',
+    name = 'begin-end',
+    desc = 'begin-end',
+}, {
+    t('\\begin{') , i(1, 'environment'), t({'}', ''}),
+    t('\t'), i(0),
+    t({'', '\\end{'}), rep(1), t('}'),
+})
 
 --- 数学环境
 -- 行内数学公式

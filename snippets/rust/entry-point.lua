@@ -8,6 +8,7 @@ local luasnip = require('luasnip')
 local s = luasnip.snippet
 local t = luasnip.text_node
 local i = luasnip.insert_node
+local fmt = require('luasnip.extras.fmt').fmt
 -- local c = luasnip.choice_node
 -- local d  = ls.dynamic_node
 
@@ -23,12 +24,15 @@ module[#module+1] = s({
     -- snippetType = 'autosnippet',
     name = 'entry-point',
     desc = '程序入口点',
-    }, {
-    t({'fn main () -> Result<(), Box<dyn std::error::Error>> {', ''}),
-    t('\t'), i(0),
-    t({'', '\tOk(())'}),
-    t({'', '}'})
-    })
+    }, fmt([[
+    fn main() -> Result<(), Box<dyn std::error::Error>> {{
+        {1}
+
+        Ok(())
+    }}
+    ]], {
+        i(0, '// code'),
+    }))
 
 --- 模块返回
 return module

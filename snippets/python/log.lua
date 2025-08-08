@@ -6,7 +6,8 @@ local luasnip = require('luasnip')
 
 -- 自定义 snippet(Lua 方式)
 local s = luasnip.snippet
-local t = luasnip.text_node
+-- local t = luasnip.text_node
+local fmt = require('luasnip.extras.fmt').fmt
 -- local i = luasnip.insert_node
 -- local c = luasnip.choice_node
 -- local d  = luasnip.dynamic_node
@@ -24,36 +25,36 @@ module[#module+1] = s({
     -- snippetType = 'autosnippet',
     name = 'log',
     desc = 'python 日志处理',
-    }, {
-    t({'import logging', '', ''}),
+    }, fmt([[
+    import logging
 
-    t({'def get_logger(', ''}),
-    t({'\tname: str = __name__,', ''}),
-    t({'\tlevel: int = logging.INFO,', ''}),
-    t({'\tfmt: str = \'%(asctime)s - %(name)s - %(levelname)s - %(message)s\',', ''}),
-    t({'\tinto: str=\'console\',', ''}),
-    t({'\t) -> logging.Logger:', '', ''}),
+    def get_logger(
+        name: str = __name__,
+        level: int = logging.INFO,
+        fmt: str = '%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        into: str='console',
+    ) -> logging.Logger:
 
-    t({'\tlogger = logging.getLogger(name)', ''}),
-    t({'\tlogger.setLevel(level)', '', ''}),
+        logger = logging.getLogger(name)
+        logger.setLevel(level)
 
-    t({'\tformatter = logging.Formatter(fmt)', ''}),
-    t({'\thandler: logging.Handler', '', ''}),
+        formatter = logging.Formatter(fmt)
+        handler: logging.Handler
 
-    t({'\tmatch into:', ''}),
-    t({'\t\tcase \'console\':', ''}),
-    t({'\t\t\thandler = logging.StreamHandler()', ''}),
-    t({'\t\tcase \'file\':', ''}),
-    t({'\t\t\thandler = logging.FileHandler(f\'{name}.log\', mode=\'a\')', '', ''}),
+        match into:
+            case 'console':
+                handler = logging.StreamHandler()
+            case 'file':
+                handler = logging.FileHandler(f'{{name}}.log', mode='a')
+            case _:
+                raise ValueError(f'不支持将日志写入到 {{into}}')
 
-    t({'\t\tcase _:', ''}),
-    t({'\t\t\traise ValueError(f\'不支持将日志写入到 {into}\')', '', ''}),
+        handler.setLevel(level)
+        handler.setFormatter(formatter)
 
-    t({'\thandler.setLevel(level)', ''}),
-    t({'\thandler.setFormatter(formatter)', '', ''}),
-    t({'\tlogger.addHandler(handler)', ''}),
-    t('\treturn logger'),
-})
+        logger.addHandler(handler)
+        return logger
+    ]], {}))
 
 --- 模块返回
 return module
