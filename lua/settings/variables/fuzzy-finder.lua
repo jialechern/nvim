@@ -11,7 +11,7 @@ local function get_key(v)
     elseif v == 'files-by-path' then
         return fuzzy_finder_leader .. 'F'
     elseif v == 'rg' then
-        return fuzzy_finder_leader .. 'g'
+        return fuzzy_finder_leader .. 'G'
     elseif v == 'buffers' then
         return fuzzy_finder_leader .. 'b'
     elseif v == 'history' then
@@ -21,15 +21,15 @@ local function get_key(v)
     elseif v == 'lines' then
         return fuzzy_finder_leader .. 'l'
     elseif v == 'lines-in-buffers' then
-        return fuzzy_finder_leader .. 'lb'
+        return fuzzy_finder_leader .. 'L'
     elseif v == 'files-in-git-repo' then
-        return fuzzy_finder_leader .. 'fg'
+        return fuzzy_finder_leader .. 'g'
     elseif v == 'changes' then
         return fuzzy_finder_leader .. 'C'
     elseif v == 'marks' then
         return fuzzy_finder_leader .. 'm'
     elseif v == 'marks-in-buffers' then
-        return fuzzy_finder_leader .. 'mb'
+        return fuzzy_finder_leader .. 'M'
     elseif v == 'search' then
         return fuzzy_finder_leader .. 's'
     elseif v == 'snippets' then
