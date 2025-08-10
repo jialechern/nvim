@@ -6,8 +6,8 @@ local map = require('utils.map').map
 local get_key = require('settings.variables.tabs').get_key
 
 map('n', get_key('edit'), function ()
-    local file = vim.fn.input("请输入文件名: ", "", 'file')
-    vim.cmd('tabedit ' .. file)
+    local file = vim.fn.input("请输入文件名: ", '', 'file')
+    vim.cmd('tabedit ' .. vim.fn.fnameescape(file))
 end, { desc = "在新标签页打开文件"})
 
 map('n', get_key('list'), function ()

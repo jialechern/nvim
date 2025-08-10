@@ -75,42 +75,89 @@ return {
 			}
 
 			-- ========= 常用快捷键(Lua 映射) =========
-            local fzf_key = '<C-q>'
 
-            map('n', fzf_key .. 'f', function()
+            -- 获取键位配置
+            local get_key = require('settings.variables.fuzzy-finder').get_key
+
+            map('n', get_key('changes'), function()
+                vim.cmd('Changes')
+            end, { desc = 'FZF: Changes' })
+
+            map('n', get_key('search'), function()
+                vim.cmd('History/')
+            end, { desc = 'FZF: Search(History/)' })
+
+            map('n', get_key('marks'), function()
+                vim.cmd('Marks')
+            end, { desc = 'FZF: Marks' })
+
+            map('n', get_key('windows'), function()
+                vim.cmd('Windows')
+            end, { desc = 'FZF: Windows' })
+
+            map('n', get_key('snippets'), function()
+                vim.cmd('Snippets')
+            end, { desc = 'FZF: Snippets' })
+
+            map('n', get_key('jumps'), function()
+                vim.cmd('Jumps')
+            end, { desc = 'FZF: Jumps' })
+
+            map('n', get_key('marks-in-buffers'), function()
+                vim.cmd('BMarks')
+            end, { desc = 'FZF: Marks in buffers(BMarks)' })
+
+            map('n', get_key('files'), function()
                 vim.cmd('Files')
-            end, { desc = 'FZF: Files' })
+            end, { desc = 'FZF: Files(Open current path by fzf)' })
+
+            map('n', get_key('files-by-path'), function()
+                local path = fn.input('请输入搜寻的路径: ', fn.getcwd(), 'dir')
+                vim.cmd('Files' .. ' ' .. fn.fnameescape(path))
+            end, { desc = 'FZF: Files(Open current path by fzf)' })
 
 			if has_rg then
-                map('n', fzf_key .. 'g', function()
+                map('n', get_key('rg'), function()
                     vim.cmd('Rg')
                 end, { desc = 'FZF: Rg (live grep)' })
 			else
 				-- 没有 rg 时回退到 Files
-                map('n', fzf_key .. 'g', function()
+                map('n', get_key('rg'), function()
                     vim.cmd('Files')
                 end, { desc = 'FZF: Files (fg fallback)' })
 			end
 
-            map('n', fzf_key .. 'b', function()
+            map('n', get_key('buffers'), function()
                 vim.cmd('Buffers')
             end, { desc = 'FZF: Buffers' })
 
-            map('n', fzf_key .. 'h', function()
+            map('n', get_key('history'), function()
                 vim.cmd('History')
             end, { desc = 'FZF: History' })
 
-            map('n', fzf_key .. 'c', function()
+            map('n', get_key('commands'), function()
                 vim.cmd('Commands')
             end, { desc = 'FZF: Commands' })
 
-            map('n', fzf_key .. 'l', function()
+            map('n', get_key('lines'), function()
                 vim.cmd('Lines')
             end, { desc = 'FZF: Lines in buffer' })
 
+            map('n', get_key('lines-in-buffers'), function()
+                vim.cmd('BLines')
+            end, { desc = 'FZF: Lines in buffers' })
+
+            map('n', get_key('tags'), function()
+                vim.cmd('Tags')
+            end, { desc = 'FZF: Tags' })
+
+            map('n', get_key('tags-in-current-buffer'), function()
+                vim.cmd('BTags')
+            end, { desc = 'FZF: Tags in current buffer(BTags)' })
+
 			-- 如果仓库内有 GFiles 命令(fzf.vim 中的 git 文件), 映射到 <leader>fgf
 			if fn.exists(':GFiles') == 2 then
-                map('n', fzf_key .. 'gf', function()
+                map('n', get_key('files-in-git-repo'), function()
                     vim.cmd('GFiles')
                 end, { desc = 'FZF: Git files' })
 			end
