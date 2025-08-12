@@ -44,5 +44,23 @@ map('n', get_key('prev-file'), function()
     vim.cmd('cpfile')
 end, { desc = "跳转到上一个文件中的最后一项" })
 
+map('n', get_key('prev-quickfix-list'), function()
+    vim.cmd('colder')
+end, { desc = "回溯到上一个 quickfix" })
+
+map('n', get_key('prev-quickfix-list-by-index'), function()
+    local num = vim.fn.input("请输入回溯次数: ")
+    vim.cmd(num .. 'colder')
+end, { desc = "回溯到前 n 个 quickfix" })
+
+map('n', get_key('next-quickfix-list'), function()
+    vim.cmd('cnewer')
+end, { desc = "跳转到下一个 quickfix" })
+
+map('n', get_key('next-quickfix-list-by-index'), function()
+    local num = vim.fn.input("请输入跳转次数: ")
+    vim.cmd(num .. 'cnewer')
+end, { desc = "跳转到第 n 个 quickfix" })
+
 return module
 

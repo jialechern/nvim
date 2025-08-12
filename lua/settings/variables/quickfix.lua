@@ -16,16 +16,24 @@ local function get_key(v)
     elseif v == 'goto' then
         return fix_leader .. 'g'
     elseif v == 'next' then
-        return fix_leader .. 'n'
+        return fix_leader .. 'j'
     elseif v == 'previous' then
-        return fix_leader .. 'p'
+        return fix_leader .. 'k'
     elseif v == 'first' then
         return fix_leader .. 'f'
     elseif v == 'last' then
         return fix_leader .. 'l'
     elseif v == 'next-file' then
-        return fix_leader .. 'N'
+        return fix_leader .. 'J'
     elseif v == 'prev-file' then
+        return fix_leader .. 'K'
+    elseif v == 'next-quickfix-list' then
+        return fix_leader .. 'n'
+    elseif v == 'next-quickfix-list-by-index' then
+        return fix_leader .. 'N'
+    elseif v == 'prev-quickfix-list' then
+        return fix_leader .. 'p'
+    elseif v == 'prev-quickfix-list-by-index' then
         return fix_leader .. 'P'
     else
         return nil

@@ -54,6 +54,13 @@ map({'v', 'x'}, '>', '>gv')
 
 --- 其它映射
 
+-- 设置 makeprg
+map('n', '<C-m>', function()
+    local makeprg = vim.fn.input('设定 makeprg(make-program) 为: ', '')
+    vim.bo.makeprg = makeprg
+end, { desc = "设置 makeprg 的快捷键" })
+
+-- 定义 _G.CoLeader .. '%%' 为当前文件路径
 map('c', _G.CoLeader .. '%%', function ()
     local file_path = vim.fn.expand('%:h')
     local sep = require('utils.path').path_prefix
