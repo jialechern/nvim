@@ -3,7 +3,7 @@
 
 local module = {}
 
--- 引入引导标签也控制的按键
+-- 引入引导标签页控制的按键
 local tab_leader = '<C-t>'
 
 module.tab_leader = tab_leader
