@@ -22,28 +22,29 @@ local function set_lsp_config(callback)
 end
 
 set_lsp_config(function(event)
-    -- 导入自定义工具函数
+    -- 导入自定义工具函数与需要的符号
     local map = require('utils.map').map
+    local get_key = require('settings.variables.lsp').get_key
 
     -- 获取当前缓冲区的 LSP 客户端
     local client = vim.lsp.get_client_by_id(event.data.client_id)
 
     -- 设置 LSP 相关的快捷键
-    map('n', 'gd', vim.lsp.buf.definition,    { desc = "跳转到定义", })
-    map('n', 'gD', vim.lsp.buf.declaration,   { desc = "跳转到声明", })
-    map('n', 'gr', vim.lsp.buf.references,    { desc = "查找引用", })
-    map('n', 'gi', vim.lsp.buf.implementation,{ desc = "跳转到实现", })
-    map('n', '<LEADER>?',  vim.lsp.buf.hover,         { desc = "悬停文档", })
-    map('n', '<LEADER>rn', vim.lsp.buf.rename,       { desc = "重命名符号", })
-    map('n', '<LEADER>ca', vim.lsp.buf.code_action,  { desc = "代码操作", })
-    map('n', '[d', vim.diagnostic.goto_prev,         { desc = "上一个诊断", })
+    map('n', get_key('goto-def'), vim.lsp.buf.definition,    { desc = "跳转到定义", })
+    map('n', get_key('goto-dec'), vim.lsp.buf.declaration,   { desc = "跳转到声明", })
+    map('n', get_key('goto-ref'), vim.lsp.buf.references,    { desc = "查找引用", })
+    map('n', get_key('goto-impl'), vim.lsp.buf.implementation,{ desc = "跳转到实现", })
+    map('n', get_key('show-doc'),  vim.lsp.buf.hover,         { desc = "悬停文档", })
+    map('n', get_key('rename'), vim.lsp.buf.rename,       { desc = "重命名符号", })
+    map('n', get_key('code-action'), vim.lsp.buf.code_action,  { desc = "代码操作", })
+    map('n', get_key('goto-next-diag'), vim.diagnostic.goto_next,         { desc = "下一个诊断", })
+    map('n', get_key('goto-prev-diag'), vim.diagnostic.goto_prev,         { desc = "上一个诊断", })
 
-    map('n', '<LEADER>ld', function()
+    map('n', get_key('doc-in-new-window'), function()
         vim.diagnostic.open_float { source = true }
     end,            { buffer = event.buf, desc = "使用新窗口打开诊断信息(Long Documents)", })
 
-    map('n', ']d', vim.diagnostic.goto_next,         { desc = "下一个诊断", })
-    map('n', '<LEADER>q', vim.diagnostic.setloclist, { desc = "推送诊断到列表", })
+    map('n', get_key('setloclist'), vim.diagnostic.setloclist, { desc = "推送诊断到列表", })
 
     -- 启用诊断信息
     vim.diagnostic.config {
@@ -56,7 +57,7 @@ set_lsp_config(function(event)
            update_in_insert = false, -- 在插入模式下不更新诊断信息
     }
 
-    map('n', '<LEADER>td', (function()
+    map('n', get_key('doc'), (function()
         -- 1 打开 0 关闭
         local diag_status = 1
         return function()
@@ -90,7 +91,7 @@ set_lsp_config(function(event)
     end
 
     if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
-        map('n', '<LEADER>th', function()
+        map('n', get_key('type-hint'), function()
             vim.lsp.inlay_hint.enable( not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf } )
         end, { buffer = event.buf, desc = "开/关 参数提示", })
     end
