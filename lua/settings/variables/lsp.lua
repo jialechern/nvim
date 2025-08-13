@@ -16,7 +16,7 @@ local function get_key(v)
     elseif v == 'goto-impl' then
         return lsp_leader .. 'gi'
     elseif v == 'show-doc' then
-        return lsp_leader .. '/'
+        return lsp_leader .. 'd'
     elseif v == 'rename' then
         return lsp_leader .. 'r'
     elseif v == 'code-action' then
@@ -32,7 +32,7 @@ local function get_key(v)
     elseif v == 'type-hint' then
         return lsp_leader .. 't'
     elseif v == 'doc' then
-        return lsp_leader .. 'd'
+        return lsp_leader .. 'D'
     else
         return nil
     end
