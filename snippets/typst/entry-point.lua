@@ -6,9 +6,12 @@ local luasnip = require('luasnip')
 
 -- 自定义 snippet(Lua 方式)
 local s = luasnip.snippet
--- local t = luasnip.text_node
--- local i = luasnip.insert_node
--- local c = luasnip.choice_node
+local t = luasnip.text_node
+local i = luasnip.insert_node
+local c = luasnip.choice_node
+
+local extras = require('luasnip.extras')
+local fmt = require('luasnip.extras.fmt').fmt
 -- local d  = luasnip.dynamic_node
 -- local sn = luasnip.snippet_node
 
@@ -24,8 +27,8 @@ module[#module+1] = s({
     -- snippetType = 'autosnippet',
     name = 'entry-point',
     desc = '程序入口点',
-    }, {
-    })
+    }, fmt([[
+    ]], {}))
 
 --- 模块返回
 return module

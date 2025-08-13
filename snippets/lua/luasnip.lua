@@ -62,7 +62,7 @@ module[#module+1] = s({
 
 
         --- 模块定义
-        local module = {}
+        local module = {{}}
 
         {2}
 
@@ -86,7 +86,7 @@ module[#module+1] = s({
             snippetType = {4},
             name = '{5}',
             desc = '{6}',
-        }}, fmt({7})),
+        }}, fmt({7}))
     ]], { i(1, 'trigger'),
             c(2, {t('false'), t('true')}),
             c(3, {t('false'), t('true')}),

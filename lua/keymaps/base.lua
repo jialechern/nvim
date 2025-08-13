@@ -43,6 +43,11 @@ map({ 'i', 'n', 's' }, '<esc>', function()
   return '<esc>'
 end, { expr = true, desc = '使用 <ESC> 键来取消搜索模式的高亮' })
 
+-- 设置 <C-e> 为括号匹配
+map('n', '<C-e>', function()
+    return '%'
+end, { expr = true, desc = '设置 <C-n> 为括号匹配快捷键' })
+
 -- 添加撤消断点
 map('i', ',', ',<c-g>u')
 map('i', '.', '.<c-g>u')
@@ -54,18 +59,41 @@ map({'v', 'x'}, '>', '>gv')
 
 --- 其它映射
 
--- 设置 makeprg
-map('n', '<C-m>', function()
+--- 设置一些 neovim中的元符号(Meta)
+
+local get_key = require('settings.variables.vim-variables').get_key
+
+map('n', get_key('make-program'), function()
     local makeprg = vim.fn.input('设定 makeprg(make-program) 为: ', '')
     vim.bo.makeprg = makeprg
 end, { desc = "设置 makeprg 的快捷键" })
+
+map('n', get_key('grep-program'), function()
+    local grepprg = vim.fn.input('设定 grepprg(grep-program) 为: ', '')
+    vim.bo.grepprg = grepprg
+end, { desc = "设置 grepprg 的快捷键" })
+
+map('n', get_key('grep-format'), function()
+    local grepformat = vim.fn.input('设定 grepformat(grep-format) 为: ', '')
+    vim.opt.grepformat = grepformat
+end, { desc = "设置 grepformat 的快捷键" })
+
+map('n', get_key('shell-pipe'), function()
+    local shellpipe = vim.fn.input('设定 shellpipe(shell-pipe) 为: ', '')
+    vim.opt.shellpipe = shellpipe
+end, { desc = "设置 shellpipe 的快捷键" })
+
+map('n', get_key('shell-redir'), function()
+    local shellredir = vim.fn.input('设定 shellredir(shell-redir) 为: ', '')
+    vim.opt.shellredir = shellredir
+end, { desc = "设置 shellredir 的快捷键" })
 
 -- 定义 _G.CoLeader .. '%%' 为当前文件路径
 map('c', _G.CoLeader .. '%%', function ()
     local file_path = vim.fn.expand('%:h')
     local sep = require('utils.path').path_prefix
     if file_path == '' then
-        return '%%'
+        return _G.CoLeader .. '%%'
     end
     return file_path .. sep
 end, { expr = true, desc = "在命令行中插入当前文件的路径" })
