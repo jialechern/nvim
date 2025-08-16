@@ -78,8 +78,8 @@ return {
             ['<C-j>'] = { 'select_next', 'fallback' },
 
             -- snippet 跳转键
-            ['<A-n>'] = { 'snippet_forward', 'fallback' },
-            ['<A-p>'] = { 'snippet_backward', 'fallback' },
+            ['<A-.>'] = { 'snippet_forward', 'fallback' },
+            ['<A-,>'] = { 'snippet_backward', 'fallback' },
         },
 
         -- 自动给出函数签名提示

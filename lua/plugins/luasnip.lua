@@ -60,15 +60,15 @@ return {
 
         -- 配置按键: 展开、跳转、回跳
         local map = vim.keymap.set
-        map({ 'i', 's' }, '<A-n>', function()
+        map({ 'i', 's' }, '<C-.>', function()
             if luasnip.expand_or_jumpable() then
                 luasnip.expand_or_jump()
             else
-                vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<A-n>', true, false, true), 'n', true)
+                vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-.>', true, false, true), 'n', true)
             end
         end, { silent = true, desc = "LuaSnip Expand or Jump" })
 
-        map({ 'i', 's' }, '<A-p>', function()
+        map({ 'i', 's' }, '<C-,>', function()
             if luasnip.jumpable(-1) then
                 luasnip.jump(-1)
             end
