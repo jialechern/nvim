@@ -16,7 +16,7 @@ return {
     local map_by_modes = require('utils.map').map_by_modes
 
     -- 插入模式：Ctrl+e 接受建议
-    map_by_modes({ 'i', 'n' }, '<C-e>', function ()
+    map('i', '<C-e>', function ()
         return vim.fn["copilot#Accept"]('<CR>')
     end, {
         expr = true,
