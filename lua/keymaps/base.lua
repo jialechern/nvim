@@ -44,7 +44,7 @@ map({ 'i', 'n', 's' }, '<esc>', function()
 end, { expr = true, desc = '使用 <ESC> 键来取消搜索模式的高亮' })
 
 -- 设置 <C-e> 为括号匹配
-map('n', '<C-e>', function()
+map_by_modes({ 'n', 'x', 's', 'v', 'o' }, '<C-e>', function()
     return '%'
 end, { expr = true, desc = '设置 <C-n> 为括号匹配快捷键' })
 
