@@ -3,7 +3,7 @@
 
 local module = {}
 
-local lsp_leader = '<C-l>'
+local lsp_leader = '<C-' .. _G.CoLeader .. '>'
 module.lsp_leader = lsp_leader
 
 local function get_key(v)
