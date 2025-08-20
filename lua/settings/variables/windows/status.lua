@@ -18,9 +18,9 @@ local function get_key(v)
     elseif v == 'right' then
         return '<' .. status_leader .. 'Right>'
     elseif v == 'H' then
-        return split_leader .. 'h'
+        return split_leader .. 'H'
     elseif v == 'V' then
-        return split_leader .. 'v'
+        return split_leader .. 'V'
     else
         return nil
     end
