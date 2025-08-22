@@ -13,7 +13,7 @@ vim.cmd('filetype on')                                  -- 文档类型自动检
 
 
 -- Hint: use `:h <option>` to figure out the meaning if needed
-vim.opt.clipboard = 'unnamedplus'                       -- 使用系统剪贴板
+-- vim.opt.clipboard = 'unnamedplus'                       -- 使用系统剪贴板
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 vim.opt.mouse = 'a'                                     -- 启用鼠标支持
 
