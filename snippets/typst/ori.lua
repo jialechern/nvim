@@ -51,7 +51,7 @@ module[#module+1] = s({
     size: 11pt,
     lang: "zh",
     region: "cn",
-){5}
+){6}
 ]], {
     i(1, "0.2.3"),
     i(2, "标题"),
