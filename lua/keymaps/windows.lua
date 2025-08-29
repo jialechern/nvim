@@ -13,3 +13,6 @@ require('keymaps.windows.size')
 -- 分屏状态控制
 require('keymaps.windows.status')
 
+-- 显示分屏快捷键文档
+require('keymaps.windows.help')
+

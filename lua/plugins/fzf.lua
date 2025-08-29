@@ -78,6 +78,7 @@ return {
 
             -- 获取键位配置
             local get_key = require('settings.variables.fuzzy-finder').get_key
+            local fuzzy_finder_leader = require('settings.variables.fuzzy-finder').fuzzy_finder_leader
 
             map('n', get_key('changes'), function()
                 vim.cmd('Changes')
@@ -161,6 +162,50 @@ return {
                     vim.cmd('GFiles')
                 end, { desc = 'FZF: Git files' })
 			end
+
+            map('n', get_key('help'), function ()
+                local help_text = [[
+fuzzy-finder 快捷键帮助手册:
+    %s : 在当前路径使用 fzf 查找文件
+    %s : 在指定路径使用 fzf 查找文件
+    %s : 使用 ripgrep (rg) 进行模糊搜索(若未安装 rg 则回退到 :Files)
+    %s : 列出并切换缓冲区
+    %s : 列出命令/搜索历史
+    %s : 列出并执行命令
+    %s : 在当前缓冲区内模糊查找行
+    %s : 在所有缓冲区内模糊查找行
+    %s : 列出当前 git 仓库内的文件(若有)
+    %s : 列出并查看更改的文件(Changes)
+    %s : 列出所有标记(Marks)
+    %s : 列出所有缓冲区内的标记(BMarks)
+    %s : 列出并搜索 命令/搜索历史 (History/)
+    %s : 列出并插入代码片段(Snippets)
+    %s : 列出并切换窗口s(Windows)
+    %s : 列出跳转位置(Jumps)
+    %s : 列出所有标签(Tags)
+    %s : 列出当前缓冲区内的标签(BTags)
+                ]]
+                vim.notify(help_text:format(
+                    get_key('files'),
+                    get_key('files-by-path'),
+                    get_key('rg'),
+                    get_key('buffers'),
+                    get_key('history'),
+                    get_key('commands'),
+                    get_key('lines'),
+                    get_key('lines-in-buffers'),
+                    get_key('files-in-git-repo'),
+                    get_key('changes'),
+                    get_key('marks'),
+                    get_key('marks-in-buffers'),
+                    get_key('search'),
+                    get_key('snippets'),
+                    get_key('windows'),
+                    get_key('jumps'),
+                    get_key('tags'),
+                    get_key('tags-in-current-buffer')
+                ), vim.log.levels.INFO, { title = 'fuzzy-finder 快捷键帮助' })
+            end, { desc = 'fuzzy-finder: Help' })
 
 			-- ========= 便捷自定义命令 =========
 			-- RgVisual: 使用寄存器内容/可视选择作为 Rg 查询

@@ -3,7 +3,9 @@
 
 -- 引入自定义工具函数
 local map_by_modes = require('utils.map').map_by_modes
+local map = require('utils.map').map
 local get_key = require('settings.variables.fold-codes').get_key
+local fold_key = require('settings.variables.fold-codes').fold_key
 
 -- close fold
 map_by_modes({ 'n', 'x' }, get_key('close'), 'zc', {  desc = "关闭当前光标所在的代码折叠" })
@@ -17,4 +19,24 @@ map_by_modes({ 'n', 'x' }, get_key('fold'), 'zf', {  desc = "折叠当前光标�
 map_by_modes({ 'n', 'x' }, get_key('expand-all'), 'zR', {  desc = "展开所有折叠" })
 -- close all 关闭所有折叠
 map_by_modes({ 'n', 'x' }, get_key('close-all'), 'zM', {  desc = "关闭所有折叠" })
+
+map('n', get_key('help'), function ()
+    local help_text = [[
+代码折叠快捷键:
+    %s : 关闭当前光标所在的代码折叠
+    %s : 打开当前光标所在的代码折叠
+    %s : 删除当前光标所在的代码折叠
+    %s : 折叠当前光标所在的代码
+    %s : 展开所有折叠
+    %s : 关闭所有折叠
+]]
+    vim.notify(help_text:format(
+        get_key('close'),
+        get_key('open'),
+        get_key('delect'),
+        get_key('fold'),
+        get_key('expand-all'),
+        get_key('close-all')
+    ), vim.log.levels.INFO, { title = "代码折叠帮助" })
+end, { desc = "显示代码折叠的帮助信息" })
 

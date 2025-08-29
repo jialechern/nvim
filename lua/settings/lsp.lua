@@ -25,6 +25,7 @@ set_lsp_config(function(event)
     -- 导入自定义工具函数与需要的符号
     local map = require('utils.map').map
     local get_key = require('settings.variables.lsp').get_key
+    local lsp_leader = require('settings.variables.lsp').lsp_leader
 
     -- 获取当前缓冲区的 LSP 客户端
     local client = vim.lsp.get_client_by_id(event.data.client_id)
@@ -95,6 +96,40 @@ set_lsp_config(function(event)
             vim.lsp.inlay_hint.enable( not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf } )
         end, { buffer = event.buf, desc = "开/关 参数提示", })
     end
+
+    map('n', get_key('help'), function ()
+        local help_text = [[
+LSP 快捷键帮助手册:
+    %s : 跳转到定义
+    %s : 跳转到声明
+    %s : 查找引用
+    %s : 跳转到实现
+    %s : 悬停文档
+    %s : 重命名符号
+    %s : 代码操作
+    %s : 下一个诊断
+    %s : 上一个诊断
+    %s : 使用新窗口打开诊断信息(Long Documents)
+    %s : 推送诊断到列表
+    %s : 开/关 参数提示
+    %s : 开/关 诊断信息
+        ]]
+        vim.notify(help_text:format(
+            get_key('goto-def'),
+            get_key('goto-dec'),
+            get_key('goto-ref'),
+            get_key('goto-impl'),
+            get_key('show-doc'),
+            get_key('rename'),
+            get_key('code-action'),
+            get_key('goto-next-diag'),
+            get_key('goto-prev-diag'),
+            get_key('doc-in-new-window'),
+            get_key('setloclist'),
+            get_key('type-hint'),
+            get_key('doc')
+        ), vim.log.levels.INFO, { title = lsp_leader .. " LSP 帮助" })
+    end, { desc = "LSP 帮助", })
 
     if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
         local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })

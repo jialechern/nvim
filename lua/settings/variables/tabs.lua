@@ -33,6 +33,8 @@ local function get_key(v)
         return tab_leader .. 'f'
     elseif v == 'last' then
         return tab_leader .. 'l'
+    elseif v == 'help' then
+        return tab_leader .. '?'
     else
         return nil
     end

@@ -15,7 +15,7 @@ local function get_key(v)
     elseif v == 'buffers' then
         return fuzzy_finder_leader .. 'b'
     elseif v == 'history' then
-        return fuzzy_finder_leader .. 'h'
+        return fuzzy_finder_leader .. 'H'
     elseif v == 'commands' then
         return fuzzy_finder_leader .. 'c'
     elseif v == 'lines' then
@@ -42,6 +42,8 @@ local function get_key(v)
         return fuzzy_finder_leader .. 't'
     elseif v == 'tags-in-current-buffer' then
         return fuzzy_finder_leader .. 'T'
+    elseif v == 'help' then
+        return fuzzy_finder_leader .. '?'
     else
         return nil
     end

@@ -34,3 +34,25 @@ map('n', get_key('#'), function ()
     vim.cmd('e #')
 end, { desc = "在当前编辑的文件与上个编辑的文件间跳转" })
 
+map('n', get_key('help'), function ()
+    local help_text = [[
+缓冲区快捷键帮助手册:
+    %s : 切换到上一个缓冲区
+    %s : 切换到下一个缓冲区
+    %s : 切换到第一个缓冲区
+    %s : 切换到最后一个缓冲区
+    %s : 列出所有缓冲区
+    %s : 跳转到指定编号的缓冲区
+    %s : 切换到上次访问的缓冲区
+]]
+    vim.notify(help_text:format(
+        get_key('previous'),
+        get_key('next'),
+        get_key('first'),
+        get_key('last'),
+        get_key('list'),
+        get_key('goto'),
+        get_key('#')
+    ), vim.log.levels.INFO, { title = '缓冲区快捷键帮助手册' })
+end, { desc = '缓存区快捷键帮助手册' })
+

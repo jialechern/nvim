@@ -56,3 +56,35 @@ map('n', get_key('last'), function ()
     vim.cmd('tablast')
 end, { desc = "跳转到最后一个标签页" })
 
+map('n', get_key('help'), function ()
+    local help_text = [[
+标签页快捷键文档:
+    %s : 在新标签页打开文件
+    %s : 列出当前所有的标签页
+    %s : 新建标签页
+    %s : 关闭标签页
+    %s : 仅留下当前窗口
+    %s : 将当前窗口移动至新的标签页
+    %s : 下一个标签页
+    %s : 上一个标签页
+    %s : 切换到指定编号的标签页
+    %s : 将当前标签页移动到指定编号的标签页前
+    %s : 跳转到第一个标签页
+    %s : 跳转到最后一个标签页
+    ]]
+    vim.notify(help_text:format(
+        get_key('edit'),
+        get_key('list'),
+        get_key('new'),
+        get_key('close'),
+        get_key('only'),
+        get_key('T'),
+        get_key('next'),
+        get_key('previous'),
+        get_key('goto'),
+        get_key('move'),
+        get_key('first'),
+        get_key('last')
+    ), vim.log.levels.INFO, { title = "标签页快捷键文档" })
+end, { desc = "打开标签页快捷键文档" })
+

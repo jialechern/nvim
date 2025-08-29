@@ -62,5 +62,39 @@ map('n', get_key('next-quickfix-list-by-index'), function()
     vim.cmd(num .. 'cnewer')
 end, { desc = "跳转到第 n 个 quickfix" })
 
+map('n', get_key('help'), function()
+    local help_text = [[
+quickfix 快捷键帮助手册:
+    %s : 打开 quickfix 窗口
+    %s : 关闭 quickfix 窗口
+    %s : 跳转到第 n 项
+    %s : 跳转到下一项
+    %s : 跳转到上一项
+    %s : 跳转到首项
+    %s : 跳转到末项
+    %s : 跳转到下一个文件中的第一项
+    %s : 跳转到上一个文件中的最后一项
+    %s : 跳转到下一个 quickfix 列表
+    %s : 跳转到第 n 个 quickfix 列表
+    %s : 回溯到上一个 quickfix 列表
+    %s : 回溯到前 n 个 quickfix 列表
+    ]]
+    vim.notify(help_text:format(
+        get_key('open-fixwindow'),
+        get_key('close-fixwindow'),
+        get_key('goto'),
+        get_key('next'),
+        get_key('previous'),
+        get_key('first'),
+        get_key('last'),
+        get_key('next-file'),
+        get_key('prev-file'),
+        get_key('next-quickfix-list'),
+        get_key('next-quickfix-list-by-index'),
+        get_key('prev-quickfix-list'),
+        get_key('prev-quickfix-list-by-index')
+    ), vim.log.levels.INFO, { title = "Quickfix 帮助手册" })
+end, { desc = "显示 quickfix 帮助手册" })
+
 return module
 

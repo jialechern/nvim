@@ -35,6 +35,8 @@ local function get_key(v)
         return fix_leader .. 'p'
     elseif v == 'prev-quickfix-list-by-index' then
         return fix_leader .. 'P'
+    elseif v == 'help' then
+        return fix_leader .. '?'
     else
         return nil
     end

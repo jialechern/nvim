@@ -88,6 +88,24 @@ map('n', get_key('shell-redir'), function()
     vim.opt.shellredir = shellredir
 end, { desc = "设置 shellredir 的快捷键" })
 
+map('n', get_key('help'), function()
+    local help_text = [[
+vim 内置变量快捷键说明:
+    %s : 设置 makeprg(make-program) 的快捷键
+    %s : 设置 grepprg(grep-program) 的快捷键
+    %s : 设置 grepformat(grep-format) 的快捷键
+    %s : 设置 shellpipe(shell-pipe) 的快捷键
+    %s : 设置 shellredir(shell-redir) 的快捷键
+    ]]
+    vim.notify(help_text:format(
+        get_key('make-program'),
+        get_key('grep-program'),
+        get_key('grep-format'),
+        get_key('shell-pipe'),
+        get_key('shell-redir')
+    ), vim.log.levels.INFO, { title = "Vim 内置变量快捷键说明" })
+end, { desc = "显示设置 vim 内置变量的快捷键文档" })
+
 -- 定义 _G.CoLeader .. '%%' 为当前文件路径
 map('c', _G.CoLeader .. '%%', function ()
     local file_path = vim.fn.expand('%:h')

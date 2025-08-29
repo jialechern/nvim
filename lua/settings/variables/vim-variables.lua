@@ -17,6 +17,8 @@ local function get_key(v)
         return meta_leader .. 's'
     elseif v == 'shell-redir' then
         return meta_leader .. 'S'
+    elseif v == 'help' then
+        return meta_leader .. '?'
     else
         return nil
     end

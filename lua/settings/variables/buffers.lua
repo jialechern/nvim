@@ -21,6 +21,10 @@ local function get_key(v)
         return buffer_leader .. 'g'
     elseif v == '#' then
         return buffer_leader .. '/'
+    elseif v == 'help' then
+        return buffer_leader .. '?'
+    else
+        return nil
     end
 end
 

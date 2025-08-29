@@ -33,6 +33,8 @@ local function get_key(v)
         return lsp_leader .. 't'
     elseif v == 'doc' then
         return lsp_leader .. 'D'
+    elseif v == 'help' then
+        return lsp_leader .. '?'
     else
         return nil
     end

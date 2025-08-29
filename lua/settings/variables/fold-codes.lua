@@ -21,6 +21,8 @@ local function get_key(v)
         return fold_key .. 'e'
     elseif v == 'close-all' then
         return fold_key .. 'a'
+    elseif v == 'help' then
+        return fold_key .. '?'
     else
         return nil
     end
