@@ -118,7 +118,10 @@ return {
             default = { 'lsp', 'snippets', 'path', 'buffer' },
             -- 配置 snippets 的权重
             providers = {
-                snippets = { score_offset = 1000, },
+                snippets = {
+                    -- 控制 snippet 的优先级
+                    -- score_offset = 1000,
+                },
             },
         },
     },
