@@ -44,8 +44,8 @@ vim.opt.jumpoptions = "stack"
 -- end 设置光标跳转逻辑
 
 
--- 配置默认浏览器为 Chromium
-vim.g.mkdp_browser = 'chromium'
+-- 配置默认浏览器为 firefox
+vim.g.mkdp_browser = 'firefox'
 
 -- 设置背景透明
 vim.api.nvim_set_hl(0, 'Normal', { bg = 'NONE', ctermbg = 'NONE' })

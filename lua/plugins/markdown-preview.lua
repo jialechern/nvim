@@ -39,7 +39,7 @@ return {
 
             -- 自定义配置选项
             vim.g.mkdp_theme = 'light'                   -- 默认主题 (dark/light)
-            vim.g.mkdp_browser = 'chromium'              -- 指定浏览器
+            vim.g.mkdp_browser = 'firefox'              -- 指定浏览器
             vim.g.mkdp_port = ''                         -- 随机端口避免冲突
             vim.g.mkdp_page_title = '${name}'         -- 页面标题
             vim.g.mkdp_auto_start = false                -- 自动开启预览
