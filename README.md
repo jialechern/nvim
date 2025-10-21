@@ -75,6 +75,20 @@ sudo pacman -S ruby
 sudo pacman -S perl
 ```
 
+#### 其它依赖
+- `typst-preview`
+    - `tinymist`
+        现在的 `typst-preview` 需要使用 `tinymist` 作为后端渲染引擎, 需要手动安装 `tinymist`
+        ```bash
+        :MasonInstall tinymist
+        ```
+    - `websocat`
+        `typst-preview` 需要使用 `websocat` 作为与 neovim 通信的桥梁, 需要手动安装 `websocat`. 虽然 `typst-preview` 的更新提示中提示使用 `Mason` 安装 `websocat`, 但是 `Mason` 并不支持安装 `websocat`, 需要使用包管理器手动安装.
+        ```bash
+        # Arch Linux
+        sudo pacman -S websocat
+        ```
+
 ## 一些基本符号的设置
 
 - `vim.g.mapleader/_G.Leader`: neovim/vim 自带的可自定义的领头键
