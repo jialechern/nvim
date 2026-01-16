@@ -128,58 +128,16 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   end,
 })
 
-vim.api.nvim_create_autocmd("FileType", {
-  group = augroup("auto_save"),
-  pattern = {
-    "tex",
-    "typst",
-  },
-  callback = function()
-      local autosave_timers = {}
-
-      local function should_skip(bufnr)
-        local ok, buftype = pcall(vim.api.nvim_buf_get_option, bufnr, 'buftype')
-        if not ok then return true end
-        if buftype ~= '' then return true end               -- skip terminal/nofile/quickfix...
-        if not vim.api.nvim_buf_get_option(bufnr, 'modifiable') then return true end
-        if vim.api.nvim_buf_get_option(bufnr, 'readonly') then return true end
-        if vim.api.nvim_buf_get_option(bufnr, 'buftype') == 'prompt' then return true end
-        if vim.api.nvim_buf_get_name(bufnr) == '' then return true end -- unnamed buffers: skip
-        return false
-      end
-
-      vim.api.nvim_create_autocmd({'TextChanged','TextChangedI'}, {
-        pattern = '*',
-        callback = function(args)
-          local bufnr = args.buf
-          if should_skip(bufnr) then return end
-          -- 只有在确实被修改时才排队保存
-          if not vim.api.nvim_buf_get_option(bufnr, 'modified') then return end
-
-          local delay_ms = 400  -- 防抖延迟（可按需调整，200-1000 范围常见）
-          if autosave_timers[bufnr] then
-            autosave_timers[bufnr]:stop()
-            autosave_timers[bufnr]:close()
-          end
-
-          local timer = vim.loop.new_timer()
-          autosave_timers[bufnr] = timer
-          timer:start(delay_ms, 0, vim.schedule_wrap(function()
-            -- 再次检查是否还需要保存（可能已撤销）
-            if vim.api.nvim_buf_get_option(bufnr, 'modified') then
-              -- 在目标缓冲上下文中执行写盘，避免影响其他缓冲
-              pcall(vim.api.nvim_buf_call, bufnr, function()
-                vim.cmd('silent! write')
-              end)
-            end
-            timer:stop()
-            timer:close()
-            autosave_timers[bufnr] = nil
-          end))
-        end,
-      })
-    end,
-})
+-- 自动切换输入法, 仅针对 GNU/Linux 系统，需安装 `fcitx5-remote` 命令
+-- vim.api.nvim_create_autocmd({ "InsertLeave" }, {
+--     pattern = { "*" },
+--     callback = function()
+--         local input_status = tonumber(vim.fn.system("fcitx5-remote"))
+--         if input_status == 2 then
+--             vim.fn.system("fcitx5-remote -c")
+--         end
+--     end,
+-- })
 
 return module
 

@@ -12,3 +12,6 @@ require('settings.autofiletype-by-fileext')
 -- 启用 neovim 原生 lsp
 require('settings.lsp')
 
+-- 配置 tex 以及 typst 文件的一些额外设置
+require('settings.auto_save')
+
