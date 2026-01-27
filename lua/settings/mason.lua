@@ -65,7 +65,7 @@ vim.api.nvim_create_autocmd("FileType", {
             end
 
             -- 配置检查 LSP 服务器的快捷键
-            map('n', '<LEADER>clsp', function ()
+            map('n', '<leader>clsp', function ()
                 if is_installed(server) then
                     vim.notify(("✅ %s 安装完成\n"):format(server), vim.log.levels.INFO)
                 end

@@ -23,10 +23,10 @@ return {
         end
     end,
     keys = { -- 添加快捷键
-        { '<leader>tp', '<cmd>TypstPreview<CR>', desc = '启动Typst预览' },
-        { '<leader>tt', '<cmd>TypstPreviewToggle<CR>', desc = '切换Typst预览' },
-        { '<leader>ts', '<cmd>TypstPreviewStop<CR>', desc = '停止Typst预览' },
-        { '<leader>tr', '<cmd>TypstPreviewReload<CR>', desc = '重新加载预览' },
+        { '<leader>Tp', '<cmd>TypstPreview<CR>', desc = '启动Typst预览' },
+        { '<leader>Tt', '<cmd>TypstPreviewToggle<CR>', desc = '切换Typst预览' },
+        { '<leader>Ts', '<cmd>TypstPreviewStop<CR>', desc = '停止Typst预览' },
+        { '<leader>Tr', '<cmd>TypstPreviewReload<CR>', desc = '重新加载预览' },
     },
     config = function()
             -- 设置插件配置

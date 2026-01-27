@@ -60,7 +60,7 @@ return {
 
         -- 配置按键: 展开、跳转、回跳
         local map = vim.keymap.set
-        map({ 'i', 's' }, '<leader>.', function()
+        map({ 'i', 'n', 'x', 's', 'v', 'o' }, '<A-.>', function()
             if luasnip.expand_or_jumpable() then
                 luasnip.expand_or_jump()
             else

@@ -78,7 +78,6 @@ return {
 
             -- 获取键位配置
             local get_key = require('settings.variables.fuzzy-finder').get_key
-            local fuzzy_finder_leader = require('settings.variables.fuzzy-finder').fuzzy_finder_leader
 
             map('n', get_key('changes'), function()
                 vim.cmd('Changes')
@@ -156,7 +155,6 @@ return {
                 vim.cmd('BTags')
             end, { desc = 'FZF: Tags in current buffer(BTags)' })
 
-			-- 如果仓库内有 GFiles 命令(fzf.vim 中的 git 文件), 映射到 <leader>fgf
 			if fn.exists(':GFiles') == 2 then
                 map('n', get_key('files-in-git-repo'), function()
                     vim.cmd('GFiles')

@@ -8,7 +8,7 @@
     
     - 现有的 Mason.nvim 配置能够根据 `settings.mason` 中的支持语言配置以及 neovim 打开的文件类型自动下载 LSP Server(需要 tun 模式下的网络连接)
     - 可以通过 `:MasonInstall LSP-Server` 手动安装 LSP Server, 也可以通过 `:MasonUninstall LSP-Server` 手动卸载 LSP Server
-    - 下载完成后可以通过 `<LEADER>clsp` 来查看当前打开文件的 LSP Server 状态
+    - 下载完成后可以通过 `<leader>clsp` 来查看当前打开文件的 LSP Server 状态
 
 ### 插件依赖的配置
 
