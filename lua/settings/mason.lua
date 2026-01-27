@@ -6,22 +6,7 @@ local module = {}
 -- 引入相关模块
 local registry = require('mason-registry')
 local map = require('utils.map').map
-
--- 所需的 lsp 服务器列表
-local require_lsps = {
-    -- <lang> = { '<lang_lsp_config>', '<lsp_server>' }
-    lua = { 'lua_ls', 'lua-language-server' },
-    rust = { 'rust_analyzer', 'rust-analyzer' },
-    python = { 'pyright', 'pyright' },
-    typst = { 'typst_lsp', 'typst-lsp' },
-    tex = { 'texlab', 'texlab' },
-    c = { 'clangd', 'clangd' },
-    cpp = { 'clangd', 'clangd' },
-    typescript = { 'ts_ls', 'typescript-language-server' },
-    javascript = { 'ts_ls', 'typescript-language-server' },
-    markdown = { 'marksman', 'marksman' },
-    toml = { 'taplo', 'taplo' },
-}
+local require_lsps = require('settings.lsp').require_lsps
 
 -- 获取指定的 LSP 服务器包
 local function get_package(name)
@@ -66,24 +51,6 @@ local function install_server(server_name)
     end)
 end
 
--- 获取所有 LSP 服务器的配置
-local function get_configs(t)
-    local arr = {}
-    for _, v in pairs(t) do
-        arr[#arr + 1] = v[1]
-    end
-    return arr
-end
-
--- 获取所有支持的语言
--- local function get_langs(t)
---     local arr = {}
---     for l, _ in pairs(t) do
---         arr[#arr + 1] = v
---     end
---     return arr
--- end
-
 -- 自动检查/加载/下载 LSP 及其服务器
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { '*' },
@@ -106,9 +73,6 @@ vim.api.nvim_create_autocmd("FileType", {
         end
     end,
 })
-
--- 加载 LSP 配置
-vim.lsp.enable(get_configs(require_lsps))
 
 return module
 

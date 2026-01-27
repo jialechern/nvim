@@ -165,5 +165,36 @@ LSP 快捷键帮助手册:
     })
 end)
 
+-- 具体语言的 LSP 配置
+-- 所需的 lsp 服务器列表
+local require_lsps = {
+    -- <lang> = { '<lang_lsp_config>', '<lsp_server>' }
+    lua = { 'lua_ls', 'lua-language-server' },
+    rust = { 'rust_analyzer', 'rust-analyzer' },
+    python = { 'pyright', 'pyright' },
+    typst = { 'tinymist', 'tinymist' },
+    tex = { 'texlab', 'texlab' },
+    c = { 'clangd', 'clangd' },
+    cpp = { 'clangd', 'clangd' },
+    typescript = { 'ts_ls', 'typescript-language-server' },
+    javascript = { 'ts_ls', 'typescript-language-server' },
+    markdown = { 'marksman', 'marksman' },
+    toml = { 'taplo', 'taplo' },
+}
+-- 导出 require_lsps
+module.require_lsps = require_lsps
+
+-- 获取所有 LSP 服务器的配置
+local function get_configs(t)
+    local arr = {}
+    for _, v in pairs(t) do
+        arr[#arr + 1] = v[1]
+    end
+    return arr
+end
+
+-- 加载 LSP 配置
+vim.lsp.enable(get_configs(require_lsps))
+
 return module
 
