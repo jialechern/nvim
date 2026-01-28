@@ -28,31 +28,6 @@ module[#module+1] = s({
     t('# include <'), i(0, 'header'), t('>'),
     })
 
---- 导入标准输入输出头文件
-module[#module+1] = s({
-    trig = 'stdio',
-    -- wordTrig  = true,
-    -- regTrig   = false,
-    -- snippetType = 'autosnippet',
-    name = 'include <stdio.h>',
-    desc = '导入标准输入输出头文件',
-    }, {
-    t('# include <stdio.h>'),
-    })
-
---- 打印函数
-local print_key = require('settings.variables.print').print_key
-module[#module+1] = s({
-    trig = print_key,
-    -- wordTrig  = true,
-    -- regTrig   = false,
-    -- snippetType = 'autosnippet',
-    name = 'printf',
-    desc = '打印函数',
-    }, {
-    t('printf('), i(0, 'format'), t(');'),
-    })
-
 -- 模块返回
 return module
 

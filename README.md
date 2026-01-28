@@ -80,8 +80,6 @@ sudo pacman -S perl
 
 - `vim.g.mapleader/_G.Leader`: neovim/vim 自带的可自定义的领头键
 - `_G.CoLeader`: 本配置文件中副带的一个可自定义领头键
-- `_G.Next`: 游标跳转符号
-- `_G.End`: 键盘映射的结束符号, 当载入的映射过多可能导致冲突时应当使用这个符号来结束映射
 
 以上所有符号均可通过 `config` 脚本进行自定义(推荐), 也可以在 `lua/settings/init-symbols` 下进行自定义.
 
@@ -100,16 +98,12 @@ python .\config --help
 ```bash
 # 在 Unix-like 系统中
 ./config --leader '>' \
-    --coleader '`' \
-    --next '<++>' \
-    --end ' '
+    --coleader '`'
 
 # 在 Windows 系统中
 python .\config --set-symbols `
     --leader '>' `
-    --coleader '`' `
-    --next '<++>' `
-    --end ' '
+    --coleader '`'
 ```
 
 ## 去除插件依赖
@@ -159,8 +153,6 @@ python .\config --set-symbols `
     在 lua 的全局命名空间 `_G` 中已经预定义了下面四个符号: 
     - `vim.g.mapleader/_G.Leader`: neovim/vim 自带的可自定义的领头键盘
     - `_G.CoLeader`: 本配置文件中副带的一个可自定义领头键( 前两者可互相转义 )
-    - `_G.End`: 键盘映射的结束符号, 当载入的映射过多可能导致冲突时应当使用这个符号来结束映射
-    - `_G.Next`: 游标跳转符号, 所有的跳转操作应当使用这个符号
 
 2. 定义键盘映射时应当语义清晰且结构清晰
 
@@ -175,11 +167,6 @@ python .\config --set-symbols `
         - `map`: 用于定义单个模式下的映射
         - `map_by_modes`: 用于多个模式下的键盘映射
     - 对于编程语言的通用概念, 其快捷键可以通过下面的方式统一注册, 由 luasnip 脚本统一加载并定义为按键映射, 下面再对这种方式支持的按键映射类型进行说明
-        - 流程控制类型的映射
-            - 分支型语句: 'if', 'if-else', 'if-else_if', 'if-else_if-else', 'switch'/'case'/'match'
-                以上类型应当注册在 `settings/variables/branchs.lua` 下.
-            - 循环型语句: 'for', 'while', 'do-while', 'loop'
-                以上类型应当注册在 `settings/variables/loops.lua` 下.
         - 程序入口
             为每个编程语言定义一个入口函数, 该函数应当注册在 `settings/variables/entry-point.lua` 下.
 
@@ -219,14 +206,8 @@ python .\config --set-symbols `
             return module
             ```
 
-        - 函数
-            为每个编程语言定义一种函数定义方式, 该函数应当注册在 `settings/variables/functions.lua` 下.
-        - 日志
-            为每个编程语言定义一种日志打印方式, 该函数应当注册在 `settings/variables/logger.lua` 下.
         - 测试
             为每个编程语言定义一种测试方式, 该函数应当注册在 `settings/variables/test.lua` 下.
-        - 打印
-            为每个编程语言定义一种打印方式, 该函数应当注册在 `settings/variables/print.lua` 下.
         - 每个文件类型的一个自动执行命令
             为每个文件类型定义一个自动执行命令, 该命令按键注册在 `settings/variables/auto-run.lua` 下
             ```lua

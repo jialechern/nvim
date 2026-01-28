@@ -5,7 +5,3 @@ require('settings.init-symbols.leader')
 
 require('settings.init-symbols.coleader')
 
-require('settings.init-symbols.next')
-
-require('settings.init-symbols.end')
-

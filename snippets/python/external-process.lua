@@ -1,5 +1,4 @@
 --- python.lua
---- python 的 branchs snipets
 
 -- 基本引入
 local luasnip = require('luasnip')

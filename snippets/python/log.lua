@@ -17,9 +17,8 @@ local fmt = require('luasnip.extras.fmt').fmt
 local module = {}
 
 --- 日志处理
-local logger_key = require('settings.variables.logger').logger_key
 module[#module+1] = s({
-    trig = logger_key,
+    trig = 'logging-init',
     -- wordTrig  = true,
     -- regTrig   = false,
     -- snippetType = 'autosnippet',

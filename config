@@ -48,8 +48,6 @@ def get_config_files(cwd: Path) -> dict[str, Path]:
         'no_plugins': cwd/'lua'/'settings'/'load_plugins.lua',
         'leader': init_symbols_path/'leader.lua',
         'coleader': init_symbols_path/'coleader.lua',
-        'next': init_symbols_path/'next.lua',
-        'end': init_symbols_path/'end.lua',
     }
 
 
@@ -91,18 +89,6 @@ def sync_config(args: argparse.Namespace, logger: logging.Logger) -> None:
                 msg = f"coleader 符号已设置为 '{val}'"
                 logger.info(f"配置已重置 -- {msg}")
 
-            case 'next':
-                content = f"_G.Next = '{val}'"
-                write_config_to_file(cfg_path, content)
-                msg = f"next 符号已设置为 '{val}'"
-                logger.info(f"配置已重置 -- {msg}")
-
-            case 'end':
-                content = f"_G.End = '{val}'"
-                write_config_to_file(cfg_path, content)
-                msg = f"end 符号已设置为 '{val}'"
-                logger.info(f"配置已重置 -- {msg}")
-
             case _ :
                 logger.critical(f"不支持的配置项: {key}")
                 exit(1)
@@ -121,8 +107,6 @@ def get_args() -> argparse.Namespace:
     parser.add_argument( "-c", "--cfg-path", help="设置配置文件路径", type=Path, default=cfg_path )
     parser.add_argument( "--leader", help="设置 leader 键", type=str, default=None )
     parser.add_argument( "--coleader", help="设置 coleader 符号", type=str, default=None )
-    parser.add_argument( "--next", help="设置 next 符号", type=str, default=None )
-    parser.add_argument( "--end", help="设置 end 符号", type=str, default=None )
     parser.add_argument( "--no-plugins", help="是否加载参数", action="store_true" )
     return parser.parse_args()
 
