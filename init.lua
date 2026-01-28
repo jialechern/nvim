@@ -58,9 +58,6 @@ if LoadPlugins then
                 },
             },
         })
-
-    -- 加载 lsp server 管理器配置
-    require('settings.mason')
 end
 
 -- 一般设置

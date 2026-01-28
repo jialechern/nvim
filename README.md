@@ -4,11 +4,10 @@
 
 ### 插件说明
 - markdown-proview 需要执行 `install.sh` 安装才可以启用;
-- 现已将 LSP 管理框架从 coc.nvim 迁移至 neovim 的内置 LSP 功能. 其中 LSP Server 通过插件 Mason.nvim 管理
+- LSP 使用 neovim 的内置 LSP 功能. 其中 LSP Server 通过插件 Mason.nvim 管理
     
-    - 现有的 Mason.nvim 配置能够根据 `settings.mason` 中的支持语言配置以及 neovim 打开的文件类型自动下载 LSP Server(需要 tun 模式下的网络连接)
+    - 每种语言所需要的 LSP 服务器以及其服务器的配置文件对应关系都在 `settings.lsp` 中
     - 可以通过 `:MasonInstall LSP-Server` 手动安装 LSP Server, 也可以通过 `:MasonUninstall LSP-Server` 手动卸载 LSP Server
-    - 下载完成后可以通过 `<leader>clsp` 来查看当前打开文件的 LSP Server 状态
 
 ### 插件依赖的配置
 
@@ -76,18 +75,6 @@ sudo pacman -S perl
 ```
 
 #### 其它依赖
-- `typst-preview`
-    - `tinymist`
-        现在的 `typst-preview` 需要使用 `tinymist` 作为后端渲染引擎, 需要手动安装 `tinymist`
-        ```bash
-        :MasonInstall tinymist
-        ```
-    - `websocat`
-        `typst-preview` 需要使用 `websocat` 作为与 neovim 通信的桥梁, 需要手动安装 `websocat`. 虽然 `typst-preview` 的更新提示中提示使用 `Mason` 安装 `websocat`, 但是 `Mason` 并不支持安装 `websocat`, 需要使用包管理器手动安装.
-        ```bash
-        # Arch Linux
-        sudo pacman -S websocat
-        ```
 
 ## 一些基本符号的设置
 
