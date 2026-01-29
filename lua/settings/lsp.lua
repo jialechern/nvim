@@ -194,7 +194,9 @@ local function get_configs(t)
 end
 
 -- 加载 LSP 配置
-vim.lsp.enable(get_configs(require_lsps))
+if vim.fn.has('nvim-0.11') == 1 then
+    vim.lsp.enable(get_configs(require_lsps))
+end
 
 return module
 

@@ -6,7 +6,9 @@ local map = require('utils.map').map
 local autocmd_key = require('settings.variables.auto-run').autocmd_key
 
 --- 自动预览
-map('n', autocmd_key, function ()
-    vim.cmd('MarkdownPreview')
-end, { desc = '预览 markdown 文件' })
+if vim.fn.exists(':MarkdownPreview') ~= 0 then
+    map('n', autocmd_key, function ()
+        vim.cmd('MarkdownPreview')
+    end, { desc = '预览 markdown 文件' })
+end
 
