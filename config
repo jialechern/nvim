@@ -45,7 +45,6 @@ def get_config_files(cwd: Path) -> dict[str, Path]:
     init_symbols_path = cwd / 'lua' / 'settings' / 'init-symbols'
 
     return {
-        'no_plugins': cwd/'lua'/'settings'/'load_plugins.lua',
         'leader': init_symbols_path/'leader.lua',
         'coleader': init_symbols_path/'coleader.lua',
     }
@@ -58,25 +57,23 @@ def write_config_to_file(file_path: Path, content: str) -> None:
 
 def sync_config(args: argparse.Namespace, logger: logging.Logger) -> None:
     for key, val in vars(args).items():
+
+        # 跳过命令行传入的配置路径参数(cfg_path)和未设置值的参数
         if key == 'cfg_path' or val is None:
             continue
 
         cfg_path = get_config_files(args.cfg_path).get(key)
 
+        # 若没有 key 对应的配置路径, 则报错退出
         if not cfg_path:
             logger.critical(f"不支持的配置项: {key}")
-            exit(1)
+            raise NotImplementedError(f"不支持的配置项: {key}")
+        # 如果配置文件不存在, 则报错退出
         elif not cfg_path.exists():
             logger.critical(f"配置文件 {cfg_path} 不存在, 请检查路径是否正确")
-            exit(1)
+            raise FileNotFoundError(f"配置文件 {cfg_path} 不存在, 请检查路径是否正确")
 
         match key :
-            case 'no_plugins':
-                content = f'return {{\n\tLoadPlugins = {str(not args.no_plugins).lower()}\n}}\n'
-                write_config_to_file(cfg_path, content)
-                msg = '将加载 neovim 插件' if not args.no_plugins else '取消加载  neovim 插件'
-                logger.info(f"配置已重置 -- {msg}")
-
             case 'leader':
                 content = f"_G.Leader = '{val}'\nvim.g.mapleader = _G.Leader"
                 write_config_to_file(cfg_path, content)
@@ -91,23 +88,14 @@ def sync_config(args: argparse.Namespace, logger: logging.Logger) -> None:
 
             case _ :
                 logger.critical(f"不支持的配置项: {key}")
-                exit(1)
+                raise NotImplementedError(f"不支持的配置项: {key}")
 
 
 def get_args() -> argparse.Namespace:
-    match os.name :
-        case "posix" :
-            cfg_path = Path.home() / ".config" / "nvim"
-        case "nt" :
-            cfg_path = Path.home() / "AppData" / "Local" / "nvim"
-        case _ :
-            raise NotImplementedError("当前操作系统不支持, 仅支持 Linux、macOS 和 Windows")
-
     parser = argparse.ArgumentParser(description="配置 neovim 配置文件的基本参数")
-    parser.add_argument( "-c", "--cfg-path", help="设置配置文件路径", type=Path, default=cfg_path )
+    parser.add_argument( "-c", "--cfg-path", help="设置配置文件路径", type=Path, default=Path(__file__).parent.resolve() )
     parser.add_argument( "--leader", help="设置 leader 键", type=str, default=None )
     parser.add_argument( "--coleader", help="设置 coleader 符号", type=str, default=None )
-    parser.add_argument( "--no-plugins", help="是否加载参数", action="store_true" )
     return parser.parse_args()
 
 

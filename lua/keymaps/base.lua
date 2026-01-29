@@ -8,7 +8,7 @@ local map_by_modes = require('utils.map').map_by_modes
 ------------------------------ 设置基本按键映射 ----------------------------
 
 -- 设置进入一般模式的快捷键
-map_by_modes({ 'i', 'v', 'x', 's', 'o', 't' }, '<C-A-Tab>', function ()
+map_by_modes({ 'i', 'v', 'x', 's', 'o', 't' }, '<C-A-q>', function ()
     vim.cmd('stopinsert')
 end, { desc = "一个更加常用的进入 normal 模式的快捷键" })
 

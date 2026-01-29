@@ -108,43 +108,19 @@ python .\config --set-symbols `
 
 ## 去除插件依赖
 
-1. 使用配置文件根目录下的 `config` 脚本去除(推荐):
-    
-    ```bash
-    # 在 Unix-like 系统中
-    ./config --no-plugins
+通过 neovim 的自带参数和 shell 的别名功能去除:
 
-    # 在 Windows 系统中
-    python .\config --no-plugins
-    ```
-
-    如果配置文件路径不正确, 可以使用 `-c` 或者 `--cfg-path` 参数指定配置文件的路径:
-
-    ```bash
-    # 在 Unix-like 系统中
-    ./config --no-plugins -c <neovim-config-path>
-
-    # 在 Windows 系统中
-    python .\config --no-plugins --cfg-path <neovim-config-path>
-    ```
-
-2. 使用配置文件自带的配置变量去除
-
-    只要将 lua/settings/variables.lua 中的变量 `LoadPlugins` 设置为 `false` 即可去除所有插件的加载.
-
-3. 通过 neovim 的自带参数和 shell 的别名功能去除
-
-    如果当前环境无法满足 加载/更新/使用 插件的功能可以考虑使用一下的方式去除插件依赖:
-    ```bash
-    nvim --noplugin <file>
-    ```
-    觉得每次都要加一条参数非常的麻烦的话可以在当前 shell 的配置文件中引入别名, 以 bash 为例: 
-    ```bash
-    # $HOME/.bashrc
-    alias vi="nvim --noplugin"
-    alias vim="nvim --noplugin"
-    alias nvim="nvim --noplugin"
-    ```
+如果当前环境无法满足 加载/更新/使用 插件的功能可以考虑使用以下的方式去除插件依赖:
+```bash
+nvim --noplugin <file>
+```
+觉得每次都要加一条参数非常的麻烦的话可以在当前 shell 的配置文件中引入别名, 以 bash 为例: 
+```bash
+# $HOME/.bashrc
+alias vi="nvim --noplugin"
+alias vim="nvim --noplugin"
+alias nvim="nvim --noplugin"
+```
 
 ## 一些编写配置的原则
 
