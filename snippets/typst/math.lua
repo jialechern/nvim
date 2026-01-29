@@ -373,7 +373,7 @@ module[#module+1] = s({
     name = 'frac',
     desc = '分式',
 }, {
-        t('frac('), i(1), t(', '), i(2), t(')'), i(0),
+        t('frac('), i(1), t(', '), i(0), t(')'),
 })
 
 module[#module+1] = s({
@@ -384,7 +384,7 @@ module[#module+1] = s({
     name = 'frac',
     desc = '分式',
 }, {
-        t('frac('), i(1), t(', '), i(2), t(')'), i(0),
+        t('frac('), i(1), t(', '), i(0), t(')'),
 })
 
 -- 组合数
@@ -396,7 +396,7 @@ module[#module+1] = s({
     name = 'binom',
     desc = '组合数',
 }, {
-        t('binom('), i(1), t(', '), i(2), t(')'), i(0),
+        t('binom('), i(1), t(', '), i(0), t(')'),
 })
 
 --- 积分
@@ -528,7 +528,7 @@ module[#module+1] = s({
     name = 'abs',
     desc = '绝对值',
 }, {
-        t('abs('), i(1), t(')'), i(0),
+        t('abs('), i(0), t(')'),
 })
 
 module[#module+1] = s({
@@ -539,7 +539,7 @@ module[#module+1] = s({
     name = 'abs',
     desc = '绝对值',
 }, {
-        t('abs('), i(1), t(')'), i(0),
+        t('abs('), i(0), t(')'),
 })
 
 -- 根式
@@ -551,7 +551,7 @@ module[#module+1] = s({
     name = 'sqrt',
     desc = '根式',
 }, {
-        t('sqrt('), i(1), t(')'), i(0),
+        t('sqrt('), i(0), t(')'),
 })
 
 module[#module+1] = s({
@@ -562,7 +562,7 @@ module[#module+1] = s({
     name = 'sqrt',
     desc = '根式',
 }, {
-        t('sqrt('), i(1), t(')'), i(0),
+        t('sqrt('), i(0), t(')'),
 })
 
 -- 范数
@@ -574,7 +574,7 @@ module[#module+1] = s({
     name = 'norm',
     desc = '范数',
 }, {
-        t('norm('), i(1), t(')'), i(0),
+        t('norm('), i(0), t(')'),
 })
 
 module[#module+1] = s({
@@ -585,7 +585,7 @@ module[#module+1] = s({
     name = 'norm',
     desc = '范数',
 }, {
-        t('norm('), i(1), t(')'), i(0),
+        t('norm('), i(0), t(')'),
 })
 
 -- 内积
@@ -597,7 +597,7 @@ module[#module+1] = s({
     name = 'inner',
     desc = '内积',
 }, {
-        t('lr(angle.l '), i(1), t(' angle.r)'), i(0),
+        t('lr(angle.l '), i(0), t(' angle.r)'),
 })
 
 module[#module+1] = s({
@@ -608,7 +608,7 @@ module[#module+1] = s({
     name = 'inner',
     desc = '内积',
 }, {
-        t('lr(angle.l '), i(1), t(' angle.r)'), i(0),
+        t('lr(angle.l '), i(0), t(' angle.r)'),
 })
 
 -- 矩阵
@@ -620,7 +620,7 @@ module[#module+1] = s({
     name = 'mat',
     desc = '矩阵',
 }, {
-        t('mat('), i(1), t(')'), i(0),
+        t('mat('), i(0), t(')'),
 })
 
 module[#module+1] = s({
@@ -631,7 +631,7 @@ module[#module+1] = s({
     name = 'mat',
     desc = '矩阵',
 }, {
-        t('mat('), i(1), t(')'), i(0),
+        t('mat('), i(0), t(')'),
 })
 
 -- 分段函数/线性方程组
@@ -643,7 +643,7 @@ module[#module+1] = s({
     name = 'cases',
     desc = '分段函数/线性方程组',
 }, {
-        t('cases('), i(1), t(')'), i(0),
+        t('cases('), i(0), t(')'),
 })
 
 module[#module+1] = s({
@@ -654,7 +654,7 @@ module[#module+1] = s({
     name = 'cases',
     desc = '分段函数/线性方程组',
 }, {
-        t('cases('), i(1), t(')'), i(0),
+        t('cases('), i(0), t(')'),
 })
 
 -- 模块返回

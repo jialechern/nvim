@@ -24,7 +24,7 @@ module[#module+1] = s({
     name = 'bb',
     desc = '双线体字母',
 }, {
-    t('bb('), i(1), t(')'), i(0),
+    t('bb('), i(0), t(')'),
 })
 
 module[#module+1] = s({
@@ -35,7 +35,7 @@ module[#module+1] = s({
     name = 'bb',
     desc = '双线体字母',
 }, {
-    t('bb('), i(1), t(')'), i(0),
+    t('bb('), i(0), t(')'),
 })
 
 --- 花字母
@@ -47,7 +47,7 @@ module[#module+1] = s({
     name = 'cal',
     desc = '花体字母',
 }, {
-    t('cal('), i(1), t(')'), i(0),
+    t('cal('), i(0), t(')'),
 })
 
 module[#module+1] = s({
@@ -58,7 +58,7 @@ module[#module+1] = s({
     name = 'cal',
     desc = '花体字母',
 }, {
-    t('cal('), i(1), t(')'), i(0),
+    t('cal('), i(0), t(')'),
 })
 
 --- 希腊字母
@@ -304,7 +304,7 @@ module[#module+1] = s({
     name = '^',
     desc = '上标',
 }, {
-        t('^('), i(1), t(')'), i(0),
+        t('^('), i(0), t(')'),
 })
 
 module[#module+1] = s({
@@ -315,7 +315,7 @@ module[#module+1] = s({
     name = '_',
     desc = '下标',
 }, {
-        t('_('), i(1), t(')'), i(0),
+        t('_('), i(0), t(')'),
 })
 
 -- 上横线
@@ -327,7 +327,7 @@ module[#module+1] = s({
     name = 'overline',
     desc = '上横线',
 }, {
-        t('overline('), i(1), t(')'), i(0),
+        t('overline('), i(0), t(')'),
 })
 
 -- 下横线
@@ -339,7 +339,7 @@ module[#module+1] = s({
     name = 'underline',
     desc = '下横线',
 }, {
-        t('underline('), i(1), t(')'), i(0),
+        t('underline('), i(0), t(')'),
 })
 
 -- 上括号
@@ -351,7 +351,7 @@ module[#module+1] = s({
     name = 'overbrace',
     desc = '上括号',
 }, {
-        t('overbrace('), i(1), t(')'), i(0),
+        t('overbrace('), i(0), t(')'),
 })
 
 -- 下括号
@@ -363,7 +363,7 @@ module[#module+1] = s({
     name = 'underbrace',
     desc = '下括号',
 }, {
-        t('underbrace('), i(1), t(')'), i(0),
+        t('underbrace('), i(0), t(')'),
 })
 
 -- 上尖括号
@@ -375,7 +375,7 @@ module[#module+1] = s({
     name = 'hat',
     desc = '上尖括号',
 }, {
-        t('hat('), i(1), t(')'), i(0),
+        t('hat('), i(0), t(')'),
 })
 
 -- 上倒尖括号
@@ -387,7 +387,7 @@ module[#module+1] = s({
     name = 'cohat',
     desc = '上倒尖括号',
 }, {
-        t('caron('), i(1), t(')'), i(0),
+        t('caron('), i(0), t(')'),
 })
 
 -- 上波浪号
@@ -399,7 +399,7 @@ module[#module+1] = s({
     name = 'tilde',
     desc = '上波浪号',
 }, {
-        t('tilde('), i(1), t(')'), i(0),
+        t('tilde('), i(0), t(')'),
 })
 
 -- 上标向右箭头
@@ -411,7 +411,7 @@ module[#module+1] = s({
     name = 'arrow',
     desc = '上标向右箭头',
 }, {
-        t('arrow('), i(1), t(')'), i(0),
+        t('arrow('), i(0), t(')'),
 })
 
 --- 各种箭头

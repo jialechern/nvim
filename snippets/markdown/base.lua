@@ -144,8 +144,7 @@ module[#module+1] = s({
     name = '链接',
     desc = '链接',
 }, {
-        t('['), i(1, 'link-text'), t(']('), i(2, 'link-url'), t(')'),
-        i(0),
+        t('['), i(1, 'link-text'), t(']('), i(0, 'link-url'), t(')'),
 })
 
 module[#module+1] = s({
@@ -156,8 +155,7 @@ module[#module+1] = s({
     name = '链接',
     desc = '链接',
 }, {
-        t('['), i(1, 'link-text'), t(']('), i(2, 'link-url'), t(')'),
-        i(0),
+        t('['), i(1, 'link-text'), t(']('), i(0, 'link-url'), t(')'),
 })
 
 -- 链接1
@@ -169,8 +167,7 @@ module[#module+1] = s({
     name = '链接',
     desc = '链接',
 }, {
-        t('<'), i(1, 'link-text'), t('>'),
-        i(0),
+        t('<'), i(0, 'link-text'), t('>'),
 })
 
 module[#module+1] = s({
@@ -181,8 +178,7 @@ module[#module+1] = s({
     name = '链接',
     desc = '链接',
 }, {
-        t('<'), i(1, 'link-text'), t('>'),
-        i(0),
+        t('<'), i(0, 'link-text'), t('>'),
 })
 
 -- 图片
@@ -194,8 +190,7 @@ module[#module+1] = s({
     name = '图片',
     desc = '图片',
 }, {
-        t('!['), i(1, 'image-text'), t(']('), i(2, 'image-url'), t(')'),
-        i(0),
+        t('!['), i(1, 'image-text'), t(']('), i(0, 'image-url'), t(')'),
 })
 
 module[#module+1] = s({
@@ -206,8 +201,7 @@ module[#module+1] = s({
     name = '图片',
     desc = '图片',
 }, {
-        t('!['), i(1, 'image-text'), t(']('), i(2, 'image-url'), t(')'),
-        i(0),
+        t('!['), i(1, 'image-text'), t(']('), i(0, 'image-url'), t(')'),
 })
 
 -- 页面分隔线
