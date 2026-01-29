@@ -79,7 +79,17 @@ return {
             vim.opt_local.wrap = true
             vim.opt_local.linebreak = true
             vim.opt_local.conceallevel = 2
-            end
+
+
+            -- 自定义 markdown 预览快捷键
+            local map = require('utils.map').map
+            local autocmd_key = require('settings.variables.auto-run').autocmd_key
+
+            map('n', autocmd_key, function ()
+                vim.cmd('MarkdownPreviewToggle')
+            end, { desc = '预览 markdown 文件' })
+
+            end,
         })
 
         -- 增强功能：复制预览页面URL

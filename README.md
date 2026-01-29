@@ -139,7 +139,7 @@ alias nvim="nvim --noplugin"
 
 3. 键盘映射机制的一些说明
     
-    - utils/map.lua 定义了两个官方 api 的浅层抽象, 应当尽可能的使用这两个函数
+    - utils/map.lua 定义了两个 api 的浅层抽象, 应当尽可能的使用这两个函数
         - `map`: 用于定义单个模式下的映射
         - `map_by_modes`: 用于多个模式下的键盘映射
     - 对于编程语言的通用概念, 其快捷键可以通过下面的方式统一注册, 由 luasnip 脚本统一加载并定义为按键映射, 下面再对这种方式支持的按键映射类型进行说明
@@ -204,6 +204,21 @@ alias nvim="nvim --noplugin"
             
 
     **p.s.** 上面注册的所有按键映射的 key 都可以统一调节, 变量统一存放在 settings/variables/ 中.
+
+    - 对一些依赖于插件的按键映射, 若不希望将它定义在插件的配置文件中(当然最好是应该放在对应插件的配置文件中), 则应该对在定义是对对应的插件进行存在性检查, 例如:
+
+    ```lua
+    -- 这里定义 markdown 的预览功能, 依赖于 markdown-preview.nvim 插件
+    map('n', autocmd_key, function ()
+        -- 对插件命令的存在性进行检查应当放在按键映射的回调函数中, 在每次调用时进行检查
+        -- 否则\(在 `map` 函数体外部检查\)可能会因为插件本身的懒加载功能导致快捷键无法被注册
+        if vim.fn.exists(':MarkdownPreviewToggle') ~= 0 then
+            vim.cmd('MarkdownPreview')
+        else
+            print('请先安装 markdown-preview 插件')
+        end
+    end, { desc = '预览 markdown 文件' })
+    ```
 
 ## 未来希望增加的
 
