@@ -61,14 +61,14 @@ return {
         keymap = {
             preset = 'none',
             -- 开启/关闭补全文档
-            ['<C-o>'] = { 'show', 'show_documentation', 'hide_documentation' },
+            ['<C-A-o>'] = { 'show', 'show_documentation', 'hide_documentation' },
 
             -- 上下滚动文档
             ['<C-p>'] = { 'scroll_documentation_up', 'fallback' },
             ['<C-n>'] = { 'scroll_documentation_down', 'fallback' },
 
             -- 关闭补全菜单
-            ['<C-x>'] = { 'hide', },
+            ['<C-A-x>'] = { 'hide', },
 
             -- 接受补全
             ['<CR>'] = { 'accept', 'fallback' },
@@ -78,8 +78,8 @@ return {
             ['<C-j>'] = { 'select_next', 'fallback' },
 
             -- snippet 跳转键
-            ['<A-.>'] = { 'snippet_forward', 'fallback' },
-            ['<A-,>'] = { 'snippet_backward', 'fallback' },
+            ['<C-A-.>'] = { 'snippet_forward', 'fallback' },
+            ['<C-A-,>'] = { 'snippet_backward', 'fallback' },
         },
 
         -- 自动给出函数签名提示
