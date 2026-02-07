@@ -4,38 +4,129 @@ return {
     -- 进入 neovim 时加载 lualine
     event = 'VimEnter',
     config = function()
-        require('lualine').setup({
-            options = {
-                icons_enabled = true,          -- 启用图标（需要安装 nerd 字体）
-                theme = 'auto',                -- 自动匹配当前 colorscheme
-                component_separators = { left = '', right = ''},  -- 组件分隔符
-                section_separators = { left = '', right = ''},    -- 区域分隔符
-                disabled_filetypes = {         -- 禁用状态栏的文件类型
-                    'NvimTree',
-                    'packer',
-                    'toggleterm'
-                },
-                always_divide_middle = true,   -- 总是分割中间区域
-                globalstatus = true,           -- 全局状态栏（Neovim 0.7+）
-            },
-        sections = {
-            lualine_a = {'mode'},          -- 左侧区域 A：模式指示器
-            lualine_b = {'branch', 'diff', 'diagnostics'}, -- 左侧区域 B：Git分支、差异、诊断
-            lualine_c = {'filename'},      -- 左侧区域 C：文件名
-            lualine_x = {'encoding', 'fileformat', 'filetype'}, -- 右侧区域 X：编码、文件格式、文件类型
-            lualine_y = {'progress'},      -- 右侧区域 Y：进度百分比
-            lualine_z = {'location'}       -- 右侧区域 Z：行号列号
-        },
-        inactive_sections = {
-            lualine_a = {},
-            lualine_b = {},
-            lualine_c = {'filename'},      -- 非活动窗口显示文件名
-            lualine_x = {'location'},      -- 非活动窗口显示位置
-            lualine_y = {},
-            lualine_z = {}
-        },
-        tabline = {},                    -- 标签栏配置
-        extensions = {'nvim-tree', 'fugitive'} -- 扩展支持
-        })
+        local colors = {
+        	red = '#ca1243',
+        	grey = '#a0a1a7',
+        	black = '#383a42',
+        	white = '#f3f3f3',
+        	light_green = '#83a598',
+        	orange = '#fe8019',
+        	green = '#8ec07c',
+        }
+
+        local theme = {
+        	normal = {
+        		a = { fg = colors.white, bg = colors.black },
+        		b = { fg = colors.white, bg = colors.grey },
+        		c = { fg = colors.black, bg = colors.white },
+        		z = { fg = colors.white, bg = colors.black },
+        	},
+        	insert = { a = { fg = colors.black, bg = colors.light_green } },
+        	visual = { a = { fg = colors.black, bg = colors.orange } },
+        	replace = { a = { fg = colors.black, bg = colors.green } },
+        }
+
+        local empty = require('lualine.component'):extend()
+        function empty:draw(default_highlight)
+        	self.status = ''
+        	self.applied_separator = ''
+        	self:apply_highlights(default_highlight)
+        	self:apply_section_separators()
+        	return self.status
+        end
+
+        -- Put proper separators and gaps between components in sections
+        local function process_sections(sections)
+        	for name, section in pairs(sections) do
+        		local left = name:sub(9, 10) < 'x'
+        		for pos = 1, name ~= 'lualine_z' and #section or #section - 1 do
+        			table.insert(section, pos * 2, { empty, color = { fg = colors.white, bg = colors.white } })
+        		end
+        		for id, comp in ipairs(section) do
+        			if type(comp) ~= 'table' then
+        				comp = { comp }
+        				section[id] = comp
+        			end
+        			comp.separator = left and { right = '' } or { left = '' }
+        		end
+        	end
+        	return sections
+        end
+
+        local function search_result()
+        	if vim.v.hlsearch == 0 then
+        		return ''
+        	end
+        	local last_search = vim.fn.getreg('/')
+        	if not last_search or last_search == '' then
+        		return ''
+        	end
+        	local searchcount = vim.fn.searchcount { maxcount = 9999 }
+        	return last_search .. '(' .. searchcount.current .. '/' .. searchcount.total .. ')'
+        end
+
+        local function modified()
+        	if vim.bo.modified then
+        		return '+'
+        	elseif vim.bo.modifiable == false or vim.bo.readonly == true then
+        		return '-'
+        	end
+        	return ''
+        end
+
+        require('lualine').setup {
+        	options = {
+        		theme = theme,
+        		component_separators = '',
+        		section_separators = { left = '', right = '' },
+        	},
+        	sections = process_sections {
+        		lualine_a = { 'mode' },
+        		lualine_b = {
+        			'branch',
+        			'diff',
+        			{
+        				'diagnostics',
+        				source = { 'nvim' },
+        				sections = { 'error' },
+        				diagnostics_color = { error = { bg = colors.red, fg = colors.white } },
+        			},
+        			{
+        				'diagnostics',
+        				source = { 'nvim' },
+        				sections = { 'warn' },
+        				diagnostics_color = { warn = { bg = colors.orange, fg = colors.white } },
+        			},
+        			{ 'filename', file_status = false, path = 1 },
+        			{ modified, color = { bg = colors.red } },
+        			{
+        				'%w',
+        				cond = function()
+        					return vim.wo.previewwindow
+        				end,
+        			},
+        			{
+        				'%r',
+        				cond = function()
+        					return vim.bo.readonly
+        				end,
+        			},
+        			{
+        				'%q',
+        				cond = function()
+        					return vim.bo.buftype == 'quickfix'
+        				end,
+        			},
+        		},
+        		lualine_c = {},
+        		lualine_x = {},
+        		lualine_y = { search_result, 'filetype' },
+        		lualine_z = { '%l:%c', '%p%%/%L' },
+        	},
+        	inactive_sections = {
+        		lualine_c = { '%f %y %m' },
+        		lualine_x = {},
+        	},
+        }
     end
 }

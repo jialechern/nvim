@@ -240,6 +240,51 @@ return {
             ---@type NoiceFormatOptions
             format = {}, --- @see section on formatting
         })
+
+        local cmdline_border_fg = "#FFFFFF"  -- 白色（命令行外框）
+        local search_border_fg  = "#8b9096"  -- 灰色（搜索/其它 popup 外框）
+        local keep_transparent   = true      -- 是否保持浮窗背景透明
+
+        local function set_noice_hls()
+        	vim.api.nvim_set_hl(0, "NoiceCmdlinePopup",    { bg = keep_transparent and "NONE" or nil, fg = search_border_fg })
+        	vim.api.nvim_set_hl(0, "NoiceCmdlineIcon",     { bg = keep_transparent and "NONE" or nil, fg = search_border_fg })
+        	vim.api.nvim_set_hl(0, "NoiceCmdlinePrompt",   { bg = keep_transparent and "NONE" or nil, fg = search_border_fg, bold = true })
+        	-- confirmations / errors / hints
+        	vim.api.nvim_set_hl(0, "NoiceConfirm",         { bg = keep_transparent and "NONE" or nil, fg = search_border_fg })
+        	vim.api.nvim_set_hl(0, "NoiceError",           { bg = keep_transparent and "NONE" or nil, fg = search_border_fg })
+        	vim.api.nvim_set_hl(0, "NoiceWarn",            { bg = keep_transparent and "NONE" or nil, fg = search_border_fg })
+
+            vim.api.nvim_set_hl(0, "NoiceCmdlinePopupBorder", {
+                fg = cmdline_border_fg,
+                bg = keep_transparent and "NONE" or nil,
+            })
+
+            -- 一般的 popup 边框（搜索、hover、帮助等通用 popup）
+            vim.api.nvim_set_hl(0, "NoicePopupBorder", {
+                fg = search_border_fg,
+                bg = keep_transparent and "NONE" or nil,
+            })
+
+            -- popupmenu（补全菜单）外框
+            vim.api.nvim_set_hl(0, "NoicePopupmenuBorder", {
+                fg = search_border_fg,
+                bg = keep_transparent and "NONE" or nil,
+            })
+
+            -- split view border（有时 noice 在 split 里显示内容）
+            vim.api.nvim_set_hl(0, "NoiceSplitBorder", {
+                fg = search_border_fg,
+                bg = keep_transparent and "NONE" or nil,
+            })
+        end
+
+        -- 1) 立即设置（当前会话）
+        set_noice_hls()
+
+        -- 2) 在每次 colorscheme 改变后重新应用（防止被覆盖）
+        vim.api.nvim_create_autocmd("ColorScheme", {
+        	callback = function() set_noice_hls() end,
+        })
     end,
 }
 
