@@ -1,10 +1,16 @@
 -- github-copilot.lua
 
-return {
-    'github/copilot.vim',            -- 插件仓库地址
-    -- 设置为 lazy 加载, 只有在文件类型完成加载后才加载
-    event = 'FileType',
-    config = function()
+local M = {}
+M[1] = {}
+local github_copilot = M[1]
+
+
+-- 插件仓库地址
+github_copilot[1] = 'github/copilot.vim'
+-- 加载策略
+github_copilot.event = 'FileType'
+-- 配置函数
+github_copilot.config = function()
     -- 禁用 Copilot 默认把 <Tab> 映射为“接受建议”
     vim.g.copilot_no_tab_map = true
 
@@ -44,11 +50,8 @@ return {
         script = true,
         replace_keycodes = false
     })
-
-    end,  -- 注意这里的逗号
-}
+end
 
 
-
-
+return M
 
