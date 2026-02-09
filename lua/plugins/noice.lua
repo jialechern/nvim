@@ -218,23 +218,24 @@ noice.config = function ()
         views = {
             cmdline_popup = {
                 position = {
-                  row = 5,
+                  row = "30%",
                   col = "50%",
                 },
                 size = {
-                  width = 60,
+                  width = "80%",
                   height = "auto",
                 },
+                border = { style = "rounded" },
             },
             popupmenu = {
                 relative = "editor",
                 position = {
-                  row = 8,
+                  row = "55%",
                   col = "50%",
                 },
                 size = {
-                  width = 60,
-                  height = 10,
+                  width = "80%",
+                  height = "auto",
                 },
                 border = {
                   style = "rounded",
