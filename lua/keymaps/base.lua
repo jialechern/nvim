@@ -62,6 +62,22 @@ map({'v', 'x'}, '>', '>gv')
 --- 设置一些 neovim中的元符号(Meta)
 
 local get_key = require('settings.variables.vim-variables').get_key
+local meta_leader = require('settings.variables.vim-variables').meta_leader
+local buffer_leader = require('settings.variables.buffers').buffer_leader
+local fold_leader = require('settings.variables.fold-codes').fold_key
+local lsp_leader = require('settings.variables.lsp').lsp_leader
+local tab_leader = require('settings.variables.tabs').tab_leader
+local fix_leader = require('settings.variables.quickfix').fix_leader
+local fuzzy_finder_leader = require('settings.variables.fuzzy-finder').fuzzy_finder_leader
+
+local cursor_leader = require('settings.variables.windows.cursor').cursor_leader
+local size_leader = require('settings.variables.windows.size').size_leader
+local split_leader = require('settings.variables.windows.split').split_leader
+local status_leader = require('settings.variables.windows.status').status_leader
+
+local autocmd_key = require('settings.variables.auto-run').autocmd_key
+local entry_point = require('settings.variables.entry-points').entry_point
+local test_key = require('settings.variables.test').test_key
 
 map('n', get_key('make-program'), function()
     local makeprg = vim.fn.input('设定 makeprg(make-program) 为: ', '')
@@ -88,6 +104,36 @@ map('n', get_key('shell-redir'), function()
     vim.opt.shellredir = shellredir
 end, { desc = "设置 shellredir 的快捷键" })
 
+map('n', meta_leader .. 'L', function()
+    local help_text = [[
+Windows 相关领头键:
+    %s : split 相关领头键
+    %s : cursor 相关领头键
+    %s : size 相关领头键
+    %s : status 相关领头键
+
+其它领头键说明:
+    %s : buffer 相关领头键
+    %s : fold 相关领头键
+    %s : lsp 相关领头键
+    %s : tab 相关领头键
+    %s : quickfix 相关领头键
+    %s : fuzzy finder 相关领头键
+    ]]
+    vim.notify(help_text:format(
+        split_leader,
+        cursor_leader,
+        size_leader,
+        status_leader,
+        buffer_leader,
+        fold_leader,
+        lsp_leader,
+        tab_leader,
+        fix_leader,
+        fuzzy_finder_leader
+    ), vim.log.levels.INFO, { title = "其他领头键列表" })
+end, { desc = "显示其他 Leader 键位列表" })
+
 map('n', get_key('help'), function()
     local help_text = [[
 vim 内置变量快捷键说明:
@@ -96,14 +142,24 @@ vim 内置变量快捷键说明:
     %s : 设置 grepformat(grep-format) 的快捷键
     %s : 设置 shellpipe(shell-pipe) 的快捷键
     %s : 设置 shellredir(shell-redir) 的快捷键
+    %s : 显示其他 Leader 键位列表
+
+Snipets 相关快捷键:
+    %s : auto command 相关快捷键
+    %s : entry point 相关快捷键
+    %s : test 相关快捷键
     ]]
     vim.notify(help_text:format(
         get_key('make-program'),
         get_key('grep-program'),
         get_key('grep-format'),
         get_key('shell-pipe'),
-        get_key('shell-redir')
-    ), vim.log.levels.INFO, { title = "Vim 内置变量快捷键说明" })
+        get_key('shell-redir'),
+        meta_leader .. 'L',
+        autocmd_key,
+        entry_point,
+        test_key
+    ), vim.log.levels.INFO, { title = "Vim 内置变量快捷键列表" })
 end, { desc = "显示设置 vim 内置变量的快捷键文档" })
 
 -- 定义快捷键使得其快速显示当前文件路径
