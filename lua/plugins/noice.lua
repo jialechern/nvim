@@ -218,31 +218,50 @@ noice.config = function ()
         views = {
             cmdline_popup = {
                 position = {
-                  row = "30%",
-                  col = "50%",
+                    row = "30%",  -- 距离顶部 30%
+                    col = "50%",
                 },
                 size = {
-                  width = "80%",
-                  height = "auto",
+                    width = math.floor(vim.o.columns * 0.8),
+                    max_width = "80%",
+                    height = "auto",
                 },
                 border = { style = "rounded" },
+            },
+            popup = {
+                size = {
+                    width = math.floor(vim.o.columns * 0.5),
+                    max_width = "50%",   -- 最大宽度
+                    height = "auto",
+                },
+                border = {
+                    style = "rounded",
+                },
             },
             popupmenu = {
                 relative = "editor",
                 position = {
-                  row = "55%",
-                  col = "50%",
+                    row = "55%",
+                    col = "50%",
                 },
                 size = {
-                  width = "80%",
-                  height = "auto",
+                    width = math.floor(vim.o.columns * 0.5),
+                    max_width = "50%",
+                    height = "auto",
                 },
                 border = {
-                  style = "rounded",
-                  padding = { 0, 1 },
+                    style = "rounded",
+                    padding = { 0, 1 },
                 },
                 win_options = {
-                  winhighlight = { Normal = "Normal", FloatBorder = "DiagnosticInfo" },
+                    winhighlight = { Normal = "Normal", FloatBorder = "DiagnosticInfo" },
+                },
+            },
+            mini = {
+                size = {
+                    width = math.floor(vim.o.columns * 0.3),
+                    max_width = "30%",
+                    height = "auto",
                 },
             },
         }, ---@see section on views
@@ -298,6 +317,14 @@ noice.config = function ()
     vim.api.nvim_create_autocmd("ColorScheme", {
     	callback = function() set_noice_hls() end,
     })
+
+    local float_window_leader = require('settings.variables.windows.float-window').float_window_leader
+
+    --  历史记录: 一键调出历史
+    vim.keymap.set("n", float_window_leader .. "l", function() require("noice").cmd("last") end, { desc = "Noice Last Message" })
+    vim.keymap.set("n", float_window_leader .. "h", function() require("noice").cmd("history") end, { desc = "Noice History" })
+    -- 2. 一键清屏
+    vim.keymap.set("n", float_window_leader .. "d", function() require("noice").cmd("dismiss") end, { desc = "Dismiss All Notifications" })
 end
 
 
