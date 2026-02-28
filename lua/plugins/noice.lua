@@ -25,6 +25,20 @@ noice.dependencies = {
 
 
 noice.config = function ()
+    -- 初始化 notify 并设置背景色
+    local has_notify, notify = pcall(require, "notify")
+    if has_notify then
+        notify.setup({
+            background_colour = "#000000", -- 这里填终端的大致底色
+            -- 即使是透明终端, 也需要一个颜色来计算动画过渡
+        })
+    end
+
+    -- 设置浮动窗口的高亮，保持背景透明并调整边框颜色
+    vim.api.nvim_set_hl(0, "NormalFloat", { bg = 'NONE', ctermbg = 'NONE'  })
+    vim.api.nvim_set_hl(0, "FloatBorder", { bg = 'NONE', ctermbg = 'NONE'  })
+
+
     require("noice").setup({
     	cmdline = {
         	enabled = true, -- enables the Noice cmdline UI

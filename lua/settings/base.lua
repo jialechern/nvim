@@ -50,9 +50,13 @@ vim.g.mkdp_browser = 'firefox'
 -- 设置背景透明
 vim.api.nvim_set_hl(0, 'Normal', { bg = 'NONE', ctermbg = 'NONE' })
 -- 设置光标行透明
-vim.api.nvim_set_hl(0, 'CursorLine', { bg = 'NONE' })
+vim.api.nvim_set_hl(0, 'CursorLine', { bg = 'NONE', ctermbg = 'NONE'  })
 -- 设置状态行透明（如果使用状态栏插件）
-vim.api.nvim_set_hl(0, 'StatusLine', { bg = 'NONE' })
+vim.api.nvim_set_hl(0, 'StatusLine', { bg = 'NONE', ctermbg = 'NONE'  })
+-- 设置浮动窗口的高亮，保持背景透明并调整边框颜色
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = 'NONE', ctermbg = 'NONE'  })
+vim.api.nvim_set_hl(0, "FloatBorder", { bg = 'NONE', ctermbg = 'NONE'  })
+
 
 -- 设置打印机模式
 vim.opt.scrolloff=10
