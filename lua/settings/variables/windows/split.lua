@@ -9,13 +9,13 @@ module.split_leader = split_leader
 
 local function get_key(v)
     if v == 'up' then
-        return split_leader .. 'k'
+        return split_leader .. '<C-k>'
     elseif v == 'down' then
-        return split_leader .. 'j'
+        return split_leader .. '<C-j>'
     elseif v == 'left' then
-        return split_leader .. 'h'
+        return split_leader .. '<C-h>'
     elseif v == 'right' then
-        return split_leader .. 'l'
+        return split_leader .. '<C-l>'
     else
         return nil
     end
