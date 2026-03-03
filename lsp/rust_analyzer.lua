@@ -55,7 +55,7 @@ local function is_library(fname)
 end
 
 return {
-  cmd = { 'rust-analyzer' },
+  cmd = { '/usr/bin/rust-analyzer' },
   filetypes = { 'rust' },
   root_dir = function(bufnr, on_dir)
     local fname = vim.api.nvim_buf_get_name(bufnr)

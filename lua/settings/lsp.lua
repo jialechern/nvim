@@ -113,6 +113,8 @@ LSP 快捷键帮助手册:
     %s : 推送诊断到列表
     %s : 开/关 参数提示
     %s : 开/关 诊断信息
+    %s : 打开补全菜单
+    %s : 关闭补全菜单
         ]]
         vim.notify(help_text:format(
             get_key('goto-def'),
@@ -127,7 +129,9 @@ LSP 快捷键帮助手册:
             get_key('doc-in-new-window'),
             get_key('setloclist'),
             get_key('type-hint'),
-            get_key('doc')
+            get_key('doc'),
+            get_key('open-hint'),
+            get_key('close-hint')
         ), vim.log.levels.INFO, { title = lsp_leader .. " LSP 帮助" })
     end, { desc = "LSP 帮助", })
 

@@ -70,18 +70,21 @@ opts.completion = {
     list = { selection = { preselect = false, auto_insert = false }, },
 }
 
+-- 引入 LSP 快捷键设置
+local get_key = require('settings.variables.lsp').get_key
+
 -- 重定义默认快捷键
 opts.keymap = {
     preset = 'none',
     -- 开启/关闭补全文档
-    ['<C-A-o>'] = { 'show', 'show_documentation', 'hide_documentation' },
+    [get_key('open-hint')] = { 'show', 'show_documentation', 'hide_documentation' },
 
     -- 上下滚动文档
     ['<C-p>'] = { 'scroll_documentation_up', 'fallback' },
     ['<C-n>'] = { 'scroll_documentation_down', 'fallback' },
 
     -- 关闭补全菜单
-    ['<C-A-x>'] = { 'hide', },
+    [get_key('close-hint')] = { 'hide', },
 
     -- 接受补全
     ['<Tab>'] = { 'accept', 'fallback' },
@@ -91,8 +94,8 @@ opts.keymap = {
     ['<C-j>'] = { 'select_next', 'fallback' },
 
     -- snippet 跳转键
-    ['<C-A-.>'] = { 'snippet_forward', 'fallback' },
-    ['<C-A-,>'] = { 'snippet_backward', 'fallback' },
+    ['<C-.>'] = { 'snippet_forward', 'fallback' },
+    ['<C-,>'] = { 'snippet_backward', 'fallback' },
 }
 
 -- 自动给出函数签名提示

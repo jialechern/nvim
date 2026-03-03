@@ -73,6 +73,29 @@ sudo pacman -S ruby
 ```bash
 sudo pacman -S perl
 ```
+### lsp 服务器的安装
+现在使用的 lsp 服务器有:
+    - clangd: C/C++ 语言服务器
+    - lua-language-server: Lua 语言服务器
+    - marksman: Markdown 语言服务器
+    - pyright: Python 语言服务器
+    - rust-analyzer: Rust 语言服务器
+    - taplo: TOML 语言服务器
+    - texlab: LaTeX 语言服务器
+    - tinymist: typst 语言服务器
+    - typescript-language-server: TypeScript 语言服务器
+
+可选的安装办法有:
+    - 通过 Mason.nvim 插件进行安装
+        进入 `nvim` 运行 `:Mason` 打开 Mason 的界面, 在里面找到对应的 LSP Server, 点击安装即可.
+    - 通过系统的包管理器进行安装
+        以 Arch Linux 为例, 可以通过下面的命令安装对应的 LSP Server:
+        ```bash
+        # 在 Arch Linux 中 clangd 是通过 arduino-language-server 包提供的
+        sudo pacman -S arduino-language-server lua-language-server marksman pyright rust-analyzer taplo texlab tinymist typescript-language-server
+        ```
+
+*注意:* 在 lsp 配置中可能会有部分路径问题, 如 rustup 和 cargo 的 bin 目录位于系统的 /usr/bin 路径之前, 则 lsp 会先加载它们的 rust-analyzer, 若想使用包管理器安装的 lsp 服务器, 只需要将 lsp 配置中的 `return { cmd = 'path' ... }` 中的 `path` 替换为对应的服务器路径即可.
 
 #### 其它依赖
 
