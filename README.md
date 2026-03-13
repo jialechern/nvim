@@ -84,6 +84,7 @@ sudo pacman -S perl
     - texlab: LaTeX 语言服务器
     - tinymist: typst 语言服务器
     - typescript-language-server: TypeScript 语言服务器
+    - nixd: nix 语言服务器
 
 可选的安装办法有:
     - 通过 Mason.nvim 插件进行安装
@@ -94,6 +95,7 @@ sudo pacman -S perl
         # 在 Arch Linux 中 clangd 是通过 arduino-language-server 包提供的
         sudo pacman -S arduino-language-server lua-language-server marksman pyright rust-analyzer taplo texlab tinymist typescript-language-server
         ```
+    - 关于 nixd: 现在 nixd 必须通过 nix 安装, 使用 home-manager 配置文件即可, 运行 `home-manager switch`.
 
 *注意:* 在 lsp 配置中可能会有部分路径问题, 如 rustup 和 cargo 的 bin 目录位于系统的 /usr/bin 路径之前, 则 lsp 会先加载它们的 rust-analyzer, 若想使用包管理器安装的 lsp 服务器, 只需要将 lsp 配置中的 `return { cmd = 'path' ... }` 中的 `path` 替换为对应的服务器路径即可.
 
