@@ -1,6 +1,7 @@
 # VimConfig
 ## 使用说明
-需要注意的是, 使用之前：
+- 经典用法: 将仓库克隆到 `~/.config/nvim`
+- 使用 nix: 将仓库克隆到 `~/.config/home-manager/nvim`
 
 ### 插件说明
 - markdown-proview 需要执行 `install.sh` 安装才可以启用;
@@ -9,7 +10,7 @@
     - 每种语言所需要的 LSP 服务器以及其服务器的配置文件对应关系都在 `settings.lsp` 中
     - 可以通过 `:MasonInstall LSP-Server` 手动安装 LSP Server, 也可以通过 `:MasonUninstall LSP-Server` 手动卸载 LSP Server
 
-### 插件依赖的配置
+### 插件依赖的配置(如果使用经典用法)
 
 - 通过一下方式可以自检插件的依赖是否满足
 
