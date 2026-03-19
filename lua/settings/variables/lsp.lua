@@ -11,6 +11,8 @@ local function get_key(v)
         return lsp_leader .. 'gd'
     elseif v == 'goto-dec' then
         return lsp_leader .. 'gD'
+    elseif v == 'format' then
+        return lsp_leader .. 'f'
     elseif v == 'goto-ref' then
         return lsp_leader .. 'gr'
     elseif v == 'goto-impl' then

@@ -24,11 +24,13 @@ for _, filetype in ipairs({
     'c',
     'lua',
     'tex',
+    'nix',
     'fish',
     'rust',
     'make',
     'typst',
     'python',
+    'haskell',
     'markdown',
     'javascript',
 }) do

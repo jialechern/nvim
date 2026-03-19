@@ -31,6 +31,13 @@ set_lsp_config(function(event)
     local client = vim.lsp.get_client_by_id(event.data.client_id)
 
     -- 设置 LSP 相关的快捷键
+    map('n', get_key('format'), function ()
+        -- 手动触发格式化
+        -- vim.cmd("normal gggqG")
+        vim.lsp.buf.format({ async = true })
+        vim.notify("代码已格式化")
+    end,    { desc = "手动触发格式化", })
+
     map('n', get_key('goto-def'), vim.lsp.buf.definition,    { desc = "跳转到定义", })
     map('n', get_key('goto-dec'), vim.lsp.buf.declaration,   { desc = "跳转到声明", })
     map('n', get_key('goto-ref'), vim.lsp.buf.references,    { desc = "查找引用", })

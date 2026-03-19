@@ -8,6 +8,9 @@ local autocmd_key = require('settings.variables.auto-run').autocmd_key
 -- 设置编译方式
 vim.bo.makeprg = 'cargo'
 
+-- 代码格式化工具
+vim.bo.formatprg = 'rustfmt --emit stdout'
+
 --- 自动编译运行
 map('n', autocmd_key, function ()
     vim.cmd('silent write')

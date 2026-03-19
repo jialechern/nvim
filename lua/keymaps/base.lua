@@ -106,6 +106,11 @@ map('n', get_key('shell-redir'), function()
     vim.opt.shellredir = shellredir
 end, { desc = "设置 shellredir 的快捷键" })
 
+map('n', get_key('content-formater'), function()
+    local formatprg = vim.fn.input('设定 formatprg(content-formater) 为: ', '')
+    vim.bo.formatprg = formatprg
+end, { desc = "设置 shellredir 的快捷键" })
+
 map('n', meta_leader .. 'L', function()
     local help_text = [[
 Windows 相关领头键:

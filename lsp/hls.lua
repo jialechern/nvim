@@ -5,7 +5,7 @@ module.cmd = { 'haskell-language-server-wrapper', '--lsp' }
 module.filetypes = { 'haskell', 'lhaskell', 'cabal' }
 
 -- 核心配置: 识别项目根目录
--- 增加了 flake.nix，这对使用 Nix 构建 Haskell 项目的环境非常关键
+-- 增加了 flake.nix, 这对使用 Nix 构建 Haskell 项目的环境非常关键
 module.root_markers = { 'hie.yaml', 'cabal.project', '*.cabal', 'flake.nix', 'stack.yaml', '.git' }
 
 module.settings = {
@@ -44,21 +44,21 @@ vim.api.nvim_create_autocmd('LspAttach', {
         if client.name == "hls" then
             local bufnr = args.buf
 
-            -- [代码高亮/语义标记]：如果需要，可以显式开启 Semantic Tokens
+            -- [代码高亮/语义标记]: 如果需要, 可以显式开启 Semantic Tokens
             if client.server_capabilities.semanticTokensProvider then
                 client.server_capabilities.semanticTokensProvider = vim.empty_dict()
             end
 
             -- [执行 CodeLens]
-            -- Haskell 大量依赖 CodeLens（比如点击 "Evaluate" 运行注释里的代码，或 "Import" 模块）
-            vim.keymap.set("n", "<leader>cl", vim.lsp.codelens.run, 
+            -- Haskell 大量依赖 CodeLens(比如点击 "Evaluate" 运行注释里的代码, 或 "Import" 模块)
+            vim.keymap.set("n", "<leader>ev", vim.lsp.codelens.run,
                 { buffer = bufnr, desc = "Haskell: Run CodeLens" })
 
             -- [刷新 CodeLens]: 确保镜头动作是最新的
             vim.keymap.set("n", "<leader>cr", vim.lsp.codelens.refresh, 
                 { buffer = bufnr, desc = "Haskell: Refresh CodeLens" })
 
-            -- [Wingman 自动推导]: 利用类型系统帮你写代码
+            -- [Wingman 自动推导]: 利用类型系统写代码
             vim.keymap.set("n", "<leader>ht", function()
                 vim.lsp.buf.code_action({
                     context = { only = { "refactor.wingman" } },

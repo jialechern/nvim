@@ -8,6 +8,9 @@ local autocmd_key = require('settings.variables.auto-run').autocmd_key
 -- 设置解释器
 vim.bo.makeprg = 'python3'
 
+-- 设置格式化工具
+vim.bo.formatprg = 'black -q -'
+
 --- 自动解释运行
 map('n', autocmd_key, function ()
     vim.cmd('silent write')

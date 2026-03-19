@@ -8,6 +8,9 @@ local autocmd_key = require('settings.variables.auto-run').autocmd_key
 -- 设置编译器
 vim.bo.makeprg = 'gcc'
 
+-- 代码格式化工具
+vim.bo.formatprg = 'clang-format -style=file'
+
 --- 自动编译
 map('n', autocmd_key, function ()
     vim.cmd('silent write')
