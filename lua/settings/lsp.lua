@@ -184,6 +184,8 @@ local require_lsps = {
     javascript = { 'ts_ls', 'typescript-language-server' },
     markdown = { 'marksman', 'marksman' },
     toml = { 'taplo', 'taplo' },
+    nix = { 'nixd', 'nixd' },
+    haskell = { 'hls', 'haskell-language-server-wrapper' },
 }
 -- 导出 require_lsps
 module.require_lsps = require_lsps
