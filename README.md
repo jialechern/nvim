@@ -1,16 +1,17 @@
 # VimConfig
 ## 使用说明
 - 经典用法: 将仓库克隆到 `~/.config/nvim`
-- 使用 nix: 将仓库克隆到 `~/.config/home-manager/nvim`
+- 使用 NixOS: 将仓库克隆到 `/etc/nixos/modules/nvim`
 
-### 插件说明
-- markdown-proview 需要执行 `install.sh` 安装才可以启用;
+### 依赖说明
+- markdown-proview 需要执行 `~/.local/share/nvim/lazy/markdown-preview.nvim/app/install.sh` 安装才可以启用;
 - LSP 使用 neovim 的内置 LSP 功能. 其中 LSP Server 通过插件 Mason.nvim 管理
     
     - 每种语言所需要的 LSP 服务器以及其服务器的配置文件对应关系都在 `settings.lsp` 中
-    - 可以通过 `:MasonInstall LSP-Server` 手动安装 LSP Server, 也可以通过 `:MasonUninstall LSP-Server` 手动卸载 LSP Server
+    - NixOS 的配置中已经包含了所有需要的 LSP 服务器
+    - 所需的 LSP 服务器也可以使用包管理器手动安装
 
-### 插件依赖的配置(如果使用经典用法)
+### 插件依赖的配置(如果不是使用 NixOS)
 
 - 通过一下方式可以自检插件的依赖是否满足
 
@@ -19,7 +20,7 @@
 
 - 当没有默认的 `lua5.1` 以及 `luarocks` 环境时需要手动安装
 
-lazy.nvim 通过内置的 hererocks（一个在 Neovim “用户目录” 下自动管理 LuaRocks 环境的工具）尝试去检查是否能安装那些声明了 rocks（LuaRocks）依赖的插件. 
+lazy.nvim 通过内置的 hererocks（一个在 Neovim "用户目录" 下自动管理 LuaRocks 环境的工具）尝试去检查是否能安装那些声明了 rocks（LuaRocks）依赖的插件. 
 
 ```bash
 sudo pacman -S lua51 luarocks
@@ -27,7 +28,7 @@ sudo pacman -S lua51 luarocks
 
 - 没有默认的 `tree-sitter` 时可以手动安装
 
-nvim-treesitter 的 “:TSInstallFromGrammar” 功能, 可以让你在没有预编译二进制解析器（parser.so）的情况下, 直接下载 grammar（.js、.json）文件, 然后用 tree-sitter cli 生成对应的 C 解析库.
+nvim-treesitter 的 ":TSInstallFromGrammar" 功能, 可以在没有预编译二进制解析器(parser.so)的情况下, 直接下载 grammar(.js、.json)文件, 然后用 tree-sitter cli 生成对应的 C 解析库.
 
 ```bash
 sudo pacman -S tree-sitter-cli
@@ -46,22 +47,22 @@ sudo pacman -S xclip
 sudo pacman -S xsel
 ```
 
-- Neovim 内置了一个 Node.js provider, 用来让某些基于 Node.js 的插件（如 coc.nvim、denops、vim-node-rpc 等）能够在 Neovim 里运行 JavaScript/TypeScript 逻辑. 
+- Neovim 内置了一个 Node.js provider, 用来让某些基于 Node.js 的插件(如 coc.nvim、denops、vim-node-rpc 等)能够在 Neovim 里运行 JavaScript/TypeScript 逻辑. 
 
-要启用这个 provider, 除了系统要有 Node.js（这里你的系统显示 Node.js v23.11.1 已安装）, 还需要全局安装一个名为 neovim 的 npm 包, 它负责在 Node 与 Neovim 之间做通信. 如果没有安装, 就会报上面那条警告. 
+要启用这个 provider, 除了系统要有 Node.js（这里你的系统显示 Node.js v23.11.1 已安装, 还需要全局安装一个名为 neovim 的 npm 包, 它负责在 Node 与 Neovim 之间做通信. 如果没有安装, 就会报上面那条警告. 
 
 ```bash
-# 如果你用 npm：
+# 如果用 npm：
 npm install -g neovim
 
-# 如果你用 yarn (推荐)：
+# 如果用 yarn (推荐)：
 yarn global add neovim
 
-# 如果你用 pnpm：
+# 如果用 pnpm：
 pnpm install -g neovim
 ```
 
-- 如果你打算在 Neovim 里运行 Ruby 脚本（例如一些用 Ruby 写的插件）, 就需要在系统里有可用的 ruby 可执行文件和 RubyGems（gem）. 
+- 如果打算在 Neovim 里运行 Ruby 脚本(例如一些用 Ruby 写的插件), 就需要在系统里有可用的 ruby 可执行文件和 RubyGems（gem）. 
 
 ```bash
 sudo pacman -S ruby
@@ -98,39 +99,9 @@ sudo pacman -S perl
         ```
     - 关于 nixd: 现在 nixd 必须通过 nix 安装, 使用 home-manager 配置文件即可, 运行 `home-manager switch`.
 
-*注意:* 在 lsp 配置中可能会有部分路径问题, 如 rustup 和 cargo 的 bin 目录位于系统的 /usr/bin 路径之前, 则 lsp 会先加载它们的 rust-analyzer, 若想使用包管理器安装的 lsp 服务器, 只需要将 lsp 配置中的 `return { cmd = 'path' ... }` 中的 `path` 替换为对应的服务器路径即可.
+**注意:** 在 lsp 配置中可能会有部分路径问题, 如 rustup 和 cargo 的 bin 目录位于系统的 /usr/bin 路径之前, 则 lsp 会先加载它们的 rust-analyzer, 若想使用包管理器安装的 lsp 服务器, 只需要将 lsp 配置中的 `return { cmd = 'path' ... }` 中的 `path` 替换为对应的服务器路径即可.
 
 #### 其它依赖
-
-## 一些基本符号的设置
-
-- `vim.g.mapleader/_G.Leader`: neovim/vim 自带的可自定义的领头键
-- `_G.CoLeader`: 本配置文件中副带的一个可自定义领头键
-
-以上所有符号均可通过 `config` 脚本进行自定义(推荐), 也可以在 `lua/settings/init-symbols` 下进行自定义.
-
-详细操作可以使用下面的命令获取:
-
-```bash
-# 在 Unix-like 系统中
-./config --help
-
-# 在 Windows 系统中
-python .\config --help
-```
-
-下面是一个符号配置的示例, 也是默认推荐的配置:
-
-```bash
-# 在 Unix-like 系统中
-./config --leader '>' \
-    --coleader '`'
-
-# 在 Windows 系统中
-python .\config --set-symbols `
-    --leader '>' `
-    --coleader '`'
-```
 
 ## 去除插件依赖
 
@@ -147,104 +118,3 @@ alias vi="nvim --noplugin"
 alias vim="nvim --noplugin"
 alias nvim="nvim --noplugin"
 ```
-
-## 一些编写配置的原则
-
-1. 当使用到特殊符号时应当使用已经解耦的预定义符号
-
-    在 lua 的全局命名空间 `_G` 中已经预定义了下面四个符号: 
-    - `vim.g.mapleader/_G.Leader`: neovim/vim 自带的可自定义的领头键盘
-    - `_G.CoLeader`: 本配置文件中副带的一个可自定义领头键( 前两者可互相转义 )
-
-2. 定义键盘映射时应当语义清晰且结构清晰
-
-    - 当映射的片段较为复杂时应当善用 lua 的字符串拼接功能
-    - 当映射的代码片段需要跳至当前行的游标之前时, 可以考虑采用 `_G.CoLeader` 作为跳转锚点
-    - 当代码片段预期的缩进与 neovim 的缩进不一致时可以善用 norm 模式下的 `0` 和 `<number>|` 命令, 结合制表符 `\t` 来自定义缩进
-    - 如果映射需要依赖于新定义的 符号/变量, 应当将这些 符号/变量 存放在 settings/variables.lua 中, 在使用 `local symbol = require('settings.variables').symbol` 的方式来引入
-
-3. 键盘映射机制的一些说明
-    
-    - utils/map.lua 定义了两个 api 的浅层抽象, 应当尽可能的使用这两个函数
-        - `map`: 用于定义单个模式下的映射
-        - `map_by_modes`: 用于多个模式下的键盘映射
-    - 对于编程语言的通用概念, 其快捷键可以通过下面的方式统一注册, 由 luasnip 脚本统一加载并定义为按键映射, 下面再对这种方式支持的按键映射类型进行说明
-        - 程序入口
-            为每个编程语言定义一个入口函数, 该函数应当注册在 `settings/variables/entry-point.lua` 下.
-
-            ```lua
-            --- <language>
-            --- entry_point snipets
-            
-            -- 基本引入
-            local luasnip = require('luasnip')
-            
-            -- 自定义 snippet(Lua 方式)
-            local s = luasnip.snippet
-            local t = luasnip.text_node
-            local i = luasnip.insert_node
-            local c = luasnip.choice_node
-            -- local d  = luasnip.dynamic_node
-            -- local sn = luasnip.snippet_node
-            
-            --- 模块定义
-            local module = {}
-            
-            --- 程序入口点
-            local entry_point = require('settings.variables.entry-points').entry_point
-            module[#module+1] = s({
-                trig = entry_point,
-                wordTrig  = true,
-                regTrig   = false,
-                -- snippetType = 'autosnippet',
-                }, {
-                t({'def main() -> None:', ''}),
-                t('\t'), i(0),
-                t({'', '', 'if __name__ == \'__main__\':', ''}),
-                t('\tmain()'),
-                })
-            
-            --- 模块返回
-            return module
-            ```
-
-        - 测试
-            为每个编程语言定义一种测试方式, 该函数应当注册在 `settings/variables/test.lua` 下.
-        - 每个文件类型的一个自动执行命令
-            为每个文件类型定义一个自动执行命令, 该命令按键注册在 `settings/variables/auto-run.lua` 下
-            ```lua
-            --- <language>
-            --- 用于配置 <language> 语言的快捷键映射
-            
-            -- 导入自定义的工具函数以及需要的符号
-            local map = require('utils.map').map
-            local autocmd_key = require('settings.variables.auto-run').autocmd_key
-            
-            --- 自动编译
-            map('n', autocmd_key, function ()
-                vim.bo.makeprg = '<compiler> %:p:r.c -o %:p:r && %:p:r'
-                vim.cmd('silent write')
-                vim.cmd('make')
-            end, { desc = '编译并运行 <language> 语言文件' })
-            ```
-            
-
-    **p.s.** 上面注册的所有按键映射的 key 都可以统一调节, 变量统一存放在 settings/variables/ 中.
-
-    - 对一些依赖于插件的按键映射, 若不希望将它定义在插件的配置文件中(当然最好是应该放在对应插件的配置文件中), 则应该对在定义是对对应的插件进行存在性检查, 例如:
-
-    ```lua
-    -- 这里定义 markdown 的预览功能, 依赖于 markdown-preview.nvim 插件
-    map('n', autocmd_key, function ()
-        -- 对插件命令的存在性进行检查应当放在按键映射的回调函数中, 在每次调用时进行检查
-        -- 否则\(在 `map` 函数体外部检查\)可能会因为插件本身的懒加载功能导致快捷键无法被注册
-        if vim.fn.exists(':MarkdownPreviewToggle') ~= 0 then
-            vim.cmd('MarkdownPreview')
-        else
-            print('请先安装 markdown-preview 插件')
-        end
-    end, { desc = '预览 markdown 文件' })
-    ```
-
-## 未来希望增加的
-

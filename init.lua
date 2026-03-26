@@ -1,7 +1,11 @@
 -- init.lua
 
 -- 加载配置初始化时必要的符号
-require('settings.init-symbols')
+-- 领头键
+_G.Leader = '>'
+vim.g.mapleader = _G.Leader
+-- 副领头键
+_G.CoLeader = '`'
 
 -- 指定插件位置，不存在则clone到本地
 if vim.fn.has('nvim-0.8') == 1 then

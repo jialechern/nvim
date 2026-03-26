@@ -83,7 +83,12 @@ markdown_preview.config = function ()
         callback = function()
         -- 启用语法高亮
         if vim.fn.exists('g:loaded_nvim_treesitter') == 1 then
-            vim.cmd('TSEnable highlight')
+		-- 只在 markdown 打开时启用 Treesitter
+	    if vim.fn.has("nvim-0.12") == 1 then
+  		vim.treesitter.start()
+	    else
+  		pcall(vim.cmd, "TSBufEnable highlight")
+	    end
         end
 
         -- 可选：设置wrap和换行符显示
