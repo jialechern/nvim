@@ -33,6 +33,17 @@ for from, to in pairs({
         name = string.sub(from, -1) .. '匹配',
         desc = string.sub(from, -1) .. '匹配',
     }, {
+            t(string.sub(from, -1) .. ' '), i(0), t(' ' .. to),
+    })
+
+    module[#module+1] = s({
+        trig = _G.LocalLeader .. from,
+        -- wordTrig  = false,
+        -- regTrig   = false,
+        snippetType = 'autosnippet',
+        name = string.sub(from, -1) .. '匹配',
+        desc = string.sub(from, -1) .. '匹配',
+    }, {
             t(string.sub(from, -1)), i(0), t(to),
     })
 end

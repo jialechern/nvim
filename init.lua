@@ -5,7 +5,8 @@
 _G.Leader = '\''
 vim.g.mapleader = _G.Leader
 -- 副领头键
-_G.CoLeader = '`'
+_G.LocalLeader = '`'
+vim.g.maplocalleader = _G.LocalLeader
 
 -- 指定插件位置，不存在则clone到本地
 if vim.fn.has('nvim-0.8') == 1 then

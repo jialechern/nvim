@@ -231,7 +231,7 @@ module[#module+1] = s({
 })
 
 module[#module+1] = s({
-    trig = _G.CoLeader .. '1',
+    trig = _G.LocalLeader .. '1',
     -- wordTrig  = true,
     -- regTrig   = false,
     snippetType = 'autosnippet',
@@ -254,7 +254,7 @@ module[#module+1] = s({
 })
 
 module[#module+1] = s({
-    trig = _G.CoLeader .. '2',
+    trig = _G.LocalLeader .. '2',
     -- wordTrig  = true,
     -- regTrig   = false,
     snippetType = 'autosnippet',
@@ -277,7 +277,7 @@ module[#module+1] = s({
 })
 
 module[#module+1] = s({
-    trig = _G.CoLeader .. '3',
+    trig = _G.LocalLeader .. '3',
     -- wordTrig  = true,
     -- regTrig   = false,
     snippetType = 'autosnippet',
@@ -300,7 +300,7 @@ module[#module+1] = s({
 })
 
 module[#module+1] = s({
-    trig = _G.CoLeader .. '4',
+    trig = _G.LocalLeader .. '4',
     -- wordTrig  = true,
     -- regTrig   = false,
     snippetType = 'autosnippet',
@@ -396,7 +396,7 @@ module[#module+1] = s({
 })
 
 module[#module+1] = s({
-    trig = _G.CoLeader .. '$',
+    trig = _G.LocalLeader .. '$',
     -- wordTrig  = true,
     -- regTrig   = false,
     snippetType = 'autosnippet',
