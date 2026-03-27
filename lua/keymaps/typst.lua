@@ -2,14 +2,14 @@
 --- 用于配置 typst 语言的快捷键映射
 
 -- 导入自定义的工具函数以及需要的符号
-local autocmd_key = require('settings.variables.auto-run').autocmd_key
+local run_key = require('settings.variables.run').run_key
 
 -- 设置编译器
 vim.bo.makeprg = 'typst'
 
 -- 设置 LspAttach 自动命令来处理快捷键和 Zathura 逻辑
 -- 在你的 LspAttach 回调函数内部
-vim.keymap.set('n', autocmd_key, function()
+vim.keymap.set('n', run_key, function()
 	-- 1. 获取项目根目录
 	local root = vim.fs.root(0, { 'main.typ', 'typst.toml', '.git' })
 

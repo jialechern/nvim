@@ -3,7 +3,7 @@
 
 -- 导入自定义的工具函数以及需要的符号
 local map = require('utils.map').map
-local autocmd_key = require('settings.variables.auto-run').autocmd_key
+local run_key = require('settings.variables.run').run_key
 
 -- 支持的 shell 语言
 local langs = {
@@ -19,7 +19,7 @@ end
 
 --- 自动运行
 for _, lang in ipairs(langs) do
-    map('n', autocmd_key, function ()
+    map('n', run_key, function ()
         vim.cmd('silent write')
         vim.cmd('make %:p')
     end, { desc = '运行 ' .. lang .. ' 语言文件' })

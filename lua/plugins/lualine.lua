@@ -83,6 +83,7 @@ lualine.config = function()
     require('lualine').setup {
     	options = {
     		theme = theme,
+            globalstatus = true,
     		component_separators = '',
     		section_separators = { left = '', right = '' },
     	},

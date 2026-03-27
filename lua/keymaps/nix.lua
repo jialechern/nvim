@@ -3,7 +3,7 @@
 
 -- 导入自定义的工具函数以及需要的符号
 local map = require('utils.map').map
-local autocmd_key = require('settings.variables.auto-run').autocmd_key
+local run_key = require('settings.variables.run').run_key
 
 -- 设置解释器
 vim.bo.makeprg = 'home-manager build --flake'
@@ -12,7 +12,7 @@ vim.bo.makeprg = 'home-manager build --flake'
 vim.bo.formatprg = 'nixpkgs-fmt'
 
 --- 自动运行
-map('n', autocmd_key, function ()
+map('n', run_key, function ()
     vim.cmd('silent write')
     local username = vim.fn.input('设定 username 为: ', '')
     vim.cmd('make .#' .. username)

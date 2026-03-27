@@ -2,7 +2,7 @@
 
 -- 加载配置初始化时必要的符号
 -- 领头键
-_G.Leader = '>'
+_G.Leader = '\''
 vim.g.mapleader = _G.Leader
 -- 副领头键
 _G.CoLeader = '`'

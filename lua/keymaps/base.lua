@@ -77,7 +77,7 @@ local status_leader = require('settings.variables.windows.status').status_leader
 local align_leader = require('settings.variables.align').align_leader
 local float_window_leader = require('settings.variables.windows.float-window').float_window_leader
 
-local autocmd_key = require('settings.variables.auto-run').autocmd_key
+local run_key = require('settings.variables.run').run_key
 local entry_point = require('settings.variables.entry-points').entry_point
 local test_key = require('settings.variables.test').test_key
 
@@ -167,7 +167,7 @@ Snipets 相关快捷键:
         get_key('shell-pipe'),
         get_key('shell-redir'),
         meta_leader .. 'L',
-        autocmd_key,
+        run_key,
         entry_point,
         test_key
     ), vim.log.levels.INFO, { title = "Vim 内置变量快捷键列表" })

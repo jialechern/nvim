@@ -3,7 +3,7 @@
 
 local module = {}
 
-module.autocmd_key = '<leader>r'
+module.run_key = '<C-e>'
 
 return module
 
