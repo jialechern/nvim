@@ -8,8 +8,8 @@ vim.g.mapleader = _G.Leader
 _G.LocalLeader = '`'
 vim.g.maplocalleader = _G.LocalLeader
 
--- 指定插件位置，不存在则clone到本地
-if vim.fn.has('nvim-0.8') == 1 then
+-- 指定插件位置, 不存在则clone到本地(版本大于 0.12 则会使用 neovim 原生的插件管理器)
+if vim.fn.has('nvim-0.8') == 1 and (not vim.fn.has("nvim-0.12") == 1) then
     local sep = require('utils.path').path_prefix
     local lazypath = vim.fn.stdpath('data') .. sep .. 'lazy' .. sep .. 'lazy.nvim'
     if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -38,7 +38,7 @@ if vim.fn.has('nvim-0.8') == 1 then
     require('lazy').setup({
             spec = {
                 -- 插件目录
-                { import = 'plugins' },
+                { import = 'plugins-old' },
             },
             defaults = {
                 -- 默认懒加载插件, 仅在需要时加载插件
@@ -64,6 +64,9 @@ if vim.fn.has('nvim-0.8') == 1 then
             },
         })
 end
+
+-- 引入插件
+require('plugins').setup()
 
 -- 一般设置
 require('settings')

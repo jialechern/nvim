@@ -1,5 +1,8 @@
 -- settings.lua
 
+-- 启用 neovim 原生 lsp (要最先加载, 否则会错过 LspAttach 事件)
+require('settings.lsp')
+
 -- 基础配置
 require('settings.base')
 
@@ -8,7 +11,4 @@ require('settings.autocmds')
 
 -- 设置根据文件扩展名配置文件类型
 require('settings.autofiletype-by-fileext')
-
--- 启用 neovim 原生 lsp
-require('settings.lsp')
 

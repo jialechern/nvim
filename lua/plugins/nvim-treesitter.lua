@@ -1,149 +1,71 @@
--- lua/plugins/nvim-treesitter.lua
 local M = {}
-M[1] = {}
-local nvim_treesitter = M[1]
 
-nvim_treesitter[1] = "nvim-treesitter/nvim-treesitter"
+local filetypes = {
+    'bash',
+    'c',
+    'cpp',
+    'css',
+    'go',
+    'html',
+    'java',
+    'javascript',
+    'json',
+    'lua',
+    'markdown',
+    'nix',
+    'python',
+    'rust',
+    'toml',
+    'typescript',
+    'vim',
+    'vimdoc',
+    'yaml',
+    'sh',
+    'zsh',
+    'haskell',
+}
 
--- 当前主分支的 nvim-treesitter 不支持 lazy-loading，
--- 所以这里必须常驻加载, 而不是 FileType 懒加载
-nvim_treesitter.lazy = false
+local parsers = filetypes
 
-nvim_treesitter.config = function()
-    -- 先判断当前 Neovim 版本
-    local has_nvim_012 = vim.fn.has("nvim-0.12") == 1
+function M.setup()
+    vim.cmd.packadd('nvim-treesitter')
 
-    if has_nvim_012 then
-        -- 现代分支: 适配当前 nvim-treesitter 写法
-        local ok, ts = pcall(require, "nvim-treesitter")
-        if not ok then
-            vim.notify(
-                "无法加载 nvim-treesitter：请检查插件是否已正确安装",
-                vim.log.levels.ERROR
-            )
-            return
-        end
-
-        -- 当前版本官方入口: setup()
-        -- 在 NixOS 里已经由 Nix 提供 parser, 这里不必再让插件自己装 parser
+    -- 让插件本体初始化
+    local ok, ts = pcall(require, 'nvim-treesitter')
+    if ok and ts.setup then
         ts.setup({})
-
-        local group = vim.api.nvim_create_augroup("UserTreesitterModern", { clear = true })
-
-        -- 只对你常用的文件类型启用 Treesitter
-        local filetypes = {
-            "bash", "c", "cpp", "css", "go", "html", "java",
-            "javascript", "json", "lua", "markdown", "nix", "python",
-            "rust", "toml", "typescript", "vim", "vimdoc", "yaml",
-            "sh", "zsh",
-        }
-
-        vim.api.nvim_create_autocmd("FileType", {
-            group = group,
-            pattern = filetypes,
-            callback = function()
-                -- 语法高亮: 由 Neovim 自己提供
-                vim.treesitter.start()
-
-                -- 自动缩进: 由 nvim-treesitter 提供
-                vim.opt_local.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-
-                -- 折叠: 由 Neovim 自己提供
-                vim.opt_local.foldmethod = "expr"
-                vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-                vim.opt_local.foldenable = false
-            end,
-        })
-    else
-        -- 兼容分支:
-	    nvim_treesitter.branch = "master"
-        -- 0.11.6 下, 当前新版 nvim-treesitter 主分支不保证可用;
-        -- 只有把插件 pin 到旧版时, 这个分支才有意义
-        local ok, configs = pcall(require, "nvim-treesitter.configs")
-        if not ok then
-            vim.notify(
-                "当前 Neovim < 0.12, 且没有找到旧版 nvim-treesitter.configs. 建议升级 Neovim 到 0.12+, 或者把 nvim-treesitter pin 到旧版.",
-                vim.log.levels.WARN
-            )
-            return
-        end
-
-        configs.setup({
-            -- 旧版配置风格
-            highlight = {
-                enable = true,
-                additional_vim_regex_highlighting = false,
-            },
-
-            indent = {
-                enable = true,
-            },
-
-            -- parser 已由 Nix 管理, 这里不让插件自己安装
-            ensure_installed = {
-                -- Shell / 系统
-                'bash',
-                'c',
-                'diff',
-                'dockerfile',
-                'git_config',
-                'git_rebase',
-                'gitattributes',
-                'gitcommit',
-                'gitignore',
-                'nix',
-                'query',
-                'vim',
-                'vimdoc',
-
-                -- Web / 前端
-                'css',
-                'html',
-                'javascript',
-                'jsdoc',
-                'json',
-                'json5',
-                'jsonc',
-                'tsx',
-                'typescript',
-
-                -- 常用/常见开发语言
-                'lua',
-                'luadoc',
-                'markdown',
-                'markdown_inline',
-                'python',
-                'regex',
-                'rust',
-                'toml',
-                'yaml',
-
-                -- LaTeX / Typst
-                'latex',
-                'typst',
-            },
-            auto_install = true,
-        })
-
-        local group = vim.api.nvim_create_augroup("UserTreesitterLegacy", { clear = true })
-
-        vim.api.nvim_create_autocmd("FileType", {
-            group = group,
-            pattern = {
-                "bash", "c", "cpp", "css", "go", "html", "java",
-                "javascript", "json", "lua", "markdown", "nix", "python",
-                "rust", "toml", "typescript", "vim", "vimdoc", "yaml",
-                "sh", "zsh",
-            },
-            callback = function()
-                vim.treesitter.start()
-                vim.opt_local.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-                vim.opt_local.foldmethod = "expr"
-                vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-                vim.opt_local.foldenable = false
-            end,
-        })
     end
+
+
+    -- 让 parser 安装到 Neovim 自己的数据目录里
+    ts.setup({
+        install_dir = vim.fn.stdpath('data') .. '/site',
+    })
+
+    -- 自动安装缺失 parser
+    ts.install(parsers)
+
+    -- -- 如果希望第一次启动就等安装完成, 再把上面一行改成
+    -- ts.install(parsers):wait(300000)
+
+    local group = vim.api.nvim_create_augroup('UserTreesitter', { clear = true })
+
+    vim.api.nvim_create_autocmd('FileType', {
+        group = group,
+        pattern = filetypes,
+        callback = function()
+            -- 语法高亮: 由 Neovim 自己启动 treesitter
+            vim.treesitter.start()
+
+            -- 缩进: 交给 nvim-treesitter
+            vim.opt_local.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+
+            -- 折叠: 交给 Neovim 的 treesitter foldexpr
+            vim.opt_local.foldmethod = 'expr'
+            vim.opt_local.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+            vim.opt_local.foldenable = false
+        end,
+    })
 end
 
 return M

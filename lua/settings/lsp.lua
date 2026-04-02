@@ -1,111 +1,144 @@
 -- lsp.lua
--- 这里是 LSP 相关的配置
 
 local module = {}
 
--- 对 lsp 的设置进行版本兼容处理
-local function set_lsp_config(callback)
-    group = vim.api.nvim_create_augroup('lsp-attach', { clear = true })
+-- LSP 名称映射表
+-- key 只是内部分类用, value 才是实际启用的 LSP config 名称
+local require_lsps = {
+    lua = { 'lua_ls', 'lua-language-server' },
+    rust = { 'rust_analyzer', 'rust-analyzer' },
+    python = { 'pyright', 'pyright' },
+    typst = { 'tinymist', 'tinymist' },
+    tex = { 'texlab', 'texlab' },
+    c = { 'clangd', 'clangd' },
+    cpp = { 'clangd', 'clangd' },
+    typescript = { 'ts_ls', 'typescript-language-server' },
+    javascript = { 'ts_ls', 'typescript-language-server' },
+    markdown = { 'marksman', 'marksman' },
+    toml = { 'taplo', 'taplo' },
+    nix = { 'nixd', 'nixd' },
+    haskell = { 'hls', 'haskell-language-server-wrapper' },
+}
 
-    if vim.fn.has('nvim-0.8') == 1 then
-        vim.api.nvim_create_autocmd('LspAttach', {
-            group = group,
-            callback = callback,
-        })
-    else
-        vim.api.nvim_create_autocmd('User', {
-            pattern = 'LspAttach',
-            group = group,
-            callback = callback,
-        })
+-- 导出, 方便别的模块复用
+module.require_lsps = require_lsps
+
+-- 把 { a = { 'x', ... }, b = { 'y', ... } } 转成 { 'x', 'y', ... }
+local function get_configs(t)
+    local arr = {}
+    for _, v in pairs(t) do
+        arr[#arr + 1] = v[1]
     end
+    return arr
 end
 
-set_lsp_config(function(event)
-    -- 导入自定义工具函数与需要的符号
-    local map = require('utils.map').map
-    local get_key = require('settings.variables.lsp').get_key
-    local lsp_leader = require('settings.variables.lsp').lsp_leader
-
-    -- 获取当前缓冲区的 LSP 客户端
-    local client = vim.lsp.get_client_by_id(event.data.client_id)
-
-    -- 设置 LSP 相关的快捷键
-    map('n', get_key('format'), function ()
-        -- 手动触发格式化
-        -- vim.cmd("normal gggqG")
-        vim.lsp.buf.format({ async = true })
-        vim.notify("代码已格式化")
-    end,    { desc = "手动触发格式化", })
-
-    map('n', get_key('goto-def'), vim.lsp.buf.definition,    { desc = "跳转到定义", })
-    map('n', get_key('goto-dec'), vim.lsp.buf.declaration,   { desc = "跳转到声明", })
-    map('n', get_key('goto-ref'), vim.lsp.buf.references,    { desc = "查找引用", })
-    map('n', get_key('goto-impl'), vim.lsp.buf.implementation,{ desc = "跳转到实现", })
-    map('n', get_key('show-doc'),  vim.lsp.buf.hover,         { desc = "悬停文档", })
-    map('n', get_key('rename'), vim.lsp.buf.rename,       { desc = "重命名符号", })
-    map('n', get_key('code-action'), vim.lsp.buf.code_action,  { desc = "代码操作", })
-    map('n', get_key('goto-next-diag'), vim.diagnostic.goto_next,         { desc = "下一个诊断", })
-    map('n', get_key('goto-prev-diag'), vim.diagnostic.goto_prev,         { desc = "上一个诊断", })
-
-    map('n', get_key('doc-in-new-window'), function()
-        vim.diagnostic.open_float { source = true }
-    end,            { buffer = event.buf, desc = "使用新窗口打开诊断信息(Long Documents)", })
-
-    map('n', get_key('setloclist'), vim.diagnostic.setloclist, { desc = "推送诊断到列表", })
-
-    -- 启用诊断信息
-    vim.diagnostic.config {
+-- 诊断默认配置: 只设置一次, 不要每次 attach 都重复设置
+local function setup_diagnostics()
+    vim.diagnostic.config({
         virtual_text = {
-            prefix = '', -- 使用图标作为前缀
-            spacing = 4,  -- 前缀和文本之间的间距
+            prefix = '', -- 诊断前缀图标
+            spacing = 4,  -- 图标与文字间距
         },
-        signs = true, -- 启用诊断标志
-        underline = true, -- 启用下划线
-           update_in_insert = false, -- 在插入模式下不更新诊断信息
-    }
+        signs = true,         -- 左侧符号栏显示诊断标记
+        underline = true,     -- 用下划线标出问题位置
+        update_in_insert = false, -- 插入模式下不刷诊断，减少干扰
+        float = {
+            border = 'rounded', -- 诊断浮窗圆角边框
+        },
+    })
+end
 
-    map('n', get_key('doc'), (function()
-        -- 1 打开 0 关闭
-        local diag_status = 1
-        return function()
-            if diag_status == 1 then
-                diag_status = 0
-                vim.diagnostic.config {
-                    virtual_text = false, -- 关闭虚拟文本
-                    signs = false,        -- 关闭诊断标志
-                    underline = false,    -- 关闭下划线
-                    -- update_in_insert = false, -- 在插入模式下不更新诊断信息
-                }
-            else
-                diag_status = 1
-                vim.diagnostic.config {
-                    virtual_text = {
-                        prefix = '', -- 使用图标作为前缀
-                        spacing = 4,  -- 前缀和文本之间的间距
-                    },
-                    signs = true, -- 启用诊断标志
-                    underline = true, -- 启用下划线
-                    -- update_in_insert = false, -- 在插入模式下不更新诊断信息
-                }
-            end
+setup_diagnostics()
+
+-- LSP Attach: 只在真正 attach 到 buffer 后, 再设置 buffer-local 的快捷键和行为
+local lsp_group = vim.api.nvim_create_augroup('lsp-attach', { clear = true })
+
+vim.api.nvim_create_autocmd('LspAttach', {
+    group = lsp_group,
+    callback = function(event)
+        -- 导入自定义工具函数与需要的符号
+        local map = require('utils.map').map
+        local get_key = require('settings.variables.lsp').get_key
+        local lsp_leader = require('settings.variables.lsp').lsp_leader
+
+        -- 当前 buffer
+        local bufnr = event.buf
+
+        -- 当前缓冲区绑定的 LSP 客户端
+        local client = vim.lsp.get_client_by_id(event.data.client_id)
+
+        -- 统一封装 buffer-local 映射
+        local function bufmap(mode, lhs, rhs, desc)
+            vim.keymap.set(mode, lhs, rhs, {
+                buffer = bufnr,
+                silent = true,
+                desc = desc,
+            })
         end
-    end)(), { buffer = event.buf, desc = "开/关 诊断信息", })
 
-    -- 配置代码折叠
-    if client and client:supports_method 'textDocument/foldingRange' then
-        local win = vim.api.nvim_get_current_win()
-        vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
-    end
+        -- --- --- --- LSP 核心功能 --- --- ---
+        bufmap('n', get_key('format'), function()
+            -- 手动格式化
+            vim.lsp.buf.format({ async = true })
+            vim.notify('代码已格式化', vim.log.levels.INFO, { title = 'LSP' })
+        end, '手动触发格式化')
 
-    if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
-        map('n', get_key('type-hint'), function()
-            vim.lsp.inlay_hint.enable( not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf } )
-        end, { buffer = event.buf, desc = "开/关 参数提示", })
-    end
+        bufmap('n', get_key('goto-def'), vim.lsp.buf.definition, '跳转到定义')
+        bufmap('n', get_key('goto-dec'), vim.lsp.buf.declaration, '跳转到声明')
+        bufmap('n', get_key('goto-ref'), vim.lsp.buf.references, '查找引用')
+        bufmap('n', get_key('goto-impl'), vim.lsp.buf.implementation, '跳转到实现')
+        bufmap('n', get_key('show-doc'), vim.lsp.buf.hover, '悬停文档')
+        bufmap('n', get_key('rename'), vim.lsp.buf.rename, '重命名符号')
+        bufmap('n', get_key('code-action'), vim.lsp.buf.code_action, '代码操作')
 
-    map('n', get_key('help'), function ()
-        local help_text = [[
+        -- 诊断跳转
+        bufmap('n', get_key('goto-next-diag'), vim.diagnostic.goto_next, '下一个诊断')
+        bufmap('n', get_key('goto-prev-diag'), vim.diagnostic.goto_prev, '上一个诊断')
+
+        -- 打开诊断浮窗: 0.12 里浮窗会显示更完整的诊断相关信息
+        bufmap('n', get_key('doc-in-new-window'), function()
+            vim.diagnostic.open_float({
+                source = true,   -- 显示来源
+                border = 'rounded',
+            })
+        end, '使用新窗口打开诊断信息(Long Documents)')
+
+        -- 推送当前 buffer 诊断到 location list
+        bufmap('n', get_key('setloclist'), vim.diagnostic.setloclist, '推送诊断到列表')
+
+        -- --- --- --- 诊断开关 --- --- ---
+        -- 使用官方诊断开关，而不是反复改 config
+        local diagnostics_enabled = true
+        bufmap('n', get_key('doc'), function()
+            diagnostics_enabled = not diagnostics_enabled
+            vim.diagnostic.enable(diagnostics_enabled)
+            if diagnostics_enabled then
+                vim.notify('诊断信息已开启', vim.log.levels.INFO, { title = 'LSP' })
+            else
+                vim.notify('诊断信息已关闭', vim.log.levels.INFO, { title = 'LSP' })
+            end
+        end, '开/关 诊断信息')
+
+        -- --- --- --- 折叠 --- --- ---
+        -- 如果 LSP 支持 foldingRange, 就优先用 LSP 折叠
+        -- 否则可以继续由 treesitter 或别的方式接管
+        if client and client:supports_method('textDocument/foldingRange') then
+            local win = vim.api.nvim_get_current_win()
+            vim.wo[win].foldmethod = 'expr'
+            vim.wo[win].foldexpr = 'v:lua.vim.lsp.foldexpr()'
+        end
+
+        -- --- --- --- 参数提示(inlay hints) --- --- ---
+        if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
+            bufmap('n', get_key('type-hint'), function()
+                local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
+                vim.lsp.inlay_hint.enable(not enabled, { bufnr = bufnr })
+            end, '开/关 参数提示')
+        end
+
+        -- --- --- --- LSP 帮助 --- --- ---
+        bufmap('n', get_key('help'), function()
+            local help_text = [[
 LSP 快捷键帮助手册:
     %s : 跳转到定义
     %s : 跳转到声明
@@ -122,94 +155,62 @@ LSP 快捷键帮助手册:
     %s : 开/关 诊断信息
     %s : 打开补全菜单
     %s : 关闭补全菜单
-        ]]
-        vim.notify(help_text:format(
-            get_key('goto-def'),
-            get_key('goto-dec'),
-            get_key('goto-ref'),
-            get_key('goto-impl'),
-            get_key('show-doc'),
-            get_key('rename'),
-            get_key('code-action'),
-            get_key('goto-next-diag'),
-            get_key('goto-prev-diag'),
-            get_key('doc-in-new-window'),
-            get_key('setloclist'),
-            get_key('type-hint'),
-            get_key('doc'),
-            get_key('open-hint'),
-            get_key('close-hint')
-        ), vim.log.levels.INFO, { title = lsp_leader .. " LSP 帮助" })
-    end, { desc = "LSP 帮助", })
+            ]]
+            vim.notify(help_text:format(
+                get_key('goto-def'),
+                get_key('goto-dec'),
+                get_key('goto-ref'),
+                get_key('goto-impl'),
+                get_key('show-doc'),
+                get_key('rename'),
+                get_key('code-action'),
+                get_key('goto-next-diag'),
+                get_key('goto-prev-diag'),
+                get_key('doc-in-new-window'),
+                get_key('setloclist'),
+                get_key('type-hint'),
+                get_key('doc'),
+                get_key('open-hint'),
+                get_key('close-hint')
+            ), vim.log.levels.INFO, { title = lsp_leader .. ' LSP 帮助' })
+        end, 'LSP 帮助')
 
-    if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
-        local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
-        vim.api.nvim_create_autocmd(
-            { 'CursorHold','CursorHoldI' },
-            {
-                buffer = event.buf,
-                group = highlight_augroup,
+        -- --- --- --- 文档高亮 --- --- ---
+        -- 0.12 的 LspAttach 很适合做这种 buffer-local 行为
+        if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+            local highlight_group = vim.api.nvim_create_augroup('lsp-highlight-' .. bufnr, { clear = true })
+
+            vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+                buffer = bufnr,
+                group = highlight_group,
                 callback = vim.lsp.buf.document_highlight,
-            }
-        )
+            })
 
-        vim.api.nvim_create_autocmd(
-            { 'CursorMoved', 'CursorMoved' },
-            {
-                buffer = event.buf,
-                group = highlight_augroup,
-                callback = vim.lsp.buf.clear_references
-            }
-        )
-    end
+            vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+                buffer = bufnr,
+                group = highlight_group,
+                callback = vim.lsp.buf.clear_references,
+            })
 
-    -- 当 lsp 断开连接时，清除高亮
-    vim.api.nvim_create_autocmd('LspDetach', {
-        group = vim.api.nvim_create_augroup('kickstart-lsp-detach', { clear = false }),
-        callback = function(event2)
-            vim.lsp.buf.clear_references()
-            vim.api.nvim_clear_autocmds {
-                group = 'kickstart-lsp-highlight',
-                buffer = event2.buf,
-            }
-        end,
-    })
-end)
+            vim.api.nvim_create_autocmd('LspDetach', {
+                buffer = bufnr,
+                group = highlight_group,
+                callback = function(ev)
+                    vim.lsp.buf.clear_references()
+                    vim.api.nvim_clear_autocmds({
+                        group = highlight_group,
+                        buffer = ev.buf,
+                    })
+                end,
+            })
+        end
+    end,
+})
 
--- 具体语言的 LSP 配置
--- 所需的 lsp 服务器列表
-local require_lsps = {
-    -- <lang> = { '<lang_lsp_config>', '<lsp_server>' }
-    lua = { 'lua_ls', 'lua-language-server' },
-    rust = { 'rust_analyzer', 'rust-analyzer' },
-    python = { 'pyright', 'pyright' },
-    typst = { 'tinymist', 'tinymist' },
-    tex = { 'texlab', 'texlab' },
-    c = { 'clangd', 'clangd' },
-    cpp = { 'clangd', 'clangd' },
-    typescript = { 'ts_ls', 'typescript-language-server' },
-    javascript = { 'ts_ls', 'typescript-language-server' },
-    markdown = { 'marksman', 'marksman' },
-    toml = { 'taplo', 'taplo' },
-    nix = { 'nixd', 'nixd' },
-    haskell = { 'hls', 'haskell-language-server-wrapper' },
-}
--- 导出 require_lsps
-module.require_lsps = require_lsps
-
--- 获取所有 LSP 服务器的配置
-local function get_configs(t)
-    local arr = {}
-    for _, v in pairs(t) do
-        arr[#arr + 1] = v[1]
-    end
-    return arr
-end
-
--- 加载 LSP 配置
+-- 启用你列出的 LSP 配置
+-- 0.12 推荐用 vim.lsp.enable() 统一管理启用/停用
 if vim.fn.has('nvim-0.11') == 1 then
     vim.lsp.enable(get_configs(require_lsps))
 end
 
 return module
-

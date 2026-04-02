@@ -1,78 +1,68 @@
---- @module 'colorscheme'
---- 配置 neovim 的配色方案
-
+-- 配置 neovim 的配色方案
 local M = {}
-M[1] = {}
-local nightfox = M[1]
 
+function M.setup()
+    -- 加载主题插件
+    vim.cmd.packadd('nightfox.nvim')
 
--- 设置主题
-nightfox[1] = "EdenEast/nightfox.nvim"
-
-
--- 加载方式
-nightfox.event = 'VimEnter'
-
-
--- 优先级
-nightfox.priority = 1000
-
-
--- 插件选项
-nightfox.opts = {}
-
-
--- 配置函数
-nightfox.config = function(_, opts)
-    -- 设置配色方案
     require('nightfox').setup({
-    	options = {
-    		-- Compiled file's destination location
-    		compile_path = vim.fn.stdpath("cache") .. "/nightfox",
-    		compile_file_suffix = "_compiled", -- Compiled file suffix
-    		transparent = true,		 -- Disable setting background
-    		terminal_colors = true,	-- Set terminal colors (vim.g.terminal_color_*) used in `:terminal`
-    		dim_inactive = false,		-- Non focused panes set to alternative background
-    		module_default = true,	 -- Default enable value for modules
-    		colorblind = {
-    			enable = false,				-- Enable colorblind support
-    			simulate_only = false, -- Only show simulated colorblind colors and not diff shifted
-    			severity = {
-    				protan = 0,					-- Severity [0,1] for protan (red)
-    				deutan = 0,					-- Severity [0,1] for deutan (green)
-    				tritan = 0,					-- Severity [0,1] for tritan (blue)
-    			},
-    		},
-    		styles = {							 -- Style to be applied to different syntax groups
-    			comments = "NONE",		 -- Value is any valid attr-list value `:help attr-list`
-    			conditionals = "NONE",
-    			constants = "NONE",
-    			functions = "NONE",
-    			keywords = "NONE",
-    			numbers = "NONE",
-    			operators = "NONE",
-    			strings = "NONE",
-    			types = "NONE",
-    			variables = "NONE",
-    		},
-    		inverse = {						 -- Inverse highlight for different types
-    			match_paren = false,
-    			visual = false,
-    			search = false,
-    		},
-    		modules = {						 -- List of various plugins and additional options
-    			-- ...
-    		},
-    	},
-    	palettes = {},
-    	specs = {},
-    	groups = {},
+        options = {
+            -- 编译缓存目录
+            compile_path = vim.fn.stdpath('cache') .. '/nightfox',
+
+            -- 编译文件后缀
+            compile_file_suffix = '_compiled',
+
+            -- 保持透明背景
+            transparent = true,
+
+            -- 同步终端颜色
+            terminal_colors = true,
+
+            -- 非当前窗口不做额外变暗
+            dim_inactive = false,
+
+            -- 默认开启模块功能
+            module_default = true,
+
+            colorblind = {
+                enable = false,
+                simulate_only = false,
+                severity = {
+                    protan = 0,
+                    deutan = 0,
+                    tritan = 0,
+                },
+            },
+
+            styles = {
+                comments = 'NONE',
+                conditionals = 'NONE',
+                constants = 'NONE',
+                functions = 'NONE',
+                keywords = 'NONE',
+                numbers = 'NONE',
+                operators = 'NONE',
+                strings = 'NONE',
+                types = 'NONE',
+                variables = 'NONE',
+            },
+
+            inverse = {
+                match_paren = false,
+                visual = false,
+                search = false,
+            },
+
+            modules = {},
+        },
+        palettes = {},
+        specs = {},
+        groups = {},
     })
 
-    -- 应用配色方案
-    vim.cmd('colorscheme nightfox')
+    -- 应用主题
+    vim.cmd.colorscheme('nightfox')
 end
 
-
 return M
-
