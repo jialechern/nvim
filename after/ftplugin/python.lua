@@ -5,6 +5,14 @@
 local map = require('utils.map').map
 local run_key = require('settings.variables.run').run_key
 
+-- 启用 lsp 服务
+require('utils.lsp_enable').enable('pyright')
+
+-- python 的本地缩进风格
+vim.opt_local.tabstop = 4
+vim.opt_local.shiftwidth = 4
+vim.opt_local.expandtab = true
+
 -- 设置解释器
 vim.bo.makeprg = 'python3'
 

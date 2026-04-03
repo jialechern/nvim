@@ -39,6 +39,14 @@ local function get_key(v)
         return lsp_leader .. 'o'
     elseif v == 'close-hint' then
         return lsp_leader .. 'x'
+    elseif v == 'snippet_forward' then
+        return '<C-.>'
+    elseif v == 'snippet_backward' then
+        return '<C-,>'
+    elseif v == 'snippet_clear' then
+        return '<C-c>'
+    elseif v == 'snippet_choice' then
+        return '<C-\\>'
     elseif v == 'help' then
         return lsp_leader .. '?'
     else

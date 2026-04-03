@@ -35,8 +35,10 @@ function M.setup()
         paths = { vim.fn.stdpath('config') .. '/snippets' },
     })
 
+    -- 获取快捷键配置
+    local get_key = require('settings.variables.lsp').get_key
     -- 按键: 展开、回跳、切换 choice、清除 snippet
-    map({ 'i', 'n', 'x', 's', 'v', 'o' }, '<A-.>', function()
+    map({ 'i', 'n', 'x', 's', 'v', 'o' }, get_key('snippet_forward'), function()
         if luasnip.expand_or_jumpable() then
             luasnip.expand_or_jump()
         else
@@ -44,19 +46,19 @@ function M.setup()
         end
     end, { silent = true, desc = 'LuaSnip 展开/跳转' })
 
-    map({ 'i', 'n', 'x', 's', 'v', 'o' }, '<A-,>', function()
+    map({ 'i', 'n', 'x', 's', 'v', 'o' }, get_key('snippet_backward'), function()
         if luasnip.jumpable(-1) then
             luasnip.jump(-1)
         end
     end, { silent = true, desc = 'LuaSnip 向后跳转' })
 
-    map({ 'i', 'n', 'x', 's', 'v', 'o' }, '<A-\\>', function()
+    map({ 'i', 'n', 'x', 's', 'v', 'o' }, get_key('snippet_choice'), function()
         if luasnip.choice_active() then
             luasnip.change_choice(1)
         end
     end, { silent = true, desc = 'LuaSnip 切换 choice' })
 
-    map({ 'i', 'n', 'x', 's', 'v', 'o' }, '<C-c>', function()
+    map({ 'i', 'n', 'x', 's', 'v', 'o' }, get_key('snippet_clear'), function()
         luasnip.unlink_current()
     end, { desc = '清除当前 snippet' })
 end

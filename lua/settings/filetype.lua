@@ -1,4 +1,4 @@
--- settings-auto-filetype-by-fileext.lua
+-- filetype
 
 vim.filetype.add({
   extension = {

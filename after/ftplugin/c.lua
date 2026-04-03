@@ -5,6 +5,9 @@
 local map = require('utils.map').map
 local run_key = require('settings.variables.run').run_key
 
+-- c 文件启用 clangd
+require('utils.lsp_enable').enable('clangd')
+
 -- 设置编译器
 vim.bo.makeprg = 'gcc'
 

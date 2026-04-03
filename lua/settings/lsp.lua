@@ -2,36 +2,6 @@
 
 local module = {}
 
--- LSP 名称映射表
--- key 只是内部分类用, value 才是实际启用的 LSP config 名称
-local require_lsps = {
-    lua = { 'lua_ls', 'lua-language-server' },
-    rust = { 'rust_analyzer', 'rust-analyzer' },
-    python = { 'pyright', 'pyright' },
-    typst = { 'tinymist', 'tinymist' },
-    tex = { 'texlab', 'texlab' },
-    c = { 'clangd', 'clangd' },
-    cpp = { 'clangd', 'clangd' },
-    typescript = { 'ts_ls', 'typescript-language-server' },
-    javascript = { 'ts_ls', 'typescript-language-server' },
-    markdown = { 'marksman', 'marksman' },
-    toml = { 'taplo', 'taplo' },
-    nix = { 'nixd', 'nixd' },
-    haskell = { 'hls', 'haskell-language-server-wrapper' },
-}
-
--- 导出, 方便别的模块复用
-module.require_lsps = require_lsps
-
--- 把 { a = { 'x', ... }, b = { 'y', ... } } 转成 { 'x', 'y', ... }
-local function get_configs(t)
-    local arr = {}
-    for _, v in pairs(t) do
-        arr[#arr + 1] = v[1]
-    end
-    return arr
-end
-
 -- 诊断默认配置: 只设置一次, 不要每次 attach 都重复设置
 local function setup_diagnostics()
     vim.diagnostic.config({
@@ -155,6 +125,10 @@ LSP 快捷键帮助手册:
     %s : 开/关 诊断信息
     %s : 打开补全菜单
     %s : 关闭补全菜单
+    %s : 跳转到下一个 snippet 节点
+    %s : 跳转到上一个 snippet 节点
+    %s : 切换 snippet 的枚举节点的选项
+    %s : 清空当前的 snippet 标识
             ]]
             vim.notify(help_text:format(
                 get_key('goto-def'),
@@ -171,7 +145,11 @@ LSP 快捷键帮助手册:
                 get_key('type-hint'),
                 get_key('doc'),
                 get_key('open-hint'),
-                get_key('close-hint')
+                get_key('close-hint'),
+                get_key('snippet_forward'),
+                get_key('snippet_backward'),
+                get_key('snippet_choice'),
+                get_key('snippet_clear')
             ), vim.log.levels.INFO, { title = lsp_leader .. ' LSP 帮助' })
         end, 'LSP 帮助')
 
@@ -206,11 +184,5 @@ LSP 快捷键帮助手册:
         end
     end,
 })
-
--- 启用你列出的 LSP 配置
--- 0.12 推荐用 vim.lsp.enable() 统一管理启用/停用
-if vim.fn.has('nvim-0.11') == 1 then
-    vim.lsp.enable(get_configs(require_lsps))
-end
 
 return module

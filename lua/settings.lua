@@ -10,5 +10,5 @@ require('settings.base')
 require('settings.autocmds')
 
 -- 设置根据文件扩展名配置文件类型
-require('settings.autofiletype-by-fileext')
+require('settings.filetype')
 

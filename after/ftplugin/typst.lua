@@ -4,6 +4,9 @@
 -- 导入自定义的工具函数以及需要的符号
 local run_key = require('settings.variables.run').run_key
 
+-- 启用 lsp 服务器
+require('utils.lsp_enable').enable('tinymist')
+
 -- 设置编译器
 vim.bo.makeprg = 'typst'
 

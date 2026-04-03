@@ -5,8 +5,16 @@
 local map = require('utils.map').map
 local run_key = require('settings.variables.run').run_key
 
+-- 让 nix 文件启用 nixd
+require('utils.lsp_enable').enable('nixd')
+
+-- nix 编辑习惯
+vim.opt_local.tabstop = 2
+vim.opt_local.shiftwidth = 2
+vim.opt_local.expandtab = true
+
 -- 设置解释器
-vim.bo.makeprg = 'home-manager build --flake'
+vim.bo.makeprg = ''
 
 -- 设置格式化工具
 vim.bo.formatprg = 'nixpkgs-fmt'

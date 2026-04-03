@@ -55,8 +55,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
                 { buffer = bufnr, desc = "Haskell: Run CodeLens" })
 
             -- [刷新 CodeLens]: 确保镜头动作是最新的
-            vim.keymap.set("n", "<leader>cr", vim.lsp.codelens.refresh, 
-                { buffer = bufnr, desc = "Haskell: Refresh CodeLens" })
+            vim.keymap.set("n", "<leader>cr", function ()
+                vim.lsp.codelens.enable(true, { bufnr = bufnr })
+            end, { buffer = bufnr, desc = "Haskell: Refresh CodeLens" })
 
             -- [Wingman 自动推导]: 利用类型系统写代码
             vim.keymap.set("n", "<leader>ht", function()
@@ -69,7 +70,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
             -- 开启缓冲区级别的 CodeLens 自动刷新(不影响性能的前提下)
             vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
                 buffer = bufnr,
-                callback = vim.lsp.codelens.refresh,
+                callback = function ()
+                    vim.lsp.codelens.enable(true, { bufnr = bufnr })
+                end,
             })
         end
     end,

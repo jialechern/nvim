@@ -18,6 +18,3 @@ require('keymaps.tabs')
 -- 设置 quickfix 相关快捷键
 require('keymaps.quickfix')
 
--- 设置自动根据文件名导入对应的键盘映射
-require('keymaps.autoload-by-filetype')
-

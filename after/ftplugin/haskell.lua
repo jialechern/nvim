@@ -5,6 +5,15 @@
 local map = require('utils.map').map
 local run_key = require('settings.variables.run').run_key
 
+
+-- 让 haskell 启用 lsp 服务
+require('utils.lsp_enable').enable('hls')
+
+-- haskell 编辑习惯
+vim.opt_local.tabstop = 2
+vim.opt_local.shiftwidth = 2
+vim.opt_local.expandtab = true
+
 -- 设置解释器
 vim.bo.makeprg = 'ghc'
 

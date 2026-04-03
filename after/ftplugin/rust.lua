@@ -5,6 +5,14 @@
 local map = require('utils.map').map
 local run_key = require('settings.variables.run').run_key
 
+-- 让 rust 文件启用 rust_analyzer
+require('utils.lsp_enable').enable('rust_analyzer')
+
+-- Rust 常见缩进设置
+vim.opt_local.tabstop = 4
+vim.opt_local.shiftwidth = 4
+vim.opt_local.expandtab = true
+
 -- 设置编译方式
 vim.bo.makeprg = 'cargo'
 
