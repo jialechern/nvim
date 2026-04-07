@@ -17,6 +17,8 @@ vim.filetype.add({
     typ = 'typst',
     conf = 'conf',
     cfg = 'conf',
+    scm = "scheme",
+    guile = 'scheme',
   },
 })
 

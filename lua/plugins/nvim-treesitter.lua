@@ -20,9 +20,9 @@ local filetypes = {
     'vim',
     'vimdoc',
     'yaml',
-    'sh',
     'zsh',
     'haskell',
+    'scheme',
 }
 
 local parsers = filetypes
