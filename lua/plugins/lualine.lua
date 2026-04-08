@@ -75,7 +75,6 @@ function M.setup()
     require('lualine').setup({
         options = {
             theme = theme,
-            globalstatus = true, -- 全局状态栏
             component_separators = '',
             section_separators = { left = '', right = '' },
         },

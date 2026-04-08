@@ -9,9 +9,11 @@ local run_key = require('settings.variables.run').run_key
 require('utils.lsp_enable').enable('nixd')
 
 -- nix 编辑习惯
-vim.opt_local.tabstop = 2
-vim.opt_local.shiftwidth = 2
-vim.opt_local.expandtab = true
+vim.bo.tabstop = 2
+vim.bo.shiftwidth = 2
+vim.bo.softtabstop = 2
+vim.bo.expandtab = true
+
 
 -- 设置解释器
 vim.bo.makeprg = ''

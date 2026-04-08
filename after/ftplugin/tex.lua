@@ -9,8 +9,8 @@ local run_key = require('settings.variables.run').run_key
 require('utils.lsp_enable').enable('texlab')
 
 -- LaTeX 常见本地设置
-vim.opt_local.textwidth = 80
-vim.opt_local.wrap = false
+vim.bo.textwidth = 80
+vim.wo.wrap = false
 
 -- 设置编译器
 vim.bo.makeprg = 'latexmk'

@@ -1,4 +1,4 @@
--- - settings-base.lua
+--- settings-base.lua
 
 -- 设置字体
 vim.opt.guifont = 'JetBrainsMono Nerd Font:h16'
@@ -28,10 +28,15 @@ vim.opt.number = true                                   -- 开启行号
 vim.opt.relativenumber = true                           -- 开启相对行号
 vim.opt.cursorline = true                               -- 显示光标所在行
 vim.opt.cursorcolumn = true                             -- 高亮显示光标所在列
+vim.api.nvim_set_hl(0, 'CursorLine', { bg = '#2E3440', underline = true })
+                                                        -- 设置行高亮
+vim.api.nvim_set_hl(0, 'CursorColumn', { bg = '#2E3440' })
+                                                        -- 设置列高亮
 vim.opt.splitbelow = true                               -- 打开新水平分割时，新的窗口在下方
 vim.opt.splitright = true                               -- 打开新垂直分割时，新的窗口在右侧
--- vim.opt.termguicolors = true                         -- 使用 24 bit rgb 颜色
+vim.opt.termguicolors = true                            -- 使用 24 bit rgb 颜色
 vim.opt.showmode = false                                -- 是否显示模式（insert, normal 等）
+vim.opt.laststatus = 3                                  -- 全局状态栏
 
 -- Searching
 vim.opt.incsearch = true                                -- search as characters are entered
@@ -39,10 +44,8 @@ vim.opt.hlsearch = true                                -- 取消高亮搜索匹�
 vim.opt.ignorecase = true                               -- 搜索时忽略大小写
 vim.opt.smartcase = true                                -- 如果搜索包含大写字母，则不忽略大小写
 
--- begin 设置光标跳转逻辑
+-- 设置光标跳转逻辑
 vim.opt.jumpoptions = "stack"
--- end 设置光标跳转逻辑
-
 
 -- 配置默认浏览器为 firefox
 vim.g.mkdp_browser = 'firefox'

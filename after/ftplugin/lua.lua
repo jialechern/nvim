@@ -9,9 +9,10 @@ local run_key = require('settings.variables.run').run_key
 require('utils.lsp_enable').enable('lua_ls')
 
 -- 设置缩进
-vim.opt_local.tabstop = 2
-vim.opt_local.shiftwidth = 2
-vim.opt_local.expandtab = true
+vim.bo.tabstop = 4
+vim.bo.shiftwidth = 4
+vim.bo.softtabstop = 4
+vim.bo.expandtab = true
 
 -- 设置解释器
 vim.bo.makeprg = 'lua'

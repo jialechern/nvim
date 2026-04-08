@@ -9,12 +9,13 @@ local run_key = require('settings.variables.run').run_key
 require('utils.lsp_enable').enable('guile_lsp_server')
 
 -- Scheme 常见缩进设置 (Lisp 系惯例: 2 空格)
-vim.opt_local.tabstop = 2
-vim.opt_local.shiftwidth = 2
-vim.opt_local.expandtab = true
+vim.bo.tabstop = 2
+vim.bo.shiftwidth = 2
+vim.bo.softtabstop = 2
+vim.bo.expandtab = true
 
 -- Lisp 风格缩进 (依赖括号而非缩进推断层级)
-vim.opt_local.lisp = true
+vim.bo.lisp = true
 
 -- 代码格式化工具 (guile 自带 --format, 需 guile 3.0+)
 vim.bo.formatprg = 'guile --format'

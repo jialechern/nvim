@@ -9,7 +9,7 @@
 require('utils.lsp_enable').enable('marksman')
 
 -- markdown 编辑习惯
-vim.opt_local.textwidth = 80
-vim.opt_local.wrap = true
-vim.opt_local.spell = true
+vim.bo.textwidth = 80
+vim.wo.spell = true
+vim.wo.wrap = true
 

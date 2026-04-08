@@ -65,11 +65,11 @@ if vim.fn.has('nvim-0.8') == 1 and (not vim.fn.has("nvim-0.12") == 1) then
         })
 end
 
--- 引入插件
-require('plugins').setup()
-
 -- 一般设置
 require('settings')
+
+-- 引入插件
+require('plugins').setup()
 
 -- 键盘映射
 require('keymaps')
