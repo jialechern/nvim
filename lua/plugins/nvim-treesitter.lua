@@ -21,6 +21,8 @@ local filetypes = {
     'vimdoc',
     'yaml',
     'zsh',
+    'typst',
+    'latex',
     'haskell',
     'scheme',
 }

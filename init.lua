@@ -69,7 +69,9 @@ end
 require('settings')
 
 -- 引入插件
-require('plugins').setup()
+if vim.o.loadplugins then
+    require('plugins').setup()
+end
 
 -- 键盘映射
 require('keymaps')
