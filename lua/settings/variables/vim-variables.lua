@@ -19,6 +19,8 @@ local function get_key(v)
         return meta_leader .. 'S'
     elseif v == 'content-formater' then
         return meta_leader .. 'f'
+    elseif v == 'goto-normal' then
+        return '<C-q>'
     elseif v == 'help' then
         return meta_leader .. '?'
     else

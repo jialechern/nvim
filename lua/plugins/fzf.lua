@@ -101,8 +101,8 @@ fuzzy-finder 快捷键帮助手册:
     %s : 列出所有标记(Marks)
     %s : 列出所有缓冲区内的标记(BMarks)
     %s : 列出并搜索 命令/搜索历史 (History/)
-    %s : �
-��出并插入代码片段(Snippets)
+    %s : �
+��出并插入代码片段(Snippets)
     %s : 列出并切换窗口(Windows)
     %s : 列出跳转位置(Jumps)
     %s : 列出所有标签(Tags)

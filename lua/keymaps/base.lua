@@ -7,13 +7,8 @@ local map_by_modes = require('utils.map').map_by_modes
 
 ------------------------------ 设置基本按键映射 ----------------------------
 -- 领头键转译
-map({ 'i','c' }, '<leader><localleader>', '<localleader>', { desc = "转译副领头键" })
-map({ 'i','c' }, '<localleader><leader>', '<leader>', { desc = "转译领头键" })
-
--- 设置进入一般模式的快捷键
-map_by_modes({ 'i', 'v', 'x', 's', 'o', 't' }, '<C-A-q>', function ()
-    vim.cmd('stopinsert')
-end, { desc = "一个更加常用的进入 normal 模式的快捷键" })
+map({ 'i', 'c' }, '<leader><localleader>', '<localleader>', { desc = "转译副领头键" })
+map({ 'i', 'c' }, '<localleader><leader>', '<leader>', { desc = "转译领头键" })
 
 -- 将按实际行跳转与按文本行跳转对调
 map('n', 'j', 'gj', { desc = "将 j 映射为按屏幕行跳转" })
@@ -36,20 +31,15 @@ map_by_modes({ 'n', 'x' }, 'J', function()
     return fast_move_by_lines .. 'j'
 end, { desc = "设置 J 为快速向下移动, 移动行数可在 init.lua 中设置", expr = true })
 
-map_by_modes({ 'n', 'x' }, 'K', function ()
+map_by_modes({ 'n', 'x' }, 'K', function()
     return fast_move_by_lines .. 'k'
 end, { desc = "设置 K 为快速向上移动, 移动行数可在 init.lua 中设置", expr = true })
 
 -- 使用 <ESC> 取消搜索高亮
 map({ 'i', 'n', 's' }, '<esc>', function()
-  vim.cmd('noh')
-  return '<esc>'
+    vim.cmd('noh')
+    return '<esc>'
 end, { expr = true, desc = '使用 <ESC> 键来取消搜索模式的高亮' })
-
--- 设置 <C-e> 为括号匹配
-map_by_modes({ 'n', 'x', 's', 'v', 'o' }, '<C-e>', function()
-    return '%'
-end, { expr = true, desc = '设置 <C-n> 为括号匹配快捷键' })
 
 -- 添加撤消断点
 map('i', ',', ',<c-g>u')
@@ -57,8 +47,8 @@ map('i', '.', '.<c-g>u')
 map('i', ';', ';<c-g>u')
 
 -- 自动缩进
-map({'v', 'x'}, '<', '<gv')
-map({'v', 'x'}, '>', '>gv')
+map({ 'v', 'x' }, '<', '<gv')
+map({ 'v', 'x' }, '>', '>gv')
 
 --- 其它映射
 
@@ -83,6 +73,31 @@ local float_window_leader = require('settings.variables.windows.float-window').f
 local run_key = require('settings.variables.run').run_key
 local entry_point = require('settings.variables.entry-points').entry_point
 local test_key = require('settings.variables.test').test_key
+
+
+-- 设置进入一般模式的快捷键
+map_by_modes({ 'c', 'i', 'v', 'x', 's', 'o', 't' }, get_key('goto-normal'), function()
+    local mode = vim.fn.mode()
+    if mode == 't' then
+        -- terminal 模式需要特殊处理
+        vim.api.nvim_feedkeys(
+            vim.api.nvim_replace_termcodes('<C-\\><C-n>', true, false, true),
+            'n', false
+        )
+    elseif mode == 'i' or mode == 'R' or mode == 'Rv' then
+        -- insert / replace 模式
+        vim.api.nvim_feedkeys(
+            vim.api.nvim_replace_termcodes('<Esc>', true, false, true),
+            'n', false
+        )
+    else
+        -- visual / select / operator-pending 等模式
+        vim.api.nvim_feedkeys(
+            vim.api.nvim_replace_termcodes('<Esc>', true, false, true),
+            'n', false
+        )
+    end
+end, { desc = "一个更加常用的进入 normal 模式的快捷键" })
 
 map('n', get_key('make-program'), function()
     local makeprg = vim.fn.input('设定 makeprg(make-program) 为: ', '')
@@ -156,6 +171,7 @@ vim 内置变量快捷键说明:
     %s : 设置 grepformat(grep-format) 的快捷键
     %s : 设置 shellpipe(shell-pipe) 的快捷键
     %s : 设置 shellredir(shell-redir) 的快捷键
+    %s : 另一个更加常用的进入 normal 模式的快捷键
     %s : 显示其他 Leader 键位列表
 
 Snipets 相关快捷键:
@@ -169,6 +185,7 @@ Snipets 相关快捷键:
         get_key('grep-format'),
         get_key('shell-pipe'),
         get_key('shell-redir'),
+        get_key('goto-normal'),
         meta_leader .. 'L',
         run_key,
         entry_point,
@@ -177,7 +194,7 @@ Snipets 相关快捷键:
 end, { desc = "显示设置 vim 内置变量的快捷键文档" })
 
 -- 定义快捷键使得其快速显示当前文件路径
-map({'i', 'c'}, '<leader>%%', function ()
+map({ 'i', 'c' }, '<leader>%%', function()
     local file_path = vim.fn.expand('%:h')
     local sep = require('utils.path').path_prefix
     if file_path == '' then
@@ -185,4 +202,3 @@ map({'i', 'c'}, '<leader>%%', function ()
     end
     return file_path .. sep
 end, { expr = true, desc = "在命令行中插入当前文件的路径" })
-

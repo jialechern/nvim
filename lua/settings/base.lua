@@ -3,6 +3,12 @@
 -- 设置字体
 vim.opt.guifont = 'JetBrainsMono Nerd Font:h16'
 
+-- 字体编码
+-- 自动识别文件编码优先级
+vim.opt.fileencodings = { "utf-8", "gbk", "gb2312", "ucs-2le", "latin1" }
+-- 修复代码文件换行符/特殊字符乱码
+vim.opt.fileformats = { "unix", "dos", "mac" }
+
 -- 禁用默认的启动界面
 vim.opt.shortmess:append('I')
 

@@ -6,7 +6,7 @@ local map = require('utils.map').map
 local run_key = require('settings.variables.run').run_key
 
 -- 启用 lsp 服务
-require('utils.lsp_enable').enable('pyright')
+require('utils.lsp_enable').enable({ 'ruff','basedpyright' })
 
 -- python 的本地缩进风格
 vim.bo.tabstop = 4
