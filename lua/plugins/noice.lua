@@ -5,11 +5,14 @@ function M.setup()
     vim.cmd.packadd('nvim-notify')
     vim.cmd.packadd('noice.nvim')
 
+    -- 倒入颜色设置
+    local colors = require('settings.variables.colors')
+
     -- 先初始化 notify
     local has_notify, notify = pcall(require, 'notify')
     if has_notify then
         notify.setup({
-            background_colour = '#000000',
+            background_colour = colors.bg1,
         })
     end
 
@@ -225,8 +228,8 @@ function M.setup()
         },
     })
 
-    local cmdline_border_fg = '#FFFFFF'
-    local search_border_fg = '#8b9096'
+    local cmdline_border_fg = colors.frost3
+    local search_border_fg = colors.bg3
     local keep_transparent = true
 
     local function set_noice_hls()

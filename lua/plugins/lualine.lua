@@ -3,24 +3,16 @@ local M = {}
 function M.setup()
     vim.cmd.packadd('lualine.nvim')
 
-    local colors = {
-        red = '#ca1243',
-        grey = '#a0a1a7',
-        black = '#383a42',
-        white = '#f3f3f3',
-        light_green = '#83a598',
-        orange = '#fe8019',
-        green = '#8ec07c',
-    }
+    local colors = require('settings.variables.colors')
 
     local theme = {
         normal = {
-            a = { fg = colors.white, bg = colors.black },
-            b = { fg = colors.white, bg = colors.grey },
-            c = { fg = colors.black, bg = colors.white },
-            z = { fg = colors.white, bg = colors.black },
+            a = { fg = colors.fg1, bg = colors.black },
+            b = { fg = colors.fg1, bg = colors.fg3 },
+            c = { fg = colors.black, bg = colors.fg1 },
+            z = { fg = colors.fg1, bg = colors.black },
         },
-        insert = { a = { fg = colors.black, bg = colors.light_green } },
+        insert = { a = { fg = colors.black, bg = colors.frost1 } },
         visual = { a = { fg = colors.black, bg = colors.orange } },
         replace = { a = { fg = colors.black, bg = colors.green } },
     }
@@ -38,7 +30,7 @@ function M.setup()
         for name, section in pairs(sections) do
             local left = name:sub(9, 10) < 'x'
             for pos = 1, name ~= 'lualine_z' and #section or #section - 1 do
-                table.insert(section, pos * 2, { empty, color = { fg = colors.white, bg = colors.white } })
+                table.insert(section, pos * 2, { empty, color = { fg = colors.fg1, bg = colors.fg1 } })
             end
             for id, comp in ipairs(section) do
                 if type(comp) ~= 'table' then
@@ -87,13 +79,13 @@ function M.setup()
                     'diagnostics',
                     source = { 'nvim' },
                     sections = { 'error' },
-                    diagnostics_color = { error = { bg = colors.red, fg = colors.white } },
+                    diagnostics_color = { error = { bg = colors.red, fg = colors.fg1 } },
                 },
                 {
                     'diagnostics',
                     source = { 'nvim' },
                     sections = { 'warn' },
-                    diagnostics_color = { warn = { bg = colors.orange, fg = colors.white } },
+                    diagnostics_color = { warn = { bg = colors.orange, fg = colors.fg1 } },
                 },
                 { 'filename', file_status = false,        path = 1 },
                 { modified,   color = { bg = colors.red } },

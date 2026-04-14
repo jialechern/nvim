@@ -7,8 +7,8 @@ local map_by_modes = require('utils.map').map_by_modes
 
 ------------------------------ 设置基本按键映射 ----------------------------
 -- 领头键转译
-map('i', '<leader><localleader>', '<localleader>', { desc = "转译副领头键" })
-map('i', '<localleader><leader>', '<leader>', { desc = "转译领头键" })
+map({ 'i','c' }, '<leader><localleader>', '<localleader>', { desc = "转译副领头键" })
+map({ 'i','c' }, '<localleader><leader>', '<leader>', { desc = "转译领头键" })
 
 -- 设置进入一般模式的快捷键
 map_by_modes({ 'i', 'v', 'x', 's', 'o', 't' }, '<C-A-q>', function ()

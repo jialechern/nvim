@@ -2,10 +2,10 @@
 
 -- 加载配置初始化时必要的符号
 -- 领头键
-_G.Leader = '\''
+_G.Leader = '/'
 vim.g.mapleader = _G.Leader
 -- 副领头键
-_G.LocalLeader = '`'
+_G.LocalLeader = ' '
 vim.g.maplocalleader = _G.LocalLeader
 
 -- 指定插件位置, 不存在则clone到本地(版本大于 0.12 则会使用 neovim 原生的插件管理器)

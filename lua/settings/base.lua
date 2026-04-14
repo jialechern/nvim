@@ -28,9 +28,11 @@ vim.opt.number = true                                   -- 开启行号
 vim.opt.relativenumber = true                           -- 开启相对行号
 vim.opt.cursorline = true                               -- 显示光标所在行
 vim.opt.cursorcolumn = true                             -- 高亮显示光标所在列
-vim.api.nvim_set_hl(0, 'CursorLine', { bg = '#2E3440', underline = true })
+
+local colors = require('settings.variables.colors')
+vim.api.nvim_set_hl(0, 'CursorLine', { bg = colors.bg1, underline = true })
                                                         -- 设置行高亮
-vim.api.nvim_set_hl(0, 'CursorColumn', { bg = '#2E3440' })
+vim.api.nvim_set_hl(0, 'CursorColumn', { bg = colors.bg1 })
                                                         -- 设置列高亮
 vim.opt.splitbelow = true                               -- 打开新水平分割时，新的窗口在下方
 vim.opt.splitright = true                               -- 打开新垂直分割时，新的窗口在右侧
