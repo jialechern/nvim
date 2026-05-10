@@ -74,6 +74,8 @@ local run_key = require('settings.variables.run').run_key
 local entry_point = require('settings.variables.entry-points').entry_point
 local test_key = require('settings.variables.test').test_key
 
+local undotree_key = require('settings.variables.undotree').undotree_key
+
 
 -- 设置进入一般模式的快捷键
 map_by_modes({ 'c', 'i', 'v', 'x', 's', 'o', 't' }, get_key('goto-normal'), function()
@@ -172,6 +174,7 @@ vim 内置变量快捷键说明:
     %s : 设置 shellpipe(shell-pipe) 的快捷键
     %s : 设置 shellredir(shell-redir) 的快捷键
     %s : 另一个更加常用的进入 normal 模式的快捷键
+    %s : 打开 Undotree
     %s : 显示其他 Leader 键位列表
 
 Snipets 相关快捷键:
@@ -186,6 +189,7 @@ Snipets 相关快捷键:
         get_key('shell-pipe'),
         get_key('shell-redir'),
         get_key('goto-normal'),
+        undotree_key,
         meta_leader .. 'L',
         run_key,
         entry_point,
@@ -202,3 +206,15 @@ map({ 'i', 'c' }, '<leader>%%', function()
     end
     return file_path .. sep
 end, { expr = true, desc = "在命令行中插入当前文件的路径" })
+
+-- 打开 Undotree
+vim.keymap.set('n', undotree_key, function()
+    vim.cmd('packadd nvim.undotree')
+
+    require('undotree').open({
+      bufnr   = nil,           -- 绘制到指定 buffer(默认创建新 buffer)
+      winid   = nil,           -- 绘制到指定 window(默认创建新窗口)
+      command = "30vnew",      -- 创建窗口用的 Vim 命令(默认左侧 30 列垂直分割)
+      title   = "Undo Tree",   -- 窗口标题; 也可以是函数 fun(bufnr): string
+    })
+end, { desc = '打开撤销树' })
