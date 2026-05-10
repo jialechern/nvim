@@ -197,16 +197,6 @@ Snipets 相关快捷键:
     ), vim.log.levels.INFO, { title = "Vim 内置变量快捷键列表" })
 end, { desc = "显示设置 vim 内置变量的快捷键文档" })
 
--- 定义快捷键使得其快速显示当前文件路径
-map({ 'i', 'c' }, '<leader>%%', function()
-    local file_path = vim.fn.expand('%:h')
-    local sep = require('utils.path').path_prefix
-    if file_path == '' then
-        return '<leader>%%'
-    end
-    return file_path .. sep
-end, { expr = true, desc = "在命令行中插入当前文件的路径" })
-
 -- 打开 Undotree
 vim.keymap.set('n', undotree_key, function()
     vim.cmd('packadd nvim.undotree')

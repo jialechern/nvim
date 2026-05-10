@@ -73,6 +73,9 @@ local function setup_blink()
 
     set_blink_hls()
 
+    -- 应用 neovim 内置补全菜单
+    vim.opt.completeopt:append('popup')
+
     -- 切换主题后重新应用高亮，避免被 colorscheme 覆盖
     vim.api.nvim_create_autocmd('ColorScheme', {
         callback = set_blink_hls,
@@ -227,9 +230,9 @@ local function setup_blink()
             },
         },
 
-        -- 幽灵文本：先保持干净，避免和菜单抢视觉焦点
+        -- 幽灵文本
         ghost_text = {
-            enabled = false,
+            enabled = true,
         },
     }
 

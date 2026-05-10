@@ -91,3 +91,6 @@ vim.opt.spelllang = { 'en', 'cjk' }
 -- 支持骆驼拼写
 vim.opt.spelloptions = 'camel'
 
+-- 开启 DiffTool
+vim.cmd('packadd nvim.difftool')
+
