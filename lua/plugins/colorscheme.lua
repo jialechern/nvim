@@ -63,6 +63,27 @@ function M.setup()
 
     -- 应用主题
     vim.cmd.colorscheme('nightfox')
+
+    -- 重置 lsp 背景色为透明
+    vim.api.nvim_set_hl(0, 'LspInlayHint', { bg = 'NONE' })
+    vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextError', { bg = 'NONE' })
+    vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextWarn', { bg = 'NONE' })
+    vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextInfo', { bg = 'NONE' })
+    vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextHint', { bg = 'NONE' })
+    vim.api.nvim_set_hl(0, 'DiagnosticFloatingNormal', { bg = 'NONE' })
+    vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'NONE' })
+
+    vim.api.nvim_create_autocmd('ColorScheme', {
+        callback = function()
+            vim.api.nvim_set_hl(0, 'LspInlayHint', { bg = 'NONE' })
+            vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextError', { bg = 'NONE' })
+            vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextWarn', { bg = 'NONE' })
+            vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextInfo', { bg = 'NONE' })
+            vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextHint', { bg = 'NONE' })
+            vim.api.nvim_set_hl(0, 'DiagnosticFloatingNormal', { bg = 'NONE' })
+            vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'NONE' })
+        end,
+    })
 end
 
 return M
