@@ -46,9 +46,9 @@ function M.setup()
         },
 
         popupmenu = {
-            enabled = true,
-            backend = 'nui',
-            kind_icons = {},
+            enabled = false,
+            -- backend = 'nui',
+            -- kind_icons = {},
         },
 
         redirect = {

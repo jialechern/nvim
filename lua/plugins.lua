@@ -21,7 +21,7 @@ end
 -- 插件的 安装/同步
 M.specs = {
     -- 主题插件
-    spec('https://github.com/EdenEast/nightfox.nvim', 'nightfox.nvim'),
+    spec('https://github.com/catppuccin/nvim', 'catppuccin'),
 
     -- nvim-treesitter
     spec('https://github.com/nvim-treesitter/nvim-treesitter', 'nvim-treesitter'),

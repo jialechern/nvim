@@ -5,16 +5,25 @@ function M.setup()
 
     local colors = require('settings.variables.colors')
 
+    -- 基于 Catppuccin Mocha 调色板的状态栏主题
+    -- 每一段都定义了 fg（前景/文字色）和 bg（背景/底色），gui 用于加粗
     local theme = {
         normal = {
-            a = { fg = colors.fg1, bg = colors.black },
-            b = { fg = colors.fg1, bg = colors.fg3 },
-            c = { fg = colors.black, bg = colors.fg1 },
-            z = { fg = colors.fg1, bg = colors.black },
+            a = { fg = colors.bg0, bg = colors.purple, gui = 'bold' }, -- 模式名: 深色底 on mauve 紫（Catppuccin 标志色）
+            b = { fg = colors.fg1, bg = colors.bg2 },                  -- 主体信息: 亮文字 on 中等深色底
+            c = { fg = colors.fg3, bg = 'NONE' },                       -- 左侧填充: 次要文字, 透明底
+            z = { fg = colors.bg0, bg = colors.purple },                -- 位置/进度: 与 a 对称
         },
-        insert = { a = { fg = colors.black, bg = colors.frost1 } },
-        visual = { a = { fg = colors.black, bg = colors.orange } },
-        replace = { a = { fg = colors.black, bg = colors.green } },
+        insert = { a = { fg = colors.bg0, bg = colors.green, gui = 'bold' } },   -- 插入模式: 绿色
+        visual = { a = { fg = colors.bg0, bg = colors.orange, gui = 'bold' } },  -- 可视模式: 暖橙色
+        replace = { a = { fg = colors.bg0, bg = colors.red, gui = 'bold' } },    -- 替换模式: 警示红
+        command = { a = { fg = colors.bg0, bg = colors.frost4, gui = 'bold' } }, -- 命令模式: 蓝色
+        terminal = { a = { fg = colors.bg0, bg = colors.frost1, gui = 'bold' } },-- 终端模式: 青绿色
+        inactive = {                                                            -- 非当前窗口: 整体变暗
+            a = { fg = colors.fg3, bg = colors.bg1 },
+            b = { fg = colors.fg3, bg = colors.bg1 },
+            c = { fg = colors.fg3, bg = 'NONE' },
+        },
     }
 
     local empty = require('lualine.component'):extend()
@@ -30,7 +39,7 @@ function M.setup()
         for name, section in pairs(sections) do
             local left = name:sub(9, 10) < 'x'
             for pos = 1, name ~= 'lualine_z' and #section or #section - 1 do
-                table.insert(section, pos * 2, { empty, color = { fg = colors.fg1, bg = colors.fg1 } })
+                table.insert(section, pos * 2, { empty, color = { fg = colors.bg2, bg = colors.bg2 } })
             end
             for id, comp in ipairs(section) do
                 if type(comp) ~= 'table' then
