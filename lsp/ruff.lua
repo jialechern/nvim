@@ -149,7 +149,7 @@ return {
   on_attach = function(client, bufnr)
     -- ruff 不提供 hover(悬停文档), 禁用以避免与 basedpyright 冲突
     -- basedpyright 会提供 hover 信息
-    client.server_capabilities.hoverProvider = false
+    client.handlers['textDocument/hover'] = function() end
 
     -- [保存时自动格式化]
     -- 使用 ruff 的 LSP formatter 在保存前自动格式化 Python 文件

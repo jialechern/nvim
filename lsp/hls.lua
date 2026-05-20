@@ -46,7 +46,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
             -- [代码高亮/语义标记]: 如果需要, 可以显式开启 Semantic Tokens
             if client.server_capabilities.semanticTokensProvider then
-                client.server_capabilities.semanticTokensProvider = vim.empty_dict()
+                client.handlers['textDocument/semanticTokens/full'] = function() end
+                client.handlers['textDocument/semanticTokens/range'] = function() end
             end
 
             -- [执行 CodeLens]

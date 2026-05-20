@@ -3,14 +3,27 @@
 
 local M = {}
 
-function M.enable(server)
-  if vim.lsp.is_enabled and not vim.lsp.is_enabled(server) then
-    vim.lsp.enable(server)
-    return
-  end
+local function enable_one(server)
+    -- 如果版本不支持 vim.lsp.is_enabled, 直接启用
+    if not vim.lsp.is_enabled then
+        vim.lsp.enable(server)
+        return
+    end
 
-  -- 如果当前版本没有 vim.lsp.is_enabled, 就直接启用
-  vim.lsp.enable(server)
+    -- 避免重复启用
+    if not vim.lsp.is_enabled(server) then
+        vim.lsp.enable(server)
+    end
+end
+
+function M.enable(servers)
+    if type(servers) == 'string' then
+        enable_one(servers)
+    else
+        for _, server in ipairs(servers) do
+            enable_one(server)
+        end
+    end
 end
 
 return M
