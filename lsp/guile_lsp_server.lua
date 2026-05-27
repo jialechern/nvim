@@ -16,20 +16,6 @@
 
 --- --- --- --- 工具函数 --- --- ---
 
---- 判断 guile-lsp-server 是否可用
-local function find_server()
-    local server = vim.fn.trim(vim.fn.system 'which guile-lsp-server 2>/dev/null')
-    if server == '' then
-        vim.notify(
-            '[guile_ls] guile-lsp-server 未找到\n'
-            .. '请在 NixOS 上安装: environment.systemPackages = [ pkgs.guile-lsp-server ]',
-            vim.log.levels.ERROR
-        )
-        return nil
-    end
-    return server
-end
-
 --- 解析 Guile 项目的 root_dir
 --- 优先级: .guile → guix.scm → .git → 文件所在目录
 local function find_root(fname)
@@ -37,17 +23,10 @@ local function find_root(fname)
         or vim.fs.dirname(fname)
 end
 
---- --- --- --- guile-lsp-server 可执行文件解析 --- --- ---
-
-local server = find_server()
-if server == nil then
-    return
-end
-
 --- --- --- --- LSP 配置主体 --- --- ---
 
 return {
-    cmd       = { server },
+    cmd       = { 'guile-lsp-server' },
     filetypes = { 'scheme' },
 
     root_dir  = function(bufnr, on_dir)

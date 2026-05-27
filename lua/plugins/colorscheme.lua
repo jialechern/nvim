@@ -14,7 +14,7 @@ function M.setup()
             dark = 'mocha',
         },
 
-        -- 启用透明背景(与之前的 nightfox 配置保持一致)
+        -- 启用透明背景
         transparent_background = true,
         -- 浮动窗口也使用透明背景
         float = {
@@ -25,7 +25,7 @@ function M.setup()
         -- 将 Catppuccin 调色板同步到终端内置颜色变量(g:terminal_color_0 ~ g:terminal_color_15)
         term_colors = true,
 
-        -- 非当前窗口不做背景变暗(与之前的 nightfox 配置保持一致)
+        -- 非当前窗口不做背景变暗
         dim_inactive = {
             enabled = false,
         },
@@ -35,7 +35,7 @@ function M.setup()
         no_bold = false,
         no_underline = false,
 
-        -- 语法高亮风格控制(留空 {} 表示不添加额外样式, 保持与原 nightfox 一致的简洁风格)
+        -- 语法高亮风格控制(留空 {} 表示不添加额外样式)
         styles = {
             comments = {},
             conditionals = {},
@@ -112,30 +112,30 @@ function M.setup()
     -- 应用 Mocha 口味主题
     vim.cmd.colorscheme('catppuccin-mocha')
 
-    -- =============================================================================
-    -- 额外强制透明覆盖(确保 Catppuccin 不会在某些场景覆盖为不透明背景)
-    -- =============================================================================
-    vim.api.nvim_set_hl(0, 'LspInlayHint', { bg = 'NONE' })
-    vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextError', { bg = 'NONE' })
-    vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextWarn', { bg = 'NONE' })
-    vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextInfo', { bg = 'NONE' })
-    vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextHint', { bg = 'NONE' })
-    vim.api.nvim_set_hl(0, 'DiagnosticFloatingNormal', { bg = 'NONE' })
-    vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'NONE' })
-    vim.api.nvim_set_hl(0, 'FloatBorder', { bg = 'NONE' })
+    -- 透明背景覆盖列表 (catppuccin 的 transparent_background 无法覆盖所有高亮组)
+    local transparent_groups = {
+        'Normal',
+        'StatusLine',
+        'NormalFloat',
+        'FloatBorder',
+        'LspInlayHint',
+        'DiagnosticFloatingNormal',
+        'DiagnosticVirtualTextError',
+        'DiagnosticVirtualTextWarn',
+        'DiagnosticVirtualTextInfo',
+        'DiagnosticVirtualTextHint',
+    }
 
-    -- 切换主题后重新应用透明覆盖(防止其他插件 / 手动切换主题后丢失透明设置)
+    local function apply_transparency()
+        for _, group in ipairs(transparent_groups) do
+            vim.api.nvim_set_hl(0, group, { bg = 'NONE' })
+        end
+    end
+
+    apply_transparency()
+
     vim.api.nvim_create_autocmd('ColorScheme', {
-        callback = function()
-            vim.api.nvim_set_hl(0, 'LspInlayHint', { bg = 'NONE' })
-            vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextError', { bg = 'NONE' })
-            vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextWarn', { bg = 'NONE' })
-            vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextInfo', { bg = 'NONE' })
-            vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextHint', { bg = 'NONE' })
-            vim.api.nvim_set_hl(0, 'DiagnosticFloatingNormal', { bg = 'NONE' })
-            vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'NONE' })
-            vim.api.nvim_set_hl(0, 'FloatBorder', { bg = 'NONE' })
-        end,
+        callback = apply_transparency,
     })
 end
 

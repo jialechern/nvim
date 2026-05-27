@@ -54,19 +54,9 @@ local function is_library(fname)
     end
 end
 
---- --- --- --- rust-analyzer 可执行文件解析 --- --- ---
-local ra = vim.fn.trim(vim.fn.system 'which rust-analyzer 2>/dev/null')
-if ra == '' then
-    vim.notify(
-        '[rust_analyzer] rust-analyzer 未找到，请运行: rustup component add rust-analyzer',
-        vim.log.levels.ERROR
-    )
-    return
-end
-
 --- --- --- --- LSP 配置主体 --- --- ---
 return {
-    cmd          = { ra },
+    cmd          = { 'rust-analyzer' },
     filetypes    = { 'rust' },
 
     root_dir     = function(bufnr, on_dir)

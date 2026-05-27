@@ -15,5 +15,5 @@ vim.bo.formatprg = ''
 map('n', run_key, function ()
     vim.cmd('silent write')
     vim.cmd('make %:p')
-end, { desc = '运行 rust 脚本' })
+end, { desc = '运行 zsh 脚本' })
 

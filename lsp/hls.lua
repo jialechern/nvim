@@ -36,47 +36,32 @@ module.settings = {
     }
 }
 
--- 动态功能绑定
-vim.api.nvim_create_autocmd('LspAttach', {
-    callback = function(args)
-        local client = vim.lsp.get_client_by_id(args.data.client_id)
-        -- 注意: Neovim 内部注册 Haskell LSP 的名字通常是 "hls"
-        if client.name == "hls" then
-            local bufnr = args.buf
+module.on_attach = function(client, bufnr)
+    if client.server_capabilities.semanticTokensProvider then
+        client.handlers['textDocument/semanticTokens/full'] = function() end
+        client.handlers['textDocument/semanticTokens/range'] = function() end
+    end
 
-            -- [代码高亮/语义标记]: 如果需要, 可以显式开启 Semantic Tokens
-            if client.server_capabilities.semanticTokensProvider then
-                client.handlers['textDocument/semanticTokens/full'] = function() end
-                client.handlers['textDocument/semanticTokens/range'] = function() end
-            end
+    vim.keymap.set("n", "<leader>ev", vim.lsp.codelens.run,
+        { buffer = bufnr, desc = "Haskell: Run CodeLens" })
 
-            -- [执行 CodeLens]
-            -- Haskell 大量依赖 CodeLens(比如点击 "Evaluate" 运行注释里的代码, 或 "Import" 模块)
-            vim.keymap.set("n", "<leader>ev", vim.lsp.codelens.run,
-                { buffer = bufnr, desc = "Haskell: Run CodeLens" })
+    vim.keymap.set("n", "<leader>cr", function()
+        vim.lsp.codelens.enable(true, { bufnr = bufnr })
+    end, { buffer = bufnr, desc = "Haskell: Refresh CodeLens" })
 
-            -- [刷新 CodeLens]: 确保镜头动作是最新的
-            vim.keymap.set("n", "<leader>cr", function ()
-                vim.lsp.codelens.enable(true, { bufnr = bufnr })
-            end, { buffer = bufnr, desc = "Haskell: Refresh CodeLens" })
+    vim.keymap.set("n", "<leader>ht", function()
+        vim.lsp.buf.code_action({
+            context = { only = { "refactor.wingman" } },
+            apply = true
+        })
+    end, { buffer = bufnr, desc = "Haskell: Wingman Tactics" })
 
-            -- [Wingman 自动推导]: 利用类型系统写代码
-            vim.keymap.set("n", "<leader>ht", function()
-                vim.lsp.buf.code_action({
-                    context = { only = { "refactor.wingman" } },
-                    apply = true
-                })
-            end, { buffer = bufnr, desc = "Haskell: Wingman Tactics" })
-
-            -- 开启缓冲区级别的 CodeLens 自动刷新(不影响性能的前提下)
-            vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-                buffer = bufnr,
-                callback = function ()
-                    vim.lsp.codelens.enable(true, { bufnr = bufnr })
-                end,
-            })
-        end
-    end,
-})
+    vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+        buffer = bufnr,
+        callback = function()
+            vim.lsp.codelens.enable(true, { bufnr = bufnr })
+        end,
+    })
+end
 
 return module

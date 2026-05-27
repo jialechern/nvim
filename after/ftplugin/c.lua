@@ -17,6 +17,6 @@ vim.bo.formatprg = 'clang-format -style=file'
 --- 自动编译
 map('n', run_key, function ()
     vim.cmd('silent write')
-    vim.cmd('make %:p:r.c -o %:p:r && %:p:r')
+    vim.cmd('make %:p -o %:p:r && %:p:r')
 end, { desc = '编译并运行 C 语言文件' })
 

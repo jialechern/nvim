@@ -12,5 +12,5 @@ vim.bo.makeprg = 'make'
 map('n', run_key, function ()
     vim.cmd('silent write')
     vim.cmd('make -f %:p')
-end, { desc = '运行 lua 语言文件' })
+end, { desc = '运行 Makefile' })
 

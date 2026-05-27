@@ -20,14 +20,14 @@ end
 
 -- 插件的 安装/同步
 M.specs = {
-    -- 主题插件
-    spec('https://github.com/catppuccin/nvim', 'catppuccin'),
+    -- 主题插件 (v2.x)
+    spec('https://github.com/catppuccin/nvim', 'catppuccin', vim.version.range('2')),
 
-    -- nvim-treesitter
+    -- nvim-treesitter (无 semver 标签, 由 lock 文件锁定 rev)
     spec('https://github.com/nvim-treesitter/nvim-treesitter', 'nvim-treesitter'),
 
-    -- Latex 插件
-    spec('https://github.com/lervag/vimtex', 'vimtex'),
+    -- Latex 插件 (v2.x, 标签格式为 v2.17 等双组件版本)
+    spec('https://github.com/lervag/vimtex', 'vimtex', vim.version.range('2')),
 
     -- fzf 插件
     spec('https://github.com/junegunn/fzf', 'fzf', nil, { build_fzf = true }),
@@ -42,12 +42,12 @@ M.specs = {
 
     -- 通知插件
     spec('https://github.com/nvim-lualine/lualine.nvim', 'lualine.nvim'),
-    spec('https://github.com/folke/noice.nvim', 'noice.nvim'),
+    spec('https://github.com/folke/noice.nvim', 'noice.nvim', vim.version.range('4')),
     spec('https://github.com/MunifTanjim/nui.nvim', 'nui.nvim'),
-    spec('https://github.com/rcarriga/nvim-notify', 'nvim-notify'),
+    spec('https://github.com/rcarriga/nvim-notify', 'nvim-notify', vim.version.range('3')),
 
-    -- markview 渲染插件
-    spec('https://github.com/OXY2DEV/markview.nvim', 'markview.nvim'),
+    -- markview 渲染插件 (v28.x)
+    spec('https://github.com/OXY2DEV/markview.nvim', 'markview.nvim', vim.version.range('28')),
     spec('https://github.com/nvim-tree/nvim-web-devicons', 'nvim-web-devicons'),
 
     -- 对齐插件
