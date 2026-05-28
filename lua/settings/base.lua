@@ -37,7 +37,7 @@ vim.opt.cursorcolumn = true   -- 高亮显示光标所在列
 
 local colors = require('settings.variables.colors')
 -- 设置行高亮
-vim.api.nvim_set_hl(0, 'CursorLine', { bg = colors.bg1, underline = true })
+vim.api.nvim_set_hl(0, 'CursorLine', { bg = colors.bg1 })
 -- 设置列高亮
 vim.api.nvim_set_hl(0, 'CursorColumn', { bg = colors.bg1 })
 

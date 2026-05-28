@@ -6,11 +6,14 @@ require('settings.lsp')
 -- 基础配置
 require('settings.base')
 
+-- 如果没有启用插件, 则设置背景透明度
+if not vim.o.loadplugins then
+    require('settings.transparency').apply_transparency()
+end
+
 -- 基本的自动命令
 require('settings.autocmds')
 
 -- 设置根据文件扩展名配置文件类型
 require('settings.filetype')
 
--- -- 开启 undotree
--- require('settings.undotree')

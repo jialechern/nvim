@@ -112,25 +112,8 @@ function M.setup()
     -- 应用 Mocha 口味主题
     vim.cmd.colorscheme('catppuccin-mocha')
 
-    -- 透明背景覆盖列表 (catppuccin 的 transparent_background 无法覆盖所有高亮组)
-    local transparent_groups = {
-        'Normal',
-        'StatusLine',
-        'NormalFloat',
-        'FloatBorder',
-        'LspInlayHint',
-        'DiagnosticFloatingNormal',
-        'DiagnosticVirtualTextError',
-        'DiagnosticVirtualTextWarn',
-        'DiagnosticVirtualTextInfo',
-        'DiagnosticVirtualTextHint',
-    }
-
-    local function apply_transparency()
-        for _, group in ipairs(transparent_groups) do
-            vim.api.nvim_set_hl(0, group, { bg = 'NONE' })
-        end
-    end
+    -- 设置背景透明
+    local apply_transparency = require('settings.transparency').apply_transparency
 
     apply_transparency()
 
