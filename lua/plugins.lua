@@ -52,6 +52,9 @@ M.specs = {
 
     -- 对齐插件
     spec('https://github.com/junegunn/vim-easy-align', 'vim-easy-align'),
+
+    -- OpenCode AI 集成插件 (v0.x, 语义化版本)
+    spec('https://github.com/nickjvandyke/opencode.nvim', 'opencode.nvim', vim.version.range('*')),
 }
 
 local function packadd(name)
@@ -103,6 +106,7 @@ function M.setup()
     require('plugins.noice').setup()
     require('plugins.markview').setup()
     require('plugins.vim-easy-align').setup()
+    require('plugins.opencode').setup()
 end
 
 return M
