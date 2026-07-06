@@ -102,12 +102,14 @@ function M.setup()
                 win = {
                     -- 标题位置: 左对齐
                     title_pos = 'left',
-                    -- 窗口相对位置: 相对于光标
-                    relative = 'cursor',
-                    -- 距离光标上方 3 行
-                    row = -3,
-                    -- 与光标列对齐
-                    col = 0,
+                    -- 窗口相对位置: 相对编辑器居中浮动
+                    relative = 'editor',
+                    -- 动态适应终端宽度: 取编辑器宽度的 60%, 上限 120 列
+                    -- row/col 不设置 = 自动居中
+                    width = function()
+                        return math.min(120, math.floor(vim.o.columns * 0.6))
+                    end,
+                    max_width = 120,
                     keys = {
                         -- <CR> 提交输入
                         i_cr = { desc = 'submit' },
@@ -288,35 +290,42 @@ function M.setup()
 
     ---------------------------------------------------------------------------
     -- 6. 快捷键映射
-    --    使用 <leader> 前缀, 实际按下的键取决于你的 mapleader (当前: "/")
-    --    你可以在熟悉后自行调整这些快捷键
     ---------------------------------------------------------------------------
     local map = require('utils.map').map
+    local agent_leader = require('settings.variables.agent').agent_leader
 
     -- Ask: 打开提示词输入框, 自动带 @this 上下文(选区或光标位置)
-    map({ 'n', 'x' }, '<leader>oa', function()
+    map({ 'n', 'x' }, agent_leader .. 'a', function()
         require('opencode').ask('@this: ')
     end, { desc = '询问 OpenCode (带当前上下文)' })
 
+    map({ 'n', 'x' }, agent_leader .. 'b', function()
+        require('opencode').ask('@buffer: ')
+    end, { desc = '询问 OpenCode (带当前缓冲区)' })
+
+    map({ 'n', 'x' }, agent_leader .. 'B', function()
+        require('opencode').ask('@buffers: ')
+    end, { desc = '询问 OpenCode (带当前缓冲区)' })
+
     -- Select: 打开选择器, 可选择提示词/命令/服务器
-    map({ 'n', 'x' }, '<leader>os', function()
+    map({ 'n', 'x' }, agent_leader .. 's', function()
         require('opencode').select()
     end, { desc = 'OpenCode 选择器 (提示词/命令/服务器)' })
 
     -- Operator: 将范围(如 motion)作为上下文发送给 OpenCode
-    --   用法: <leader>oo + motion (如 <leader>ooip = 将整个段落作为上下文)
+    --   用法: <agent-leader>oo + motion (如 <agent-leader>ooip = 将整个段落作为上下文)
     --   支持 . (dot-repeat) 重复操作
-    map({ 'n', 'x' }, '<leader>oo', function()
+    map({ 'n', 'x' }, agent_leader .. 'o', function()
         return require('opencode').operator('@this ')
     end, { desc = '将范围发送给 OpenCode (操作符)', expr = true })
 
     -- Operator (单行版): 操作当前行
-    map('n', '<leader>ol', function()
+    map('n', agent_leader .. 'l', function()
         return require('opencode').operator('@this ') .. '_'
     end, { desc = '将当前行发送给 OpenCode', expr = true })
 
     -- 快速发送 Ask 不带预设前缀 (直接打开空输入框)
-    map({ 'n', 'x' }, '<leader>oA', function()
+    map({ 'n', 'x' }, agent_leader .. 'A', function()
         require('opencode').ask()
     end, { desc = '询问 OpenCode (空白输入框)' })
 
@@ -324,66 +333,66 @@ function M.setup()
     --   这些快捷键让你在不离开 Neovim 的情况下滚动 OpenCode TUI 的消息
 
     -- 向上滚动半页
-    map('n', '<leader>ou', function()
+    map('n', agent_leader .. 'u', function()
         require('opencode').command('session.half.page.up')
     end, { desc = 'OpenCode 向上滚动半页' })
 
     -- 向下滚动半页
-    map('n', '<leader>od', function()
+    map('n', agent_leader .. 'd', function()
         require('opencode').command('session.half.page.down')
     end, { desc = 'OpenCode 向下滚动半页' })
 
     -- 向上滚动整页
-    map('n', '<leader>oU', function()
+    map('n', agent_leader .. 'U', function()
         require('opencode').command('session.page.up')
     end, { desc = 'OpenCode 向上滚动整页' })
 
     -- 向下滚动整页
-    map('n', '<leader>oD', function()
+    map('n', agent_leader .. 'D', function()
         require('opencode').command('session.page.down')
     end, { desc = 'OpenCode 向下滚动整页' })
 
     -- --- OpenCode 会话管理 ---
 
     -- 开启新会话 (清空历史, 开始新的对话)
-    map('n', '<leader>on', function()
+    map('n', agent_leader .. 'n', function()
         require('opencode').command('session.new')
     end, { desc = 'OpenCode 开启新会话' })
 
     -- 中断当前会话 (停止 AI 正在生成的回复)
-    map('n', '<leader>oi', function()
+    map('n', agent_leader .. 'i', function()
         require('opencode').command('session.interrupt')
     end, { desc = 'OpenCode 中断当前会话' })
 
     -- 压缩当前会话 (上下文过长时使用, 让 AI 总结后重开)
-    map('n', '<leader>oc', function()
+    map('n', agent_leader .. 'c', function()
         require('opencode').command('session.compact')
     end, { desc = 'OpenCode 压缩会话上下文' })
 
     -- 撤销上一步操作
-    map('n', '<leader>oz', function()
+    map('n', agent_leader .. 'z', function()
         require('opencode').command('session.undo')
     end, { desc = 'OpenCode 撤销上一步' })
 
     -- 重做被撤销的操作
-    map('n', '<leader>oZ', function()
+    map('n', agent_leader .. 'Z', function()
         require('opencode').command('session.redo')
     end, { desc = 'OpenCode 重做' })
 
     --- 选择会话 (在多会话之间切换)
-    map('n', '<leader>oS', function()
+    map('n', agent_leader .. 'S', function()
         require('opencode').command('session.select')
     end, { desc = 'OpenCode 选择/切换会话' })
 
     -- --- Agent 代理控制 ---
 
     -- 切换 Agent (OpenCode 支持 build/plan 等多种 Agent 模式)
-    map('n', '<leader>ot', function()
+    map('n', agent_leader .. 't', function()
         require('opencode').command('agent.cycle')
     end, { desc = 'OpenCode 切换 Agent 代理' })
 
     -- 手动启动 OpenCode (垂直分屏打开终端)
-    map('n', '<leader>o<CR>', function()
+    map('n', agent_leader .. 'O', function()
         vim.cmd('StartOpenCode')
     end, { desc = '在 Neovim 中启动 OpenCode' })
 

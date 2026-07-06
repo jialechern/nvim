@@ -3,7 +3,7 @@
 
 local module = {}
 
-local lsp_leader = '<C-/>'
+local lsp_leader = '<C-' .. _G.Leader .. '>'
 module.lsp_leader = lsp_leader
 
 local function get_key(v)
@@ -46,7 +46,7 @@ local function get_key(v)
     elseif v == 'snippet_clear' then
         return '<C-c>'
     elseif v == 'snippet_choice' then
-        return '<C-\\>'
+        return '<C-\'>'
     elseif v == 'help' then
         return lsp_leader .. '?'
     else
@@ -57,4 +57,3 @@ end
 module.get_key = get_key
 
 return module
-

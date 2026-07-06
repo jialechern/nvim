@@ -69,6 +69,7 @@ local split_leader = require('settings.variables.windows.split').split_leader
 local status_leader = require('settings.variables.windows.status').status_leader
 local align_leader = require('settings.variables.align').align_leader
 local float_window_leader = require('settings.variables.windows.float-window').float_window_leader
+local agent_leader = require('settings.variables.agent').agent_leader
 
 local run_key = require('settings.variables.run').run_key
 local entry_point = require('settings.variables.entry-points').entry_point
@@ -148,6 +149,7 @@ Windows 相关领头键:
     %s : fuzzy finder 相关领头键
     %s : 文本对齐相关领头键
     %s : 浮动窗口相关领头键
+    %s : agent 相关领头键
     ]]
     vim.notify(help_text:format(
         split_leader,
@@ -161,7 +163,8 @@ Windows 相关领头键:
         fix_leader,
         fuzzy_finder_leader,
         align_leader,
-        float_window_leader
+        float_window_leader,
+        agent_leader
     ), vim.log.levels.INFO, { title = "其他领头键列表" })
 end, { desc = "显示其他 Leader 键位列表" })
 
