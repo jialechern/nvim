@@ -41,6 +41,16 @@ vim.api.nvim_set_hl(0, 'CursorLine', { bg = colors.bg1 })
 -- 设置列高亮
 vim.api.nvim_set_hl(0, 'CursorColumn', { bg = colors.bg1 })
 
+-- 光标闪烁: 发送闪烁序列, 动画节奏由终端 (kitty cursor_blink_interval) 统一控制
+-- 与 fish 光标保持一致: normal/visual 方块、insert 竖线、replace 下划线
+vim.opt.guicursor = {
+  'n-v-c:block-blinkwait500-blinkon400-blinkoff250',
+  'i-ci-ve:ver25-blinkwait500-blinkon400-blinkoff250',
+  'r-cr:hor20-blinkwait500-blinkon400-blinkoff250',
+  'o:hor50',
+  'sm:block-blinkwait500-blinkon400-blinkoff250',
+}
+
 vim.opt.splitbelow = true    -- 打开新水平分割时，新的窗口在下方
 vim.opt.splitright = true    -- 打开新垂直分割时，新的窗口在右侧
 vim.opt.termguicolors = true -- 使用 24 bit rgb 颜色
