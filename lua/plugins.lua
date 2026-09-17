@@ -46,15 +46,8 @@ M.specs = {
     spec('https://github.com/MunifTanjim/nui.nvim', 'nui.nvim'),
     spec('https://github.com/rcarriga/nvim-notify', 'nvim-notify', vim.version.range('3')),
 
-    -- markview 渲染插件 (v28.x)
-    spec('https://github.com/OXY2DEV/markview.nvim', 'markview.nvim', vim.version.range('28')),
-    spec('https://github.com/nvim-tree/nvim-web-devicons', 'nvim-web-devicons'),
-
     -- 对齐插件
     spec('https://github.com/junegunn/vim-easy-align', 'vim-easy-align'),
-
-    -- OpenCode AI 集成插件 (v0.x, 语义化版本)
-    spec('https://github.com/nickjvandyke/opencode.nvim', 'opencode.nvim', vim.version.range('*')),
 }
 
 local function packadd(name)
@@ -104,9 +97,7 @@ function M.setup()
     require('plugins.blink-cmp').setup()
     require('plugins.lualine').setup()
     require('plugins.noice').setup()
-    require('plugins.markview').setup()
     require('plugins.vim-easy-align').setup()
-    require('plugins.opencode').setup()
 end
 
 return M

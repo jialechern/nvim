@@ -3,6 +3,6 @@
 
 local module = {}
 
-module.agent_leader = '<C-' .. _G.LocalLeader .. '>'
+module.agent_leader = '<A-' .. _G.LocalLeader .. '>'
 
 return module
