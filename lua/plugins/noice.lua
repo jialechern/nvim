@@ -1,14 +1,16 @@
 vim.cmd.packadd('nui.nvim')
-vim.cmd.packadd('nvim-notify')
+-- nvim-notify 是可选的通知后端: 不装也能跑 —— noice 的 views.notify 后端列表是
+-- { 'snacks', 'notify' } 且自带 fallback = 'mini', 两条路都没有时用内置 mini 视图
+-- (右下角一行、2 秒消失)。装了 snacks.nvim 则优先用 snacks(无需改这里)。
+-- 因此不硬 packadd, 缺失时静默降级(与 plugins/telescope.lua 对 fzf-native 的处理一致)。
+local has_nvim_notify = pcall(vim.cmd.packadd, 'nvim-notify')
 vim.cmd.packadd('noice.nvim')
 
--- 导入颜色设置
 local colors = require('settings.consts').colors
 
--- 先初始化 notify
-local has_notify, notify = pcall(require, 'notify')
-if has_notify then
-    notify.setup({
+-- 通知窗口的"背后底色": 只在通知带淡入淡出(opacity)阶段时生效
+if has_nvim_notify then
+    require('notify').setup({
         background_colour = colors.bg1,
     })
 end
