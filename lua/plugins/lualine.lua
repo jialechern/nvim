@@ -83,15 +83,15 @@ require('lualine').setup({
             'diff',
             {
                 'diagnostics',
-                source = { 'nvim' },
-                sections = { 'error' },
-                diagnostics_color = { error = { bg = colors.red, fg = colors.fg1 } },
-            },
-            {
-                'diagnostics',
-                source = { 'nvim' },
-                sections = { 'warn' },
-                diagnostics_color = { warn = { bg = colors.orange, fg = colors.fg1 } },
+                -- 选项名是复数 sources; 取值见 lualine 的 components/diagnostics/sources.lua:
+                -- nvim_diagnostic / nvim_workspace_diagnostic / nvim_lsp / coc / ale / vim_lsp
+                sources = { 'nvim_diagnostic' },
+                -- 一个组件里画 error / warn 两段, 省一次取诊断的开销
+                sections = { 'error', 'warn' },
+                diagnostics_color = {
+                    error = { bg = colors.red, fg = colors.fg1 },
+                    warn = { bg = colors.orange, fg = colors.fg1 },
+                },
             },
             { 'filename', file_status = false,        path = 1 },
             { modified,   color = { bg = colors.red } },
