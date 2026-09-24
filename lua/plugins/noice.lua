@@ -172,6 +172,15 @@ require('noice').setup({
 
     throttle = 1000 / 30,
 
+    -- 搜索计数已经在 lualine 的 search_result() 里显示; 上游默认还会往 virtualtext
+    -- 视图送一份, 这里跳过以免重复(官方 doc ROUTES 一节的做法)
+    routes = {
+        {
+            filter = { event = 'msg_show', kind = 'search_count' },
+            opts = { skip = true },
+        },
+    },
+
     views = {
         -- 尺寸一律用百分比: nui 会按当前编辑器尺寸实时换算;
         -- 写成 math.floor(vim.o.columns * 0.8) 只会在启动时求值一次, 之后改窗口大小不再跟随
