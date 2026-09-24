@@ -90,11 +90,5 @@ require('catppuccin').setup({
 
 vim.cmd.colorscheme('catppuccin-mocha')
 
--- 设置背景透明
-local apply_transparency = require('settings.transparency').apply_transparency
-
-apply_transparency()
-
-vim.api.nvim_create_autocmd('ColorScheme', {
-    callback = apply_transparency,
-})
+-- 透明背景完全由上面的 transparent_background / float.transparent 负责;
+-- settings/transparency.lua 只在无插件路径下被 settings.lua 调用。

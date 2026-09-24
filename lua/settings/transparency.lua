@@ -1,17 +1,20 @@
--- transparency.lua
--- 给出一个设置透明背景的配置函数
+--- transparency.lua
+--- 只在无插件路径(--noplugin，没有 catppuccin)时给高亮组去背景;
+--- 插件路径下 catppuccin 的 transparent_background / float.transparent 已覆盖这些组。
 
+---@class Settings.Transparency
+---@field apply_transparency fun()
 local module = {}
 
+--- 背景置 NONE: 必须带 update, 否则 nvim_set_hl 会整体替换组定义, 把 fg/style 一起抹掉
 local function apply_transparency()
-    -- 透明背景覆盖列表 (当前所用的主题无法覆盖所有高亮组)
+    ---@type string[]
     local transparent_groups = {
         'Normal',
         'StatusLine',
         'NormalFloat',
         'FloatBorder',
         'LspInlayHint',
-        'DiagnosticFloatingNormal',
         'DiagnosticVirtualTextError',
         'DiagnosticVirtualTextWarn',
         'DiagnosticVirtualTextInfo',
@@ -19,10 +22,11 @@ local function apply_transparency()
     }
 
     for _, group in ipairs(transparent_groups) do
-        vim.api.nvim_set_hl(0, group, { bg = 'NONE' })
+        vim.api.nvim_set_hl(0, group, { bg = 'NONE', update = true })
     end
 end
 
 module.apply_transparency = apply_transparency
 
+---@type Settings.Transparency
 return module
