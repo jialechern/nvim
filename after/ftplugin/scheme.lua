@@ -9,16 +9,12 @@ vim.bo.shiftwidth = 2
 vim.bo.softtabstop = 2
 vim.bo.expandtab = true
 
--- Lisp 风格缩进 (依赖括号而非缩进推断层级)
+-- Lisp 系按括号决定缩进层级, 不依赖内容缩进
 vim.bo.lisp = true
 
--- 代码格式化工具 (guile 自带 --format, 需 guile 3.0+)
-vim.bo.formatprg = 'guile --format'
-
--- 设置运行方式: 直接用 guile 解释当前文件
+-- 当前无可用 scheme 格式化器(guile 没有 --format), 故不设 formatprg: gq 走内置排版
 vim.bo.makeprg = 'guile %'
 
---- 自动保存并运行当前 scheme 文件
 map(keys.run_file, function()
     vim.cmd('silent write')
     vim.cmd('make')

@@ -9,15 +9,18 @@ vim.bo.shiftwidth = 2
 vim.bo.softtabstop = 2
 vim.bo.expandtab = true
 
--- 设置解释器
-vim.bo.makeprg = ''
+-- makeprg 只负责 invoke; 构建目标(flake 属性)由回调传入
+vim.bo.makeprg = 'nix build'
 
--- 设置格式化工具
-vim.bo.formatprg = 'nixpkgs-fmt'
+vim.bo.formatprg = 'nixfmt -'
 
---- 自动运行
-map(keys.run_file, function ()
+map(keys.run_file, function()
     vim.cmd('silent write')
+    ---@type string
     local username = vim.fn.input('设定 username 为: ', '')
-    vim.cmd('make .#' .. username)
+    if username == '' then
+        return
+    end
+    -- '#' 会被 Ex 展开成 alternate file, 必须转义
+    vim.cmd('make .\\#' .. username)
 end, { buffer = 0 })
