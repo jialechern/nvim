@@ -11,12 +11,8 @@ vim.bo.makeprg = 'node'
 -- 设置格式化工具
 vim.bo.formatprg = 'prettierd %'
 
--- 启用 TypeScript/JavaScript LSP
-require('utils.lsp_enable').enable('ts_ls')
-
 --- 自动运行
 map(keys.run_file, function ()
     vim.cmd('silent write')
     vim.cmd('make %:p')
 end, { buffer = 0 })
-

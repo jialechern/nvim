@@ -23,6 +23,7 @@ function M.setup()
     -- 调用顺序即加载顺序, 不要随手挪动
     require('plugins.colorscheme').setup() -- 主题最先, 否则高亮会被后加载的插件覆盖
     require('plugins.nvim-treesitter').setup()
+    require('plugins.nvim-lspconfig').setup()
     require('plugins.telescope').setup()
     require('plugins.snippets').setup()
     require('plugins.lualine').setup()

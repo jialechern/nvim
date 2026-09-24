@@ -5,9 +5,6 @@
 local map = require('utils.map').map
 local keys = require('keys.run')
 
--- c++ 文件启用 clangd
-require('utils.lsp_enable').enable('clangd')
-
 -- 设置编译器
 vim.bo.makeprg = 'g++'
 
@@ -19,4 +16,3 @@ map(keys.run_file, function ()
     vim.cmd('silent write')
     vim.cmd('make %:p -o %:p:r && %:p:r')
 end, { buffer = 0 })
-

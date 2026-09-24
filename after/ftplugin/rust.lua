@@ -5,9 +5,6 @@
 local map = require('utils.map').map
 local keys = require('keys.run')
 
--- 让 rust 文件启用 rust_analyzer
-require('utils.lsp_enable').enable('rust_analyzer')
-
 -- Rust 常见缩进设置
 vim.bo.tabstop = 4
 vim.bo.shiftwidth = 4
@@ -25,4 +22,3 @@ map(keys.run_file, function ()
     vim.cmd('silent write')
     vim.cmd('make run')
 end, { buffer = 0 })
-

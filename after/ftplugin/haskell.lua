@@ -5,16 +5,11 @@
 local map = require('utils.map').map
 local keys = require('keys.run')
 
-
--- 让 haskell 启用 lsp 服务
-require('utils.lsp_enable').enable('hls')
-
 -- haskell 编辑习惯
 vim.bo.tabstop = 2
 vim.bo.shiftwidth = 2
 vim.bo.softtabstop = 2
 vim.bo.expandtab = true
-
 
 -- 设置解释器
 vim.bo.makeprg = 'ghc'
@@ -27,4 +22,3 @@ map(keys.run_file, function ()
     vim.cmd('silent write')
     vim.cmd('make %:p')
 end, { buffer = 0 })
-

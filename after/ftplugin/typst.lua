@@ -5,9 +5,6 @@
 local map = require('utils.map').map
 local keys = require('keys.run')
 
--- 启用 lsp 服务器
-require('utils.lsp_enable').enable('tinymist')
-
 -- 设置编译器
 vim.bo.makeprg = 'typst'
 
@@ -37,4 +34,3 @@ map(keys.run_file, function()
 	vim.fn.jobstart(zathura_cmd, { detach = true })
 	vim.notify("Zathura 预览: " .. vim.fn.fnamemodify(pdf_path, ":t"))
 end, { buffer = 0 })
-

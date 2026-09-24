@@ -5,9 +5,6 @@
 local map = require('utils.map').map
 local keys = require('keys.run')
 
--- 让 scheme 文件启用
-require('utils.lsp_enable').enable('guile_lsp_server')
-
 -- Scheme 常见缩进设置 (Lisp 系惯例: 2 空格)
 vim.bo.tabstop = 2
 vim.bo.shiftwidth = 2

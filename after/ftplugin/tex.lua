@@ -5,9 +5,6 @@
 local map = require('utils.map').map
 local keys = require('keys.run')
 
--- 让 tex / plaintex 文件启用 texlab
-require('utils.lsp_enable').enable('texlab')
-
 -- LaTeX 常见本地设置
 vim.bo.textwidth = 80
 vim.wo.wrap = false
@@ -23,4 +20,3 @@ map(keys.run_file, function ()
     vim.cmd('silent write')
     vim.cmd('make')
 end, { buffer = 0 })
-
