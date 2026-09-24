@@ -27,12 +27,12 @@ telescope.setup({
         borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
         -- 未安装 nvim-web-devicons, 不做图标着色(装上后可改成 true)
         color_devicons = false,
-        -- 忽略噪声目录(对应原 FZF_DEFAULT_COMMAND 里的 glob)
-        file_ignore_patterns = { '^%.git/', '^node_modules/' },
-        -- live_grep / grep_string 走 ripgrep, 同样跳过噪声目录
+        -- 全局结果过滤: 带 filename 的 picker(含 live_grep)都会吃; Lua 模式按子串匹配(不加 ^ 才能挡住嵌套目录)
+        file_ignore_patterns = { '%.git/', 'node_modules/' },
+        -- live_grep / grep_string 走 ripgrep: --glob 剪掉任意层级的噪声目录
         vimgrep_arguments = {
             'rg', '--color=never', '--no-heading', '--with-filename', '--line-number',
-            '--column', '--smart-case', '--hidden', '--glob', '!{.git,node_modules}/*',
+            '--column', '--smart-case', '--hidden', '--glob', '!**/{.git,node_modules}/*',
         },
         mappings = {
             i = {
@@ -115,8 +115,11 @@ vim.api.nvim_create_user_command('RgVisual', function()
     if txt == '' then
         txt = fn.getreg('v')
     end
-    if txt ~= '' then
-        builtin.grep_string({ search = txt:gsub('\n', '\\n') })
+    -- 多行只取第一行: rg 默认不跨行, 且换行会被 telescope 的 escape_chars 二次转义
+    ---@type string
+    local search = (txt:match('^[^\n]*') or '')
+    if search ~= '' then
+        builtin.grep_string({ search = search })
     else
         builtin.live_grep()
     end
