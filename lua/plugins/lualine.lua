@@ -75,10 +75,19 @@ local function search_result()
     if not last_search or last_search == '' then
         return ''
     end
-    local searchcount = vim.fn.searchcount({ maxcount = 9999 })
-    return last_search .. '(' .. searchcount.current .. '/' .. searchcount.total .. ')'
+    -- 与官方 searchcount 组件一致: 限流 + 出错静默(大文件里 searchcount 可能很慢)
+    ---@type boolean, { current: integer, total: integer, maxcount: integer, incomplete: integer }
+    local ok, searchcount = pcall(vim.fn.searchcount, { maxcount = 999, timeout = 500 })
+    if not ok or not searchcount or searchcount.incomplete == 1 then
+        return ''
+    end
+    ---@type integer
+    local total = math.min(searchcount.total or 0, searchcount.maxcount)
+    return last_search .. '(' .. searchcount.current .. '/' .. total .. ')'
 end
 
+--- 文件状态标记: '+' 已修改, '-' 只读或不可改
+---@return string
 local function modified()
     if vim.bo.modified then
         return '+'
