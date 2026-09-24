@@ -1,3 +1,11 @@
+--- noice.lua
+--- noice.nvim: 命令行 / 消息 / LSP 文档(hover, signature)的 UI
+---
+--- 这里只写"与上游默认值不同"的配置; 与默认相同的项(messages / redirect / commands /
+--- presets / lsp.override / lsp.hover|signature|message / markdown / health / notify)
+--- 不再重复抄写, 需要时查 :help noice.nvim 与插件自带 README。
+--- 核对上游默认值: lua/noice/config/init.lua 的 defaults(), 以及 config/views.lua。
+
 vim.cmd.packadd('nui.nvim')
 -- nvim-notify 是可选的通知后端: 不装也能跑 —— noice 的 views.notify 后端列表是
 -- { 'snacks', 'notify' } 且自带 fallback = 'mini', 两条路都没有时用内置 mini 视图
@@ -17,160 +25,27 @@ end
 
 require('noice').setup({
     cmdline = {
-        enabled = true,
-        view = 'cmdline_popup',
-        opts = {},
+        -- 只换图标, 其余(pattern / lang / conceal / title)沿用默认值
         format = {
-            cmdline = { pattern = '^:', icon = '$', lang = 'vim' },
-            search_down = { kind = 'search', pattern = '^/', icon = ' ', lang = 'regex' },
-            search_up = { kind = 'search', pattern = '^%?', icon = ' ', lang = 'regex' },
-            filter = { pattern = '^:%s*!', icon = '$', lang = 'bash' },
-            lua = { pattern = { '^:%s*lua%s+', '^:%s*lua%s*=%s*', '^:%s*=%s*' }, icon = '', lang = 'lua' },
-            help = { pattern = '^:%s*he?l?p?%s+', icon = '' },
-            input = { view = 'cmdline_input', icon = '󰥻 ' },
+            cmdline = { icon = '$' },
+            -- 上游 help 图标是 nerd-font 的“帮助”字形, 这里保留原来那个(问号书本)图标;
+            -- 用字节转义写死(UTF-8 EF 9F 95), 避免工具链/编辑器改动字形
+            help = { icon = '\239\159\149' },
         },
     },
 
-    messages = {
-        enabled = true,
-        view = 'notify',
-        view_error = 'notify',
-        view_warn = 'notify',
-        view_history = 'messages',
-        view_search = 'virtualtext',
-    },
-
+    -- 补全菜单交给原生 vim.lsp.completion(见 settings/lsp.lua), 关掉 noice 的覆盖
     popupmenu = {
         enabled = false,
-        -- backend = 'nui',
-        -- kind_icons = {},
-    },
-
-    redirect = {
-        view = 'popup',
-        filter = { event = 'msg_show' },
-    },
-
-    commands = {
-        history = {
-            view = 'split',
-            opts = { enter = true, format = 'details' },
-            filter = {
-                any = {
-                    { event = 'notify' },
-                    { error = true },
-                    { warning = true },
-                    { event = 'msg_show', kind = { '' } },
-                    { event = 'lsp',      kind = 'message' },
-                },
-            },
-        },
-        last = {
-            view = 'popup',
-            opts = { enter = true, format = 'details' },
-            filter = {
-                any = {
-                    { event = 'notify' },
-                    { error = true },
-                    { warning = true },
-                    { event = 'msg_show', kind = { '' } },
-                    { event = 'lsp',      kind = 'message' },
-                },
-            },
-            filter_opts = { count = 1 },
-        },
-        errors = {
-            view = 'popup',
-            opts = { enter = true, format = 'details' },
-            filter = { error = true },
-            filter_opts = { reverse = true },
-        },
-        all = {
-            view = 'split',
-            opts = { enter = true, format = 'details' },
-            filter = {},
-        },
-    },
-
-    notify = {
-        enabled = true,
-        view = 'notify',
     },
 
     lsp = {
-        progress = {
-            enabled = true,
-            format = 'lsp_progress',
-            format_done = 'lsp_progress_done',
-            throttle = 1000 / 30,
-            view = 'mini',
-        },
-        override = {
-            ['vim.lsp.util.convert_input_to_markdown_lines'] = false,
-            ['vim.lsp.util.stylize_markdown'] = false,
-            ['cmp.entry.get_documentation'] = false,
-        },
-        hover = {
-            enabled = true,
-            silent = false,
-            view = nil,
-            opts = {},
-        },
-        signature = {
-            enabled = true,
-            auto_open = {
-                enabled = true,
-                trigger = true,
-                throttle = 50,
-            },
-            view = nil,
-            opts = {},
-        },
-        message = {
-            enabled = true,
-            view = 'notify',
-            opts = {},
-        },
+        -- hover / signature 浮窗里用 treesitter 的 markdown 解析做高亮:
+        -- noice 的 view 层会读这个 lang 去调 vim.treesitter.start(view/init.lua)
         documentation = {
-            view = 'hover',
-            opts = {
-                lang = 'markdown',
-                replace = true,
-                render = 'plain',
-                format = { '{message}' },
-                win_options = { concealcursor = 'n', conceallevel = 3 },
-            },
+            opts = { lang = 'markdown' },
         },
     },
-
-    markdown = {
-        hover = {
-            ['|(%S-)|'] = vim.cmd.help,
-            ['%[.-%]%((%S-)%)'] = require('noice.util').open,
-        },
-        highlights = {
-            ['|%S-|'] = '@text.reference',
-            ['@%S+'] = '@parameter',
-            ['^%s*(Parameters:)'] = '@text.title',
-            ['^%s*(Return:)'] = '@text.title',
-            ['^%s*(See also:)'] = '@text.title',
-            ['{%S-}'] = '@parameter',
-        },
-    },
-
-    health = {
-        checker = true,
-    },
-
-    presets = {
-        bottom_search = false,
-        command_palette = false,
-        long_message_to_split = false,
-        inc_rename = false,
-        lsp_doc_border = false,
-    },
-
-    throttle = 1000 / 30,
 
     -- 搜索计数已经在 lualine 的 search_result() 里显示; 上游默认还会往 virtualtext
     -- 视图送一份, 这里跳过以免重复(官方 doc ROUTES 一节的做法)
@@ -207,27 +82,15 @@ require('noice').setup({
 local cmdline_border_fg = colors.frost3
 
 local function set_noice_hls()
-    vim.api.nvim_set_hl(0, 'NoiceCmdlinePopup', { bg = keep_transparent and 'NONE' or nil, fg = search_border_fg })
-    vim.api.nvim_set_hl(0, 'NoiceCmdlineIcon', { bg = keep_transparent and 'NONE' or nil, fg = search_border_fg })
-    vim.api.nvim_set_hl(0, 'NoiceCmdlinePrompt',
-        { bg = keep_transparent and 'NONE' or nil, fg = search_border_fg, bold = true })
-    vim.api.nvim_set_hl(0, 'NoiceConfirm', { bg = keep_transparent and 'NONE' or nil, fg = search_border_fg })
-    vim.api.nvim_set_hl(0, 'NoiceError', { bg = keep_transparent and 'NONE' or nil, fg = search_border_fg })
-    vim.api.nvim_set_hl(0, 'NoiceWarn', { bg = keep_transparent and 'NONE' or nil, fg = search_border_fg })
-    vim.api.nvim_set_hl(0, 'NoiceCmdlinePopupBorder',
-        { fg = cmdline_border_fg, bg = keep_transparent and 'NONE' or nil })
-    vim.api.nvim_set_hl(0, 'NoicePopupBorder', { fg = search_border_fg, bg = keep_transparent and 'NONE' or nil })
-    vim.api.nvim_set_hl(0, 'NoicePopupmenuBorder', { fg = search_border_fg, bg = keep_transparent and 'NONE' or nil })
-    vim.api.nvim_set_hl(0, 'NoiceSplitBorder', { fg = search_border_fg, bg = keep_transparent and 'NONE' or nil })
+    vim.api.nvim_set_hl(0, 'NoiceCmdlinePopupBorder', { fg = cmdline_border_fg })
 end
 
 set_noice_hls()
 vim.api.nvim_create_autocmd('ColorScheme', {
-    callback = function()
-        set_noice_hls()
-    end,
+    callback = set_noice_hls,
 })
 
+-- 键位与描述见 keys/windows/float_window.lua, 这里只写行为
 local map = require('utils.map').map
 local keys = require('keys.windows.float_window')
 
