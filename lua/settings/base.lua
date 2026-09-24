@@ -1,8 +1,5 @@
 --- settings-base.lua
 
--- 设置字体
-vim.opt.guifont = 'JetBrainsMono Nerd Font:h16'
-
 -- 字体编码
 -- 自动识别文件编码优先级
 vim.opt.fileencodings = { "utf-8", "gbk", "gb2312", "ucs-2le", "latin1" }
@@ -12,11 +9,8 @@ vim.opt.fileformats = { "unix", "dos", "mac" }
 -- 禁用默认的启动界面
 vim.opt.shortmess:append('I')
 
--- 配置语法高亮
+-- 文件类型/缩进插件(Neovim 默认已开语法高亮与类型检测, 不必再写 syntax on / filetype on)
 vim.cmd('filetype plugin indent on')
-vim.cmd('filetype on') -- 文档类型自动检测
-vim.cmd('syntax on')
-
 
 -- Hint: use `:h <option>` to figure out the meaning if needed
 -- vim.opt.clipboard = 'unnamedplus'                       -- 使用系统剪贴板
@@ -67,8 +61,8 @@ vim.opt.hlsearch = true   -- 开启高亮搜索匹配结果
 vim.opt.ignorecase = true -- 搜索时忽略大小写
 vim.opt.smartcase = true  -- 如果搜索包含大写字母，则不忽略大小写
 
--- 设置光标跳转逻辑
-vim.opt.jumpoptions = "stack"
+-- 跳转行为: 追加 stack, 不改默认的 clean(跳转时清理同文件旧位置的标记)
+vim.opt.jumpoptions:append('stack')
 
 -- 设置打印机模式
 vim.opt.scrolloff = 10
