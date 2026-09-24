@@ -114,8 +114,6 @@ require('lualine').setup({
         -- 用 %v(屏幕列)而不是 %c(字节列): 中英文混排时 %c 的数会和肉眼位置对不上
         lualine_z = { '%l:%v', '%p%%/%L' },
     }),
-    inactive_sections = {
-        lualine_c = { '%f %y %m' },
-        lualine_x = {},
-    },
+    -- 不需要 inactive_sections: base.lua 里 laststatus = 3(全局状态栏),
+    -- lualine 会自动按 globalstatus 工作, 非活动分段不会出场
 })
