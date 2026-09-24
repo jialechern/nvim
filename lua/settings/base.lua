@@ -57,6 +57,9 @@ vim.opt.splitright = true    -- 打开新垂直分割时，新的窗口在右侧
 vim.opt.termguicolors = true -- 使用 24 bit rgb 颜色
 vim.opt.showmode = false     -- 是否显示模式（insert, normal 等）
 vim.opt.laststatus = 3       -- 全局状态栏
+vim.opt.showcmdloc = 'statusline' -- 半截命令(d / 2d / "a …)显示到状态栏的 %S 处
+                                  -- noice 会丢弃 showcmd 消息(它的 status.command 组件又有残留问题),
+                                  -- 交给原生 %S 最可靠; 对应的组件写在 plugins/lualine.lua
 
 -- Searching
 vim.opt.incsearch = true  -- search as characters are entered

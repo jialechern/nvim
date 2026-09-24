@@ -70,6 +70,28 @@ local function modified()
     return ''
 end
 
+-- noice 的状态栏组件: noice 会把 showcmd / showmode 消息从它的视图里跳过(skip route),
+-- 只有它自己的状态组件能把它们读回来。
+-- 这里只用于 mode —— 也就是宏录制提示("recording @q"): base.lua 关掉了 showmode,
+-- 而 nvim 在 reg_recording ~= 0 时仍会发该消息, 停止录制时会发空消息让 noice 清掉。
+-- 不用它取 command(showcmd): noice 只对 msg_showmode 做清理, showcmd 会残留上一条内容
+-- (上游 issue #1076 / #1209), 所以半截命令改由 base.lua 的 showcmdloc = 'statusline'
+-- 配合下面的 %S 组件显示。
+-- 必须延迟取值: 本文件比 plugins/noice.lua 先加载, 那时插件还没 packadd。
+local function noice_status(name)
+    return {
+        function()
+            return require('noice').api.status[name].get() or ''
+        end,
+        cond = function()
+            local ok, has = pcall(function()
+                return require('noice').api.status[name].has()
+            end)
+            return ok and has or false
+        end,
+    }
+end
+
 require('lualine').setup({
     options = {
         theme = theme,
@@ -109,7 +131,9 @@ require('lualine').setup({
             },
         },
         lualine_c = {},
-        lualine_x = {},
+        -- %S = 半截命令(由 base.lua 的 showcmdloc = 'statusline' 驱动), 空时自动跳过;
+        -- 后面是宏录制提示, 见上面 noice_status 的说明
+        lualine_x = { '%S', noice_status('mode') },
         lualine_y = { search_result, 'filetype' },
         -- 用 %v(屏幕列)而不是 %c(字节列): 中英文混排时 %c 的数会和肉眼位置对不上
         lualine_z = { '%l:%v', '%p%%/%L' },
