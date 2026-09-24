@@ -111,8 +111,6 @@ end
 require('lualine').setup({
     options = {
         theme = theme,
-        component_separators = '',
-        section_separators = { left = '', right = '' },
     },
     sections = process_sections({
         lualine_a = { 'mode' },
@@ -133,18 +131,10 @@ require('lualine').setup({
             },
             { 'filename', file_status = false,        path = 1 },
             { modified,   color = { bg = colors.red } },
-            {
-                '%w',
-                cond = function() return vim.wo.previewwindow end,
-            },
-            {
-                '%r',
-                cond = function() return vim.bo.readonly end,
-            },
-            {
-                '%q',
-                cond = function() return vim.bo.buftype == 'quickfix' end,
-            },
+            -- %w/%r/%q 在不适用时本来就渲染为空, 无需再写 cond
+            '%w',
+            '%r',
+            '%q',
         },
         lualine_c = {},
         -- %S = 半截命令(由 base.lua 的 showcmdloc = 'statusline' 驱动), 空时自动跳过;

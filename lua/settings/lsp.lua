@@ -11,9 +11,6 @@ local function setup_diagnostics()
             prefix = '', -- 诊断前缀图标
             spacing = 4,  -- 图标与文字间距
         },
-        signs = true,         -- 左侧符号栏显示诊断标记
-        underline = true,     -- 用下划线标出问题位置
-        update_in_insert = false, -- 插入模式下不刷诊断，减少干扰
         float = {
             border = 'rounded', -- 诊断浮窗圆角边框
         },

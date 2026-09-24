@@ -14,7 +14,6 @@ require('catppuccin').setup({
     -- 浮动窗口同样透明
     float = {
         transparent = true,
-        solid = false,
     },
 
     -- 同步调色板到终端颜色变量 g:terminal_color_0 ~ g:terminal_color_15
@@ -74,7 +73,6 @@ require('catppuccin').setup({
     color_overrides = {},
     custom_highlights = {},
 
-    default_integrations = true,
     -- auto 集成: 自动检测已装插件并开启对应集成(默认关, 这里显式打开)
     auto_integrations = true,
 
@@ -85,7 +83,7 @@ require('catppuccin').setup({
         -- (NoiceMini / NoiceFormatLevel*); 以后装 snacks.nvim 由 auto_integrations 接管
     },
 
-    compile_path = vim.fn.stdpath('cache') .. '/catppuccin',
+    -- 编译缓存路径与默认一致(stdpath('cache')/catppuccin), 不再重复声明
 })
 
 vim.cmd.colorscheme('catppuccin-mocha')

@@ -13,8 +13,7 @@ local actions = require('telescope.actions')
 
 telescope.setup({
     defaults = {
-        -- 布局: 对应原 fzf 的 down = '40%'(底部弹出, 预览在右侧)
-        layout_strategy = 'horizontal',
+        -- 布局: 底部弹出(anchor='S' 对应原 fzf 的 down = '40%'), 预览在右侧
         layout_config = {
             width = 0.9,
             height = 0.4,
@@ -22,9 +21,6 @@ telescope.setup({
             preview_width = 0.55,
         },
         sorting_strategy = 'ascending',
-        -- 圆角边框, 与全局 winborder = 'rounded' 保持一致
-        border = true,
-        borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
         -- 未安装 nvim-web-devicons, 不做图标着色(装上后可改成 true)
         color_devicons = false,
         -- 全局结果过滤: 带 filename 的 picker(含 live_grep)都会吃; Lua 模式按子串匹配(不加 ^ 才能挡住嵌套目录)

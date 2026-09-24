@@ -55,7 +55,8 @@ require('noice').setup({
         -- 写成 math.floor(vim.o.columns * 0.8) 只会在启动时求值一次, 之后改窗口大小不再跟随
         cmdline_popup = {
             position = { row = '30%', col = '50%' },
-            size = { width = '80%', height = 'auto' },
+            -- 百分比宽度会让上游默认的 min_width=60 失效(窄窗口下不再保底)
+            size = { width = '80%' },
         },
         popup = {
             size = { width = '50%', height = 'auto' },
