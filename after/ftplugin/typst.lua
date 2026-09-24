@@ -2,7 +2,8 @@
 --- 用于配置 typst 语言的快捷键映射
 
 -- 导入自定义的工具函数以及需要的符号
-local run_key = require('settings.variables.run').run_key
+local map = require('utils.map').map
+local keys = require('keys.run')
 
 -- 启用 lsp 服务器
 require('utils.lsp_enable').enable('tinymist')
@@ -10,7 +11,7 @@ require('utils.lsp_enable').enable('tinymist')
 -- 设置编译器
 vim.bo.makeprg = 'typst'
 
-vim.keymap.set('n', run_key, function()
+map(keys.run_file, function()
 	local root = vim.fs.root(0, { 'main.typ', 'typst.toml', '.git' })
 
 	local pdf_path
@@ -35,5 +36,5 @@ vim.keymap.set('n', run_key, function()
 
 	vim.fn.jobstart(zathura_cmd, { detach = true })
 	vim.notify("Zathura 预览: " .. vim.fn.fnamemodify(pdf_path, ":t"))
-end, { buffer = 0, desc = "Typst Smart Preview" })
+end, { buffer = 0 })
 

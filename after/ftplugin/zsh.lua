@@ -3,7 +3,7 @@
 
 -- 导入自定义的工具函数以及需要的符号
 local map = require('utils.map').map
-local run_key = require('settings.variables.run').run_key
+local keys = require('keys.run')
 
 -- 设置编译方式
 vim.bo.makeprg = 'zsh'
@@ -12,8 +12,8 @@ vim.bo.makeprg = 'zsh'
 vim.bo.formatprg = ''
 
 --- 自动编译运行
-map('n', run_key, function ()
+map(keys.run_file, function ()
     vim.cmd('silent write')
     vim.cmd('make %:p')
-end, { desc = '运行 zsh 脚本' })
+end, { buffer = 0 })
 

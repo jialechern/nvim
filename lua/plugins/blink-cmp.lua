@@ -17,7 +17,7 @@ local function setup_blink()
     vim.o.winborder = 'rounded'
 
     local blink = require('blink.cmp')
-    local get_key = require('settings.variables.lsp').get_key
+    local keys = require('keys.lsp')
 
     -- 统一设置 blink.cmp 的高亮组
     -- 这里尽量跟随当前配色，而不是写死一堆颜色
@@ -239,15 +239,15 @@ local function setup_blink()
     -- 按键映射
     opts.keymap = {
         preset = 'none',
-        [get_key('open-hint')] = { 'show', 'show_documentation', 'hide_documentation' },
+        [keys.open_hint.lhs] = { 'show', 'show_documentation', 'hide_documentation' },
         ['<C-p>'] = { 'scroll_documentation_up', 'fallback' },
         ['<C-n>'] = { 'scroll_documentation_down', 'fallback' },
-        [get_key('close-hint')] = { 'hide' },
+        [keys.close_hint.lhs] = { 'hide' },
         ['<Tab>'] = { 'accept', 'fallback' },
         ['<C-k>'] = { 'select_prev', 'fallback' },
         ['<C-j>'] = { 'select_next', 'fallback' },
-        [get_key('snippet_forward')] = { 'snippet_forward', 'fallback' },
-        [get_key('snippet_backward')] = { 'snippet_backward', 'fallback' },
+        [keys.snippet_forward.lhs] = { 'snippet_forward', 'fallback' },
+        [keys.snippet_backward.lhs] = { 'snippet_backward', 'fallback' },
     }
 
     -- 签名提示

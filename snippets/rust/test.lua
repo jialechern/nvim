@@ -16,7 +16,7 @@ local fmt = require('luasnip.extras.fmt').fmt
 local module = {}
 
 --- 测试模块
-local test_key = require('settings.variables.test').test_key
+local test_key = require('settings.consts').test_key
 module[#module+1] = s({
     trig = test_key,
     -- wordTrig  = true,

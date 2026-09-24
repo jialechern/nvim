@@ -3,7 +3,7 @@
 
 -- 导入自定义的工具函数以及需要的符号
 local map = require('utils.map').map
-local run_key = require('settings.variables.run').run_key
+local keys = require('keys.run')
 
 
 -- 让 haskell 启用 lsp 服务
@@ -23,8 +23,8 @@ vim.bo.makeprg = 'ghc'
 vim.bo.formatprg = 'ormolu --stdin-input-source %'
 
 --- 自动运行
-map('n', run_key, function ()
+map(keys.run_file, function ()
     vim.cmd('silent write')
     vim.cmd('make %:p')
-end, { desc = '运行 haskell 语言文件' })
+end, { buffer = 0 })
 

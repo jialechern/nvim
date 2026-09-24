@@ -1,27 +1,25 @@
--- split.lua
--- 控制分屏
+--- split.lua
+--- 分屏操作映射 (键位与描述见 lua/keys/windows/split.lua)
 
--- 导入自定义工具函数与需要的符号
 local map = require('utils.map').map
-local get_key = require('settings.variables.windows.split').get_key
+local keys = require('keys.windows.split')
 
-map('n', get_key('up'), function ()
+map(keys.up, function()
     vim.cmd('set nosplitbelow')
     vim.cmd('split')
-end, { desc = "向上分屏" })
+end)
 
-map('n', get_key('down'), function ()
+map(keys.down, function()
     vim.cmd('set splitbelow')
     vim.cmd('split')
-end, { desc = "向下分屏" })
+end)
 
-map('n', get_key('left'), function ()
+map(keys.left, function()
     vim.cmd('set nosplitright')
     vim.cmd('vsplit')
-end, { desc = "向左分屏" })
+end)
 
-map('n', get_key('right'), function ()
+map(keys.right, function()
     vim.cmd('set splitright')
     vim.cmd('vsplit')
-end, { desc = "向右分屏" })
-
+end)

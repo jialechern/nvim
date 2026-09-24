@@ -1,24 +1,22 @@
--- size.lua
--- 控制窗口大小
+--- size.lua
+--- 窗口尺寸调整映射 (键位与描述见 lua/keys/windows/size.lua)
 
--- 导入自定义工具函数与需要的符号
 local map = require('utils.map').map
-local get_key = require('settings.variables.windows.size').get_key
-local size = require('settings.variables.windows.size').size
+local keys = require('keys.windows.size')
+local step = require('settings.consts').window_resize_step
 
-map('n', get_key('left'), function ()
-    vim.cmd('vertical resize -' .. size)
-end, { desc = "纵向分屏分界线左移" })
+map(keys.left, function()
+    vim.cmd('vertical resize -' .. step)
+end)
 
-map('n', get_key('right'), function ()
-    vim.cmd('vertical resize +' .. size)
-end, { desc = "纵向分屏分界线右移" })
+map(keys.right, function()
+    vim.cmd('vertical resize +' .. step)
+end)
 
-map('n', get_key('up'), function ()
-    vim.cmd('resize +' .. size)
-end, { desc = "横向分屏分界线上移" })
+map(keys.up, function()
+    vim.cmd('resize +' .. step)
+end)
 
-map('n', get_key('down'), function ()
-    vim.cmd('resize -' .. size)
-end, { desc = "横向分屏分界线下移" })
-
+map(keys.down, function()
+    vim.cmd('resize -' .. step)
+end)

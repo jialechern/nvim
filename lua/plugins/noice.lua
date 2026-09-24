@@ -5,8 +5,8 @@ function M.setup()
     vim.cmd.packadd('nvim-notify')
     vim.cmd.packadd('noice.nvim')
 
-    -- 倒入颜色设置
-    local colors = require('settings.variables.colors')
+    -- 导入颜色设置
+    local colors = require('settings.consts').colors
 
     -- 先初始化 notify
     local has_notify, notify = pcall(require, 'notify')
@@ -254,13 +254,12 @@ function M.setup()
         end,
     })
 
-    local float_window_leader = require('settings.variables.windows.float-window').float_window_leader
-    vim.keymap.set('n', float_window_leader .. 'l', function() require('noice').cmd('last') end,
-        { desc = 'Noice Last Message' })
-    vim.keymap.set('n', float_window_leader .. 'h', function() require('noice').cmd('history') end,
-        { desc = 'Noice History' })
-    vim.keymap.set('n', float_window_leader .. 'd', function() require('noice').cmd('dismiss') end,
-        { desc = 'Dismiss All Notifications' })
+    local map = require('utils.map').map
+    local keys = require('keys.windows.float_window')
+
+    map(keys.last_message, function() require('noice').cmd('last') end)
+    map(keys.history, function() require('noice').cmd('history') end)
+    map(keys.dismiss, function() require('noice').cmd('dismiss') end)
 end
 
 return M

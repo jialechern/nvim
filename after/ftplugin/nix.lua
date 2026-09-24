@@ -3,7 +3,7 @@
 
 -- 导入自定义的工具函数以及需要的符号
 local map = require('utils.map').map
-local run_key = require('settings.variables.run').run_key
+local keys = require('keys.run')
 
 -- 让 nix 文件启用 nixd
 require('utils.lsp_enable').enable('nixd')
@@ -22,9 +22,9 @@ vim.bo.makeprg = ''
 vim.bo.formatprg = 'nixpkgs-fmt'
 
 --- 自动运行
-map('n', run_key, function ()
+map(keys.run_file, function ()
     vim.cmd('silent write')
     local username = vim.fn.input('设定 username 为: ', '')
     vim.cmd('make .#' .. username)
-end, { desc = '运行 nix 语言文件' })
+end, { buffer = 0 })
 

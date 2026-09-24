@@ -50,85 +50,41 @@ function M.setup()
     }
 
     -- --- --- --- 键位 --- --- ---
-    local get_key = require('settings.variables.fuzzy-finder').get_key
+    local map = require('utils.map').map
+    local keys = require('keys.fuzzy_finder')
 
-    vim.keymap.set('n', get_key('changes'), function() vim.cmd('Changes') end, { desc = 'FZF: Changes' })
-    vim.keymap.set('n', get_key('search'), function() vim.cmd('History/') end, { desc = 'FZF: Search(History/)' })
-    vim.keymap.set('n', get_key('marks'), function() vim.cmd('Marks') end, { desc = 'FZF: Marks' })
-    vim.keymap.set('n', get_key('windows'), function() vim.cmd('Windows') end, { desc = 'FZF: Windows' })
-    vim.keymap.set('n', get_key('snippets'), function() vim.cmd('Snippets') end, { desc = 'FZF: Snippets' })
-    vim.keymap.set('n', get_key('jumps'), function() vim.cmd('Jumps') end, { desc = 'FZF: Jumps' })
-    vim.keymap.set('n', get_key('marks-in-buffers'), function() vim.cmd('BMarks') end,
-        { desc = 'FZF: Marks in buffers(BMarks)' })
-    vim.keymap.set('n', get_key('files'), function() vim.cmd('Files') end, { desc = 'FZF: Files' })
+    map(keys.changes, function() vim.cmd('Changes') end)
+    map(keys.search, function() vim.cmd('History/') end)
+    map(keys.marks, function() vim.cmd('Marks') end)
+    map(keys.windows, function() vim.cmd('Windows') end)
+    map(keys.snippets, function() vim.cmd('Snippets') end)
+    map(keys.jumps, function() vim.cmd('Jumps') end)
+    map(keys.marks_in_buffers, function() vim.cmd('BMarks') end)
+    map(keys.files, function() vim.cmd('Files') end)
 
-    vim.keymap.set('n', get_key('files-by-path'), function()
+    map(keys.files_by_path, function()
         local path = fn.input('请输入搜寻的路径: ', fn.getcwd(), 'dir')
         vim.cmd('Files ' .. fn.fnameescape(path))
-    end, { desc = 'FZF: Files by path' })
+    end)
 
     if has_rg then
-        vim.keymap.set('n', get_key('rg'), function() vim.cmd('Rg') end, { desc = 'FZF: Rg (live grep)' })
+        map(keys.rg, function() vim.cmd('Rg') end)
     else
-        vim.keymap.set('n', get_key('rg'), function() vim.cmd('Files') end, { desc = 'FZF: Files fallback' })
+        map(keys.rg, function() vim.cmd('Files') end)
     end
 
-    vim.keymap.set('n', get_key('buffers'), function() vim.cmd('Buffers') end, { desc = 'FZF: Buffers' })
-    vim.keymap.set('n', get_key('history'), function() vim.cmd('History') end, { desc = 'FZF: History' })
-    vim.keymap.set('n', get_key('commands'), function() vim.cmd('Commands') end, { desc = 'FZF: Commands' })
-    vim.keymap.set('n', get_key('lines'), function() vim.cmd('Lines') end, { desc = 'FZF: Lines' })
-    vim.keymap.set('n', get_key('lines-in-buffers'), function() vim.cmd('BLines') end, { desc = 'FZF: BLines' })
-    vim.keymap.set('n', get_key('tags'), function() vim.cmd('Tags') end, { desc = 'FZF: Tags' })
-    vim.keymap.set('n', get_key('tags-in-current-buffer'), function() vim.cmd('BTags') end, { desc = 'FZF: BTags' })
+    map(keys.buffers, function() vim.cmd('Buffers') end)
+    map(keys.history, function() vim.cmd('History') end)
+    map(keys.commands, function() vim.cmd('Commands') end)
+    map(keys.lines, function() vim.cmd('Lines') end)
+    map(keys.lines_in_buffers, function() vim.cmd('BLines') end)
+    map(keys.tags, function() vim.cmd('Tags') end)
+    map(keys.tags_in_current_buffer, function() vim.cmd('BTags') end)
 
     if fn.exists(':GFiles') == 2 then
-        vim.keymap.set('n', get_key('files-in-git-repo'), function() vim.cmd('GFiles') end, { desc = 'FZF: Git files' })
+        map(keys.files_in_git_repo, function() vim.cmd('GFiles') end)
     end
 
-    vim.keymap.set('n', get_key('help'), function()
-        local help_text = [[
-fuzzy-finder 快捷键帮助手册:
-    %s : 在当前路径使用 fzf 查找文件
-    %s : 在指定路径使用 fzf 查找文件
-    %s : 使用 ripgrep (rg) 进行模糊搜索(若未安装 rg 则回退到 :Files)
-    %s : 列出并切换缓冲区
-    %s : 列出命令/搜索历史
-    %s : 列出并执行命令
-    %s : 在当前缓冲区内模糊查找行
-    %s : 在所有缓冲区内模糊查找行
-    %s : 列出当前 git 仓库内的文件(若有)
-    %s : 列出并查看更改的文件(Changes)
-    %s : 列出所有标记(Marks)
-    %s : 列出所有缓冲区内的标记(BMarks)
-    %s : 列出并搜索 命令/搜索历史 (History/)
-    %s : �
-��出并插入代码片段(Snippets)
-    %s : 列出并切换窗口(Windows)
-    %s : 列出跳转位置(Jumps)
-    %s : 列出所有标签(Tags)
-    %s : 列出当前缓冲区内的标签(BTags)
-    ]]
-        vim.notify(help_text:format(
-            get_key('files'),
-            get_key('files-by-path'),
-            get_key('rg'),
-            get_key('buffers'),
-            get_key('history'),
-            get_key('commands'),
-            get_key('lines'),
-            get_key('lines-in-buffers'),
-            get_key('files-in-git-repo'),
-            get_key('changes'),
-            get_key('marks'),
-            get_key('marks-in-buffers'),
-            get_key('search'),
-            get_key('snippets'),
-            get_key('windows'),
-            get_key('jumps'),
-            get_key('tags'),
-            get_key('tags-in-current-buffer')
-        ), vim.log.levels.INFO, { title = 'fuzzy-finder 快捷键帮助' })
-    end, { desc = 'fuzzy-finder: Help' })
 
     -- --- --- --- 自定义命令 --- --- ---
     api.nvim_create_user_command('RgVisual', function()

@@ -1,34 +1,31 @@
--- status.lua
--- 控制分屏窗口状态
+--- status.lua
+--- 分屏布局调整映射 (键位与描述见 lua/keys/windows/status.lua)
 
--- 导入自定义工具函数与需要的符号
 local map = require('utils.map').map
-local get_key = require('settings.variables.windows.status').get_key
+local keys = require('keys.windows.status')
 
-map('n', get_key('V'), function ()
+map(keys.to_vertical, function()
     vim.cmd('wincmd t')
     vim.cmd('wincmd H')
-end, { desc = "更改横向分屏为纵向" })
+end)
 
-map('n', get_key('H'), function ()
+map(keys.to_horizontal, function()
     vim.cmd('wincmd t')
     vim.cmd('wincmd K')
-end, { desc = "更改纵向分屏为横向" })
+end)
 
-map('n', get_key('up'), function ()
+map(keys.up, function()
     vim.cmd('wincmd K')
-end, { desc = "将当前分屏移至最上" })
+end)
 
-map('n', get_key('down'), function ()
+map(keys.down, function()
     vim.cmd('wincmd J')
-end, { desc = "将当前分屏移至最下" })
+end)
 
-map('n', get_key('left'), function ()
+map(keys.left, function()
     vim.cmd('wincmd H')
-end, { desc = "将当前分屏移至最左" })
+end)
 
-map('n', get_key('right'), function ()
+map(keys.right, function()
     vim.cmd('wincmd L')
-end, { desc = "将当前分屏移至最右" })
-
-
+end)

@@ -3,7 +3,7 @@ local M = {}
 function M.setup()
     vim.cmd.packadd('lualine.nvim')
 
-    local colors = require('settings.variables.colors')
+    local colors = require('settings.consts').colors
 
     -- 基于 Catppuccin Mocha 调色板的状态栏主题
     -- 每一段都定义了 fg（前景/文字色）和 bg（背景/底色），gui 用于加粗

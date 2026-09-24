@@ -26,60 +26,49 @@ local lsp_group = vim.api.nvim_create_augroup('lsp-attach', { clear = true })
 vim.api.nvim_create_autocmd('LspAttach', {
     group = lsp_group,
     callback = function(event)
-        -- 导入自定义工具函数与需要的符号
+        -- 映射统一走 utils.map, 键位与描述见 keys/lsp.lua
         local map = require('utils.map').map
-        local get_key = require('settings.variables.lsp').get_key
-        local lsp_leader = require('settings.variables.lsp').lsp_leader
+        local keys = require('keys.lsp')
 
-        -- 当前 buffer
+        -- 当前 buffer 与 attach 的 LSP 客户端
         local bufnr = event.buf
-
-        -- 当前缓冲区绑定的 LSP 客户端
         local client = vim.lsp.get_client_by_id(event.data.client_id)
-
-        -- 统一封装 buffer-local 映射
-        local function bufmap(mode, lhs, rhs, desc)
-            vim.keymap.set(mode, lhs, rhs, {
-                buffer = bufnr,
-                silent = true,
-                desc = desc,
-            })
-        end
+        local opts = { buffer = bufnr }
 
         -- --- --- --- LSP 核心功能 --- --- ---
-        bufmap('n', get_key('format'), function()
+        map(keys.format, function()
             -- 手动格式化
             vim.lsp.buf.format({ async = true })
             vim.notify('代码已格式化', vim.log.levels.INFO, { title = 'LSP' })
-        end, '手动触发格式化')
+        end, opts)
 
-        bufmap('n', get_key('goto-def'), vim.lsp.buf.definition, '跳转到定义')
-        bufmap('n', get_key('goto-dec'), vim.lsp.buf.declaration, '跳转到声明')
-        bufmap('n', get_key('goto-ref'), vim.lsp.buf.references, '查找引用')
-        bufmap('n', get_key('goto-impl'), vim.lsp.buf.implementation, '跳转到实现')
-        bufmap('n', get_key('show-doc'), vim.lsp.buf.hover, '悬停文档')
-        bufmap('n', get_key('rename'), vim.lsp.buf.rename, '重命名符号')
-        bufmap('n', get_key('code-action'), vim.lsp.buf.code_action, '代码操作')
+        map(keys.goto_def, vim.lsp.buf.definition, opts)
+        map(keys.goto_dec, vim.lsp.buf.declaration, opts)
+        map(keys.goto_ref, vim.lsp.buf.references, opts)
+        map(keys.goto_impl, vim.lsp.buf.implementation, opts)
+        map(keys.show_doc, vim.lsp.buf.hover, opts)
+        map(keys.rename, vim.lsp.buf.rename, opts)
+        map(keys.code_action, vim.lsp.buf.code_action, opts)
 
         -- 诊断跳转
-        bufmap('n', get_key('goto-next-diag'), vim.diagnostic.goto_next, '下一个诊断')
-        bufmap('n', get_key('goto-prev-diag'), vim.diagnostic.goto_prev, '上一个诊断')
+        map(keys.goto_next_diag, vim.diagnostic.goto_next, opts)
+        map(keys.goto_prev_diag, vim.diagnostic.goto_prev, opts)
 
         -- 打开诊断浮窗: 0.12 里浮窗会显示更完整的诊断相关信息
-        bufmap('n', get_key('doc-in-new-window'), function()
+        map(keys.doc_in_new_window, function()
             vim.diagnostic.open_float({
                 source = true,   -- 显示来源
                 border = 'rounded',
             })
-        end, '使用新窗口打开诊断信息(Long Documents)')
+        end, opts)
 
         -- 推送当前 buffer 诊断到 location list
-        bufmap('n', get_key('setloclist'), vim.diagnostic.setloclist, '推送诊断到列表')
+        map(keys.setloclist, vim.diagnostic.setloclist, opts)
 
         -- --- --- --- 诊断开关 --- --- ---
         -- 使用官方诊断开关，而不是反复改 config
         local diagnostics_enabled = true
-        bufmap('n', get_key('doc'), function()
+        map(keys.doc, function()
             diagnostics_enabled = not diagnostics_enabled
             vim.diagnostic.enable(diagnostics_enabled)
             if diagnostics_enabled then
@@ -87,7 +76,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
             else
                 vim.notify('诊断信息已关闭', vim.log.levels.INFO, { title = 'LSP' })
             end
-        end, '开/关 诊断信息')
+        end, opts)
 
         -- --- --- --- 折叠 --- --- ---
         -- 如果 LSP 支持 foldingRange, 就优先用 LSP 折叠
@@ -100,58 +89,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
         -- --- --- --- 参数提示(inlay hints) --- --- ---
         if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
-            bufmap('n', get_key('type-hint'), function()
+            map(keys.type_hint, function()
                 local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
                 vim.lsp.inlay_hint.enable(not enabled, { bufnr = bufnr })
-            end, '开/关 参数提示')
+            end, opts)
         end
-
-        -- --- --- --- LSP 帮助 --- --- ---
-        bufmap('n', get_key('help'), function()
-            local help_text = [[
-LSP 快捷键帮助手册:
-    %s : 跳转到定义
-    %s : 跳转到声明
-    %s : 查找引用
-    %s : 跳转到实现
-    %s : 悬停文档
-    %s : 重命名符号
-    %s : 代码操作
-    %s : 下一个诊断
-    %s : 上一个诊断
-    %s : 使用新窗口打开诊断信息(Long Documents)
-    %s : 推送诊断到列表
-    %s : 开/关 参数提示
-    %s : 开/关 诊断信息
-    %s : 打开补全菜单
-    %s : 关闭补全菜单
-    %s : 跳转到下一个 snippet 节点
-    %s : 跳转到上一个 snippet 节点
-    %s : 切换 snippet 的枚举节点的选项
-    %s : 清空当前的 snippet 标识
-            ]]
-            vim.notify(help_text:format(
-                get_key('goto-def'),
-                get_key('goto-dec'),
-                get_key('goto-ref'),
-                get_key('goto-impl'),
-                get_key('show-doc'),
-                get_key('rename'),
-                get_key('code-action'),
-                get_key('goto-next-diag'),
-                get_key('goto-prev-diag'),
-                get_key('doc-in-new-window'),
-                get_key('setloclist'),
-                get_key('type-hint'),
-                get_key('doc'),
-                get_key('open-hint'),
-                get_key('close-hint'),
-                get_key('snippet_forward'),
-                get_key('snippet_backward'),
-                get_key('snippet_choice'),
-                get_key('snippet_clear')
-            ), vim.log.levels.INFO, { title = lsp_leader .. ' LSP 帮助' })
-        end, 'LSP 帮助')
 
         -- --- --- --- 文档高亮 --- --- ---
         -- 0.12 的 LspAttach 很适合做这种 buffer-local 行为

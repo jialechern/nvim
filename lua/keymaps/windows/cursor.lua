@@ -1,23 +1,21 @@
--- cursor.lua
--- 控制光标在不同窗口间的移动
+--- cursor.lua
+--- 分屏间光标移动映射 (键位与描述见 lua/keys/windows/cursor.lua)
 
--- 导入自定义工具函数与需要的符号
 local map = require('utils.map').map
-local get_key = require('settings.variables.windows.cursor').get_key
+local keys = require('keys.windows.cursor')
 
-map('n', get_key('left'), function ()
+map(keys.left, function()
     vim.cmd('wincmd h')
-end, { desc = "分屏时光标左移" })
+end)
 
-map('n', get_key('right'), function ()
+map(keys.right, function()
     vim.cmd('wincmd l')
-end, { desc = "分屏时光标右移" })
+end)
 
-map('n', get_key('up'), function ()
+map(keys.up, function()
     vim.cmd('wincmd k')
-end, { desc = "分屏时光标上移" })
+end)
 
-map('n', get_key('down'), function ()
+map(keys.down, function()
     vim.cmd('wincmd j')
-end, { desc = "分屏时光标下移" })
-
+end)

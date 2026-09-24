@@ -1,5 +1,5 @@
 -- windows.lua
--- 放置分屏管理的快捷键配置
+-- 放置分屏管理的快捷键配置 (键位与描述见 lua/keys/windows/)
 
 -- 基本分屏功能
 require('keymaps.windows.split')
@@ -12,7 +12,3 @@ require('keymaps.windows.size')
 
 -- 分屏状态控制
 require('keymaps.windows.status')
-
--- 显示分屏快捷键文档
-require('keymaps.windows.help')
-

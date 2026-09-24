@@ -35,7 +35,7 @@ vim.opt.relativenumber = true -- 开启相对行号
 vim.opt.cursorline = true     -- 显示光标所在行
 vim.opt.cursorcolumn = true   -- 高亮显示光标所在列
 
-local colors = require('settings.variables.colors')
+local colors = require('settings.consts').colors
 -- 设置行高亮
 vim.api.nvim_set_hl(0, 'CursorLine', { bg = colors.bg1 })
 -- 设置列高亮

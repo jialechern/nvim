@@ -3,7 +3,7 @@
 
 -- 导入自定义的工具函数以及需要的符号
 local map = require('utils.map').map
-local run_key = require('settings.variables.run').run_key
+local keys = require('keys.run')
 
 -- 让 rust 文件启用 rust_analyzer
 require('utils.lsp_enable').enable('rust_analyzer')
@@ -21,8 +21,8 @@ vim.bo.makeprg = 'cargo'
 vim.bo.formatprg = 'rustfmt --emit stdout'
 
 --- 自动编译运行
-map('n', run_key, function ()
+map(keys.run_file, function ()
     vim.cmd('silent write')
     vim.cmd('make run')
-end, { desc = '编译运行 rust 项目' })
+end, { buffer = 0 })
 
