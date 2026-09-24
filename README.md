@@ -2,9 +2,10 @@
 ## 使用说明
 - 经典用法: 将仓库克隆到 `~/.config/nvim`
 - 使用 NixOS: 将仓库克隆到 `/etc/nixos/modules/nvim`
+- 本机(NixOS)流程: 插件与语言服务器都由 home-manager 声明(见 `/etc/nixos/home/shell/nvim.nix`), 维护与验证姿势见 `AGENTS.md`; 下面 "如果不是使用 NixOS" 里的 pacman / Mason / tree-sitter-cli 段落只是通用历史说明, 不是本机步骤。
 ### 插件依赖的配置(如果不是使用 NixOS)
 
-- 通过一下方式可以自检插件的依赖是否满足
+- 通过以下方式可以自检插件的依赖是否满足
 
     进入 `nvim` 运行 `:checkhealth` 可以检查所有插件的依赖是否满足.
     也可以通过 `:checkhealth <plugin_name>` 来检查某个插件的依赖. 
