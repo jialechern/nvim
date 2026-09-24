@@ -67,7 +67,10 @@ vim.opt.jumpoptions:append('stack')
 -- 设置打印机模式
 vim.opt.scrolloff = 10
 
--- 设置自动保存折叠信息
+-- 视图只保存折叠: cursor/curdir 交给其它机制(见 autocmds.lua 的 last_loc)
+vim.opt.viewoptions = 'folds'
+
+-- 自动保存/恢复折叠信息
 local fold_group = vim.api.nvim_create_augroup('remember_folds', { clear = true })
 vim.api.nvim_create_autocmd('BufWinLeave', {
     group = fold_group,
