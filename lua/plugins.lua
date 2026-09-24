@@ -17,18 +17,13 @@
 ---   telescope-fzf-native.nvim    telescope-fzf-native-nvim
 --- 核对方法: ls ~/.local/share/nvim/site/pack/hm/opt
 
-local M = {}
-
-function M.setup()
-    -- 调用顺序即加载顺序, 不要随手挪动
-    require('plugins.colorscheme').setup() -- 主题最先, 否则高亮会被后加载的插件覆盖
-    require('plugins.nvim-treesitter').setup()
-    require('plugins.nvim-lspconfig').setup()
-    require('plugins.telescope').setup()
-    require('plugins.snippets').setup()
-    require('plugins.lualine').setup()
-    require('plugins.noice').setup()
-    require('plugins.vim-easy-align').setup()
-end
-
-return M
+-- 调用顺序即加载顺序, 不要随手挪动。
+-- 每个 plugins/<name>.lua 被 require 时直接执行(先 packadd 再配置), 没有 setup() 壳
+require('plugins.colorscheme') -- 主题最先, 否则高亮会被后加载的插件覆盖
+require('plugins.nvim-treesitter')
+require('plugins.nvim-lspconfig')
+require('plugins.telescope')
+require('plugins.snippets')
+require('plugins.lualine')
+require('plugins.noice')
+require('plugins.vim-easy-align')

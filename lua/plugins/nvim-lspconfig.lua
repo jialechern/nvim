@@ -6,9 +6,7 @@
 
 
 --- 启用的服务器(取代原先在 after/ftplugin/<ft>.lua 里逐个文件类型启用的写法)
-local M = {}
-
-M.servers = {
+local servers = {
     'basedpyright',
     'clangd',
     'guile_ls',
@@ -24,11 +22,6 @@ M.servers = {
     'ts_ls',
 }
 
-function M.setup()
-    -- 必须先把插件放到 runtimepath 上, vim.lsp.config/vim.lsp.enable 才能找到它的 lsp/*.lua
-    vim.cmd.packadd('nvim-lspconfig')
-    vim.lsp.enable(M.servers)
-
-end
-
-return M
+-- 必须先把插件放到 runtimepath 上, vim.lsp.config/vim.lsp.enable 才能找到它的 lsp/*.lua
+vim.cmd.packadd('nvim-lspconfig')
+vim.lsp.enable(servers)
