@@ -86,19 +86,12 @@ require('catppuccin').setup({
 
     -- 显式控制特定插件的集成(覆盖 default / auto 行为)
     integrations = {
-        -- lualine: 让 lualine 内部直接使用 catppuccin 色值
-        lualine = true,
-        -- noice.nvim: 匹配 noice 的默认界面风格
+        -- noice.nvim: 命令行 / 消息 / LSP 文档浮窗的配色
+        -- (只想改命令行浮窗边框色, 见 plugins/noice.lua)
         noice = true,
-        -- nvim-notify: 通知窗口配色
-        notify = true,
-        -- markview.nvim: markdown / typst 等文档渲染配色
-        markview = true,
-        -- nvim-treesitter-context: 上下文固定行配色
-        treesitter_context = true,
-        -- treesitter(经 default_integrations = true 已默认开启, 此处显式标注以明确)
-        -- treesitter = true,
-        -- fzf 集成针对的是 fzf-lua, 本配置使用 fzf.vim, 故不在此列
+        -- 通知配色随后端走: 现在不装 nvim-notify, 用的是 noice 内置 mini 视图
+        -- (NoiceMini / NoiceFormatLevel*)。以后若装 snacks.nvim, catppuccin 会经
+        -- auto_integrations 自动接管, 不需要在这里加
     },
 
     -- 编译缓存路径: 将最终计算出的高亮 LUA 缓存到磁盘, 加速后续启动
