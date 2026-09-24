@@ -17,3 +17,6 @@ require('settings.autocmds')
 -- 设置根据文件扩展名配置文件类型
 require('settings.filetype')
 
+-- 原生 treesitter(高亮/折叠): 按 FileType 启用, 与插件无关(--noplugin 下也生效)
+require('settings.treesitter')
+

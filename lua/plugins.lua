@@ -11,7 +11,6 @@
 ---   mini.snippets                mini-snippets
 ---   noice.nvim / nui.nvim        noice-nvim / nui-nvim
 ---   nvim-lspconfig               nvim-lspconfig
----   nvim-treesitter              nvim-treesitter
 ---   plenary.nvim                 plenary-nvim
 ---   telescope.nvim               telescope-nvim
 ---   telescope-fzf-native.nvim    telescope-fzf-native-nvim
@@ -20,7 +19,6 @@
 -- 调用顺序即加载顺序, 不要随手挪动。
 -- 每个 plugins/<name>.lua 被 require 时直接执行(先 packadd 再配置), 没有 setup() 壳
 require('plugins.colorscheme') -- 主题最先, 否则高亮会被后加载的插件覆盖
-require('plugins.nvim-treesitter')
 require('plugins.nvim-lspconfig')
 require('plugins.telescope')
 require('plugins.snippets')
