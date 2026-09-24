@@ -44,11 +44,11 @@ require('catppuccin').setup({
         properties = {},
         types = {},
         operators = {},
+        miscs = {}, -- 关掉 @module/@tag 等硬编码斜体
     },
 
-    -- LSP 诊断相关的显示风格
+    -- LSP 诊断相关
     lsp_styles = {
-        -- 虚拟文字诊断(行尾 floating 诊断块): 不加斜体
         virtual_text = {
             errors = {},
             hints = {},
