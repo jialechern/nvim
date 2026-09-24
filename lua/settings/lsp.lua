@@ -105,25 +105,22 @@ vim.api.nvim_create_autocmd('LspAttach', {
         end
 
         -- --- --- --- 诊断开关 --- --- ---
-        -- 使用官方诊断开关，而不是反复改 config
-        local diagnostics_enabled = true
+        -- 按 buffer 开关: 闭包局部量会与全局状态脱钩, 读取实际状态
         map(keys.doc, function()
-            diagnostics_enabled = not diagnostics_enabled
-            vim.diagnostic.enable(diagnostics_enabled)
-            if diagnostics_enabled then
-                vim.notify('诊断信息已开启', vim.log.levels.INFO, { title = 'LSP' })
-            else
-                vim.notify('诊断信息已关闭', vim.log.levels.INFO, { title = 'LSP' })
-            end
+            local enabled = not vim.diagnostic.is_enabled({ bufnr = bufnr })
+            vim.diagnostic.enable(enabled, { bufnr = bufnr })
+            vim.notify(enabled and '诊断信息已开启' or '诊断信息已关闭', vim.log.levels.INFO, { title = 'LSP' })
         end, opts)
 
         -- --- --- --- 折叠 --- --- ---
-        -- 如果 LSP 支持 foldingRange, 就优先用 LSP 折叠
-        -- 否则可以继续由 treesitter 或别的方式接管
+        -- LSP 支持 foldingRange 时用它的 foldexpr 覆盖 treesitter; 取 buffer 所在窗口而不是当前窗口
         if client and client:supports_method('textDocument/foldingRange') then
-            local win = vim.api.nvim_get_current_win()
-            vim.wo[win].foldmethod = 'expr'
-            vim.wo[win].foldexpr = 'v:lua.vim.lsp.foldexpr()'
+            ---@type integer
+            local win = vim.fn.bufwinid(bufnr)
+            if win ~= -1 then
+                vim.wo[win].foldmethod = 'expr'
+                vim.wo[win].foldexpr = 'v:lua.vim.lsp.foldexpr()'
+            end
         end
 
         -- --- --- --- 参数提示(inlay hints) --- --- ---
