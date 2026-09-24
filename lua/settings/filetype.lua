@@ -8,7 +8,7 @@ vim.filetype.add({
     mk  = 'make',
     c   = 'c',
     cpp = 'cpp',
-    h   = 'c',
+    -- h 交给 Neovim 内置探测(c/cpp/objc 按内容判断), 不要写死
     js = 'javascript',
     ts = 'typescript',
     fish = 'fish',
