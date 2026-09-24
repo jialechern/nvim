@@ -13,11 +13,10 @@ local actions = require('telescope.actions')
 
 telescope.setup({
     defaults = {
-        -- 布局: 底部弹出(anchor='S' 对应原 fzf 的 down = '40%'), 预览在右侧
+        -- 布局: 结果在左、预览在右, 整体横纵居中(anchor 默认即居中, 写 'S' 会靠底)
         layout_config = {
             width = 0.9,
-            height = 0.4,
-            anchor = 'S',
+            height = 0.6,
             preview_width = 0.55,
         },
         sorting_strategy = 'ascending',
