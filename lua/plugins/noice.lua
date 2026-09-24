@@ -97,3 +97,11 @@ local keys = require('keys.windows.float_window')
 map(keys.last_message, function() require('noice').cmd('last') end)
 map(keys.history, function() require('noice').cmd('history') end)
 map(keys.dismiss, function() require('noice').cmd('dismiss') end)
+
+-- 把当前命令行的输出重定向到浮动窗口; 命令行保持打开, 便于改完再执行一遍
+-- (官方 doc COMMAND REDIRECTION 一节的 recipe)
+map(keys.redirect, function() require('noice').redirect(vim.fn.getcmdline()) end)
+
+-- LSP hover / signature 浮窗里的翻页(官方 doc LSP HOVER DOC SCROLLING 一节的能力)
+map(keys.scroll_doc_down, function() require('noice.lsp').scroll(4) end)
+map(keys.scroll_doc_up, function() require('noice.lsp').scroll(-4) end)
