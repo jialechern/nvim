@@ -1,8 +1,10 @@
 -- lsp.lua
 
+---@class Settings.Lsp
+---@type Settings.Lsp
 local module = {}
 
--- 诊断默认配置: 只设置一次, 不要每次 attach 都重复设置
+-- 诊断默认配置: 只设置一次, 不要每次 attach 都重复设置(与默认值相同的项不写)
 local function setup_diagnostics()
     vim.diagnostic.config({
         virtual_text = {
@@ -25,6 +27,7 @@ local lsp_group = vim.api.nvim_create_augroup('lsp-attach', { clear = true })
 
 vim.api.nvim_create_autocmd('LspAttach', {
     group = lsp_group,
+    ---@param event vim.api.keyset.create_autocmd.callback_args
     callback = function(event)
         -- 映射统一走 utils.map, 键位与描述见 keys/lsp.lua
         local map = require('utils.map').map
@@ -32,7 +35,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
         -- 当前 buffer 与 attach 的 LSP 客户端
         local bufnr = event.buf
+        ---@type vim.lsp.Client?
         local client = vim.lsp.get_client_by_id(event.data.client_id)
+        ---@type MapOpts
         local opts = { buffer = bufnr }
 
         -- --- --- --- LSP 核心功能 --- --- ---
@@ -50,9 +55,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
         map(keys.rename, vim.lsp.buf.rename, opts)
         map(keys.code_action, vim.lsp.buf.code_action, opts)
 
-        -- 诊断跳转
-        map(keys.goto_next_diag, vim.diagnostic.goto_next, opts)
-        map(keys.goto_prev_diag, vim.diagnostic.goto_prev, opts)
+        -- 诊断跳转: 0.11 起 goto_next/goto_prev 已废弃(0.13 移除), 用 jump 的 count 方向
+        map(keys.goto_next_diag, function()
+            vim.diagnostic.jump({ count = 1 })
+        end, opts)
+        map(keys.goto_prev_diag, function()
+            vim.diagnostic.jump({ count = -1 })
+        end, opts)
 
         -- 打开诊断浮窗: 0.12 里浮窗会显示更完整的诊断相关信息
         map(keys.doc_in_new_window, function()
@@ -72,9 +81,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
             -- autotrigger 默认只在服务器声明的触发字符(如 Python 的 . [ " ')上弹菜单, 敲普通字母不弹。
             -- 这里把字母/数字/下划线也加进触发字符, 使边打边弹(≈ blink.cmp 的逐键触发);
             -- 必须在 enable() 之前修改 —— 它会在这时读取 triggerCharacters 建触发表
+            ---@type lsp.CompletionOptions?
             local provider = client.server_capabilities.completionProvider
             if provider then
+                ---@type string[]
                 local triggers = provider.triggerCharacters or {}
+                ---@type table<string, boolean>
                 local existing = {}
                 for _, ch in ipairs(triggers) do
                     existing[ch] = true
@@ -142,6 +154,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
             vim.api.nvim_create_autocmd('LspDetach', {
                 buffer = bufnr,
                 group = highlight_group,
+                ---@param ev vim.api.keyset.create_autocmd.callback_args
                 callback = function(ev)
                     vim.lsp.buf.clear_references()
                     vim.api.nvim_clear_autocmds({

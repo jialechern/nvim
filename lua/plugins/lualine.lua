@@ -2,28 +2,39 @@ vim.cmd.packadd('lualine.nvim')
 
 local colors = require('settings.consts').colors
 
--- 基于 Catppuccin Mocha 调色板的状态栏主题
--- 每一段都定义了 fg（前景/文字色）和 bg（背景/底色），gui 用于加粗
+--- lualine 组件: 组件名/文本、返回文本的函数, 或 { 组件, 选项 } 表
+---@alias LualineComponent string|fun(): string?|table
+
+-- 状态栏主题: 每段的 a/b/c/z 给 fg/bg, gui = 'bold' 表示加粗
+---@type table<string, table<string, table<string, string>>>
 local theme = {
     normal = {
-        a = { fg = colors.bg0, bg = colors.purple, gui = 'bold' }, -- 模式名: 深色底 on mauve 紫（Catppuccin 标志色）
-        b = { fg = colors.fg1, bg = colors.bg2 },                  -- 主体信息: 亮文字 on 中等深色底
-        c = { fg = colors.fg3, bg = 'NONE' },                       -- 左侧填充: 次要文字, 透明底
-        z = { fg = colors.bg0, bg = colors.purple },                -- 位置/进度: 与 a 对称
+        a = { fg = colors.bg0, bg = colors.purple, gui = 'bold' }, -- 模式名: 用 Catppuccin 标志色 mauve
+        b = { fg = colors.fg1, bg = colors.bg2 },
+        c = { fg = colors.fg3, bg = 'NONE' },        -- 两侧填充: 透明底
+        z = { fg = colors.bg0, bg = colors.purple }, -- 与 a 对称
     },
-    insert = { a = { fg = colors.bg0, bg = colors.green, gui = 'bold' } },   -- 插入模式: 绿色
-    visual = { a = { fg = colors.bg0, bg = colors.orange, gui = 'bold' } },  -- 可视模式: 暖橙色
-    replace = { a = { fg = colors.bg0, bg = colors.red, gui = 'bold' } },    -- 替换模式: 警示红
-    command = { a = { fg = colors.bg0, bg = colors.frost4, gui = 'bold' } }, -- 命令模式: 蓝色
-    terminal = { a = { fg = colors.bg0, bg = colors.frost1, gui = 'bold' } },-- 终端模式: 青绿色
-    inactive = {                                                            -- 非当前窗口: 整体变暗
+    insert = { a = { fg = colors.bg0, bg = colors.green, gui = 'bold' } },
+    visual = { a = { fg = colors.bg0, bg = colors.orange, gui = 'bold' } },
+    replace = { a = { fg = colors.bg0, bg = colors.red, gui = 'bold' } },
+    command = { a = { fg = colors.bg0, bg = colors.frost4, gui = 'bold' } },
+    terminal = { a = { fg = colors.bg0, bg = colors.frost1, gui = 'bold' } },
+    inactive = { -- 非当前窗口整体变暗
         a = { fg = colors.fg3, bg = colors.bg1 },
         b = { fg = colors.fg3, bg = colors.bg1 },
         c = { fg = colors.fg3, bg = 'NONE' },
     },
 }
 
+-- 空组件: 不产出文本, 只用来在分段之间插入自定义底色的填充块
+---@type table
+-- 分隔块: 用 lualine 内部基类 component:extend() 造一个空组件(官方公开做法是 separator= + draw_empty,
+-- 这里是沿用社区写法; 升级 lualine 时留意 component.lua 的 apply_highlights/apply_section_separators 是否还在)
 local empty = require('lualine.component'):extend()
+
+--- 覆盖 draw: 不画内容, 只应用分隔符与高亮
+---@param default_highlight string lualine 传入的所在分段默认高亮组名
+---@return string
 function empty:draw(default_highlight)
     self.status = ''
     self.applied_separator = ''
@@ -32,9 +43,14 @@ function empty:draw(default_highlight)
     return self.status
 end
 
+--- 给每个分段之间插入填充组件, 并把字符串 / 函数组件规范成 { 组件, 选项 } 表
+---@param sections table<string, LualineComponent[]> 键为 lualine_a ~ lualine_z
+---@return table<string, table[]> 处理后的 sections
 local function process_sections(sections)
     for name, section in pairs(sections) do
+        -- 段字母是第 9 个字符: x/y/z 属于状态栏右侧, 其余在左侧
         local left = name:sub(9, 10) < 'x'
+        -- lualine_z 是最后一段, 它后面不再插填充块
         for pos = 1, name ~= 'lualine_z' and #section or #section - 1 do
             table.insert(section, pos * 2, { empty, color = { fg = colors.bg2, bg = colors.bg2 } })
         end
@@ -49,6 +65,8 @@ local function process_sections(sections)
     return sections
 end
 
+--- 搜索计数: 只在 / 或 ? 触发过搜索且搜索寄存器非空时显示
+---@return string
 local function search_result()
     if vim.v.hlsearch == 0 then
         return ''
@@ -70,20 +88,18 @@ local function modified()
     return ''
 end
 
--- noice 的状态栏组件: noice 会把 showcmd / showmode 消息从它的视图里跳过(skip route),
--- 只有它自己的状态组件能把它们读回来。
--- 这里只用于 mode —— 也就是宏录制提示("recording @q"): base.lua 关掉了 showmode,
--- 而 nvim 在 reg_recording ~= 0 时仍会发该消息, 停止录制时会发空消息让 noice 清掉。
--- 不用它取 command(showcmd): noice 只对 msg_showmode 做清理, showcmd 会残留上一条内容
--- (上游 issue #1076 / #1209), 所以半截命令改由 base.lua 的 showcmdloc = 'statusline'
--- 配合下面的 %S 组件显示。
--- 必须延迟取值: 本文件比 plugins/noice.lua 先加载, 那时插件还没 packadd。
+-- noice 的状态组件: noice 会把 showcmd / showmode 消息从视图里 skip 掉, 只有它的 status 能读回来。
+-- 这里只取 mode(宏录制提示): showcmd 会残留上一条内容(上游 issue #1076 / #1209),
+-- 所以半截命令走 base.lua 的 showcmdloc = 'statusline' + 下面的 %S。必须延迟取值(本文件比 noice.lua 先加载)。
+---@param name string noice status 名(当前只用 'mode')
+---@return { [1]: fun(): string, cond: fun(): boolean }
 local function noice_status(name)
     return {
         function()
             return require('noice').api.status[name].get() or ''
         end,
         cond = function()
+            ---@type boolean, boolean
             local ok, has = pcall(function()
                 return require('noice').api.status[name].has()
             end)

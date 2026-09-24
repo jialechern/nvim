@@ -11,6 +11,7 @@ map(keys.switch_to_leader, '<leader>')
 
 -- 回到普通模式: 终端模式要先退出终端作业
 map(keys.goto_normal, function()
+    ---@type string
     local mode = vim.fn.mode()
     local key = (mode == 't') and '<C-\\><C-n>' or '<Esc>'
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, false, true), 'n', false)
@@ -29,14 +30,17 @@ map(keys.line_end, '$')
 map(keys.screen_bottom, 'L')
 
 -- 快速上下移动, 行数取自 settings/consts.lua
+---@return string
 map(keys.fast_down, function()
     return consts.fast_move_by_lines .. 'j'
 end, { expr = true })
+---@return string
 map(keys.fast_up, function()
     return consts.fast_move_by_lines .. 'k'
 end, { expr = true })
 
 -- <Esc> 退出时顺带取消搜索高亮
+---@return string
 map(keys.escape, function()
     vim.cmd('noh')
     return '<esc>'
@@ -55,10 +59,12 @@ map(keys.indent_right, '>gv')
 map(keys.undotree, function()
     vim.cmd('packadd nvim.undotree')
 
+    -- bufnr/winid 留空则由插件新建 buffer/窗口; command 是创建窗口的 Vim 命令(30vnew = 左侧 30 列),
+    -- title 也可以是函数 fun(bufnr): string
     require('undotree').open({
-        bufnr   = nil,           -- 绘制到指定 buffer(默认创建新 buffer)
-        winid   = nil,           -- 绘制到指定 window(默认创建新窗口)
-        command = '30vnew',      -- 创建窗口用的 Vim 命令(默认左侧 30 列垂直分割)
-        title   = 'Undo Tree',   -- 窗口标题; 也可以是函数 fun(bufnr): string
+        bufnr   = nil,
+        winid   = nil,
+        command = '30vnew',
+        title   = 'Undo Tree',
     })
 end)

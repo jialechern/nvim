@@ -1,11 +1,9 @@
--- nix.lua
---- 用于配置 nix 语言的快捷键映射
+--- nix.lua
 
--- 导入自定义的工具函数以及需要的符号
 local map = require('utils.map').map
 local keys = require('keys.run')
 
--- nix 编辑习惯
+-- nixpkgs 惯例: 2 空格缩进
 vim.bo.tabstop = 2
 vim.bo.shiftwidth = 2
 vim.bo.softtabstop = 2

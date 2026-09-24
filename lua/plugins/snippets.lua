@@ -1,11 +1,6 @@
 --- snippets.lua
---- 片段: Neovim 原生引擎(vim.snippet) + mini.snippets 负责"集合与匹配" +
---- friendly-snippets 提供社区片段集合。
---- 自研片段已全部弃用(snippets/ 目录已删), 只维护插件清单里的社区集合。
----
---- 键位见 keys/lsp.lua 的 snippet_*; 片段还会通过 mini.snippets 起的进程内
---- LSP 服务器出现在原生补全菜单里(补全本身由 settings/lsp.lua 启用)
-
+--- 片段: Neovim 原生引擎(vim.snippet) + mini.snippets(集合与匹配) + friendly-snippets(社区集合)。
+--- 自研片段已弃用(snippets/ 目录已删); 键位见 keys/lsp.lua 的 snippet_*, 片段另经进程内 LSP 服务器进补全菜单。
 
 vim.cmd.packadd('mini.snippets')
 vim.cmd.packadd('friendly-snippets') -- 只提供数据(snippets/<lang>.json), 不加载脚本
@@ -21,6 +16,7 @@ snippets.setup({
     mappings = { expand = '', jump_next = '', jump_prev = '', stop = '' },
     -- 用 Neovim 原生片段会话(高亮与跳转都是原生的)
     expand = {
+        ---@param snippet { body: string } 待展开的片段
         insert = function(snippet)
             vim.snippet.expand(snippet.body)
         end,

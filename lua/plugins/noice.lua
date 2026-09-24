@@ -1,16 +1,10 @@
 --- noice.lua
 --- noice.nvim: 命令行 / 消息 / LSP 文档(hover, signature)的 UI
----
---- 这里只写"与上游默认值不同"的配置; 与默认相同的项(messages / redirect / commands /
---- presets / lsp.override / lsp.hover|signature|message / markdown / health / notify)
---- 不再重复抄写, 需要时查 :help noice.nvim 与插件自带 README。
---- 核对上游默认值: lua/noice/config/init.lua 的 defaults(), 以及 config/views.lua。
+--- 只写与上游默认值不同的配置; 核对默认值见 :help noice.nvim 与 lua/noice/config/init.lua 的 defaults()
 
 vim.cmd.packadd('nui.nvim')
--- nvim-notify 是可选的通知后端: 不装也能跑 —— noice 的 views.notify 后端列表是
--- { 'snacks', 'notify' } 且自带 fallback = 'mini', 两条路都没有时用内置 mini 视图
--- (右下角一行、2 秒消失)。装了 snacks.nvim 则优先用 snacks(无需改这里)。
--- 因此不硬 packadd, 缺失时静默降级(与 plugins/telescope.lua 对 fzf-native 的处理一致)。
+-- nvim-notify 是可选后端: noice 的 views.notify 自带 fallback = 'mini'(右下角一行), 装了
+-- snacks.nvim 则优先用它。所以不硬 packadd, 缺失时静默降级(同 telescope.lua 对 fzf-native)。
 local has_nvim_notify = pcall(vim.cmd.packadd, 'nvim-notify')
 vim.cmd.packadd('noice.nvim')
 
@@ -74,13 +68,12 @@ require('noice').setup({
     },
 })
 
--- noice 高亮只保留我们主动想要的差别, 其余交给 catppuccin 的 noice 集成;
--- 透明背景由 colorscheme.lua(transparent_background + float.transparent)与
--- settings/transparency.lua 负责, 这里不再重复设置 NormalFloat / FloatBorder。
--- 注意: NoiceError / NoiceWarn 这两个组在 noice 里并不存在(消息级别颜色由
--- NoiceFormatLevel*、以及装了 nvim-notify 时的 Notify* 决定), 不要在这里设置。
+-- noice 高亮只保留主动想要的差别, 其余交给 catppuccin 的 noice 集成; 透明背景由
+-- colorscheme.lua(transparent_background + float.transparent)与 settings/transparency.lua 负责。
+-- 注意 NoiceError / NoiceWarn 在 noice 里并不存在(消息级别颜色是 NoiceFormatLevel*), 别设置它们。
 local cmdline_border_fg = colors.frost3
 
+-- 主题切换会重建高亮组, 所以立即设一次 + 挂 ColorScheme 重设
 local function set_noice_hls()
     vim.api.nvim_set_hl(0, 'NoiceCmdlinePopupBorder', { fg = cmdline_border_fg })
 end

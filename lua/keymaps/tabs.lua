@@ -5,6 +5,7 @@ local map = require('utils.map').map
 local keys = require('keys.tabs')
 
 map(keys.edit, function()
+    ---@type string
     local file = vim.fn.input('请输入文件名: ', '', 'file')
     vim.cmd('tabedit ' .. vim.fn.fnameescape(file))
 end)
@@ -38,11 +39,13 @@ map(keys.previous, function()
 end)
 
 map(keys.goto_tab, function()
+    ---@type string
     local num = vim.fn.input('请输入标签页编号: ')
     vim.cmd('tabnext ' .. num)
 end)
 
 map(keys.move, function()
+    ---@type string
     local num = vim.fn.input('请输入标签页编号: ')
     vim.cmd('tabmove ' .. num)
 end)

@@ -10,7 +10,8 @@
         "vim"
     ],
     "diagnostics.severity": {
-        "undefined-field": "Warning"
+        "undefined-field": "Warning",
+        "different-requires": "Information"
     },
     "workspace.checkThirdParty": false,
     "workspace.ignoreDir": [

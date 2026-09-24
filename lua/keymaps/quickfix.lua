@@ -13,6 +13,7 @@ map(keys.close_fixwindow, function()
 end)
 
 map(keys.goto_item, function()
+    ---@type string
     local num = vim.fn.input('请输入条目编号: ')
     vim.cmd('cc ' .. num)
 end)
@@ -46,6 +47,7 @@ map(keys.prev_list, function()
 end)
 
 map(keys.prev_list_by_index, function()
+    ---@type string
     local num = vim.fn.input('请输入回溯次数: ')
     vim.cmd(num .. 'colder')
 end)
@@ -55,6 +57,7 @@ map(keys.next_list, function()
 end)
 
 map(keys.next_list_by_index, function()
+    ---@type string
     local num = vim.fn.input('请输入跳转次数: ')
     vim.cmd(num .. 'cnewer')
 end)

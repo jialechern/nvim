@@ -25,6 +25,7 @@ map(keys.list, function()
 end)
 
 map(keys.goto_buffer, function()
+    ---@type string
     local num = vim.fn.input('请输入缓冲区编号: ')
     vim.cmd('buffer ' .. num)
 end)

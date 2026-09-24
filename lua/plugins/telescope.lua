@@ -1,8 +1,6 @@
 --- telescope.lua
 --- 模糊查找: telescope.nvim(取代原来的 fzf + fzf.vim)
---- 依赖(nix 提供, 名字见 plugins.lua 的对照表): plenary.nvim, telescope-fzf-native.nvim
---- 键位见 keys/fuzzy_finder.lua
-
+--- 依赖(nix 提供) plenary.nvim / telescope-fzf-native.nvim; 键位见 keys/fuzzy_finder.lua
 
 vim.cmd.packadd('telescope.nvim')
 vim.cmd.packadd('plenary.nvim')
@@ -38,6 +36,7 @@ telescope.setup({
         },
         mappings = {
             i = {
+                -- 覆盖 telescope 默认的 <C-k>=preview_scrolling_right / <C-j>=nop, 换取 fzf 的上下选择手感
                 ['<C-j>'] = actions.move_selection_next,
                 ['<C-k>'] = actions.move_selection_previous,
             },
@@ -87,6 +86,7 @@ map(keys.search, builtin.search_history)
 map(keys.commands, builtin.commands)
 map(keys.snippets, function()
     -- 片段不经过 telescope: 交给 mini.snippets 的选择 UI(由 noice 渲染)
+    ---@type boolean, table
     local ok, snippets = pcall(require, 'mini.snippets')
     if ok and #snippets.expand({ insert = false }) > 0 then
         snippets.expand()
@@ -104,6 +104,7 @@ else
 end
 
 -- --- --- --- 自定义命令(沿用原 fzf 配置里的三个) --- --- ---
+---@param opts vim.api.keyset.create_user_command.command_args
 vim.api.nvim_create_user_command('GrepWord', function(opts)
     local word = (opts.args ~= '' and opts.args) or fn.expand('<cword>')
     builtin.grep_string({ search = word })
@@ -123,6 +124,7 @@ end, { nargs = 0, desc = '搜索最近一次复制/选中的文本' })
 
 vim.api.nvim_create_user_command('FilesCwd', function()
     -- 优先从 git 仓库根目录开始查找(等价于原来 lcd 到仓库根再查文件)
+    ---@type string? 不在 git 仓库内时取到 nil
     local git_root = fn.systemlist('git rev-parse --show-toplevel')[1]
     if git_root and git_root ~= '' then
         builtin.find_files({ cwd = git_root })

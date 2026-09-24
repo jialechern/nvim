@@ -23,6 +23,7 @@ require('keymaps.tabs')
 require('keymaps.quickfix')
 
 -- 自检: 键位在同一作用域内重复注册会被报告出来 (描述缺失会在注册时直接报错)
+---@type string[]
 local problems = require('utils.map').check()
 if #problems > 0 then
     vim.notify('快捷键自检发现问题:\n' .. table.concat(problems, '\n'), vim.log.levels.ERROR)

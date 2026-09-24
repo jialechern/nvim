@@ -1,8 +1,13 @@
 --- autocmds.lua
---- 这里存放和基本配置相关的自动命令
+--- 存放与基础配置相关的自动命令(键位只写在 keys/ 里, 这里只注册行为)
 
+
+---@class Settings.Autocmds
+---@type Settings.Autocmds
 local module = {}
 
+---@param name string
+---@return integer
 local function augroup(name)
     return vim.api.nvim_create_augroup(name, { clear = true })
 end
@@ -29,6 +34,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 vim.api.nvim_create_autocmd({ "VimResized" }, {
   group = augroup("resize_splits"),
   callback = function()
+    ---@type integer
     local current_tab = vim.fn.tabpagenr()
     vim.cmd("tabdo wincmd =")
     vim.cmd("tabnext " .. current_tab)
@@ -92,6 +98,7 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("man_unlisted"),
   pattern = { "man" },
+  ---@param event vim.api.keyset.create_autocmd.callback_args
   callback = function(event)
     vim.bo[event.buf].buflisted = false
   end,
@@ -119,25 +126,20 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 -- 保存文件时自动创建目录，以防某些中间目录不存在
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   group = augroup("auto_create_dir"),
+  ---@param event vim.api.keyset.create_autocmd.callback_args
   callback = function(event)
     if event.match:match("^%w%w+:[\\/][\\/]") then
       return
     end
+    ---@type string
     local file = vim.uv.fs_realpath(event.match) or event.match
     vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
   end,
 })
 
--- 自动切换输入法, 仅针对 GNU/Linux 系统，需安装 `fcitx5-remote` 命令
--- vim.api.nvim_create_autocmd({ "InsertLeave" }, {
---     pattern = { "*" },
---     callback = function()
---         local input_status = tonumber(vim.fn.system("fcitx5-remote"))
---         if input_status == 2 then
---             vim.fn.system("fcitx5-remote -c")
---         end
---     end,
--- })
+-- 自动切换输入法(仅 GNU/Linux, 需 `fcitx5-remote`), 当前关闭: InsertLeave 时若输入法处于中文态(2)则切回英文
+-- vim.api.nvim_create_autocmd({ "InsertLeave" }, { pattern = { "*" }, callback = function()
+--     local input_status = tonumber(vim.fn.system("fcitx5-remote")); if input_status == 2 then vim.fn.system("fcitx5-remote -c") end end })
 
 return module
 

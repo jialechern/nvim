@@ -1,21 +1,14 @@
 --- map.lua
---- 按键映射的唯一入口
----
---- 约定: 键位与描述写在 lua/keys/<命名空间>.lua (见 KeySpec), 这里只负责注册与自检。
---- 描述(desc)是快捷键唯一的文档来源, 因此不允许缺省。
----
---- 用法:
----     local map = require('utils.map').map
----     local keys = require('keys.buffers')
----
----     map(keys.next, function() vim.cmd('bnext') end)                   -- 模式取 spec.modes, 缺省 'n'
----     map(keys.close, 'zc', { modes = { 'n', 'x' } })                   -- 调用点覆盖模式
----     map(keys.goto_def, vim.lsp.buf.definition, { buffer = bufnr })    -- 透传 vim.keymap.set 的选项
-
---- 覆盖 KeySpec.modes 等 vim.keymap.set 选项
+--- 按键映射的唯一入口: 键位与描述写在 lua/keys/<命名空间>.lua(见 KeySpec), desc 是唯一文档来源, 缺省即报错。
+--- 用法: map(spec, rhs[, opts]) — rhs 为 string 或返回 string 的 expr 函数; opts 透传 vim.keymap.set(MapOpts)。
 ---@class MapOpts : vim.keymap.set.Opts
 ---@field modes? string|string[]  -- 生效模式, 覆盖 KeySpec.modes
 ---@field buffer? integer         -- 0 表示当前 buffer, 显式声明以便运行时类型库缺失时也能检查
+
+--- 映射注册器(模块表): 注册入口与启动自检
+---@class Map
+---@field map fun(spec: KeySpec, rhs: string|(fun(): string?), opts?: MapOpts)
+---@field check fun(): string[]
 
 local M = {}
 
@@ -73,6 +66,7 @@ function M.check()
         for lhs, by_scope in pairs(by_lhs) do
             -- 全局映射与 buffer-local 映射可以合法共存, 只在同作用域内比
             for scope, by_source in pairs(by_scope) do
+                ---@type string[]
                 local sources = vim.tbl_keys(by_source)
                 if #sources > 1 then
                     table.sort(sources)
@@ -88,4 +82,5 @@ end
 
 M.map = map
 
+---@type Map
 return M

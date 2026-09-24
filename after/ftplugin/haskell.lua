@@ -1,11 +1,9 @@
--- haskell.lua
---- 用于配置 haskell 语言的快捷键映射
+--- haskell.lua
 
--- 导入自定义的工具函数以及需要的符号
 local map = require('utils.map').map
 local keys = require('keys.run')
 
--- haskell 编辑习惯
+-- haskell 惯例: 2 空格缩进
 vim.bo.tabstop = 2
 vim.bo.shiftwidth = 2
 vim.bo.softtabstop = 2

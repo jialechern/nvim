@@ -1,11 +1,9 @@
 --- nvim-lspconfig.lua
---- LSP 服务器配置的来源: nvim-lspconfig(上游提供 cmd / filetypes / root_markers 等样板)
---- 这里只做 packadd + 统一启用; 需要个性化覆盖时写 after/lsp/<server>.lua(优先级更高)
----
---- 说明: 上游配置名即服务器名(如 guile_ls、rust_analyzer); 名字写错时 vim.lsp.enable 会告警
-
+--- LSP 服务器样板来自 nvim-lspconfig(上游提供 cmd / filetypes / root_markers); 这里只做 packadd + 统一启用。
+--- 个性化覆盖写 after/lsp/<server>.lua(优先级更高); 上游配置名即服务器名, 写错时 vim.lsp.enable 会告警。
 
 --- 启用的服务器(取代原先在 after/ftplugin/<ft>.lua 里逐个文件类型启用的写法)
+---@type string[]
 local servers = {
     'basedpyright',
     'clangd',

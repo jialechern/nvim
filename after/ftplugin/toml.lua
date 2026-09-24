@@ -1,1 +1,3 @@
--- toml.lua
+--- toml.lua
+--- toml 暂无 buffer-local 设置: 缩进随全局默认, 格式化由 taplo 语言服务器负责,
+--- 因此这里不需要 makeprg/formatprg 与运行键映射。

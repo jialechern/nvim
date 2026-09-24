@@ -1,26 +1,23 @@
 -- 配置 neovim 的 Catppuccin 配色方案(Mocha 摩卡口味)
 
--- 加载主题插件
 vim.cmd.packadd('catppuccin-nvim')
 
 require('catppuccin').setup({
-    -- 口味固定为 Mocha(深色旗舰版)
     flavour = 'mocha',
-    -- 根据 vim.o.background 自动匹配 latre / mocha(flavour 为 auto 时才生效, 此处保留备用)
+    -- 仅在 flavour = 'auto' 时才生效, 此处保留备用
     background = {
         light = 'latte',
         dark = 'mocha',
     },
 
-    -- 启用透明背景
     transparent_background = true,
-    -- 浮动窗口也使用透明背景
+    -- 浮动窗口同样透明
     float = {
         transparent = true,
         solid = false,
     },
 
-    -- 将 Catppuccin 调色板同步到终端内置颜色变量(g:terminal_color_0 ~ g:terminal_color_15)
+    -- 同步调色板到终端颜色变量 g:terminal_color_0 ~ g:terminal_color_15
     term_colors = true,
 
     -- 非当前窗口不做背景变暗
@@ -28,7 +25,7 @@ require('catppuccin').setup({
         enabled = false,
     },
 
-    -- 全局是否禁用斜体 / 粗体 / 下划线(false = 允许；设为 true 则强制全局关闭)
+    -- false = 允许斜体 / 粗体 / 下划线
     no_italic = false,
     no_bold = false,
     no_underline = false,
@@ -59,7 +56,7 @@ require('catppuccin').setup({
             information = {},
             ok = {},
         },
-        -- 下划线诊断(错误单词下方的波纹线)
+        -- 错误单词下方的波纹线
         underlines = {
             errors = { 'underline' },
             hints = { 'underline' },
@@ -67,38 +64,30 @@ require('catppuccin').setup({
             information = { 'underline' },
             ok = { 'underline' },
         },
-        -- Inlay Hint(参数提示): 关闭后台色块, 保持透明
+        -- 关掉 Inlay Hint 的色块, 保持透明
         inlay_hints = {
             background = false,
         },
     },
 
-    -- 颜色覆盖(直接修改 Catppuccin 调色板原色值, 此处为空不覆盖)
+    -- 手动覆盖调色板原色值 / 任意 highlight group, 此处保持为空
     color_overrides = {},
-
-    -- 全局额外高亮覆盖(自定义任意 highlight group, 此处保留为空)
     custom_highlights = {},
 
-    -- 默认开启 Catppuccin 内置的所有插件集成
     default_integrations = true,
-    -- 自动检测已安装插件并开启对应集成
+    -- auto 集成: 自动检测已装插件并开启对应集成(默认关, 这里显式打开)
     auto_integrations = true,
 
-    -- 显式控制特定插件的集成(覆盖 default / auto 行为)
     integrations = {
-        -- noice.nvim: 命令行 / 消息 / LSP 文档浮窗的配色
-        -- (只想改命令行浮窗边框色, 见 plugins/noice.lua)
+        -- 命令行 / 消息 / LSP 文档浮窗配色(命令行浮窗边框色见 plugins/noice.lua)
         noice = true,
-        -- 通知配色随后端走: 现在不装 nvim-notify, 用的是 noice 内置 mini 视图
-        -- (NoiceMini / NoiceFormatLevel*)。以后若装 snacks.nvim, catppuccin 会经
-        -- auto_integrations 自动接管, 不需要在这里加
+        -- 通知配色跟随后端: 现在不装 nvim-notify, 走 noice 内置 mini 视图
+        -- (NoiceMini / NoiceFormatLevel*); 以后装 snacks.nvim 由 auto_integrations 接管
     },
 
-    -- 编译缓存路径: 将最终计算出的高亮 LUA 缓存到磁盘, 加速后续启动
     compile_path = vim.fn.stdpath('cache') .. '/catppuccin',
 })
 
--- 应用 Mocha 口味主题
 vim.cmd.colorscheme('catppuccin-mocha')
 
 -- 设置背景透明
