@@ -15,10 +15,6 @@ if has_nvim_notify then
     })
 end
 
--- 保持浮窗透明
-vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'NONE', ctermbg = 'NONE' })
-vim.api.nvim_set_hl(0, 'FloatBorder', { bg = 'NONE', ctermbg = 'NONE' })
-
 require('noice').setup({
     cmdline = {
         enabled = true,
@@ -177,58 +173,29 @@ require('noice').setup({
     throttle = 1000 / 30,
 
     views = {
+        -- 尺寸一律用百分比: nui 会按当前编辑器尺寸实时换算;
+        -- 写成 math.floor(vim.o.columns * 0.8) 只会在启动时求值一次, 之后改窗口大小不再跟随
         cmdline_popup = {
-            position = {
-                row = '30%',
-                col = '50%',
-            },
-            size = {
-                width = math.floor(vim.o.columns * 0.8),
-                max_width = '80%',
-                height = 'auto',
-            },
-            border = { style = 'rounded' },
+            position = { row = '30%', col = '50%' },
+            size = { width = '80%', height = 'auto' },
         },
         popup = {
-            size = {
-                width = math.floor(vim.o.columns * 0.5),
-                max_width = '50%',
-                height = 'auto',
-            },
+            size = { width = '50%', height = 'auto' },
+        },
+        -- LSP hover / signature 浮窗边框: 与 0.12 的 winborder = 'rounded' 保持一致
+        -- (上游 hover 视图默认 border.style = 'none')
+        hover = {
             border = { style = 'rounded' },
-        },
-        popupmenu = {
-            relative = 'editor',
-            position = {
-                row = '55%',
-                col = '50%',
-            },
-            size = {
-                width = math.floor(vim.o.columns * 0.5),
-                max_width = '50%',
-                height = 'auto',
-            },
-            border = {
-                style = 'rounded',
-                padding = { 0, 1 },
-            },
-            win_options = {
-                winhighlight = { Normal = 'Normal', FloatBorder = 'DiagnosticInfo' },
-            },
-        },
-        mini = {
-            size = {
-                width = math.floor(vim.o.columns * 0.3),
-                max_width = '30%',
-                height = 'auto',
-            },
         },
     },
 })
 
+-- noice 高亮只保留我们主动想要的差别, 其余交给 catppuccin 的 noice 集成;
+-- 透明背景由 colorscheme.lua(transparent_background + float.transparent)与
+-- settings/transparency.lua 负责, 这里不再重复设置 NormalFloat / FloatBorder。
+-- 注意: NoiceError / NoiceWarn 这两个组在 noice 里并不存在(消息级别颜色由
+-- NoiceFormatLevel*、以及装了 nvim-notify 时的 Notify* 决定), 不要在这里设置。
 local cmdline_border_fg = colors.frost3
-local search_border_fg = colors.bg3
-local keep_transparent = true
 
 local function set_noice_hls()
     vim.api.nvim_set_hl(0, 'NoiceCmdlinePopup', { bg = keep_transparent and 'NONE' or nil, fg = search_border_fg })
