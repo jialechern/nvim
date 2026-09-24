@@ -23,23 +23,24 @@ snippets.setup({
     },
 })
 
--- 展开或跳到下一个节点: 沿用 LuaSnip 时代"一个键搞定"的手感
+-- 展开/跳节点: 自定义 expand.insert 后 mini.snippets 的 session 不会建立,
+-- 所以只用原生 vim.snippet 会话(高亮与占位符同样是原生的)
 map(keys.snippet_forward, function()
-    if #snippets.expand({ insert = false }) > 0 then
+    if vim.snippet.active({ direction = 1 }) then
+        vim.snippet.jump(1)
+    elseif #snippets.expand({ insert = false }) > 0 then
         snippets.expand()
-    elseif snippets.session.get() ~= nil then
-        snippets.session.jump('next')
     end
 end)
 
 map(keys.snippet_backward, function()
-    if snippets.session.get() ~= nil then
-        snippets.session.jump('prev')
+    if vim.snippet.active({ direction = -1 }) then
+        vim.snippet.jump(-1)
     end
 end)
 
 map(keys.snippet_clear, function()
-    snippets.session.stop()
+    vim.snippet.stop()
 end)
 
 -- 起一个只实现 completion 的进程内 LSP 服务器, 让社区片段进入原生补全菜单

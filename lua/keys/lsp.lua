@@ -1,10 +1,8 @@
 --- lsp.lua
 --- LSP / 补全 / snippet 相关按键 (lsp_leader 命名空间)
----
---- 说明: 前 13 个键由 settings/lsp.lua 在 LspAttach 时注册(buffer-local),
----       open_hint/close_hint 作用于 Neovim 原生补全菜单(vim.lsp.completion),
----       snippet_* 由 plugins/snippets.lua 注册(vim.snippet + mini.snippets)。
+--- 前 13 键由 settings/lsp.lua 在 LspAttach 时注册(buffer-local), snippet_* 由 plugins/snippets.lua 注册
 
+---@type string
 local lsp_leader = '<C-' .. (vim.g.maplocalleader or '\\') .. '>'
 
 --- snippet 按键: 原生片段会话只在插入模式(含 select)中活动
@@ -60,7 +58,8 @@ local module = {
 
     snippet_forward = snippet_key('<C-.>', '展开片段或跳转到下一个节点'),
     snippet_backward = snippet_key('<C-,>', '跳转到上一个片段节点'),
-    snippet_clear = snippet_key('<C-c>', '结束当前片段会话'),
+    -- 不用 <C-c>: 插入模式下它是原生"退出插入但不触发 InsertLeave"的键, 不能被覆盖
+    snippet_clear = snippet_key('<C-;>', '结束当前片段会话'),
 }
 
 return module
