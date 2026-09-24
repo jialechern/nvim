@@ -126,7 +126,6 @@ function M.setup()
                 auto_open = {
                     enabled = true,
                     trigger = true,
-                    luasnip = true,
                     throttle = 50,
                 },
                 view = nil,
@@ -260,6 +259,7 @@ function M.setup()
     map(keys.last_message, function() require('noice').cmd('last') end)
     map(keys.history, function() require('noice').cmd('history') end)
     map(keys.dismiss, function() require('noice').cmd('dismiss') end)
+
 end
 
 return M

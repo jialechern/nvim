@@ -13,14 +13,14 @@ vim.opt.fileformats = { "unix", "dos", "mac" }
 vim.opt.shortmess:append('I')
 
 -- 配置语法高亮
-vim.cmd('syntax on')
 vim.cmd('filetype plugin indent on')
 vim.cmd('filetype on') -- 文档类型自动检测
+vim.cmd('syntax on')
 
 
 -- Hint: use `:h <option>` to figure out the meaning if needed
 -- vim.opt.clipboard = 'unnamedplus'                       -- 使用系统剪贴板
-vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
+vim.opt.completeopt = { 'menu', 'menuone', 'noselect', 'popup' } -- popup: 补全菜单用浮窗(并显示候选预览)
 vim.opt.mouse = 'a' -- 启用鼠标支持
 
 -- Tab
@@ -34,6 +34,7 @@ vim.opt.number = true         -- 开启行号
 vim.opt.relativenumber = true -- 开启相对行号
 vim.opt.cursorline = true     -- 显示光标所在行
 vim.opt.cursorcolumn = true   -- 高亮显示光标所在列
+vim.o.winborder = 'rounded'   -- 所有浮窗(诊断/悬停/补全文档)默认圆角边框
 
 local colors = require('settings.consts').colors
 -- 设置行高亮

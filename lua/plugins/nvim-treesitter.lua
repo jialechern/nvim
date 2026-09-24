@@ -1,5 +1,3 @@
-local M = {}
-
 local filetypes = {
     'bash',
     'c',
@@ -26,8 +24,7 @@ local filetypes = {
     'haskell',
     'scheme',
 }
-
-local parsers = filetypes
+local M = {}
 
 function M.setup()
     vim.cmd.packadd('nvim-treesitter')
@@ -39,16 +36,8 @@ function M.setup()
     end
 
 
-    -- 让 parser 安装到 Neovim 自己的数据目录里
-    ts.setup({
-        install_dir = vim.fn.stdpath('data') .. '/site',
-    })
-
-    -- 自动安装缺失 parser
-    ts.install(parsers)
-
-    -- -- 如果希望第一次启动就等安装完成, 再把上面一行改成
-    -- ts.install(parsers):wait(300000)
+    -- parser(grammar)与 queries 由 nix 提供(参见 plugins.lua 的对照表),
+    -- 因此不再运行时下载/编译: 原先的 install_dir + ts.install(parsers) 已移除
 
     local group = vim.api.nvim_create_augroup('UserTreesitter', { clear = true })
 
@@ -68,6 +57,7 @@ function M.setup()
             vim.opt_local.foldenable = false
         end,
     })
+
 end
 
 return M

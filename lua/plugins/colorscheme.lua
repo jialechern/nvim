@@ -1,9 +1,10 @@
 -- 配置 neovim 的 Catppuccin 配色方案(Mocha 摩卡口味)
+
+-- 加载主题插件
 local M = {}
 
 function M.setup()
-    -- 加载主题插件
-    vim.cmd.packadd('catppuccin')
+    vim.cmd.packadd('catppuccin-nvim')
 
     require('catppuccin').setup({
         -- 口味固定为 Mocha(深色旗舰版)
@@ -88,8 +89,6 @@ function M.setup()
 
         -- 显式控制特定插件的集成(覆盖 default / auto 行为)
         integrations = {
-            -- blink.cmp: 使用带边框风格的补全菜单
-            blink_cmp = { style = 'bordered' },
             -- lualine: 让 lualine 内部直接使用 catppuccin 色值
             lualine = true,
             -- noice.nvim: 匹配 noice 的默认界面风格
@@ -120,6 +119,7 @@ function M.setup()
     vim.api.nvim_create_autocmd('ColorScheme', {
         callback = apply_transparency,
     })
+
 end
 
 return M

@@ -2,17 +2,17 @@
 --- LSP / 补全 / snippet 相关按键 (lsp_leader 命名空间)
 ---
 --- 说明: 前 13 个键由 settings/lsp.lua 在 LspAttach 时注册(buffer-local),
----       open_hint/close_hint 由 blink-cmp 的补全菜单消费,
----       snippet_* 由 luasnip 与 blink-cmp 共同消费。
+---       open_hint/close_hint 作用于 Neovim 原生补全菜单(vim.lsp.completion),
+---       snippet_* 由 plugins/snippets.lua 注册(vim.snippet + mini.snippets)。
 
 local lsp_leader = '<C-' .. (vim.g.maplocalleader or '\\') .. '>'
 
---- snippet 跳转类按键在多个模式下可用
+--- snippet 按键: 原生片段会话只在插入模式(含 select)中活动
 ---@param lhs string
 ---@param desc string
 ---@return KeySpec
 local function snippet_key(lhs, desc)
-    return { lhs = lhs, desc = desc, modes = { 'i', 'n', 'x', 's', 'v', 'o' } }
+    return { lhs = lhs, desc = desc, modes = { 'i', 's' } }
 end
 
 ---@class Keys.Lsp
@@ -36,7 +36,6 @@ end
 ---@field snippet_forward KeySpec    -- 展开/下一节点
 ---@field snippet_backward KeySpec   -- 上一节点
 ---@field snippet_clear KeySpec      -- 清除 snippet
----@field snippet_choice KeySpec     -- 切换可选项
 
 ---@type Keys.Lsp
 local module = {
@@ -59,10 +58,9 @@ local module = {
     open_hint = { lhs = lsp_leader .. 'o', desc = '打开补全菜单' },
     close_hint = { lhs = lsp_leader .. 'x', desc = '关闭补全菜单' },
 
-    snippet_forward = snippet_key('<C-.>', '展开 snippet 或跳转到下一个节点'),
-    snippet_backward = snippet_key('<C-,>', '跳转到上一个 snippet 节点'),
-    snippet_clear = snippet_key('<C-c>', '清除当前 snippet'),
-    snippet_choice = snippet_key("<C-'>", '切换 snippet 的可选项'),
+    snippet_forward = snippet_key('<C-.>', '展开片段或跳转到下一个节点'),
+    snippet_backward = snippet_key('<C-,>', '跳转到上一个片段节点'),
+    snippet_clear = snippet_key('<C-c>', '结束当前片段会话'),
 }
 
 return module

@@ -1,5 +1,5 @@
 --- consts.lua
---- 静态常量: 主题调色板 / 按键行为参数 / snippet 触发词
+--- 静态常量: 主题调色板 / 按键行为参数
 --- 内容继续增长时, 拆分为 settings/consts/<主题>.lua
 
 --- 主题调色板: Catppuccin Mocha 标准色
@@ -30,8 +30,6 @@
 ---@field colors Consts.Colors
 ---@field fast_move_by_lines integer   -- J/K 一次跨越的行数
 ---@field window_resize_step integer   -- 分屏尺寸调整步长
----@field entry_point string           -- 程序入口 snippet 的触发词
----@field test_key string              -- 测试 snippet 的触发词
 
 ---@type Consts
 local module = {
@@ -69,8 +67,6 @@ local module = {
 
     fast_move_by_lines = 5,
     window_resize_step = 5,
-    entry_point = 'init',
-    test_key = 'test',
 }
 
 return module

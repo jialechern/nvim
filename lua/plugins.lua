@@ -1,100 +1,30 @@
--- plugins.lua
+--- plugins.lua
+--- 插件的"来源"由 Nix 负责(home-manager 的 programs.neovim.plugins): 插件被挂在 'packpath'
+--- 的 site/pack/hm/{start,opt} 下。本文件只负责"何时加载"与"按什么顺序配置"。
+---
+--- 懒加载: nix 里声明成 optional = true 的插件进 opt 目录, 由各 plugins/<name>.lua 内部的
+--- vim.cmd.packadd('<目录名>') 按需加载。packadd 认的是 **目录名**(通常是插件仓库名),
+--- 与 nixpkgs 属性名不一定相同:
+---   目录名(packadd)              nixpkgs 属性名
+---   catppuccin-nvim              catppuccin-nvim
+---   lualine.nvim                 lualine-nvim
+---   mini.snippets                mini-snippets
+---   noice.nvim / nui.nvim        noice-nvim / nui-nvim
+---   nvim-lspconfig               nvim-lspconfig
+---   nvim-treesitter              nvim-treesitter
+---   plenary.nvim                 plenary-nvim
+---   telescope.nvim               telescope-nvim
+---   telescope-fzf-native.nvim    telescope-fzf-native-nvim
+--- 核对方法: ls ~/.local/share/nvim/site/pack/hm/opt
+
 local M = {}
 
--- 统一生成 vim.pack 规格
-local function spec(src, name, version, data)
-    local item = {
-        src = src,
-        name = name,
-    }
-    if version ~= nil then
-        item.version = version
-    end
-
-    if data ~= nil then
-        item.data = data
-    end
-
-    return item
-end
-
--- 插件的 安装/同步
-M.specs = {
-    -- 主题插件 (v2.x)
-    spec('https://github.com/catppuccin/nvim', 'catppuccin', vim.version.range('2')),
-
-    -- nvim-treesitter (无 semver 标签, 由 lock 文件锁定 rev)
-    spec('https://github.com/nvim-treesitter/nvim-treesitter', 'nvim-treesitter'),
-
-    -- Latex 插件 (v2.x, 标签格式为 v2.17 等双组件版本)
-    spec('https://github.com/lervag/vimtex', 'vimtex', vim.version.range('2')),
-
-    -- fzf 插件
-    spec('https://github.com/junegunn/fzf', 'fzf', nil, { build_fzf = true }),
-    spec('https://github.com/junegunn/fzf.vim', 'fzf.vim'),
-
-    -- snip 插件
-    spec('https://github.com/L3MON4D3/LuaSnip', 'LuaSnip', vim.version.range('2'), { build_jsregexp = true }),
-
-    -- 补全插件
-    spec('https://github.com/saghen/blink.cmp', 'blink.cmp', vim.version.range('1')),
-    spec('https://github.com/xzbdmw/colorful-menu.nvim', 'colorful-menu.nvim'),
-
-    -- 通知插件
-    spec('https://github.com/nvim-lualine/lualine.nvim', 'lualine.nvim'),
-    spec('https://github.com/folke/noice.nvim', 'noice.nvim', vim.version.range('4')),
-    spec('https://github.com/MunifTanjim/nui.nvim', 'nui.nvim'),
-    spec('https://github.com/rcarriga/nvim-notify', 'nvim-notify', vim.version.range('3')),
-
-    -- 对齐插件
-    spec('https://github.com/junegunn/vim-easy-align', 'vim-easy-align'),
-}
-
-local function packadd(name)
-    pcall(vim.cmd.packadd, name)
-end
-
--- 处理插件的 build 钩子
-local function setup_pack_hooks()
-    vim.api.nvim_create_autocmd('PackChanged', {
-        callback = function(ev)
-            local d = ev.data
-            local spec = d.spec or {}
-            local meta = spec.data or {}
-            local kind = d.kind
-            local path = d.path
-
-            if kind ~= 'install' and kind ~= 'update' then
-                return
-            end
-
-            -- LuaSnip 的可选 jsregexp 构建
-            if meta.build_jsregexp and not (jit and jit.os and jit.os:find('Windows')) then
-                vim.system({ 'make', 'install_jsregexp' }, { cwd = path, text = true }):wait()
-            end
-
-            -- fzf 的安装脚本
-            if meta.build_fzf then
-                packadd(spec.name or 'fzf')
-                pcall(vim.fn['fzf#install'])
-            end
-        end,
-    })
-end
-
 function M.setup()
-    setup_pack_hooks()
-
-    -- 先安装/同步, 但不自动加载
-    vim.pack.add(M.specs, { load = false })
-
-    -- 按原始依赖顺序加载
-    require('plugins.colorscheme').setup()
+    -- 调用顺序即加载顺序, 不要随手挪动
+    require('plugins.colorscheme').setup() -- 主题最先, 否则高亮会被后加载的插件覆盖
     require('plugins.nvim-treesitter').setup()
-    require('plugins.vimtex').setup()
-    require('plugins.fzf').setup()
-    require('plugins.luasnip').setup()
-    require('plugins.blink-cmp').setup()
+    require('plugins.telescope').setup()
+    require('plugins.snippets').setup()
     require('plugins.lualine').setup()
     require('plugins.noice').setup()
     require('plugins.vim-easy-align').setup()
