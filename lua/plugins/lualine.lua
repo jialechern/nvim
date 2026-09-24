@@ -111,7 +111,8 @@ require('lualine').setup({
         lualine_c = {},
         lualine_x = {},
         lualine_y = { search_result, 'filetype' },
-        lualine_z = { '%l:%c', '%p%%/%L' },
+        -- 用 %v(屏幕列)而不是 %c(字节列): 中英文混排时 %c 的数会和肉眼位置对不上
+        lualine_z = { '%l:%v', '%p%%/%L' },
     }),
     inactive_sections = {
         lualine_c = { '%f %y %m' },
