@@ -1,6 +1,8 @@
 --- autocmds.lua
 --- 存放与基础配置相关的自动命令(键位只写在 keys/ 里, 这里只注册行为)
 
+local map = require('utils.map').map
+local keys = require('keys.close_window')
 
 ---@class Settings.Autocmds
 ---@type Settings.Autocmds
@@ -22,11 +24,11 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
   end,
 })
 
--- 高亮复制结果
+-- 高亮复制结果(0.12 只需 vim.hl)
 vim.api.nvim_create_autocmd("TextYankPost", {
   group = augroup("highlight_yank"),
   callback = function()
-    (vim.hl or vim.highlight).on_yank()
+    vim.hl.on_yank()
   end,
 })
 
@@ -41,16 +43,19 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
   end,
 })
 
--- 打开缓冲区时转到最后一个位置
+-- 打开缓冲区时转到最后编辑位置(视图文件只存折叠, 见 settings/base.lua 的 viewoptions)
 vim.api.nvim_create_autocmd("BufReadPost", {
   group = augroup("last_loc"),
+  ---@param event vim.api.keyset.create_autocmd.callback_args
   callback = function(event)
+    ---@type string[]
     local exclude = { "gitcommit" }
     local buf = event.buf
-    if vim.tbl_contains(exclude, vim.bo[buf].filetype) or vim.b[buf].lazyvim_last_loc then
+    if vim.tbl_contains(exclude, vim.bo[buf].filetype) or vim.b[buf].did_jump_last_loc then
       return
     end
-    vim.b[buf].lazyvim_last_loc = true
+    vim.b[buf].did_jump_last_loc = true
+    ---@type [integer, integer]
     local mark = vim.api.nvim_buf_get_mark(buf, '"')
     local lcount = vim.api.nvim_buf_line_count(buf)
     if mark[1] > 0 and mark[1] <= lcount then
@@ -59,38 +64,25 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   end,
 })
 
--- 使用 <q> 关闭某些文件类型
+-- <q> 关闭这些一次性窗口
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("close_with_q"),
   pattern = {
     "PlenaryTestPopup",
     "checkhealth",
     "dbout",
-    "gitsigns-blame",
-    "grug-far",
     "help",
     "lspinfo",
-    "neotest-output",
-    "neotest-output-panel",
-    "neotest-summary",
-    "notify",
     "qf",
-    "spectre_panel",
     "startuptime",
-    "tsplayground",
   },
+  ---@param event vim.api.keyset.create_autocmd.callback_args
   callback = function(event)
     vim.bo[event.buf].buflisted = false
-    vim.schedule(function()
-      vim.keymap.set("n", "q", function()
-        vim.cmd("close")
-        pcall(vim.api.nvim_buf_delete, event.buf, { force = true })
-      end, {
-        buffer = event.buf,
-        silent = true,
-        desc = "Quit buffer",
-      })
-    end)
+    map(keys.close, function()
+      vim.cmd("close")
+      pcall(vim.api.nvim_buf_delete, event.buf, { force = true })
+    end, { buffer = event.buf })
   end,
 })
 
