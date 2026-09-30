@@ -27,6 +27,10 @@ end)
 map(keys.goto_buffer, function()
     ---@type string
     local num = vim.fn.input('请输入缓冲区编号: ')
+    -- 非数字直接忽略: 乱输入拼进 Ex 命令会报 E488
+    if not num:match('^%d+$') then
+        return
+    end
     vim.cmd('buffer ' .. num)
 end)
 

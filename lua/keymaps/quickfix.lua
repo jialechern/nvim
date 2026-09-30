@@ -15,6 +15,10 @@ end)
 map(keys.goto_item, function()
     ---@type string
     local num = vim.fn.input('请输入条目编号: ')
+    -- 非数字直接忽略: 空串/乱输入拼进 Ex 命令会报 E488/E939 或退化为单步
+    if not num:match('^%d+$') then
+        return
+    end
     vim.cmd('cc ' .. num)
 end)
 
@@ -49,6 +53,9 @@ end)
 map(keys.prev_list_by_index, function()
     ---@type string
     local num = vim.fn.input('请输入回溯次数: ')
+    if not num:match('^%d+$') then
+        return
+    end
     vim.cmd(num .. 'colder')
 end)
 
@@ -59,5 +66,8 @@ end)
 map(keys.next_list_by_index, function()
     ---@type string
     local num = vim.fn.input('请输入跳转次数: ')
+    if not num:match('^%d+$') then
+        return
+    end
     vim.cmd(num .. 'cnewer')
 end)

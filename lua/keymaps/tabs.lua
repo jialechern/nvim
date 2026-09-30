@@ -41,12 +41,19 @@ end)
 map(keys.goto_tab, function()
     ---@type string
     local num = vim.fn.input('请输入标签页编号: ')
+    -- 非数字直接忽略: 乱输入拼进 Ex 命令会报 E488
+    if not num:match('^%d+$') then
+        return
+    end
     vim.cmd('tabnext ' .. num)
 end)
 
 map(keys.move, function()
     ---@type string
     local num = vim.fn.input('请输入标签页编号: ')
+    if not num:match('^%d+$') then
+        return
+    end
     vim.cmd('tabmove ' .. num)
 end)
 
