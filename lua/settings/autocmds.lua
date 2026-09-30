@@ -70,9 +70,7 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = {
     "PlenaryTestPopup",
     "checkhealth",
-    "dbout",
     "help",
-    "lspinfo",
     "qf",
     "startuptime",
   },
