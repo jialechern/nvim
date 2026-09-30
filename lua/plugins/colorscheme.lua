@@ -1,14 +1,11 @@
 -- 配置 neovim 的 Catppuccin 配色方案(Mocha 摩卡口味)
+-- 只写与上游默认值不同的选项(catppuccin 2.0 defaults 见 src/lua/catppuccin/init.lua);
+-- 与默认相同的键(background/dim_inactive/no_italic 等与 underlines)已清理, 避免假配置噪声
 
 vim.cmd.packadd('catppuccin-nvim')
 
 require('catppuccin').setup({
     flavour = 'mocha',
-    -- 仅在 flavour = 'auto' 时才生效, 此处保留备用
-    background = {
-        light = 'latte',
-        dark = 'mocha',
-    },
 
     transparent_background = true,
     -- 浮动窗口同样透明
@@ -19,34 +16,15 @@ require('catppuccin').setup({
     -- 同步调色板到终端颜色变量 g:terminal_color_0 ~ g:terminal_color_15
     term_colors = true,
 
-    -- 非当前窗口不做背景变暗
-    dim_inactive = {
-        enabled = false,
-    },
-
-    -- false = 允许斜体 / 粗体 / 下划线
-    no_italic = false,
-    no_bold = false,
-    no_underline = false,
-
-    -- 语法高亮风格控制(留空 {} 表示不添加额外样式)
+    -- 语法高亮风格: 上游默认给 comments/conditionals 加斜体、@module/@tag 等硬编码斜体, 全部去掉
+    -- (其余 styles/underlines/lsp_styles 的默认值本就符合预期, 不重复声明)
     styles = {
         comments = {},
         conditionals = {},
-        loops = {},
-        functions = {},
-        keywords = {},
-        strings = {},
-        variables = {},
-        numbers = {},
-        booleans = {},
-        properties = {},
-        types = {},
-        operators = {},
-        miscs = {}, -- 关掉 @module/@tag 等硬编码斜体
+        miscs = {},
     },
 
-    -- LSP 诊断相关
+    -- LSP 诊断相关: 虚拟文本不加斜体(上游默认 { "italic" })
     lsp_styles = {
         virtual_text = {
             errors = {},
@@ -55,33 +33,20 @@ require('catppuccin').setup({
             information = {},
             ok = {},
         },
-        -- 错误单词下方的波纹线
-        underlines = {
-            errors = { 'underline' },
-            hints = { 'underline' },
-            warnings = { 'underline' },
-            information = { 'underline' },
-            ok = { 'underline' },
-        },
-        -- 关掉 Inlay Hint 的色块, 保持透明
+        -- 关掉 Inlay Hint 的色块, 保持透明(上游默认 background = true)
         inlay_hints = {
             background = false,
         },
     },
 
-    -- 手动覆盖调色板原色值 / 任意 highlight group, 此处保持为空
-    color_overrides = {},
-    custom_highlights = {},
-
-    -- auto 集成: 自动检测已装插件并开启对应集成(默认关, 这里显式打开)
-    auto_integrations = true,
-
     integrations = {
         -- 命令行 / 消息 / LSP 文档浮窗配色(命令行浮窗边框色见 plugins/noice.lua)
         noice = true,
-        -- 通知配色跟随后端: 现在不装 nvim-notify, 走 noice 内置 mini 视图
-        -- (NoiceMini / NoiceFormatLevel*); 以后装 snacks.nvim 由 auto_integrations 接管
+        -- 通知配色跟随后端: 现在不装 nvim-notify, 走 noice 内置 mini 视图(NoiceMini / NoiceFormatLevel*)
     },
+
+    -- 不开 auto_integrations: 它只检测 vim.pack/lazy/packer 管理的插件(lib/detect_integrations.lua),
+    -- 本仓库插件由 nix 挂 pack/hm, 检测恒为空 —— 需要的集成必须像 noice 一样显式列出
 
     -- 编译缓存路径与默认一致(stdpath('cache')/catppuccin), 不再重复声明
 })
