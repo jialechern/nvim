@@ -83,7 +83,10 @@ local function search_result()
     end
     ---@type integer
     local total = math.min(searchcount.total or 0, searchcount.maxcount)
-    return last_search .. '(' .. searchcount.current .. '/' .. total .. ')'
+    -- 搜索模式原样进状态栏会被按 % 解析(%s/%b 之类被当成 item 吃掉);
+    -- 与 lualine 内置组件一致, 先经 stl_escape 转义
+    local pattern = require('lualine.utils.utils').stl_escape(last_search)
+    return pattern .. '(' .. searchcount.current .. '/' .. total .. ')'
 end
 
 --- 文件状态标记: '+' 已修改, '-' 只读或不可改
