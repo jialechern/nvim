@@ -41,14 +41,8 @@ telescope.setup({
         find_files = { hidden = true },
         buffers = { sort_mru = true },
     },
-    extensions = {
-        fzf = {
-            fuzzy = true,                   -- 模糊匹配交给 fzf-native
-            override_generic_sorter = true, -- 覆盖通用排序器
-            override_file_sorter = true,    -- 覆盖文件排序器
-            case_mode = 'smart_case',
-        },
-    },
+    -- fzf 扩展(fuzzy/override_*/case_mode)与 fzf-native 默认值逐键相同, 不重复声明;
+    -- load_extension 即按默认启用
 })
 
 if has_fzf_native then
