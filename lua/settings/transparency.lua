@@ -1,6 +1,7 @@
 --- transparency.lua
 --- 只在无插件路径(--noplugin，没有 catppuccin)时给高亮组去背景;
 --- 插件路径下 catppuccin 的 transparent_background / float.transparent 已覆盖这些组。
+--- 注意: CursorLine/CursorColumn 不在此处理 —— 插件路径由 catppuccin 决定, 无插件路径走内置默认。
 
 ---@class Settings.Transparency
 ---@field apply_transparency fun()

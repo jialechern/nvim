@@ -28,13 +28,9 @@ vim.opt.number = true         -- 开启行号
 vim.opt.relativenumber = true -- 开启相对行号
 vim.opt.cursorline = true     -- 显示光标所在行
 vim.opt.cursorcolumn = true   -- 高亮显示光标所在列
+-- CursorLine/CursorColumn 的背景色不再在此设置: 插件路径由 catppuccin 决定,
+-- 无插件路径走内置默认; 写在这里会在插件路径被覆盖成死配置
 vim.o.winborder = 'rounded'   -- 所有浮窗(诊断/悬停/补全文档)默认圆角边框
-
-local colors = require('settings.consts').colors
--- 设置行高亮
-vim.api.nvim_set_hl(0, 'CursorLine', { bg = colors.bg1 })
--- 设置列高亮
-vim.api.nvim_set_hl(0, 'CursorColumn', { bg = colors.bg1 })
 
 -- 光标闪烁: 发送闪烁序列, 动画节奏由终端 (kitty cursor_blink_interval) 统一控制
 -- 与 fish 光标保持一致: normal/visual 方块、insert 竖线、replace 下划线
