@@ -13,29 +13,30 @@
 配置**直接从工作区加载**(实测 `nvim` 的 runtimepath 第一项就是 `~/.config/nvim`), 所以改完 Lua 重启 nvim 即生效。
 
 - 插件是例外: 插件目录由 nix 声明并挂到 `~/.local/share/nvim/site/pack/hm/{start,opt}`, 新增/删除/改名插件必须改 `/etc/nixos` 里的 `programs.neovim.plugins` 并 rebuild, 仓库侧的 `packadd` 才能找到它们。
+- 例外: Neovim 自带的 dist 包(`$VIMRUNTIME/pack/dist/opt/` 下的 `nvim.undotree`/`nvim.difftool`)不归 nix 清单管, `packadd` 直接可用, 不要为它们改 /etc/nixos。
 - 仓库仍是 gitee flake input(`nvim-dotfiles`)的源: 若在别处用 NixOS 部署本配置, 仍走 提交 → `git push`(gitee main) → `nix flake update nvim-dotfiles` → `home-manager switch`; 后两步是系统级/不可逆操作, 只在用户明确要求时执行。
 - 在工作区直接跑 `nvim` 会写线上 `~/.local/share/nvim`(treesitter parser 等), 别用它当"临时沙箱"。
 
-## 验证(已在当前工作区跑通, 均不联网、不改线上)
+## 验证(已在当前工作区跑通, 均不联网; `-i NONE` 避免写 shada; #3 完整加载仍会追加 `~/.local/state/nvim/lsp.log` 并写 catppuccin 编译缓存, 属 state/cache 侧常规日志)
 
 ```bash
 # 1) 全部 Lua 文件语法检查(最快, 不加载配置) → 期望输出 failures=0
-nvim --headless -u NONE -c 'lua local bad=0 for _,f in ipairs(vim.fn.glob("**/*.lua", false, true)) do local fn,e=loadfile(f) if not fn then bad=bad+1 io.write("FAIL "..f..": "..tostring(e).."\n") end end io.write("failures="..bad.."\n")' -c 'qa!'
+nvim --headless -u NONE -i NONE -c 'lua local bad=0 for _,f in ipairs(vim.fn.glob("**/*.lua", false, true)) do local fn,e=loadfile(f) if not fn then bad=bad+1 io.write("FAIL "..f..": "..tostring(e).."\n") end end io.write("failures="..bad.."\n")' -c 'qa!'
 
-# 2) 不加载插件地加载仓库(覆盖 settings/ keymaps/ snippets 的 require 链, 退出码应为 0)
-nvim --headless --noplugin --cmd "set rtp^=$PWD" -u "$PWD/init.lua" -c 'qa!'
+# 2) 不加载插件地加载仓库(覆盖 settings/ keymaps/ 的 require 链, plugins 整体跳过, 退出码应为 0)
+nvim --headless --noplugin -i NONE --cmd "set rtp^=$PWD" -u "$PWD/init.lua" -c 'qa!'
 
 # 3) 完整加载(含 nix 提供的插件; packadd 名写错会在这一步以 require 失败暴露, 退出码应为 0)
-nvim --headless -u "$PWD/init.lua" --cmd "set rtp^=$PWD" -c 'qa!'
+nvim --headless -i NONE -u "$PWD/init.lua" --cmd "set rtp^=$PWD" -c 'qa!'
 
 # 4) 快捷键自检 → 期望输出 keymap problems=0
-nvim --headless -u "$PWD/init.lua" --cmd "set rtp^=$PWD" -c 'lua local p=require("utils.map").check() io.write("keymap problems="..#p.."\n") for _,s in ipairs(p) do io.write(s.."\n") end' -c 'qa!'
+nvim --headless -i NONE -u "$PWD/init.lua" --cmd "set rtp^=$PWD" -c 'lua local p=require("utils.map").check() io.write("keymap problems="..#p.."\n") for _,s in ipairs(p) do io.write(s.."\n") end' -c 'qa!'
 
 # 5) 核对 nix 侧插件目录名(packadd 认的是目录名, 不是 nixpkgs 属性名)
 ls -1 ~/.local/share/nvim/site/pack/hm/opt
 
 # 6) 离线类型检查 → 期望 no problems found(不带 VIMRUNTIME 时运行时类型会解析不到)
-export VIMRUNTIME=$(nvim --headless -u NONE -c 'lua io.write(vim.fn.expand("$VIMRUNTIME"))' -c 'qa!')
+export VIMRUNTIME=$(nvim --headless -u NONE -i NONE -c 'lua io.write(vim.fn.expand("$VIMRUNTIME"))' -c 'qa!')
 lua-language-server --check=. --checklevel=Warning
 ```
 
