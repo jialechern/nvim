@@ -28,6 +28,7 @@ local consts = require('settings.consts')
 ---@type Keys.Base
 local module = {
     -- 领头键转译: 在插入/命令行模式下输入对侧的领头键
+    -- 代价: 插入/命令行模式下单独输入 `/`、`\` 需等 timeoutlen(默认 1000ms)才上屏, 属有意取舍
     switch_to_local_leader = { lhs = '<leader><localleader>', desc = '插入副领头键 <LocalLeader>', modes = { 'i', 'c' } },
     switch_to_leader = { lhs = '<localleader><leader>', desc = '插入领头键 <Leader>', modes = { 'i', 'c' } },
 

@@ -20,6 +20,7 @@ local module = {
     down = { lhs = '<C-A-Down>', desc = '将当前窗口移至最下' },
     left = { lhs = '<C-A-Left>', desc = '将当前窗口移至最左' },
     right = { lhs = '<C-A-Right>', desc = '将当前窗口移至最右' },
+    -- 备注: <C-A-*> 会被 Neovim 内部规范化为 <M-C-*>, :map 输出与表内记法不一致, 排查键位时注意
 }
 
 return module
