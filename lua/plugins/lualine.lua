@@ -81,8 +81,10 @@ local function search_result()
     if not ok or not searchcount or searchcount.incomplete == 1 then
         return ''
     end
+    -- maxcount 加 or 兕底: searchcount 理论上可返回空字典(上游手册), 此时该键为 nil 会拋错;
+    -- 与官方 searchcount 组件一致: 限流 + 出错静默(大文件里 searchcount 可能很慢)
     ---@type integer
-    local total = math.min(searchcount.total or 0, searchcount.maxcount)
+    local total = math.min(searchcount.total or 0, searchcount.maxcount or 999)
     -- 搜索模式原样进状态栏会被按 % 解析(%s/%b 之类被当成 item 吃掉);
     -- 与 lualine 内置组件一致, 先经 stl_escape 转义
     local pattern = require('lualine.utils.utils').stl_escape(last_search)
