@@ -96,16 +96,6 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- 文本文件类型中的换行和拼写检查
-vim.api.nvim_create_autocmd("FileType", {
-  group = augroup("wrap_spell"),
-  pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
-  callback = function()
-    vim.opt_local.wrap = true
-    vim.opt_local.spell = true
-  end,
-})
-
 -- 修复 json 文件的隐藏级别
 vim.api.nvim_create_autocmd({ "FileType" }, {
   group = augroup("json_conceal"),
