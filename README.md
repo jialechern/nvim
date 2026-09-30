@@ -51,8 +51,6 @@
     ```
     关于 nixd: 现在 nixd 必须通过 nix 安装, 使用 home-manager 配置文件即可, 运行 `home-manager switch`.
 - 通过 Mason.nvim 插件或是通过 `Mason` 命令行软件进行安装
-#### 其它依赖
-...
 ## 去除插件依赖
 
 通过 neovim 的自带参数和 shell 的别名功能去除:
