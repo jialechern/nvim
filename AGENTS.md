@@ -1,6 +1,6 @@
 # AGENTS.md
 
-个人 Neovim 配置(Lua, 约 2.5k 行 / 65 个文件)。无 lint / format / 测试 / CI / 构建步骤, 验证即"加载配置不报错"。
+个人 Neovim 配置(Lua, 47 个文件 / 约 2.3k 行)。无 lint / format / 测试 / CI / 构建步骤, 验证即"加载配置不报错"。
 
 ## 硬性前提
 
@@ -66,7 +66,7 @@ lua-language-server --check=. --checklevel=Warning
 - snippets: 自研片段已全部弃用(`snippets/` 目录不存在, 不要重建), 只用社区集合; 片段会经 mini.snippets 起的进程内 LSP 服务器进入原生补全菜单。
 - 类型标注: 仓库根 `.luarc.json`(LuaJIT + `undefined-field` 提到 Warning + `different-requires` 降为 Information + 忽略 `.pi`)的 `workspace.library` 指向 `${env:VIMRUNTIME}/lua`, 才能解析 `vim.keymap.set.Opts`、`vim.api.keyset.create_autocmd.callback_args` 等运行时类型; 离线跑 `lua-language-server --check=. --checklevel=Warning` 前要 `export VIMRUNTIME`。
   - `different-requires` 降级的原因: `require('plugins.noice')` 与 `require('noice')` 都会被 lua-language-server 解析到 `lua/plugins/noice.lua`(插件源码不在 workspace), 属误报。
-- 主题: catppuccin mocha + 透明背景。高亮覆盖集中在 `lua/plugins/colorscheme.lua` 与 `lua/settings/transparency.lua`(后者被 colorscheme 与无插件路径共用, 改透明相关走这里)。
+- 主题: catppuccin mocha + 透明背景。高亮覆盖分两条互不重叠的路径: `lua/plugins/colorscheme.lua`(catppuccin 选项, 插件路径)与 `lua/settings/transparency.lua`(`--noplugin` 时由 settings.lua 调用); 改透明相关先确认走哪条。
 - treesitter: **纯原生**(Neovim 0.12), 不依赖 nvim-treesitter 插件 —— `lua/settings/treesitter.lua`(settings.lua 里无条件加载, --noplugin 下也生效)只做 `vim.treesitter.start()` 高亮 + `foldexpr` 折叠; parser 与 queries 全由 nix 提供(两个 start 包: `pack/hm/start/nvim-treesitter-grammars` 提供 320 个 parser, `pack/hm/start/nvim-treesitter-queries` 提供 300+ 语言的 queries, 取自上游 nvim-treesitter 的 `runtime/queries`), 声明在 `/etc/nixos/home/shell/nvim.nix`; `~/.local/share/nvim/site/{parser,parser-info,queries}` 是旧 ts.install 残留, 已删除; **site/pack/hm 不能删**。0.12 原生没有 treesitter 缩进, 缩进交给 `$VIMRUNTIME/indent/<ft>.vim`。新增语言: nix grammar 列表 + 该文件的 `filetypes` 各加一项(缺 parser 时静默跳过不报错)。0.12 还内置了 treesitter 增量选择: Visual 模式 `an`/`in`/`[n`/`]n`/`[N`/`]N`。
 
 ## 外部依赖(不在本仓库)
