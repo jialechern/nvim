@@ -1,7 +1,8 @@
 --- settings-base.lua
 
 -- 字体编码
--- 自动识别文件编码优先级
+-- 自动识别文件编码优先级(偏离内置默认已实测无影响: UTF-8/UTF-16 BOM 往返与内置一致;
+-- gb2312 是 gbk 的子集, 排在后面实际不可达, 保留仅为语义声明)
 vim.opt.fileencodings = { "utf-8", "gbk", "gb2312", "ucs-2le", "latin1" }
 -- 修复代码文件换行符/特殊字符乱码
 vim.opt.fileformats = { "unix", "dos", "mac" }
