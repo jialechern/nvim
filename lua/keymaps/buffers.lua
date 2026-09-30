@@ -3,6 +3,7 @@
 
 local map = require('utils.map').map
 local keys = require('keys.buffers')
+local input = require('utils.input')
 
 map(keys.previous, function()
     vim.cmd('bprevious')
@@ -25,10 +26,9 @@ map(keys.list, function()
 end)
 
 map(keys.goto_buffer, function()
-    ---@type string
-    local num = vim.fn.input('请输入缓冲区编号: ')
-    -- 非数字直接忽略: 乱输入拼进 Ex 命令会报 E488
-    if not num:match('^%d+$') then
+    -- buffer 的编号从 1 起, 0 会报 E939(实测; 切 alternate 用的是下面的 alternate_file 键)
+    local num = input.ask_number('请输入缓冲区编号: ')
+    if not num then
         return
     end
     vim.cmd('buffer ' .. num)

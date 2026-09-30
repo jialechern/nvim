@@ -3,6 +3,7 @@
 
 local map = require('utils.map').map
 local keys = require('keys.quickfix')
+local input = require('utils.input')
 
 map(keys.open_fixwindow, function()
     vim.cmd('copen')
@@ -13,10 +14,9 @@ map(keys.close_fixwindow, function()
 end)
 
 map(keys.goto_item, function()
-    ---@type string
-    local num = vim.fn.input('请输入条目编号: ')
-    -- 非数字直接忽略: 空串/乱输入拼进 Ex 命令会报 E488/E939 或退化为单步
-    if not num:match('^%d+$') then
+    -- cc 的条目编号从 1 起, 0 会报 E939, 一并在 ask_number 里拒绝
+    local num = input.ask_number('请输入条目编号: ')
+    if not num then
         return
     end
     vim.cmd('cc ' .. num)
@@ -51,9 +51,8 @@ map(keys.prev_list, function()
 end)
 
 map(keys.prev_list_by_index, function()
-    ---@type string
-    local num = vim.fn.input('请输入回溯次数: ')
-    if not num:match('^%d+$') then
+    local num = input.ask_number('请输入回溯次数: ')
+    if not num then
         return
     end
     vim.cmd(num .. 'colder')
@@ -64,9 +63,8 @@ map(keys.next_list, function()
 end)
 
 map(keys.next_list_by_index, function()
-    ---@type string
-    local num = vim.fn.input('请输入跳转次数: ')
-    if not num:match('^%d+$') then
+    local num = input.ask_number('请输入跳转次数: ')
+    if not num then
         return
     end
     vim.cmd(num .. 'cnewer')
