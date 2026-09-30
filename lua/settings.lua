@@ -17,6 +17,10 @@ require('settings.autocmds')
 -- 设置根据文件扩展名配置文件类型
 require('settings.filetype')
 
+-- 按文件类型应用定制, 每个关注点一个模块(取代原 after/ftplugin/*):
+require('settings.indent')   -- 缩进(宽度 + lisp 开关)
+require('settings.format')   -- 格式化工具(formatprg)
+
 -- 原生 treesitter(高亮/折叠): 按 FileType 启用, 与插件无关(--noplugin 下也生效)
 require('settings.treesitter')
 
