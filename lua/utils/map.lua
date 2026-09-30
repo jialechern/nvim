@@ -39,8 +39,10 @@ local function map(spec, rhs, opts)
 
     opts = opts or {}
     local modes = to_mode_list(opts.modes or spec.modes or 'n')
-    local options = vim.tbl_extend('force', { silent = true, desc = spec.desc }, opts)
+    local options = vim.tbl_extend('force', { silent = true }, opts)
     options.modes = nil -- 仅供本函数使用, 不能传给 vim.keymap.set
+    -- desc 是唯一文档来源(写在 keys 表里), 即使 opts 传了也以 spec 为准, 防止注册处静默改写
+    options.desc = spec.desc
 
     local info = debug.getinfo(2, 'Sl')
     local source = string.format('%s:%d', info and info.short_src or '?', info and info.currentline or 0)
