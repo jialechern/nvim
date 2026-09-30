@@ -19,6 +19,7 @@ local fuzzy_finder_leader = '<C-q>'
 ---@field history KeySpec                -- 命令历史
 ---@field search KeySpec                 -- 搜索历史
 ---@field commands KeySpec               -- 查找命令
+---@field keymaps KeySpec                -- 查找快捷键
 ---@field snippets KeySpec               -- 插入片段
 
 ---@type Keys.FuzzyFinder
@@ -39,6 +40,7 @@ local module = {
     history = { lhs = fuzzy_finder_leader .. 'H', desc = '命令历史' },
     search = { lhs = fuzzy_finder_leader .. 's', desc = '搜索历史' },
     commands = { lhs = fuzzy_finder_leader .. 'c', desc = '查找命令' },
+    keymaps = { lhs = fuzzy_finder_leader .. 'k', desc = '查找快捷键' },
     snippets = { lhs = fuzzy_finder_leader .. 'S', desc = '选择并插入片段' },
 }
 

@@ -79,6 +79,10 @@ map(keys.jumps, builtin.jumplist)
 map(keys.history, builtin.command_history)
 map(keys.search, builtin.search_history)
 map(keys.commands, builtin.commands)
+map(keys.keymaps, function()
+    -- 只列真实键位: 默认的 show_plug 会把 matchit/plenary 的 <Plug> 映射一起列出来
+    builtin.keymaps({ show_plug = false })
+end)
 map(keys.snippets, function()
     -- 片段不经过 telescope: 交给 mini.snippets 的选择 UI(由 noice 渲染)
     ---@type boolean, table
