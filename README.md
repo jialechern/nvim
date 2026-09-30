@@ -27,10 +27,11 @@
     ```
 ### lsp 服务器的安装
 现在使用的 lsp 服务器有:
+- basedpyright: Python 语言服务器(类型检查)
 - clangd: C/C++ 语言服务器
 - lua-language-server: Lua 语言服务器
 - marksman: Markdown 语言服务器
-- ruff: Python 语言服务器
+- ruff: Python linter/formatter (LSP 只提供诊断与格式化)
 - rust-analyzer: Rust 语言服务器
 - taplo: TOML 语言服务器
 - texlab: LaTeX 语言服务器
@@ -38,6 +39,7 @@
 - typescript-language-server: TypeScript 语言服务器
 - nixd: nix 语言服务器
 - haskell-language-server: Haskell 语言服务器
+- guile-lsp-server: Scheme (Guile) 语言服务器(只在 scheme.guile 文件类型上启动)
 
 #### 可选的安装办法有:
 - 通过 home-manager 进行安装(推荐)
