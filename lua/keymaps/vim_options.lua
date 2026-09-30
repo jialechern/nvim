@@ -19,7 +19,8 @@ end)
 map(keys.grep_format, function()
     ---@type string
     local grepformat = vim.fn.input('设定 grepformat(grep-format) 为: ', '')
-    vim.opt.grepformat = grepformat
+    -- 与配对的 grepprg 一致走 buffer-local(grepformat 是 global-local 选项), 换 buffer 不分裂
+    vim.bo.grepformat = grepformat
 end)
 
 map(keys.shell_pipe, function()
