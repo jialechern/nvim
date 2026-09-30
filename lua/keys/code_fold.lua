@@ -26,8 +26,8 @@ local module = {
 
     close = nx(fold_leader .. 'c', '关闭光标所在的折叠'),
     open = nx(fold_leader .. 'o', '打开光标所在的折叠'),
-    delete = nx(fold_leader .. 'd', '删除光标所在的折叠'),
-    fold = nx(fold_leader .. 'f', '创建折叠'),
+    delete = nx(fold_leader .. 'd', '删除光标所在的折叠(仅 manual/marker 折叠方式)'),
+    fold = nx(fold_leader .. 'f', '创建折叠(仅 manual/marker 折叠方式)'),
     expand_all = nx(fold_leader .. 'e', '展开所有折叠'),
     close_all = nx(fold_leader .. 'a', '关闭所有折叠'),
 }
