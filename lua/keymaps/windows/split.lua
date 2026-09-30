@@ -4,22 +4,20 @@
 local map = require('utils.map').map
 local keys = require('keys.windows.split')
 
+-- 方位用窗口修饰符控制(aboveleft/belowright, 见 :h :aboveleft):
+-- 旧写法先改全局的 splitbelow/splitright 再 split, 一次分屏会把会话默认写穿
 map(keys.up, function()
-    vim.cmd('set nosplitbelow')
-    vim.cmd('split')
+    vim.cmd('aboveleft split')
 end)
 
 map(keys.down, function()
-    vim.cmd('set splitbelow')
-    vim.cmd('split')
+    vim.cmd('belowright split')
 end)
 
 map(keys.left, function()
-    vim.cmd('set nosplitright')
-    vim.cmd('vsplit')
+    vim.cmd('aboveleft vsplit')
 end)
 
 map(keys.right, function()
-    vim.cmd('set splitright')
-    vim.cmd('vsplit')
+    vim.cmd('belowright vsplit')
 end)
