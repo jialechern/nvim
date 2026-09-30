@@ -19,7 +19,7 @@ M.formatters = {
     nix = 'nixfmt -',
     python = 'black -q -',
     rust = 'rustfmt --emit stdout',
-    tex = 'latexindent -m',
+    tex = 'latexindent -m -c ~/.cache/nvim/latexindent', -- -c 把 indent.log 从 cwd 挪进缓存目录(目录不存在时工具会自建)
 }
 
 vim.api.nvim_create_autocmd('FileType', {
