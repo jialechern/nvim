@@ -72,7 +72,6 @@ vim.api.nvim_create_autocmd("FileType", {
     "checkhealth",
     "help",
     "qf",
-    "startuptime",
   },
   ---@param event vim.api.keyset.create_autocmd.callback_args
   callback = function(event)
