@@ -110,10 +110,9 @@ vim.api.nvim_create_user_command('GrepWord', function(opts)
 end, { nargs = '?', desc = '用 ripgrep 搜索光标下的词(或指定词)' })
 
 vim.api.nvim_create_user_command('RgVisual', function()
+    -- 用未命名寄存器(最近一次 yank/删除): 可视选区不会自动进寄存器,
+    -- 且本命令未声明 range, 从可视模式带 '<,'> 调用会报 E481
     local txt = fn.getreg('"')
-    if txt == '' then
-        txt = fn.getreg('v')
-    end
     -- 多行只取第一行: rg 默认不跨行, 且换行会被 telescope 的 escape_chars 二次转义
     ---@type string
     local search = (txt:match('^[^\n]*') or '')
@@ -122,7 +121,7 @@ vim.api.nvim_create_user_command('RgVisual', function()
     else
         builtin.live_grep()
     end
-end, { nargs = 0, desc = '搜索最近一次复制/选中的文本' })
+end, { nargs = 0, desc = '搜索最近一次 yank/删除的文本' })
 
 vim.api.nvim_create_user_command('FilesCwd', function()
     -- 优先从 git 仓库根目录开始查找(等价于原来 lcd 到仓库根再查文件)
