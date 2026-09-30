@@ -1,6 +1,7 @@
 --- lsp.lua
 --- LSP / 补全 / snippet 相关按键 (lsp_leader 命名空间)
---- 前 13 键由 settings/lsp.lua 在 LspAttach 时注册(buffer-local), snippet_* 由 plugins/snippets.lua 注册
+--- 除 snippet_* 外全部由 settings/lsp.lua 在 LspAttach 时注册(buffer-local;
+--- 其中 type_hint/open_hint/close_hint 为条件注册), snippet_* 由 plugins/snippets.lua 注册
 
 ---@type string
 local lsp_leader = '<C-' .. (vim.g.maplocalleader or '\\') .. '>'
@@ -53,8 +54,8 @@ local module = {
     setloclist = { lhs = lsp_leader .. 'q', desc = '把当前缓冲区诊断推送到 location list' },
     type_hint = { lhs = lsp_leader .. 't', desc = '开/关参数提示(inlay hints)' },
     doc = { lhs = lsp_leader .. 'D', desc = '开/关诊断显示' },
-    open_hint = { lhs = lsp_leader .. 'o', desc = '打开补全菜单' },
-    close_hint = { lhs = lsp_leader .. 'x', desc = '关闭补全菜单' },
+    open_hint = { lhs = lsp_leader .. 'o', desc = '打开补全菜单', modes = 'i' },
+    close_hint = { lhs = lsp_leader .. 'x', desc = '关闭补全菜单', modes = 'i' },
 
     snippet_forward = snippet_key('<C-.>', '展开片段或跳转到下一个节点'),
     snippet_backward = snippet_key('<C-,>', '跳转到上一个片段节点'),
