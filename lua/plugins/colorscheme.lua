@@ -1,5 +1,5 @@
 -- 配置 neovim 的 Catppuccin 配色方案(Mocha 摩卡口味)
--- 只写与上游默认值不同的选项(catppuccin 2.0 defaults 见 src/lua/catppuccin/init.lua);
+-- 只写与上游默认值不同的选项(catppuccin 2.0 defaults 见 lua/catppuccin/init.lua 的 default_options);
 -- 与默认相同的键(background/dim_inactive/no_italic 等与 underlines)已清理, 避免假配置噪声
 
 vim.cmd.packadd('catppuccin-nvim')

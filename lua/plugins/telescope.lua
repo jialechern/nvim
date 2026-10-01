@@ -86,7 +86,8 @@ map(keys.keymaps, function()
     builtin.keymaps({ show_plug = false })
 end)
 map(keys.snippets, function()
-    -- 片段不经过 telescope: 交给 mini.snippets 的选择 UI(由 noice 渲染)
+    -- 片段不经过 telescope: 走 mini.snippets 的 vim.ui.select 默认实现(编号列表);
+    -- 这里的命令行与相关消息仍由 noice 渲染, 但列表本身不是 noice 提供的
     ---@type boolean, table
     local ok, snippets = pcall(require, 'mini.snippets')
     if ok and #snippets.expand({ insert = false }) > 0 then
