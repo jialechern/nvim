@@ -10,8 +10,8 @@ vim.opt.fileformats = { 'unix', 'dos', 'mac' }
 -- 禁用默认的启动界面
 vim.opt.shortmess:append('I')
 
--- 文件类型/缩进插件(Neovim 默认已开语法高亮与类型检测, 不必再写 syntax on / filetype on)
-vim.cmd('filetype plugin indent on')
+-- (这里原本写 `filetype plugin indent on`; Neovim 默认已启用 filetype 检测与 ftplugin/indent,
+--  实测 -u NORC 打开 .rs/.py 时 ftplugin 与 indent 脚本都已加载, 故删除)
 
 -- Hint: use `:h <option>` to figure out the meaning if needed
 -- vim.opt.clipboard = 'unnamedplus'                       -- 使用系统剪贴板
