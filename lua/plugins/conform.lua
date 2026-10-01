@@ -46,9 +46,12 @@ conform.setup({
     end,
 
     formatters = {
-        -- 沿用旧 formatprg 的两个参数: -m 允许调整换行, -c 把 indent.log 挪出项目目录
+        -- 沿用旧 formatprg 的两个参数: -m 允许调整换行, -c 把 indent.log 挪出项目目录。
+        -- 用 append_args 而不是覆盖 args: 范围格式化(可视选中后 gq)走的是上游 range_args,
+        -- 只覆盖 args 会让这两个参数在范围路径上静默丢失(indent.log 落回工作目录);
+        -- append_args 会被同时追加到 args 与 range_args(conform/util.lua 的 add_formatter_args)
         latexindent = {
-            args = { '-m', '-c', vim.fn.stdpath('cache') .. '/latexindent' },
+            append_args = { '-m', '-c', vim.fn.stdpath('cache') .. '/latexindent' },
         },
     },
 })
