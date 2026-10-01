@@ -1,10 +1,10 @@
 # AGENTS.md
 
-个人 Neovim 配置(Lua, 48 个文件 / 约 2.4k 行)。无测试 / CI / 构建步骤, 验证即"加载配置不报错"(格式化由编辑器侧的 conform 负责, 见下)。
+个人 Neovim 配置(Lua, 49 个文件 / 约 2.4k 行; 计数口径 = `git ls-files --cached --others --exclude-standard '*.lua' | wc -l`, 含尚未提交的新文件)。无测试 / CI / 构建步骤, 验证即"加载配置不报错"(格式化由编辑器侧的 conform 负责, 见下)。
 
 ## 硬性前提
 
-- 需要 Neovim >= 0.12(`vim.lsp.config`、`vim.lsp.completion`、`vim.snippet`、`vim.treesitter.start`、`winborder`); 本机为 0.12.5。
+- 需要 Neovim >= 0.12(本机 0.12.5)。注意别把这条当精确结论: 配置里用到的 `vim.lsp.config`/`vim.lsp.enable`、`winborder`、`vim.lsp.completion`(含 `autotrigger`)、`vim.treesitter.language.add` 在 0.11 就已可用, 真实最低版本没在本机验证过(没有 0.11 二进制)。
 - 不要引入 lazy.nvim / packer / Mason 等插件管理器: **插件由 nix(home-manager 的 `programs.neovim.plugins`)声明**, 懒加载靠 `packadd`(见下); LSP 二进制也由 home-manager 安装, 不在编辑器内装。
 - 仓库里不再有插件清单与 lockfile(`nvim-pack-lock.json` 已随 vim.pack 一起移除, 不要加回); `.pi/` 已 gitignore。
 
@@ -17,7 +17,7 @@
 - 仓库仍是 gitee flake input(`nvim-dotfiles`)的源: 若在别处用 NixOS 部署本配置, 仍走 提交 → `git push`(gitee main) → `nix flake update nvim-dotfiles` → `home-manager switch`; 后两步是系统级/不可逆操作, 只在用户明确要求时执行。
 - 在工作区直接跑 `nvim` 会写线上 `~/.local/share/nvim`(treesitter parser 等), 别用它当"临时沙箱"。
 
-## 验证(已在当前工作区跑通, 均不联网; `-i NONE` 避免写 shada; #3 完整加载仍会追加 `~/.local/state/nvim/lsp.log` 并写 catppuccin 编译缓存, 属 state/cache 侧常规日志)
+## 验证(已在当前工作区跑通, 均不联网; `-i NONE` 避免写 shada; #3 完整加载仍会追加 `~/.local/state/nvim/lsp.log`、写 catppuccin 编译缓存, 并按 `settings/base.lua` 的 mkview 给打开过的 buffer 各写一个 `~/.local/state/nvim/view/*`, 均属 state/cache 侧常规文件)
 
 ```bash
 # 1) 全部 Lua 文件语法检查(最快, 不加载配置) → 期望输出 failures=0
@@ -38,6 +38,9 @@ ls -1 ~/.local/share/nvim/site/pack/hm/opt
 # 6) 离线类型检查 → 期望 no problems found(不带 VIMRUNTIME 时运行时类型会解析不到)
 export VIMRUNTIME=$(nvim --headless -u NONE -i NONE -c 'lua io.write(vim.fn.expand("$VIMRUNTIME"))' -c 'qa!')
 lua-language-server --check=. --checklevel=Warning
+
+# 7) 格式化风格自检 → 期望无输出(所有 lua 文件都符合仓库根的 .stylua.toml; 删了配置会落回 Tab+双引号)
+stylua --check $(git ls-files --cached --others --exclude-standard '*.lua')
 ```
 
 `-u "$PWD/init.lua" --cmd "set rtp^=$PWD"` 是"用工作区代码启动"的通用姿势; 漏掉 `rtp` 前置会让 `require()` 全部落到线上配置。
@@ -47,12 +50,14 @@ lua-language-server --check=. --checklevel=Warning
 - `init.lua` → `require('settings')` → (`vim.o.loadplugins` 为真时)`require('plugins')` → `require('keymaps')`。
 - `lua/settings.lua`: 顺序有意义, `settings.lsp` **必须最先**(否则错过 `LspAttach`); 无插件时(`loadplugins` 为假, 即 `--noplugin`; `-u NONE` 时配置整体不加载, 该分支不可达)才走 `settings.transparency`。
 - 插件三步接入: 在 `/etc/nixos` 的 `programs.neovim.plugins` 里声明(懒加载写 `{ plugin = <包>; optional = true; }`, 进 `pack/hm/opt`; 直接写包名则进 `start`, 启动即加载) → 新建 `lua/plugins/<name>.lua`(**被 require 时直接执行**: 先 `vim.cmd.packadd('<目录名>')` 再配置; 不写 `setup()` 壳, 也没有 `local M`/`return M`) → 在 `lua/plugins.lua` 里按顺序加一行 `require('plugins.<name>')`。那里的顺序就是加载顺序(直接执行, 所以不要随手挪动)。
-  - `packadd` 认**目录名**(通常是插件仓库名, 如 `lualine.nvim`、`mini.snippets`), 与 nixpkgs 属性名(`lualine-nvim`、`mini-snippets`)不一定相同; 名字对不上时 `:packadd` 是静默失败, 只会在后续 `require` 时报错。核对方法(nix 侧 opt 目录列表)写在 `lua/plugins.lua` 头部。
+  - `packadd` 认**目录名**(通常是插件仓库名, 如 `lualine.nvim`、`mini.snippets`), 与 nixpkgs 属性名(`lualine-nvim`、`mini-snippets`)不一定相同; 名字对不上时的表现分两个阶段: init 阶段(**本仓库所有调用点**)抛 `E919`, 启动完成后同一调用才变成静默成功 —— `lua/plugins/noice.lua` 与 `lua/plugins/telescope.lua` 的 `pcall(vim.cmd.packadd, …)` 守卫正是靠 init 阶段会抛错才有效, 把这种调用挪到 autocmd/懒加载里就会永远返回 true。核对方法(nix 侧 opt 目录列表)写在 `lua/plugins.lua` 头部。
   - 插件的编译与运行期依赖(jsregexp、fzf 二进制、treesitter grammar 等)全部由 nix 负责, 仓库里不再有 build 钩子。
 - LSP: 服务器样板由 **`nvim-lspconfig`** 提供(上游 `lsp/` 目录里的 `cmd`/`filetypes`/`root_markers`), 在 `lua/plugins/nvim-lspconfig.lua` 里 `packadd` + `vim.lsp.enable(servers)` 统一启用 —— 旧的 `lsp/<name>.lua` 目录与 `after/ftplugin/*` 里逐文件类型启用的写法(以及 `lua/utils/lsp_enable.lua`)已删除。要覆盖上游配置一律写 `after/lsp/<server>.lua`(优先级: 上游 `lsp/` → 你的 `after/lsp/` → `vim.lsp.config()`), **不要**再建 `lsp/` 与上游同名竞争。新增语言: 上游有配置 → 把服务器名加进 `lua/plugins/nvim-lspconfig.lua` 的 `servers` 表 + 在 `settings/filetype.lua` 里做扩展名映射; 上游没有 → 自己写 `after/lsp/<name>.lua`(文件名即服务器名)。
   - `guile_ls` 只能在带点子类型 `scheme.guile` 上启动, 所以 `settings/filetype.lua` 把 `.scm`/`.guile` 映射为 `scheme.guile`(通用的 `scheme` ftplugin 依然会加载, 实测有效)。
-- 文件类型定制按关注点拆在 `lua/settings/indent.lua`(格式化已移出, 见下一条): 每个文件是一张业务命名的数据表(`M.widths`/`M.flags`) + 一个 FileType autocmd, `utils/ft.lua` 的 `lookup()` 统一处理带点子类型(`scheme.guile` 按段回退到 `scheme`); `after/ftplugin/*` 已整体删除, 不要重建。表里只列与全局默认不同的项(缩进 4 之类的不写); 新增语言在相关表里各加一行, 新增一类按文件类型的配置就新建一个这样的小模块并复用 `lookup()`。按文件类型设**窗口局部**选项(spell/wrap 这类)时必须走 `nvim_set_option_value(..., scope='local')` —— `vim.wo` 赋值会把全局默认一起写穿, 让某个文件类型的设置污染所有新窗口。
+- 文件类型定制按关注点拆在 `lua/settings/indent.lua`(格式化已移出, 见下一条): 每个文件是一张业务命名的数据表(现在只有 `M.widths`) + 一个 FileType autocmd, `utils/ft.lua` 的 `lookup()` 统一处理带点子类型(`scheme.guile` 按段回退到 `scheme`); `after/ftplugin/*` 已整体删除, 不要重建。表里只列与全局默认不同的项(缩进 4 之类的不写); 新增语言在相关表里各加一行, 新增一类按文件类型的配置就新建一个这样的小模块并复用 `lookup()`。按文件类型设**窗口局部**选项(spell/wrap 这类)时必须走 `nvim_set_option_value(..., scope='local')` —— `vim.wo` 赋值会把全局默认一起写穿, 让某个文件类型的设置污染所有新窗口。
 - 格式化由 **conform.nvim** 统一负责(`lua/plugins/conform.lua`): 外部工具优先、LSP 只兜底(`lsp_format='fallback'`), 同一张 `formatters_by_ft` 决定保存时格式化、`<C-\>f` 与 `gq`。旧的 `settings/format.lua`(formatprg)已删除, **不要再按文件类型配 formatprg**; `gq` 靠 conform 的 `formatexpr` 接管, 但只在"该文件类型有可用外部工具"时才接管 —— 不接管时 typst/toml 仍由 Neovim 自己的 LSP formatexpr 负责、markdown/纯文本仍走内置重排(否则 conform 的 formatexpr 会在没格式化器可跑时返回 0, 让 `gq` 什么都做不了)。保存时自动格式化默认开启, `:FormatDisable`(`!` 只关当前 buffer)/`:FormatEnable` 切换, `:ConformInfo` 看当前 buffer 会用哪个格式化器、工具是否就绪。
+  - lua 的格式化器是 stylua, 仓库根 `.stylua.toml`(4 空格 + 单引号)是风格的唯一来源: **删掉它 stylua 会落回内置默认(Tab + 双引号), 每次保存把整文件重排**, 所以改风格只改这个文件, 然后跑验证第 7 条。
+  - `formatters.<名字>.args` 只作用于**整文件**路径; 范围格式化(`gq` 选中几行)走上游的 `range_args`, 要给两条路径都加参数得用 `append_args`(conform 会把它追加到 args 与 range_args 两边, 见 `lua/plugins/conform.lua` 的 latexindent, 否则参数会静默只生效一半)。
 - 非 LSP 的 lint(nvim-lint + shellcheck/markdownlint-cli2 + 仓库根 `.markdownlint-cli2.jsonc`)已试配并**移除**: 需求由 LSP 诊断覆盖, 实际用不上, 不要顺手加回。
 - 按文件类型的 makeprg/编译运行(`<C-e>` 运行键, 含 typst 预览/nix build 自定义 runner)与 spell/wrap/textwidth 覆盖已整个删除(`settings/build.lua`、`keys/run.lua`、`settings/text.lua` 不复存在, `settings/autocmds.lua` 的 wrap_spell autocmd 已删): `:make` 回到全局 makeprg=make, markdown 不再查拼写, tex 恢复软换行, formatoptions 保持内置默认。需要时从会话记录或按需重写, 别顺手重建。
 - 对齐插件已删除(`lua/plugins/vim-easy-align.lua` 与 `lua/keys/align.lua` 不复存在, `ga` 回归内置的字符编码查询): 上游自 2024-07 起停更, 交互修饰键又不可发现。再需要对齐时优先交给格式化器/语言工具(c/cpp 已在 `lua/plugins/conform.lua` 挂了 `clang-format`, 它读项目 `.clang-format`, 在项目里开 `AlignConsecutiveAssignments` 即可), 或重新评估 mini.align; 不要按旧教程把 vim-easy-align 加回来。
@@ -64,13 +69,14 @@ lua-language-server --check=. --checklevel=Warning
   - 启动自检 `require('utils.map').check()` 在 `lua/keymaps.lua` 末尾调用: 报告同一作用域下被**不同代码位置**抢注的键位(同一处代码重复注册、以及全局与 buffer-local 并存都不算冲突); 新增/改动键位后跑验证第 4 条。人工浏览全部已注册键位用 fuzzy finder 的 `<C-q>k`(telescope `builtin.keymaps`, 传 `show_plug = false` 滤掉 matchit/plenary 的 `<Plug>` 噪声)。
   - 有的命名空间只在特定上下文注册: LSP 在 `settings/lsp.lua` 的 `LspAttach`、关闭特殊窗口的 `q` 在 `settings/autocmds.lua`、fzf/补全/浮动窗口在对应插件里。按文件类型注册的映射**必须带 buffer**(如 `{ buffer = buf }`; 否则会覆盖全局键位, 切回旧 buffer 时会跑错语言)。
 - 非按键的静态配置(调色板、行为参数)集中在 `lua/settings/consts.lua`, 例如 `colors`、`fast_move_by_lines`、`window_resize_step`; 内容变大再拆 `lua/settings/consts/`。
-- leader 约定: `<Leader>` = `/`, `<LocalLeader>` = `\`, LSP 前缀 `<C-\>`(`keys.lsp.lsp_leader`), fuzzy finder `<C-q>`(`keys.fuzzy_finder.fuzzy_finder_leader`)。`vim.g.mapleader` / `vim.g.maplocalleader` 在 `init.lua` 定义; keys 表里取前缀用 `vim.g.maplocalleader`, 不要读全局变量(否则 lua_ls 报 `undefined-field`)。
+- leader 约定: `<Leader>` = `/`, `<LocalLeader>` = `\`, LSP 前缀 `<C-\>`(`keys.lsp.lsp_leader`), fuzzy finder `<C-q>`(`keys.fuzzy_finder.fuzzy_finder_leader`)。`vim.g.mapleader` / `vim.g.maplocalleader` 在 `init.lua` 定义; keys 表里取前缀用 `vim.g.maplocalleader`, 不要读全局变量(否则 lua_ls 报 `undefined-field`)。默认**不覆盖 Neovim 内置键**(曾经把 H/L 与 ^/$ 对调, 已撤销, 见 `docs/code-review-2026-10-01.md` 的 CMT-07);例外只保留普通模式的 `<C-u>`(改为打开撤销树, 内置的"上滚半屏"不再可用), 新增这类例外要在这里记一笔并说明理由。
 - 补全与片段: blink.cmp / LuaSnip 已删除, 改用 Neovim 原生实现 —— 补全在 `lua/settings/lsp.lua` 的 `LspAttach` 里用 `vim.lsp.completion.enable()` 启用(`<C-y>` 确认、`<C-e>` 取消), 片段用 `lua/plugins/snippets.lua` 的 `mini.snippets` + `friendly-snippets`, 引擎为 `vim.snippet`(展开/跳转/停止都用 `vim.snippet.*` 原生会话, 不再用 mini.snippets 的 session API); 相应的 `keys.lsp` 里的 `open_hint`/`close_hint`/`snippet_*` 由这两处注册。
 - snippets: 自研片段已全部弃用(`snippets/` 目录不存在, 不要重建), 只用社区集合; 片段会经 mini.snippets 起的进程内 LSP 服务器进入原生补全菜单。
 - 类型标注: 仓库根 `.luarc.json`(LuaJIT + `undefined-field` 提到 Warning + `different-requires` 降为 Information + 忽略 `.pi`)的 `workspace.library` 指向 `${env:VIMRUNTIME}/lua`, 才能解析 `vim.keymap.set.Opts`、`vim.api.keyset.create_autocmd.callback_args` 等运行时类型; 离线跑 `lua-language-server --check=. --checklevel=Warning` 前要 `export VIMRUNTIME`。
   - `different-requires` 降级的原因: `require('plugins.noice')` 与 `require('noice')` 都会被 lua-language-server 解析到 `lua/plugins/noice.lua`(插件源码不在 workspace), 属误报。
 - 主题: catppuccin mocha + 透明背景。高亮覆盖分两条互不重叠的路径: `lua/plugins/colorscheme.lua`(catppuccin 选项, 插件路径)与 `lua/settings/transparency.lua`(`--noplugin` 时由 settings.lua 调用); 改透明相关先确认走哪条。
-- treesitter: **纯原生**(Neovim 0.12), 不依赖 nvim-treesitter 插件 —— `lua/settings/treesitter.lua`(settings.lua 里无条件加载, --noplugin 下也生效)只做 `vim.treesitter.start()` 高亮 + `foldexpr` 折叠; parser 与 queries 全由 nix 提供(两个 start 包: `pack/hm/start/nvim-treesitter-grammars` 提供 320 个 parser, `pack/hm/start/nvim-treesitter-queries` 提供 300+ 语言的 queries, 取自上游 nvim-treesitter 的 `runtime/queries`), 声明在 `/etc/nixos/home/shell/nvim.nix`; `~/.local/share/nvim/site/{parser,parser-info,queries}` 是旧 ts.install 残留, 已删除; **site/pack/hm 不能删**。0.12 原生没有 treesitter 缩进, 缩进交给 `$VIMRUNTIME/indent/<ft>.vim`。新增语言: nix grammar 列表 + 该文件的 `filetypes` 各加一项(缺 parser 时静默跳过不报错); ft 名与 parser/queries 名不同时先 `vim.treesitter.language.register('<parser>', '<ft>')`(现存唯一实例: tex→latex, 见 `lua/settings/treesitter.lua` 头部)。0.12 还内置了 treesitter 增量选择: Visual 模式 `an`/`in`/`[n`/`]n`/`[N`/`]N`。
+- treesitter: **纯原生**(Neovim 0.12), 不依赖 nvim-treesitter 插件 —— `lua/settings/treesitter.lua`(settings.lua 里无条件加载, --noplugin 下也生效)只做 `vim.treesitter.start()` 高亮(折叠归属见下一条 `settings/folding.lua`); parser 与 queries 全由 nix 提供(两个 start 包: `pack/hm/start/nvim-treesitter-grammars` 提供 320 个 parser, `pack/hm/start/nvim-treesitter-queries` 提供 300+ 语言的 queries, 取自上游 nvim-treesitter 的 `runtime/queries`), 声明在 `/etc/nixos/home/shell/nvim.nix`; `~/.local/share/nvim/site/{parser,parser-info,queries}` 是旧 ts.install 残留, 已删除; **site/pack/hm 不能删**。0.12 原生没有 treesitter 缩进, 缩进交给 `$VIMRUNTIME/indent/<ft>.vim`。新增语言: nix grammar 列表 + 该文件的 `filetypes` 各加一项(缺 parser 时静默跳过不报错); ft 名与 parser/queries 名不同时先 `vim.treesitter.language.register('<parser>', '<ft>')`(现存唯一实例: tex→latex, 见 `lua/settings/treesitter.lua` 头部)。0.12 还内置了 treesitter 增量选择: Visual 模式 `an`/`in`/`[n`/`]n`/`[N`/`]N`。
+- 折叠(`foldexpr`/`foldmethod`)归属由 `lua/settings/folding.lua` 统一裁决, 优先级 = 支持 `textDocument/foldingRange` 的 LSP > treesitter; 它在三处被调用: `settings/treesitter.lua` 的 FileType、`settings/lsp.lua` 的 LspAttach、`settings/base.lua` 的 `BufWinEnter`。**不要在别处直接写 `foldexpr`** —— `viewoptions='folds'` 让 `loadview` 在 `BufWinEnter` 恢复 view 里的旧 `foldexpr`, 时序上它晚于 FileType、早于异步的 `LspAttach`, 会把 treesitter 的值顶掉(表现为折叠静默失效, 见 `docs/code-review-2026-10-01.md` 的 BUG-02), 所以 `base.lua` 在 `loadview` 之后必须再调一次 `refresh()`。该模块只写 `foldmethod`/`foldexpr`, 不碰 `foldenable`/`foldlevel`, 以保留"记住折叠"。
 
 ## 外部依赖(不在本仓库)
 
@@ -82,4 +88,5 @@ lua-language-server --check=. --checklevel=Warning
 
 - 注释、README、commit 一律中文。commit 形如 `type(scope): 中文描述`(历史前缀拼写不统一, 如 `chorn`/`chron`, 不必模仿错拼)。
 - 模块统一 `local M = {}` / `local module = {}` 加 `return`, 文件头常有 `--- <name>.lua` 与用法说明; 注释解释"为什么"而非复述代码。
+- Lua 的缩进/引号风格由仓库根 `.stylua.toml` 唯一决定(4 空格 + 单引号): 保存时会跑 conform→stylua, 手工调风格会在下次保存被改回; 要改风格就改那个文件。
 - 改动保持最小, 不做任务外重构; 与相邻文件风格保持一致。

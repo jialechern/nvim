@@ -1,7 +1,7 @@
 # VimConfig
 ## 使用说明
 - 经典用法: 将仓库克隆到 `~/.config/nvim`
-- 使用 NixOS: 将仓库克隆到 `/etc/nixos/modules/nvim`
+- 使用 NixOS: 把本仓库当作 home-manager 的配置源(本机在 `/etc/nixos/home/shell/nvim.nix` 声明插件与 LSP 二进制)
 - 本机(NixOS)流程: 插件与语言服务器都由 home-manager 声明(见 `/etc/nixos/home/shell/nvim.nix`), 维护与验证姿势见 `AGENTS.md`; 下面 "如果不是使用 NixOS" 里的 pacman / Mason / tree-sitter-cli 段落只是通用历史说明, 不是本机步骤。
 ### 插件依赖的配置(如果不是使用 NixOS)
 
