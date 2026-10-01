@@ -38,12 +38,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         local opts = { buffer = bufnr }
 
         -- --- --- --- LSP 核心功能 --- --- ---
-        map(keys.format, function()
-            -- 手动格式化: async 不阻塞编辑, 完成时机由服务器决定, 通知只表示请求已发出
-            vim.lsp.buf.format({ async = true })
-            vim.notify('已请求格式化', vim.log.levels.INFO, { title = 'LSP' })
-        end, opts)
-
+        -- (<C-\>f 格式化已改由 plugins/conform.lua 全局注册, 不再依赖 LSP attach)
         map(keys.goto_def, vim.lsp.buf.definition, opts)
         map(keys.goto_dec, vim.lsp.buf.declaration, opts)
         map(keys.goto_ref, vim.lsp.buf.references, opts)

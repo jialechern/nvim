@@ -1,7 +1,7 @@
 --- lsp.lua
 --- LSP / 补全 / snippet 相关按键 (lsp_leader 命名空间)
---- 除 snippet_* 外全部由 settings/lsp.lua 在 LspAttach 时注册(buffer-local;
---- 其中 type_hint/open_hint/close_hint 为条件注册), snippet_* 由 plugins/snippets.lua 注册
+--- 大部分由 settings/lsp.lua 在 LspAttach 时注册(buffer-local; 其中 type_hint/open_hint/close_hint 为条件注册),
+--- format 由 plugins/conform.lua 全局注册(格式化已与 LSP 解耦), snippet_* 由 plugins/snippets.lua 注册
 
 ---@type string
 local lsp_leader = '<C-' .. (vim.g.maplocalleader or '\\') .. '>'
@@ -16,7 +16,7 @@ end
 
 ---@class Keys.Lsp
 ---@field lsp_leader string          -- 命名空间前缀
----@field format KeySpec             -- 格式化
+---@field format KeySpec             -- 格式化(conform)
 ---@field goto_def KeySpec           -- 跳转定义
 ---@field goto_dec KeySpec           -- 跳转声明
 ---@field goto_ref KeySpec           -- 查找引用

@@ -1,6 +1,6 @@
 # AGENTS.md
 
-个人 Neovim 配置(Lua, 47 个文件 / 约 2.3k 行)。无 lint / format / 测试 / CI / 构建步骤, 验证即"加载配置不报错"。
+个人 Neovim 配置(Lua, 48 个文件 / 约 2.4k 行)。无测试 / CI / 构建步骤, 验证即"加载配置不报错"(格式化由编辑器侧的 conform 负责, 见下)。
 
 ## 硬性前提
 
@@ -51,12 +51,13 @@ lua-language-server --check=. --checklevel=Warning
   - 插件的编译与运行期依赖(jsregexp、fzf 二进制、treesitter grammar 等)全部由 nix 负责, 仓库里不再有 build 钩子。
 - LSP: 服务器样板由 **`nvim-lspconfig`** 提供(上游 `lsp/` 目录里的 `cmd`/`filetypes`/`root_markers`), 在 `lua/plugins/nvim-lspconfig.lua` 里 `packadd` + `vim.lsp.enable(servers)` 统一启用 —— 旧的 `lsp/<name>.lua` 目录与 `after/ftplugin/*` 里逐文件类型启用的写法(以及 `lua/utils/lsp_enable.lua`)已删除。要覆盖上游配置一律写 `after/lsp/<server>.lua`(优先级: 上游 `lsp/` → 你的 `after/lsp/` → `vim.lsp.config()`), **不要**再建 `lsp/` 与上游同名竞争。新增语言: 上游有配置 → 把服务器名加进 `lua/plugins/nvim-lspconfig.lua` 的 `servers` 表 + 在 `settings/filetype.lua` 里做扩展名映射; 上游没有 → 自己写 `after/lsp/<name>.lua`(文件名即服务器名)。
   - `guile_ls` 只能在带点子类型 `scheme.guile` 上启动, 所以 `settings/filetype.lua` 把 `.scm`/`.guile` 映射为 `scheme.guile`(通用的 `scheme` ftplugin 依然会加载, 实测有效)。
-- 文件类型定制按关注点拆在 `lua/settings/{indent,format}.lua`: 每个文件是一张业务命名的数据表(`M.widths`/`M.flags`、`M.formatters`) + 一个 FileType autocmd, `utils/ft.lua` 的 `lookup()` 统一处理带点子类型(`scheme.guile` 按段回退到 `scheme`); `after/ftplugin/*` 已整体删除, 不要重建。表里只列与全局默认不同的项(缩进 4 之类的不写); 新增语言在相关表里各加一行, 新增一类按文件类型的配置就新建一个这样的小模块并复用 `lookup()`。按文件类型设**窗口局部**选项(spell/wrap 这类)时必须走 `nvim_set_option_value(..., scope='local')` —— `vim.wo` 赋值会把全局默认一起写穿, 让某个文件类型的设置污染所有新窗口。
+- 文件类型定制按关注点拆在 `lua/settings/indent.lua`(格式化已移出, 见下一条): 每个文件是一张业务命名的数据表(`M.widths`/`M.flags`) + 一个 FileType autocmd, `utils/ft.lua` 的 `lookup()` 统一处理带点子类型(`scheme.guile` 按段回退到 `scheme`); `after/ftplugin/*` 已整体删除, 不要重建。表里只列与全局默认不同的项(缩进 4 之类的不写); 新增语言在相关表里各加一行, 新增一类按文件类型的配置就新建一个这样的小模块并复用 `lookup()`。按文件类型设**窗口局部**选项(spell/wrap 这类)时必须走 `nvim_set_option_value(..., scope='local')` —— `vim.wo` 赋值会把全局默认一起写穿, 让某个文件类型的设置污染所有新窗口。
+- 格式化由 **conform.nvim** 统一负责(`lua/plugins/conform.lua`): 外部工具优先、LSP 只兜底(`lsp_format='fallback'`), 同一张 `formatters_by_ft` 决定保存时格式化、`<C-\>f` 与 `gq`。旧的 `settings/format.lua`(formatprg)已删除, **不要再按文件类型配 formatprg**; `gq` 靠 conform 的 `formatexpr` 接管, 但只在"该文件类型有可用外部工具"时才接管 —— 不接管时 typst/toml 仍由 Neovim 自己的 LSP formatexpr 负责、markdown/纯文本仍走内置重排(否则 conform 的 formatexpr 会在没格式化器可跑时返回 0, 让 `gq` 什么都做不了)。保存时自动格式化默认开启, `:FormatDisable`(`!` 只关当前 buffer)/`:FormatEnable` 切换, `:ConformInfo` 看当前 buffer 会用哪个格式化器、工具是否就绪。
 - 按文件类型的 makeprg/编译运行(`<C-e>` 运行键, 含 typst 预览/nix build 自定义 runner)与 spell/wrap/textwidth 覆盖已整个删除(`settings/build.lua`、`keys/run.lua`、`settings/text.lua` 不复存在, `settings/autocmds.lua` 的 wrap_spell autocmd 已删): `:make` 回到全局 makeprg=make, markdown 不再查拼写, tex 恢复软换行, formatoptions 保持内置默认。需要时从会话记录或按需重写, 别顺手重建。
-- 对齐插件已删除(`lua/plugins/vim-easy-align.lua` 与 `lua/keys/align.lua` 不复存在, `ga` 回归内置的字符编码查询): 上游自 2024-07 起停更, 交互修饰键又不可发现。再需要对齐时优先交给格式化器/语言工具(c/cpp 已在 `settings/format.lua` 挂了 `clang-format -style=file`, 在项目 `.clang-format` 里开 `AlignConsecutiveAssignments` 即可), 或重新评估 mini.align; 不要按旧教程把 vim-easy-align 加回来。
+- 对齐插件已删除(`lua/plugins/vim-easy-align.lua` 与 `lua/keys/align.lua` 不复存在, `ga` 回归内置的字符编码查询): 上游自 2024-07 起停更, 交互修饰键又不可发现。再需要对齐时优先交给格式化器/语言工具(c/cpp 已在 `lua/plugins/conform.lua` 挂了 `clang-format`, 它读项目 `.clang-format`, 在项目里开 `AlignConsecutiveAssignments` 即可), 或重新评估 mini.align; 不要按旧教程把 vim-easy-align 加回来。
 - 类型解析与 LSP 配置无关: `lua_ls` 认识 `vim.*` 靠仓库根 `.luarc.json` 的 `workspace.library`(`${env:VIMRUNTIME}/lua`); 该变量由 nvim 自己设置, 命令行离线复检时才需要 `export VIMRUNTIME`。
 - 键位与描述单一来源: 每个 `lua/keys/<命名空间>.lua` 导出 Hash Map(字段名 snake_case; 有前缀的命名空间其领头键以 `<名字>_leader` 字段放在同一张表, 无前缀的如 `close_window`、`windows.cursor|size` 直接写完整 lhs, 不设 leader 字段), 每个按键是 `KeySpec = { lhs, desc, modes? }`(`modes` 缺省 `'n'`), 类型定义在 `lua/keys/types.lua`。使用处 `local keys = require('keys.<命名空间>')`, 用 `map(keys.<字段>, rhs[, opts])` 注册(变量名统一用 `keys`, 不要用单字母缩写)。
-  - `lua/keymaps/*`(通用/命名空间)与 `settings/` 下按文件类型的模块(`indent`/`format`)、插件内部一律只写行为, **不要在映射处硬编码 lhs 或写 desc**; desc 只写在 keys 表里(它是快捷键唯一的文档来源, 不再手写 help 映射)。
+  - `lua/keymaps/*`(通用/命名空间)与 `settings/` 下按文件类型的模块(`indent`)、插件内部一律只写行为, **不要在映射处硬编码 lhs 或写 desc**; desc 只写在 keys 表里(它是快捷键唯一的文档来源, 不再手写 help 映射)。
   - `keys/` 内部相互引用时不要再用 `keys` 这个名字(避免与"本文件的表"混淆), 用该命名空间的短名, 如 `local split = require('keys.windows.split')`。
   - `require('utils.map').map(spec, rhs, opts)` 是唯一入口: 支持 `{ modes = {...} }` 覆盖模式、透传 `vim.keymap.set` 选项(如 `buffer`); 缺 `desc`/`lhs` 会在注册时报错。已删除 `map_by_modes`(`vim.keymap.set` 原生支持模式列表)与 `noremap`(0.12 已不支持, 非递归本就是默认)。
   - 启动自检 `require('utils.map').check()` 在 `lua/keymaps.lua` 末尾调用: 报告同一作用域下被**不同代码位置**抢注的键位(同一处代码重复注册、以及全局与 buffer-local 并存都不算冲突); 新增/改动键位后跑验证第 4 条。人工浏览全部已注册键位用 fuzzy finder 的 `<C-q>k`(telescope `builtin.keymaps`, 传 `show_plug = false` 滤掉 matchit/plenary 的 `<Plug>` 噪声)。
@@ -72,7 +73,7 @@ lua-language-server --check=. --checklevel=Warning
 
 ## 外部依赖(不在本仓库)
 
-可执行文件由 `/etc/nixos/home/shell/nvim.nix` 的 home-manager 声明: clangd、lua-language-server、nixd、marksman、ruff、basedpyright、black、guile-lsp-server、rust-analyzer、typescript-language-server、haskell-language-server、ormolu、nixfmt、prettierd、taplo、texlab、tinymist, formatprg 用的 clang-format、rustfmt、latexindent(见 `lua/settings/format.lua`), 以及 telescope 用的 ripgrep/fd 等。README 里的 `pacman` / Mason 安装段落是通用历史说明, 不是本机流程; 缺工具时报告用户, 不要 `sudo` 安装(系统缺的临时工具用 `nix shell`)。
+可执行文件由 `/etc/nixos/home/shell/nvim.nix` 的 home-manager 声明: clangd、lua-language-server、nixd、marksman、ruff、basedpyright、guile-lsp-server、rust-analyzer、typescript-language-server、haskell-language-server、ormolu、nixfmt、prettierd、taplo、texlab、tinymist, 格式化工具 stylua、clang-format、rustfmt、latexindent(见 `lua/plugins/conform.lua`), 以及 telescope 用的 ripgrep/fd 等。README 里的 `pacman` / Mason 安装段落是通用历史说明, 不是本机流程; 缺工具时报告用户, 不要 `sudo` 安装(系统缺的临时工具用 `nix shell`)。
 
 其它环境耦合: `guicursor` 只发闪烁序列, 动画由终端控制(kitty `cursor_blink_interval`); 未设置 `unnamedplus`, 系统剪贴板依赖终端/wl-clipboard; `j/k` 已与 `gj/gk` 对调, 新增移动类映射时注意。
 
