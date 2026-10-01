@@ -4,13 +4,12 @@
 local map = require('utils.map').map
 local keys = require('keys.windows.status')
 
+-- wincmd H/K 本身就是"移到最左/最上并占满整个高/宽"(:h CTRL-W_H), 前面再 wincmd t 不改变结果
 map(keys.to_vertical, function()
-    vim.cmd('wincmd t')
     vim.cmd('wincmd H')
 end)
 
 map(keys.to_horizontal, function()
-    vim.cmd('wincmd t')
     vim.cmd('wincmd K')
 end)
 
