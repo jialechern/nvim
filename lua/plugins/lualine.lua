@@ -75,20 +75,20 @@ local function search_result()
     if not last_search or last_search == '' then
         return ''
     end
-    -- 与官方 searchcount 组件一致: 限流 + 出错静默(大文件里 searchcount 可能很慢)
+    -- 判空用 next(searchcount) == nil: 上游文档说"上次搜索模式未设置时返回空字典"(:h searchcount()),
+    -- lualine 内置组件也是这么判的; 只给 total/maxcount 做 or 兜底会在拼接 current 时抛错
     ---@type boolean, { current: integer, total: integer, maxcount: integer, incomplete: integer }
     local ok, searchcount = pcall(vim.fn.searchcount, { maxcount = 999, timeout = 500 })
-    if not ok or not searchcount or searchcount.incomplete == 1 then
+    if not ok or next(searchcount or {}) == nil or searchcount.incomplete == 1 then
         return ''
     end
-    -- maxcount 加 or 兕底: searchcount 理论上可返回空字典(上游手册), 此时该键为 nil 会拋错;
-    -- 与官方 searchcount 组件一致: 限流 + 出错静默(大文件里 searchcount 可能很慢)
+    -- 字段级兜底: 非空字典仍可能缺某一项(与官方组件的取值方式保持一致)
     ---@type integer
     local total = math.min(searchcount.total or 0, searchcount.maxcount or 999)
     -- 搜索模式原样进状态栏会被按 % 解析(%s/%b 之类被当成 item 吃掉);
     -- 与 lualine 内置组件一致, 先经 stl_escape 转义
     local pattern = require('lualine.utils.utils').stl_escape(last_search)
-    return pattern .. '(' .. searchcount.current .. '/' .. total .. ')'
+    return pattern .. '(' .. (searchcount.current or 0) .. '/' .. total .. ')'
 end
 
 --- 文件状态标记: '+' 已修改, '-' 只读或不可改
