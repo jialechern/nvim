@@ -58,8 +58,10 @@ local module = {
     undo_break_dot = { lhs = '.', desc = '插入句点并打断撤销块', modes = 'i' },
     undo_break_semicolon = { lhs = ';', desc = '插入分号并打断撤销块', modes = 'i' },
 
-    indent_left = { lhs = '<', desc = '左缩进并保持选中', modes = { 'v', 'x' } },
-    indent_right = { lhs = '>', desc = '右缩进并保持选中', modes = { 'v', 'x' } },
+    -- 缩进只在 visual 模式('x')生效, 不写 'v': 'v' 会把 select 模式一起算进来, 而 select 模式下键入的 rhs 会被当作文本插入
+    -- (实测在 select 里按 `<` 会把 rhs 的 `<gv` 敲进缓冲区, 弄脏内容); 口径与 keys/code_fold.lua 的 nx() 一致
+    indent_left = { lhs = '<', desc = '左缩进并保持选中', modes = { 'x' } },
+    indent_right = { lhs = '>', desc = '右缩进并保持选中', modes = { 'x' } },
 
     undotree = { lhs = '<C-u>', desc = '打开撤销树' },
 }
