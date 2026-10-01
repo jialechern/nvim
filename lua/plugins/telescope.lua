@@ -26,8 +26,16 @@ telescope.setup({
         file_ignore_patterns = { '%.git/', 'node_modules/' },
         -- live_grep / grep_string 走 ripgrep: --glob 剪掉任意层级的噪声目录
         vimgrep_arguments = {
-            'rg', '--color=never', '--no-heading', '--with-filename', '--line-number',
-            '--column', '--smart-case', '--hidden', '--glob', '!**/{.git,node_modules}/*',
+            'rg',
+            '--color=never',
+            '--no-heading',
+            '--with-filename',
+            '--line-number',
+            '--column',
+            '--smart-case',
+            '--hidden',
+            '--glob',
+            '!**/{.git,node_modules}/*',
         },
         mappings = {
             i = {
@@ -93,7 +101,11 @@ if fn.executable('rg') == 1 then
     map(keys.rg, builtin.live_grep)
 else
     map(keys.rg, builtin.find_files)
-    vim.notify('未检测到 ripgrep (rg), 全文搜索将退化为文件查找', vim.log.levels.INFO, { title = 'telescope' })
+    vim.notify(
+        '未检测到 ripgrep (rg), 全文搜索将退化为文件查找',
+        vim.log.levels.INFO,
+        { title = 'telescope' }
+    )
 end
 
 -- --- --- --- 自定义命令(沿用原 fzf 配置里的三个) --- --- ---

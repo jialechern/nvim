@@ -11,7 +11,7 @@ local theme = {
     normal = {
         a = { fg = colors.bg0, bg = colors.purple, gui = 'bold' }, -- 模式名: 用 Catppuccin 标志色 mauve
         b = { fg = colors.fg1, bg = colors.bg2 },
-        c = { fg = colors.fg3, bg = 'NONE' },        -- 两侧填充: 透明底
+        c = { fg = colors.fg3, bg = 'NONE' }, -- 两侧填充: 透明底
         z = { fg = colors.bg0, bg = colors.purple }, -- 与 a 对称
     },
     insert = { a = { fg = colors.bg0, bg = colors.green, gui = 'bold' } },
@@ -143,8 +143,8 @@ require('lualine').setup({
                     warn = { bg = colors.orange, fg = colors.fg1 },
                 },
             },
-            { 'filename', file_status = false,        path = 1 },
-            { modified,   color = { bg = colors.red } },
+            { 'filename', file_status = false, path = 1 },
+            { modified, color = { bg = colors.red } },
             -- %w/%r/%q 在不适用时本来就渲染为空, 无需再写 cond
             '%w',
             '%r',

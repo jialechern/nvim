@@ -15,8 +15,11 @@ local function guarded(zcmd)
         if foldmethod == 'manual' or foldmethod == 'marker' then
             return zcmd
         end
-        vim.notify(('foldmethod=%s 下无法手动折叠(仅 manual/marker 支持 %s)'):format(foldmethod, zcmd),
-            vim.log.levels.WARN, { title = 'fold' })
+        vim.notify(
+            ('foldmethod=%s 下无法手动折叠(仅 manual/marker 支持 %s)'):format(foldmethod, zcmd),
+            vim.log.levels.WARN,
+            { title = 'fold' }
+        )
         return ''
     end
 end

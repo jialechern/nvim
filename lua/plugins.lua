@@ -6,7 +6,7 @@
 -- 每个 plugins/<name>.lua 被 require 时直接执行(先 packadd 再配置), 没有 setup() 壳
 require('plugins.colorscheme') -- 主题最先, 否则高亮会被后加载的插件覆盖
 require('plugins.nvim-lspconfig')
-require('plugins.conform')    -- 格式化(外部工具优先, LSP 兜底; 见该文件头部说明)
+require('plugins.conform') -- 格式化(外部工具优先, LSP 兜底; 见该文件头部说明)
 require('plugins.telescope')
 require('plugins.snippets')
 require('plugins.lualine')

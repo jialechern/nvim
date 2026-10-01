@@ -18,8 +18,7 @@ require('settings.autocmds')
 require('settings.filetype')
 
 -- 按文件类型应用定制, 每个关注点一个模块(取代原 after/ftplugin/*):
-require('settings.indent')   -- 缩进(宽度 + lisp 开关); 格式化(原 settings/format.lua)已改由 plugins/conform.lua 负责
+require('settings.indent') -- 缩进(宽度 + lisp 开关); 格式化(原 settings/format.lua)已改由 plugins/conform.lua 负责
 
 -- 原生 treesitter(高亮/折叠): 按 FileType 启用, 与插件无关(--noplugin 下也生效)
 require('settings.treesitter')
-

@@ -8,9 +8,9 @@
 vim.g.tex_flavor = 'latex'
 
 vim.filetype.add({
-  extension = {
-    -- scm / guile 用带点子类型: guile_ls 只在 scheme.guile 上启动(通用的 scheme 设置仍会加载)
-    scm = 'scheme.guile',
-    guile = 'scheme.guile',
-  },
+    extension = {
+        -- scm / guile 用带点子类型: guile_ls 只在 scheme.guile 上启动(通用的 scheme 设置仍会加载)
+        scm = 'scheme.guile',
+        guile = 'scheme.guile',
+    },
 })

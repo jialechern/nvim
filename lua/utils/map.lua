@@ -72,8 +72,8 @@ function M.check()
                 local sources = vim.tbl_keys(by_source)
                 if #sources > 1 then
                     table.sort(sources)
-                    problems[#problems + 1] = string.format('[%s] 键位重复 %s (%s): %s', mode, lhs, scope,
-                        table.concat(sources, ' 与 '))
+                    problems[#problems + 1] =
+                        string.format('[%s] 键位重复 %s (%s): %s', mode, lhs, scope, table.concat(sources, ' 与 '))
                 end
             end
         end

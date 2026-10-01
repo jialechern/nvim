@@ -10,8 +10,8 @@ local M = {}
 ---@type table<string, integer>
 M.widths = {
     haskell = 2, -- haskell 惯例
-    nix = 2,     -- nixpkgs 惯例
-    scheme = 2,  -- Scheme/Lisp 惯例
+    nix = 2, -- nixpkgs 惯例
+    scheme = 2, -- Scheme/Lisp 惯例
 }
 
 --- 缩进机制开关: lisp 让缩进按括号层级工作, 不依赖内容缩进

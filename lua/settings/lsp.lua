@@ -9,7 +9,7 @@ local function setup_diagnostics()
     vim.diagnostic.config({
         virtual_text = {
             prefix = '', -- 诊断前缀图标
-            spacing = 4,  -- 图标与文字间距
+            spacing = 4, -- 图标与文字间距
         },
         float = {
             border = 'rounded', -- 诊断浮窗圆角边框
@@ -58,7 +58,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         -- 打开诊断浮窗: 0.12 里浮窗会显示更完整的诊断相关信息
         map(keys.doc_in_new_window, function()
             vim.diagnostic.open_float({
-                source = true,   -- 显示来源
+                source = true, -- 显示来源
                 border = 'rounded',
             })
         end, opts)
@@ -101,7 +101,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
         map(keys.doc, function()
             local enabled = not vim.diagnostic.is_enabled({ bufnr = bufnr })
             vim.diagnostic.enable(enabled, { bufnr = bufnr })
-            vim.notify(enabled and '诊断信息已开启' or '诊断信息已关闭', vim.log.levels.INFO, { title = 'LSP' })
+            vim.notify(
+                enabled and '诊断信息已开启' or '诊断信息已关闭',
+                vim.log.levels.INFO,
+                { title = 'LSP' }
+            )
         end, opts)
 
         -- --- --- --- 折叠 --- --- ---
