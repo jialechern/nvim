@@ -1,5 +1,5 @@
 --- base.lua
---- 基础按键: 领头键转译 / 行内移动 / 缩进 / 撤销断点 / 回到普通模式
+--- 基础按键: 领头键转译 / 屏幕行与实际行移动 / 快速移动 / 缩进 / 撤销断点 / 撤销树
 
 local consts = require('settings.consts')
 
@@ -10,10 +10,6 @@ local consts = require('settings.consts')
 ---@field screen_up KeySpec               -- 按屏幕行上移
 ---@field line_down KeySpec               -- 按实际行下移
 ---@field line_up KeySpec                 -- 按实际行上移
----@field first_non_blank KeySpec         -- 行首第一个有效字符
----@field screen_top KeySpec              -- 屏幕首行
----@field line_end KeySpec                -- 行尾
----@field screen_bottom KeySpec           -- 屏幕末行
 ---@field fast_down KeySpec               -- 快速下移
 ---@field fast_up KeySpec                 -- 快速上移
 ---@field escape KeySpec                  -- 退出并取消搜索高亮
@@ -41,11 +37,8 @@ local module = {
     line_down = { lhs = 'gj', desc = '向下移动(实际行, 与 j 互换)' },
     line_up = { lhs = 'gk', desc = '向上移动(实际行, 与 k 互换)' },
 
-    -- H/L 与 ^/$ 对调: H/L 走行首行尾, ^/$ 走屏幕首末行
-    first_non_blank = { lhs = 'H', desc = '跳转到行首第一个有效字符(与 ^ 互换)', modes = { 'n', 'x' } },
-    screen_top = { lhs = '^', desc = '跳转到屏幕首行(与 H 互换)' },
-    line_end = { lhs = 'L', desc = '跳转到行尾(与 $ 互换)', modes = { 'n', 'x' } },
-    screen_bottom = { lhs = '$', desc = '跳转到屏幕末行(与 L 互换)' },
+    -- H/L/^/$ 一律不覆盖, 保持 Neovim 内置语义: 屏幕首/末行 = H/L, 行首/行尾 = ^/$
+    -- (曾经把这两组对调过, 已撤 —— 覆盖默认键会改掉视觉模式里 `$` 这类反射键的语义; 见 docs/code-review-2026-10-01.md 的 CMT-07)
 
     fast_down = {
         lhs = 'J',

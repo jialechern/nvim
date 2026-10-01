@@ -15,11 +15,7 @@ map(keys.screen_up, 'gk')
 map(keys.line_down, 'j')
 map(keys.line_up, 'k')
 
--- 行首行尾与屏幕首末行对调
-map(keys.first_non_blank, '^')
-map(keys.screen_top, 'H')
-map(keys.line_end, '$')
-map(keys.screen_bottom, 'L')
+-- H/L/^/$ 不做映射: 直接用 Neovim 内置语义(屏幕首/末行 = H/L, 行首/行尾 = ^/$)
 
 -- 快速上下移动, 行数取自 settings/consts.lua
 ---@return string
