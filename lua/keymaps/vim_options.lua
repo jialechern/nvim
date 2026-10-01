@@ -35,8 +35,6 @@ map(keys.shell_redir, function()
     vim.opt.shellredir = shellredir
 end)
 
-map(keys.format_program, function()
-    ---@type string
-    local formatprg = vim.fn.input('设定 formatprg(format-program) 为: ', '')
-    vim.bo.formatprg = formatprg
-end)
+-- 不提供 formatprg 的交互设置: 'formatprg' 会被 'formatexpr' 压过(doc/options.txt), 而 conform 已给主要语言
+-- 挂了 buffer-local formatexpr(plugins/conform.lua), 设了也不会生效 —— 详见 docs/code-review-2026-10-01.md 的 BUG-03。
+-- 需要改格式化行为请走 conform 的 formatters_by_ft, 或对单独 buffer 用 :FormatDisable。

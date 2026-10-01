@@ -10,7 +10,6 @@ local meta_leader = '<C-m>'
 ---@field grep_format KeySpec     -- grepformat
 ---@field shell_pipe KeySpec      -- shellpipe
 ---@field shell_redir KeySpec     -- shellredir
----@field format_program KeySpec  -- formatprg
 
 ---@type Keys.VimOptions
 local module = {
@@ -21,7 +20,6 @@ local module = {
     grep_format = { lhs = meta_leader .. 'G', desc = '交互设置 grepformat(搜索结果格式)' },
     shell_pipe = { lhs = meta_leader .. 's', desc = '交互设置 shellpipe(命令输出重定向方式)' },
     shell_redir = { lhs = meta_leader .. 'S', desc = '交互设置 shellredir(命令输出重定向目标)' },
-    format_program = { lhs = meta_leader .. 'f', desc = '交互设置 formatprg(格式化命令)' },
 }
 
 return module
