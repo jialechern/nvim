@@ -51,8 +51,10 @@ vim.api.nvim_create_autocmd('FileType', {
 
         vim.treesitter.start(args.buf, lang)
 
-        vim.opt_local.foldmethod = 'expr'
-        vim.opt_local.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+        -- 标记折叠由 treesitter 提供(settings/folding.lua 据此裁决); foldenable 只在首次设定,
+        -- 之后由 view 恢复用户自己的开关状态
+        vim.b[args.buf].treesitter_fold = true
+        require('settings.folding').refresh(args.buf)
         vim.opt_local.foldenable = false
     end,
 })

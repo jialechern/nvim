@@ -109,15 +109,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
         end, opts)
 
         -- --- --- --- 折叠 --- --- ---
-        -- LSP 支持 foldingRange 时用它的 foldexpr 覆盖 treesitter; 取 buffer 所在窗口而不是当前窗口
-        if client and client:supports_method('textDocument/foldingRange') then
-            ---@type integer
-            local win = vim.fn.bufwinid(bufnr)
-            if win ~= -1 then
-                vim.wo[win].foldmethod = 'expr'
-                vim.wo[win].foldexpr = 'v:lua.vim.lsp.foldexpr()'
-            end
-        end
+        -- 归属由 settings/folding.lua 统一裁决(优先级: 支持 foldingRange 的 LSP > treesitter);
+        -- 每次 attach 都重跑, 这样折叠客户端后来才 attach 或已 detach 时结论也跟着变
+        require('settings.folding').refresh(bufnr)
 
         -- --- --- --- 参数提示(inlay hints) --- --- ---
         if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then

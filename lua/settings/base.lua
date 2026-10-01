@@ -77,8 +77,12 @@ vim.api.nvim_create_autocmd('BufWinLeave', {
 })
 vim.api.nvim_create_autocmd('BufWinEnter', {
     group = fold_group,
-    callback = function()
+    ---@param event vim.api.keyset.create_autocmd.callback_args
+    callback = function(event)
         vim.cmd('silent! loadview')
+        -- loadview 会把 view 里陈旧的 foldexpr/foldmethod 一并恢复, 所以恢复完要重新裁决一次
+        -- (foldenable/foldlevel 不动, 折叠开关与层级仍以 view 为准)
+        require('settings.folding').refresh(event.buf)
     end,
 })
 
