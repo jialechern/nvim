@@ -93,7 +93,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
             vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
             map(keys.open_hint, vim.lsp.completion.get, { buffer = bufnr, modes = 'i' })
-            map(keys.close_hint, '<C-e>', { buffer = bufnr, modes = 'i' })
+            -- 只把 <C-e> 送出去关菜单; 菜单没开时不动作
+            -- (否则会落到内置 i_CTRL-E '插入下方字符', 与 desc "关闭补全菜单" 不符)
+            ---@return string
+            map(keys.close_hint, function()
+                return vim.fn.pumvisible() ~= 0 and '<C-e>' or ''
+            end, { buffer = bufnr, modes = 'i', expr = true })
         end
 
         -- --- --- --- 诊断开关 --- --- ---
