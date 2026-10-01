@@ -61,7 +61,7 @@ vim.opt.smartcase = true -- 如果搜索包含大写字母，则不忽略大小�
 -- 跳转行为: 追加 stack, 不改默认的 clean(跳转时清理同文件旧位置的标记)
 vim.opt.jumpoptions:append('stack')
 
--- 设置打印机模式
+-- 光标上下保留 10 行滚动边距
 vim.opt.scrolloff = 10
 
 -- 视图只保存折叠: cursor/curdir 交给其它机制(见 autocmds.lua 的 last_loc)

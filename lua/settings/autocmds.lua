@@ -14,7 +14,8 @@ local function augroup(name)
     return vim.api.nvim_create_augroup(name, { clear = true })
 end
 
--- 改动设置时重新加载配置
+-- 焦点/终端事件回到 nvim 时重新读入被外部修改的文件(:h :checktime)
+-- 注: vim.o.buftype 读的就是当前 buffer 的 buftype/buf 作用域选项, 与 vim.bo 等价
 vim.api.nvim_create_autocmd({ 'FocusGained', 'TermClose', 'TermLeave' }, {
     group = augroup('checktime'),
     callback = function()
@@ -83,7 +84,7 @@ vim.api.nvim_create_autocmd('FileType', {
     end,
 })
 
--- 使在线打开 man 文件时更容易关闭
+-- man 缓冲不进缓冲区列表(buflisted=false 只影响列表; 真正让 q 能关掉它的是内置 ftplugin/man.vim 的 <nowait> q)
 vim.api.nvim_create_autocmd('FileType', {
     group = augroup('man_unlisted'),
     pattern = { 'man' },
@@ -93,7 +94,8 @@ vim.api.nvim_create_autocmd('FileType', {
     end,
 })
 
--- 修复 json 文件的隐藏级别
+-- json 不隐藏文本: conceallevel 默认就是 0, 这条是防御性的 —— conceallevel 是窗口局部选项, 会跨 buffer 残留,
+-- 内置 rust/typst ftplugin 在开启 g:rust_conceal / g:typst_conceal 时会把它设成 2, 那时 json 也会跟着隐藏
 vim.api.nvim_create_autocmd({ 'FileType' }, {
     group = augroup('json_conceal'),
     pattern = { 'json', 'jsonc', 'json5' },
