@@ -81,6 +81,8 @@ end
 
 set_noice_hls()
 vim.api.nvim_create_autocmd('ColorScheme', {
+    -- 带 clear 的 augroup: 不然 :source $MYVIMRC 会重复追加回调
+    group = vim.api.nvim_create_augroup('noice_highlights', { clear = true }),
     callback = set_noice_hls,
 })
 
