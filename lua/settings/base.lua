@@ -90,12 +90,5 @@ vim.api.nvim_create_autocmd('BufWinEnter', {
 -- 设置自动保存
 -- vim.opt.autowrite = true
 
--- -- 拼写检查
--- vim.opt.spell = true
--- 设置拼写检查语言
-vim.opt.spelllang = { 'en', 'cjk' }
--- 支持骆驼拼写
-vim.opt.spelloptions = 'camel'
-
 -- 开启 DiffTool
 vim.cmd('packadd nvim.difftool')
