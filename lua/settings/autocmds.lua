@@ -14,14 +14,13 @@ local function augroup(name)
     return vim.api.nvim_create_augroup(name, { clear = true })
 end
 
--- 焦点/终端事件回到 nvim 时重新读入被外部修改的文件(:h :checktime)
--- 注: vim.o.buftype 读的就是当前 buffer 的 buftype/buf 作用域选项, 与 vim.bo 等价
+-- 焦点/终端事件回到 nvim 时重新读入被外部修改的文件(:h :checktime)。
+-- 不按当前 buffer 的 buftype 设防: 触发时用户可能停在 help/浮窗(nofile), 守卫会让所有
+-- 文件 buffer 的外部改动都不被检查; 而 checktime 对 nofile buffer 本就无事可做
 vim.api.nvim_create_autocmd({ 'FocusGained', 'TermClose', 'TermLeave' }, {
     group = augroup('checktime'),
     callback = function()
-        if vim.o.buftype ~= 'nofile' then
-            vim.cmd('checktime')
-        end
+        vim.cmd('checktime')
     end,
 })
 
