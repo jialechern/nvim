@@ -82,7 +82,7 @@ local function search_result()
     if not ok or next(searchcount or {}) == nil or searchcount.incomplete == 1 then
         return ''
     end
-    -- 字段级兜底: 非空字典仍可能缺某一项(与官方组件的取值方式保持一致)
+    -- 字段级兜底: 非空字典仍可能缺某一项(官方组件是裸取值, 这里比它多了字段级兜底)
     ---@type integer
     local total = math.min(searchcount.total or 0, searchcount.maxcount or 999)
     -- 搜索模式原样进状态栏会被按 % 解析(%s/%b 之类被当成 item 吃掉);
