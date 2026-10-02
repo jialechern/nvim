@@ -42,12 +42,12 @@ local module = {
 
     fast_down = {
         lhs = 'J',
-        desc = string.format('向下快速移动 %d 行', consts.fast_move_by_lines),
+        desc = string.format('向下快速移动 %d 个屏幕行', consts.fast_move_by_lines),
         modes = { 'n', 'x' },
     },
     fast_up = {
         lhs = 'K',
-        desc = string.format('向上快速移动 %d 行', consts.fast_move_by_lines),
+        desc = string.format('向上快速移动 %d 个屏幕行', consts.fast_move_by_lines),
         modes = { 'n', 'x' },
     },
 

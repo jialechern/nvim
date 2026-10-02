@@ -17,14 +17,15 @@ map(keys.line_up, 'k')
 
 -- H/L/^/$ 不做映射: 直接用 Neovim 内置语义(屏幕首/末行 = H/L, 行首/行尾 = ^/$)
 
--- 快速上下移动, 行数取自 settings/consts.lua
+-- 快速上下移动(屏幕行, 与 j/k 对调口径一致), 行数取自 settings/consts.lua。
+-- 注意 expr 映射返回的按键串不参与重映射(实测), 必须显式写 gj/gk 才是屏幕行
 ---@return string
 map(keys.fast_down, function()
-    return consts.fast_move_by_lines .. 'j'
+    return consts.fast_move_by_lines .. 'gj'
 end, { expr = true })
 ---@return string
 map(keys.fast_up, function()
-    return consts.fast_move_by_lines .. 'k'
+    return consts.fast_move_by_lines .. 'gk'
 end, { expr = true })
 
 -- <Esc> 退出时顺带取消搜索高亮
