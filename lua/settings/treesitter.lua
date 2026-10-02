@@ -51,10 +51,13 @@ vim.api.nvim_create_autocmd('FileType', {
 
         vim.treesitter.start(args.buf, lang)
 
-        -- 标记折叠由 treesitter 提供(settings/folding.lua 据此裁决); foldenable 只在首次设定,
-        -- 之后由 view 恢复用户自己的开关状态
+        -- foldenable 初值(全部打开)只在首次进入该 ft 时设定: 之后再触发 FileType(:setfiletype 等)
+        -- 不覆盖用户手动开关; 日常的开关状态由 viewoptions='folds' 的 view 恢复(见 settings/base.lua)
+        if vim.b[args.buf].treesitter_fold == nil then
+            vim.opt_local.foldenable = false
+        end
+        -- 标记折叠由 treesitter 提供(settings/folding.lua 据此裁决)
         vim.b[args.buf].treesitter_fold = true
         require('settings.folding').refresh(args.buf)
-        vim.opt_local.foldenable = false
     end,
 })
