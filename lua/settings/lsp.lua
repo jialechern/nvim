@@ -115,7 +115,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
         -- --- --- --- 折叠 --- --- ---
         -- 归属由 settings/folding.lua 统一裁决(优先级: 支持 foldingRange 的 LSP > treesitter);
-        -- 每次 attach 都重跑, 这样折叠客户端后来才 attach 或已 detach 时结论也跟着变
+        -- 每次 attach 都重跑; detach 时的重裁决在 folding.lua 自己的 LspDetach autocmd 里
         require('settings.folding').refresh(bufnr)
 
         -- --- --- --- 参数提示(inlay hints) --- --- ---
