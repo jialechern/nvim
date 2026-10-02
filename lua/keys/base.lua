@@ -58,8 +58,9 @@ local module = {
     undo_break_dot = { lhs = '.', desc = '插入句点并打断撤销块', modes = 'i' },
     undo_break_semicolon = { lhs = ';', desc = '插入分号并打断撤销块', modes = 'i' },
 
-    -- 缩进只在 visual 模式('x')生效, 不写 'v': 'v' 会把 select 模式一起算进来, 而 select 模式下键入的 rhs 会被当作文本插入
-    -- (实测在 select 里按 `<` 会把 rhs 的 `<gv` 敲进缓冲区, 弄脏内容); 口径与 keys/code_fold.lua 的 nx() 一致
+    -- 缩进只在 visual 模式('x')生效, 不写 'v': 'v' 包含 select 模式, 而那里的用户预期是
+    -- "打字即替换选区"(doc/visual.txt Select-mode-mapping: vmap 定义的映射在 select 下会
+    -- 临时切 Visual 执行, 与该预期相反); 'x' 下 select 无映射, 按 < > 走内置的字面替换
     indent_left = { lhs = '<', desc = '左缩进并保持选中', modes = { 'x' } },
     indent_right = { lhs = '>', desc = '右缩进并保持选中', modes = { 'x' } },
 
