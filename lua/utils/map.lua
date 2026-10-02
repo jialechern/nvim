@@ -49,12 +49,20 @@ local function map(spec, rhs, opts)
     local scope = opts.buffer and ('buffer ' .. tostring(opts.buffer)) or '全局'
 
     for _, mode in ipairs(modes) do
-        registry[mode] = registry[mode] or {}
-        registry[mode][spec.lhs] = registry[mode][spec.lhs] or {}
-        registry[mode][spec.lhs][scope] = registry[mode][spec.lhs][scope] or {}
-        registry[mode][spec.lhs][scope][source] = true
-
         vim.keymap.set(mode, spec.lhs, rhs, options)
+        -- registry 键用 Neovim 规范化后的 lhs(注册后回读, 不自己实现归一化规则):
+        -- `<C-A-Up>` 存储为 `<M-C-Up>`, `<C-m>` 与 `<CR>` 同字节; 用原字符串做键会让这类
+        -- 互相覆盖在 check() 里互相不可见(docs/code-review-2026-10-02.md 的 RED-08)。
+        -- maparg 的查找本身按规范化后的键比较, 所以用原始 lhs 也查得到; 对非当前 buffer
+        -- 注册时可能查不到(maparg 只管当前 buffer), 此时退回原始 lhs, 与旧口径一致
+        local mapped = vim.fn.maparg(spec.lhs, mode, false, true)
+        ---@type string
+        local canonical = (type(mapped) == 'table' and mapped.lhs ~= nil and mapped.lhs ~= '') and mapped.lhs
+            or spec.lhs
+        registry[mode] = registry[mode] or {}
+        registry[mode][canonical] = registry[mode][canonical] or {}
+        registry[mode][canonical][scope] = registry[mode][canonical][scope] or {}
+        registry[mode][canonical][scope][source] = true
     end
 end
 
