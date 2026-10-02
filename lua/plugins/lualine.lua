@@ -86,7 +86,8 @@ local function search_result()
     ---@type integer
     local total = math.min(searchcount.total or 0, searchcount.maxcount or 999)
     -- 搜索模式原样进状态栏会被按 % 解析(%s/%b 之类被当成 item 吃掉);
-    -- 与 lualine 内置组件一致, 先经 stl_escape 转义
+    -- 上游 searchcount 组件只输出 [current/total]、不显示 pattern, 这里的 pattern 是超出官方的部分,
+    -- 所以转义必须自己做(官方组件没有这一步, stl_escape 是它内部工具函数, 借来用)
     local pattern = require('lualine.utils.utils').stl_escape(last_search)
     return pattern .. '(' .. (searchcount.current or 0) .. '/' .. total .. ')'
 end
