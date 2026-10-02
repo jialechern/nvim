@@ -1,9 +1,10 @@
 --- settings-base.lua
 
 -- 字体编码
--- 自动识别文件编码优先级(偏离内置默认已实测无影响: UTF-8/UTF-16 BOM 往返与内置一致;
--- gb2312 是 gbk 的子集, 排在后面实际不可达, 保留仅为语义声明)
-vim.opt.fileencodings = { 'utf-8', 'gbk', 'gb2312', 'ucs-2le', 'latin1' }
+-- 自动识别文件编码优先级: ucs-bom 领头, 带 BOM 的 UTF-8/UTF-16(含 BE 与 astral 字符)由 BOM 判定,
+-- 与内置一致; gbk/ucs-2le 兜住无 BOM 的场景(实测缺 ucs-bom 时 UTF-16BE 文件会被误判成乱码)。
+-- gb2312 是 gbk 的子集, 排在后面实际不可达, 保留仅为语义声明
+vim.opt.fileencodings = { 'ucs-bom', 'utf-8', 'gbk', 'gb2312', 'ucs-2le', 'latin1' }
 -- 修复代码文件换行符/特殊字符乱码
 vim.opt.fileformats = { 'unix', 'dos', 'mac' }
 
