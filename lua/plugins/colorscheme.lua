@@ -46,7 +46,9 @@ require('catppuccin').setup({
     },
 
     -- 不开 auto_integrations: 它只检测 vim.pack/lazy/packer 管理的插件(lib/detect_integrations.lua),
-    -- 本仓库插件由 nix 挂 pack/hm, 检测恒为空 —— 需要的集成必须像 noice 一样显式列出
+    -- 本仓库插件由 nix 挂 pack/hm, 检测恒为空。
+    -- 注意 default_integrations(默认开)仍会默认启用 telescope/gitsigns/markdown 等常见集成;
+    -- 只有 noice 这类不在默认表里的集成才必须像上面那样显式列出
 
     -- 编译缓存路径与默认一致(stdpath('cache')/catppuccin), 不再重复声明
 })
